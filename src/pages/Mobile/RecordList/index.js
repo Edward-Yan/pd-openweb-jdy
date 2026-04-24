@@ -8,9 +8,11 @@ import cx from 'classnames';
 import _ from 'lodash';
 import { WaterMark } from 'ming-ui';
 import FixedPage from 'mobile/App/FixedPage.jsx';
-import { AddRecordBtn, BatchOperationBtn } from 'mobile/components/RecordActions';
+import { AddRecordBtn, BatchOperationBtn, ShareWebToAppBtn } from 'mobile/components/RecordActions';
 import { RecordInfoModal } from 'mobile/Record';
 import { openAddRecord } from 'mobile/Record/addRecord';
+import Constant from 'src/pages/chat/utils/constant';
+import SendToChatForMobile from 'src/pages/Mobile/components/RecordInfo/SendToChatForMobile/SendToChatForMobile';
 import { addNewRecord } from 'src/pages/worksheet/redux/actions';
 import { updateHierarchyConfigLevel } from 'src/pages/worksheet/views';
 import { getShowViews } from 'src/pages/worksheet/views/util';
@@ -35,6 +37,8 @@ class RecordList extends Component {
     this.state = {
       previewRecordId: undefined,
       tempViewIdForRecordInfo: undefined,
+      sendChatMobileVisible: false,
+      selectedShareType: '',
     };
     this.hideAddRecord = hideAddRecord;
     this.viewRef = React.createRef();
@@ -143,6 +147,72 @@ class RecordList extends Component {
       window.mobileNavigateTo(`/mobile/app/${params.appId}`);
     }
   };
+
+  handleShareToApp = node => {
+    console.log('风向--------------', node);
+    this.setState({
+      sendChatMobileVisible: true,
+      selectedShareType: node.key,
+    });
+  };
+
+  renderSendToChat() {
+    const { sendChatMobileVisible, selectedShareType } = this.state;
+    const { appDetail, worksheetInfo } = this.props;
+    const { params } = this.props.match;
+    console.log('-----------params:', this.props);
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com' : location.origin}`;
+    let shareUrl = ``;
+    let chatCard = {};
+    if (selectedShareType === Constant.CARD_SHARE_ENUM.SHEET) {
+      if (!params.appId || !params.groupId || !params.worksheetId) return;
+      shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}`;
+      const worksheetName = worksheetInfo?.name || '';
+      chatCard = {
+        msg: `[数据表]${worksheetName}`,
+        title: worksheetName,
+        extra: {
+          appId: params.appId,
+          appName: appDetail.appName || '',
+          shareUser: md.global.Account.fullname,
+        },
+        url: shareUrl,
+        text: Constant.CARD_SHARE_ENUM.SHEET,
+      };
+    } else if (selectedShareType === Constant.CARD_SHARE_ENUM.VIEW) {
+      if (!params.appId || !params.groupId || !params.worksheetId || !params.viewId) return;
+      shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}/${params.viewId}`;
+      const currentView = _.find(worksheetInfo.views, v => v.viewId === params.viewId);
+      const viewName = currentView?.name || '';
+      chatCard = {
+        msg: `[视图]${viewName}`,
+        title: viewName,
+        extra: {
+          appId: params.appId,
+          appName: appDetail.appName || '',
+          sheetName: worksheetInfo.name || '',
+          sheetId: params.worksheetId,
+          shareUser: md.global.Account.fullname,
+        },
+        url: shareUrl,
+        text: Constant.CARD_SHARE_ENUM.VIEW,
+      };
+    }
+
+    console.log('chatCard::', chatCard);
+    return (
+      <Fragment>
+        {sendChatMobileVisible && (
+          <SendToChatForMobile
+            sendChatMobileVisible={sendChatMobileVisible}
+            card={chatCard}
+            url={chatCard.url}
+            onClose={() => this.setState({ sendChatMobileVisible: false, selectedShareType: '' })}
+          />
+        )}
+      </Fragment>
+    );
+  }
 
   renderContent() {
     const {
@@ -265,6 +335,7 @@ class RecordList extends Component {
               flexDirection: 'column',
             }}
           >
+            {<ShareWebToAppBtn className="Static" onClick={this.handleShareToApp} />}
             {!batchOptVisible && showBackBtn && (
               <Back
                 icon={appNaviStyle === 2 && location.href.includes('mobile/app') ? 'home' : 'back'}
@@ -350,6 +421,7 @@ class RecordList extends Component {
             });
           }}
         />
+        {this.renderSendToChat()}
       </Fragment>
     );
   }

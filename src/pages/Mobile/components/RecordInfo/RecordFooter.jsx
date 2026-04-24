@@ -49,6 +49,8 @@ function genCard(from = 'recordInfo', type = 'public', params = {}) {
         viewId: params.viewId,
         appId: params.appId,
         shareUser: md.global.Account.fullname,
+        appName: params.appName,
+        sheetName: params.sheetName,
       },
     };
   }
@@ -60,6 +62,8 @@ function genCard(from = 'recordInfo', type = 'public', params = {}) {
       worksheetId: params.worksheetId,
       appId: params.appId,
       shareUser: md.global.Account.fullname,
+      appName: params.appName,
+      sheetName: params.sheetName,
     },
   };
 }
@@ -529,10 +533,10 @@ export default class RecordFooter extends Component {
 
   renderSendToChat() {
     const { sendChatMobileVisible } = this.state;
-    const { recordInfo, recordBase, groupId } = this.props;
-    // console.log('recordInfo:', recordInfo);
-    // console.log('recordBase:', recordBase);
-    // console.log('groupId:', groupId);
+    const { recordInfo, recordBase } = this.props;
+    console.log('recordInfo:', recordInfo);
+    console.log('recordBase:', recordBase);
+    console.log('----------this.props', this.props);
     const recordTitle = getTitleTextFromControls(recordInfo.formData);
     // const allowChange = recordBase.isCharge || isOwner(recordInfo.ownerAccount, recordInfo.formData);
     // const shareRange = recordInfo.shareRange;
@@ -543,15 +547,11 @@ export default class RecordFooter extends Component {
       viewId: recordBase.viewId,
       appId: recordBase.appId,
       groupId: recordInfo.groupId,
+      appName: this.props.worksheetInfo?.appName || '',
+      sheetName: this.props.worksheetInfo?.name || '',
     };
     const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com' : location.origin}`;
-    // const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}/${params.viewId}`;//视图url
-    // const shareUrl = getRecordLandUrl({
-    //     appId: params.appId,
-    //     recordId: params.rowId,
-    //     viewId: params.viewId,
-    //     worksheetId: params.worksheetId,
-    //   })
+
     const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.worksheetId}/${params.viewId}/row/${params.rowId}`;
     const chatCard = {
       ...genCard(recordBase.from, 'private', params),

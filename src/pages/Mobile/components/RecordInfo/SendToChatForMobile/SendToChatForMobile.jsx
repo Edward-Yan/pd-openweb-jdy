@@ -264,7 +264,7 @@ export default class SendToChatForMobile extends Component {
                   ></i>
                 </div>
               </div>
-              {isRecordCard && (
+              {/* {isRecordCard && (
                 <TextArea
                   className="desc-textarea"
                   placeholder="请添加说明内容"
@@ -275,7 +275,7 @@ export default class SendToChatForMobile extends Component {
                   clearable
                   onChange={val => this.setState({ description: val })}
                 />
-              )}
+              )} */}
             </div>
 
             <Button

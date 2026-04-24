@@ -342,6 +342,7 @@ class RecordList extends Component {
           worksheetInfo={worksheetInfo}
           viewId={this.state.tempViewIdForRecordInfo}
           rowId={this.state.previewRecordId}
+          groupId={worksheetInfo.groupId}
           onClose={() => {
             this.setState({
               previewRecordId: undefined,

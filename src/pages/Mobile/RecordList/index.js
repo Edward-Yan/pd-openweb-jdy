@@ -161,7 +161,7 @@ class RecordList extends Component {
     const { appDetail, worksheetInfo } = this.props;
     const { params } = this.props.match;
     console.log('-----------params:', this.props);
-    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com' : location.origin}`;
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
     let shareUrl = ``;
     let chatCard = {};
     if (selectedShareType === Constant.CARD_SHARE_ENUM.SHEET) {

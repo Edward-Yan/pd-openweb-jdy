@@ -75,7 +75,7 @@ export function BatchOperationBtn(props) {
 export function ShareWebToAppBtn(props) {
   const { style, className, onClick = () => {} } = props;
   const actions = [
-    { key: Constant.CARD_SHARE_ENUM.SHEET, text: '分享数据表' },
+    { key: Constant.CARD_SHARE_ENUM.SHEET, text: '分享工作表' },
     { key: Constant.CARD_SHARE_ENUM.VIEW, text: '分享视图' },
   ];
   return (

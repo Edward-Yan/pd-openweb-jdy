@@ -224,9 +224,9 @@ export default class RecordFooter extends Component {
       },
     };
     return [
+      shareObj.ztttShare,
       publicShare ? shareObj.publicShare : undefined,
       innerShare ? shareObj.innerShare : undefined,
-      shareObj.ztttShare,
     ].filter(item => item);
   };
 
@@ -550,7 +550,7 @@ export default class RecordFooter extends Component {
       appName: this.props.worksheetInfo?.appName || '',
       sheetName: this.props.worksheetInfo?.name || '',
     };
-    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com' : location.origin}`;
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
 
     const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.worksheetId}/${params.viewId}/row/${params.rowId}`;
     const chatCard = {

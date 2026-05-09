@@ -286,13 +286,13 @@ export default class SendToChatForMobile extends Component {
               style={{
                 width: '100%',
                 height: '40px',
-                backgroundColor: selectedUser ? '#1677ff' : '#ccc',
                 color: '#fff',
                 border: 'none',
                 borderRadius: '4px',
                 fontSize: '16px',
                 marginTop: '10px',
               }}
+              className={`send-btn-${selectedUser ? 'enable' : 'disable'}`}
               disabled={!selectedUser}
               onClick={this.handleSend}
             >

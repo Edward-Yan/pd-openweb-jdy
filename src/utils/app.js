@@ -25,7 +25,7 @@ export const setFavicon = (iconUrl, iconColor) => {
  * 获取应用界面特性是否可见
  */
 export const getAppFeaturesVisible = () => {
-  const { s, tb, tr, ln, rp, td, ss, ac, ch } = qs.parse(location.search.substr(1));
+  const { s, tb, tr, ln, rp, td, ss, ac, ch, pheader } = qs.parse(location.search.substr(1));
 
   return {
     s: s !== 'no', // 回首页按钮
@@ -37,6 +37,7 @@ export const getAppFeaturesVisible = () => {
     ss: ss !== 'no', // 超级搜索
     ac: ac !== 'no', // 账户
     ch: ch !== 'no', // 消息侧边栏
+    pheader: pheader !== 'no', // 顶部导航
   };
 };
 
@@ -44,7 +45,7 @@ export const getAppFeaturesVisible = () => {
  * 获取应用界面特性路径
  */
 export const getAppFeaturesPath = () => {
-  const { s, tb, tr, ln, rp, td, ss, ac, ch } = getAppFeaturesVisible();
+  const { s, tb, tr, ln, rp, td, ss, ac, ch, pheader } = getAppFeaturesVisible();
 
   return [
     s ? '' : 's=no',
@@ -56,6 +57,7 @@ export const getAppFeaturesPath = () => {
     ss ? '' : 'ss=no',
     ac ? '' : 'ac=no',
     ch ? '' : 'ch=no',
+    pheader ? '' : 'pheader=no', // 顶部导航
   ]
     .filter(o => o)
     .join('&');

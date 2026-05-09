@@ -16,6 +16,7 @@ import SendToChatForMobile from 'src/pages/Mobile/components/RecordInfo/SendToCh
 import { isOwner } from 'src/pages/worksheet/common/recordInfo/crtl';
 import { getTitleTextFromControls } from 'src/utils/control';
 import { renderText } from 'src/utils/control';
+import { getEnvConfig } from 'src/utils/envConfig';
 import { compatibleMDJS } from 'src/utils/project';
 import { getRecordLandUrl } from 'src/utils/record';
 import { replaceBtnsTranslateInfo } from 'src/utils/translate';
@@ -657,7 +658,7 @@ export default class RecordFooter extends Component {
       appName: this.props.worksheetInfo?.appName || '',
       sheetName: this.props.worksheetInfo?.name || '',
     };
-    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? getEnvConfig().domainName : location.origin}`;
     // const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}/${params.viewId}`;//视图url
     // const shareUrl = getRecordLandUrl({
     //     appId: params.appId,

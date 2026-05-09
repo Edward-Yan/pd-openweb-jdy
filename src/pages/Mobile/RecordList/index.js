@@ -18,6 +18,7 @@ import { addNewRecord } from 'src/pages/worksheet/redux/actions';
 import { updateHierarchyConfigLevel } from 'src/pages/worksheet/views';
 import { getShowViews } from 'src/pages/worksheet/views/util';
 import { getRequest } from 'src/utils/common';
+import { getEnvConfig } from 'src/utils/envConfig';
 import { handlePushState, mdAppResponse } from 'src/utils/project';
 import AppPermissions from '../components/AppPermissions';
 import Back from '../components/Back';
@@ -169,10 +170,10 @@ class RecordList extends Component {
     const { appDetail, worksheetInfo } = this.props;
     const { params } = this.props.match;
     console.log('-----------params:', this.props);
-    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? getEnvConfig().domainName : location.origin}`;
     let shareUrl = ``;
     let chatCard = {};
-    debugger;
+
     if (selectedShareType === Constant.CARD_SHARE_ENUM.SHEET) {
       if (!params.appId || !params.groupId || !params.worksheetId) return;
       shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}`;

@@ -1,4 +1,4 @@
-FROM nginx:1.17.6
+FROM nginx:1.29.2
 COPY ./docker/nginx.conf /etc/nginx/conf.d/default.conf
 COPY ./docker/rewrite.setting /etc/nginx/
 COPY ./docker/portal.rewrite.setting /etc/nginx/

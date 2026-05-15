@@ -46,6 +46,7 @@ class AppHome extends React.Component {
     this.contentRef = createRef();
     this.handleScroll = _.debounce(this.handleScroll.bind(this), 300);
     this.isSetScrollTop = false;
+    this.isHideForWebview = true;
   }
   componentDidMount() {
     const maturityTime = moment(md.global.Account.createTime).add(7, 'day').format('YYYY-MM-DD');
@@ -602,12 +603,12 @@ class AppHome extends React.Component {
 
     return (
       <WaterMark projectId={projectObj.projectId}>
-        <div className="listConBox h100">
-          <SelectProject changeProject={this.getProject} />
+        <div className="listConBox h100 pTop15">
+          {!this.isHideForWebview && <SelectProject changeProject={this.getProject} />}
           {this.renderSearchApp()}
           {!searchValue && this.renderContent()}
           {searchValue && this.renderSearchResult()}
-          <TabBar action="appHome" />
+          {!this.isHideForWebview && <TabBar action="appHome" />}
         </div>
         {guideStep ? this.renderGuide() : null}
       </WaterMark>

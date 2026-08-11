@@ -127,6 +127,7 @@ class DragSelect extends React.Component {
   }
   componentWillUnmount() {
     this.removeMouseDownHandler();
+    this.clear();
   }
   getContainer = () => {
     let container;
@@ -144,6 +145,12 @@ class DragSelect extends React.Component {
   handleMouseMove = evt => {
     if (this.started) {
       const rootNode = this.getRootNode();
+
+      if (!rootNode) {
+        this.clear();
+        return;
+      }
+
       const rect = rootNode.getBoundingClientRect();
       this.endPos = {
         x: evt.clientX - rect.left,
@@ -198,10 +205,10 @@ class DragSelect extends React.Component {
   clear = () => {
     this.dragging = false;
     this.started = false;
+    document.removeEventListener('mousemove', this.handleMouseMove);
+    document.removeEventListener('mouseup', this.finishDragSelect);
+    document.removeEventListener('keyup', this.cancelDragSelect);
     if (this.selectionEl) {
-      document.removeEventListener('mousemove', this.handleMouseMove);
-      document.removeEventListener('mouseup', this.finishDragSelect);
-      document.removeEventListener('keyup', this.cancelDragSelect);
       $(this.selectionEl).remove();
       this.selectionEl = null;
     }

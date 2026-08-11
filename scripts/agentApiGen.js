@@ -23,6 +23,19 @@ const FN_NAME_OVERRIDES = {
   'POST /api/agui': 'aguiRun',
 };
 
+// isSseEndpoint 只认 /stream 结尾的 path,不符合该约定的流式端点在此显式声明,key = `${METHOD} ${path}`
+const IS_STREAM_OVERRIDES = {
+  // AG-UI SSE 协议端点,path 不以 /stream 结尾
+  'POST /api/agui': true,
+};
+
+function deriveIsStream(swaggerPath, method) {
+  const key = `${method.toUpperCase()} ${swaggerPath}`;
+  if (key in IS_STREAM_OVERRIDES) return IS_STREAM_OVERRIDES[key];
+
+  return isSseEndpoint(swaggerPath);
+}
+
 function deriveFnName(swaggerPath, method) {
   const key = `${method.toUpperCase()} ${swaggerPath}`;
   if (FN_NAME_OVERRIDES[key]) return FN_NAME_OVERRIDES[key];
@@ -111,7 +124,7 @@ function parseSwagger(swagger) {
         pathParams,
         queryParams,
         bodyProps,
-        isStream: isSseEndpoint(swaggerPath, op),
+        isStream: deriveIsStream(swaggerPath, method),
       });
     }
   }

@@ -149,6 +149,8 @@ function NewRecordForm(props) {
   });
   const cellObjs = useRef({});
   const isSubmitting = useRef(false);
+  // 提交锁必须用 ref：requesting 是 state，连点提交时 onSave 闭包里读到的仍是旧值，拦不住第二次提交
+  const submitLock = useRef(false);
   const customwidget = useRef();
   const formcon = useRef();
   const formdataRef = useRef([]);
@@ -180,13 +182,18 @@ function NewRecordForm(props) {
 
   function newRecord(options = {}) {
     function handleSubmit() {
-      if (!customwidget.current) return;
+      if (!customwidget.current) {
+        // loading 已经提前打开，这里必须收尾，否则遮罩关不掉
+        onSubmitEnd();
+        return;
+      }
+
       if (options.rowStatus === 21) {
         // 存草稿
-        onSubmitBegin();
         const { data = [] } = customwidget.current.getSubmitData({ ignoreAlert: true, silent: true }) || {};
 
         if (requesting) {
+          onSubmitEnd();
           return false;
         }
 
@@ -276,6 +283,7 @@ function NewRecordForm(props) {
             }
           },
           onSubmitEnd: () => {
+            submitLock.current = false;
             onSubmitEnd();
             setRequesting(false);
           },
@@ -284,11 +292,12 @@ function NewRecordForm(props) {
         return;
       }
 
-      onSubmitBegin();
       cache.current.newRecordOptions = options;
       customwidget.current.submitFormData();
     }
 
+    // loading 必须在延迟之前打开：延迟期间遮罩不出现，提交按钮可以被连点，会叠加出多次提交
+    onSubmitBegin();
     setTimeout(handleSubmit, this.hasFocusingRelateRecordTags || window.cellTextIsBlurring ? 1000 : 0);
   }
 
@@ -308,9 +317,12 @@ function NewRecordForm(props) {
       onSubmitEnd();
       return false;
     } else {
-      if (requesting) {
+      if (submitLock.current || requesting) {
         return false;
       }
+
+      // 二次确认弹层期间也必须保持上锁，否则等待用户确认的这段时间里可以再次提交
+      submitLock.current = true;
 
       if (customButtonConfirm) {
         try {
@@ -318,6 +330,7 @@ function NewRecordForm(props) {
           customBtn.btnRemark = remark;
         } catch (err) {
           console.log(err);
+          submitLock.current = false;
           onSubmitEnd();
           return;
         }
@@ -505,6 +518,7 @@ function NewRecordForm(props) {
         },
         onSubmitEnd: () => {
           emitter.emit('ROWS_UPDATE');
+          submitLock.current = false;
           onSubmitEnd();
           setRequesting(false);
         },

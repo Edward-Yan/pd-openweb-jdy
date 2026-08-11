@@ -159,8 +159,8 @@ export default function CreateAppEntryContent(props) {
   const [draftAttachments, setDraftAttachments] = useState([]);
   const [inputId] = useState(() => `create-app-entry-prompt-${uuidv4()}`);
   // 示例提示词：按当前组织画像取 app-build-recommender 的推荐，从中随机取 3 条展示（每次打开重新随机）；
-  // 空 / 失败回退静态样例。
-  const { randomSamples: samples, status: samplesStatus } = useDailyBuildSuggestions(projectId);
+  // 空 / 失败回退静态样例。隐藏 AI 功能时连请求都不发（推荐本身由 agent 实时生成）。
+  const { randomSamples: samples, status: samplesStatus } = useDailyBuildSuggestions(projectId, showAi);
 
   const cards = actions.filter(a => !a.hidden && a.variant === 'card');
   const rows = actions.filter(a => !a.hidden && a.variant === 'row');
@@ -285,7 +285,8 @@ export default function CreateAppEntryContent(props) {
         </div>
       )}
 
-      <div className="moreLabel">{_l('更多创建方式')}</div>
+      {/* 「更多」是相对上方 AI 创建而言；隐藏 AI 后这些就是全部入口，标题失去参照，不再展示 */}
+      {showAi && <div className="moreLabel">{_l('更多创建方式')}</div>}
       <div className="moreGrid">
         {cards.map(action => (
           <div

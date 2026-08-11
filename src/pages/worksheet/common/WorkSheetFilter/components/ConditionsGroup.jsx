@@ -192,7 +192,7 @@ export default function ConditionsGroup(props) {
 
         const conditionGroupKey = getTypeKey((control || {}).type);
         const conditionGroupType = control ? CONTROL_FILTER_WHITELIST[conditionGroupKey].value : '';
-        const isSheetFieldError = isOtherShowFeild(control);
+        const isSheetFieldError = from !== 'rule' && isOtherShowFeild(control);
         return (
           <ConditionCon key={condition.id} isSingleFilter={isSingleFilter}>
             <ConditionHeader>

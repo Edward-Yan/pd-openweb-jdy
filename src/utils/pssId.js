@@ -9,6 +9,7 @@ const getLocalStorage = () => get(window, 'localStorage');
 export const setPssId = (id, verification = false) => {
   if (id) {
     const httpOnly = get(window, 'md.global.Config.HttpOnly');
+    const isLocal = get(window, 'md.global.Config.IsLocal');
 
     if (
       verification ||
@@ -19,7 +20,7 @@ export const setPssId = (id, verification = false) => {
       location.href.indexOf('theportal.cn') > -1 ||
       location.href.indexOf('localhost') > -1 ||
       location.href.indexOf('share.mingdao.net') > -1 ||
-      location.href.indexOf('mingdaoyun.cn') > -1 ||
+      (!isLocal && location.href.indexOf('mingdaoyun.cn') > -1) ||
       location.href.indexOf('open_in_browser') > -1
     ) {
       window.setCookie('md_pss_id', id);

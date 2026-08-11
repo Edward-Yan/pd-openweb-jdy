@@ -263,7 +263,7 @@ function DeskFormWidget(props) {
   // 渲染表单项
   const renderWidgetsContent = () => {
     const widgetName = convertControl(item.type);
-    const isFreeField = isCustomWidget(item);
+    const isFreeField = isCustomWidget(item) && !(item.otherSheetControlType === 30 && item.type !== 54);
     let Widgets;
 
     if (isFreeField) {
@@ -291,7 +291,7 @@ function DeskFormWidget(props) {
     // (禁用或只读) 且 内容不存在
     if (
       !_.includes([22, 52, 34], item.type) &&
-      !isCustomWidget(item) &&
+      !isFreeField &&
       !(item.type === 29 && isRelateRecordTableControl(item)) &&
       !(_.includes([9, 10, 11], item.type) && advancedSetting.readonlyshowall === '1') &&
       (item.disabled || _.includes([25, 31, 32, 33, 37, 38, 53], item.type) || !isEditable) &&

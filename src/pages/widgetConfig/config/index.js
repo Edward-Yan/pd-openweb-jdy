@@ -130,7 +130,7 @@ export const NOT_NEED_DELETE_CONFIRM = [22, 25, 30, 31, 32, 37, 38, 43, 52, 53, 
 // 没有宽度设置的控件
 export const NOT_HAVE_WIDTH_CONFIG = [43, 49, 52];
 
-export const MAX_CONTROLS_COUNT = window.platformENV.isLocal ? 2000 : 200;
+export const getMaxControlsCount = () => (window.platformENV.isLocal ? 2000 : 200);
 
 export const MAX_OPTIONS_COUNT = 1000;
 

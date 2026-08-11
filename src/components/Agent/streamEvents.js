@@ -393,12 +393,37 @@ export function upsertRebuildConfirm(message, data) {
     ts: Date.now(),
     status: 'pending',
     stepId: stringValue(readField(data, 'stepId')) || '__rebuild__',
-    options: Array.isArray(options) && options.length ? options : ['resume', 'rebuild'],
+    // 兜底不含 resume：V5.19 起后端按 build 状态动态发 options（已建完刻意不给"继续"），
+    // 漏发时兜出"继续生成"会指向无效分支，rebuild 是唯一任何状态下都合法的动作。
+    options: Array.isArray(options) && options.length ? options : ['rebuild'],
   };
   const idx = parts.findIndex(p => p.kind === 'rebuild-confirm');
 
   if (idx >= 0) return { ...message, parts: parts.map((p, i) => (i === idx ? { ...next, ts: p.ts } : p)) };
   return { ...message, parts: [...parts, next] };
+}
+
+// 把服务端回吐的「挂起中意图弹层」还原到历史消息里（进入/刷新会话时用）。
+// 弹层本身只是一次性 SSE 事件，刷新即丢，而其中的 none_of_these（「我想做点别的」）是用户从一次
+// 误路由里脱身的唯一出口——丢了它，会话就卡在搭建语境里出不来。
+// 后端 pendingConfirmation 的字段与 SSE completed payload 同名同义（stepId / options），故直接复用
+// upsertRebuildConfirm，两条来源共用同一套渲染与回传逻辑。
+// 挂到最后一条 assistant 消息上（视觉上贴在对话末尾，与实时那轮的位置一致）；没有 assistant 消息
+// （历史里只有用户提问）则不还原——卡片无处安放，且这种会话本就不该有挂起的弹层。
+export function restorePendingConfirmation(messages, pendingConfirmation) {
+  if (!pendingConfirmation || !Array.isArray(messages) || !messages.length) return messages;
+
+  let idx = -1;
+
+  for (let i = messages.length - 1; i >= 0; i -= 1) {
+    if (messages[i] && messages[i].role === 'assistant') {
+      idx = i;
+      break;
+    }
+  }
+
+  if (idx < 0) return messages;
+  return messages.map((m, i) => (i === idx ? upsertRebuildConfirm(m, pendingConfirmation) : m));
 }
 
 // 用户点选后把 rebuild-confirm part 标记为已决策。

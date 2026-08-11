@@ -90,11 +90,11 @@ function collectPathParams(op, swaggerPath) {
   });
 }
 
-function isSseEndpoint(swaggerPath, op) {
-  if (/\/stream$/.test(swaggerPath)) return true;
-
-  const summary = (op.summary || '').toLowerCase();
-  return /sse|event-stream|event_stream|server-sent/.test(summary);
+// 只按 path 约定判流式：url 以 /stream 结尾即 SSE。
+// 不匹配 summary——描述里出现 "SSE" 的多是在说明与流式接口的关系（如断连兜底通道），并不代表自身是流式，
+// 按文案判技术属性会误伤普通接口。path 不以 /stream 结尾的流式端点在 IS_STREAM_OVERRIDES 里显式声明。
+function isSseEndpoint(swaggerPath) {
+  return /\/stream$/.test(swaggerPath);
 }
 
 module.exports = {

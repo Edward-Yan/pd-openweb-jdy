@@ -484,6 +484,10 @@ export function getTableHeadHeight(columns) {
 }
 
 export function showReadOnlyTip(target, isLastRow) {
+  if (!target || !target.parentElement) {
+    return;
+  }
+
   const source = document.createElement('div');
   source.classList.add('readOnlyTip');
   source.innerText = _l('当前字段不可编辑');

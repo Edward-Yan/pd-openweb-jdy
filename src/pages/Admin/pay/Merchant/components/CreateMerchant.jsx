@@ -104,9 +104,7 @@ export default class CreateMerchant extends Component {
           <div className="Font18 TxtCenter textTertiary mBottom50">
             {_l('根据业务需求平台提供不同的支付收款渠道，支持创建多个通道的商户')}
           </div>
-          {PAY_CHANNEL.filter(item =>
-            window.platformENV.isOverseas || window.platformENV.isLocal ? item.value !== 0 : true,
-          ).map(item => {
+          {PAY_CHANNEL.filter(item => item.value !== 0).map(item => {
             return (
               <PayChannelItem
                 key={item.value}

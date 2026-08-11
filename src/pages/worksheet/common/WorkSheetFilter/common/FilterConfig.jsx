@@ -70,17 +70,17 @@ export default function SingleFilter(props) {
   const showWorkflowControl = isOpenPermit(permitList.sysControlSwitch, sheetSwitchPermit, viewId);
 
   function filterAddConditionControls(controls) {
-    return filterOnlyShowField(
-      showWorkflowControl
-        ? controls
-        : controls.filter(
-            c =>
-              !_.includes(
-                WORKFLOW_SYSTEM_CONTROL.map(c => c.controlId),
-                c.controlId,
-              ),
-          ),
-    );
+    const availableControls = showWorkflowControl
+      ? controls
+      : controls.filter(
+          c =>
+            !_.includes(
+              WORKFLOW_SYSTEM_CONTROL.map(c => c.controlId),
+              c.controlId,
+            ),
+        );
+
+    return from === 'rule' ? availableControls : filterOnlyShowField(availableControls);
   }
 
   useEffect(() => {

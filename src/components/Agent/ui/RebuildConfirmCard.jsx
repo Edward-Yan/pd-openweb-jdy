@@ -130,7 +130,12 @@ const Resolved = styled.div`
 // disabled：流式进行中或本卡片已被其它操作占用时禁用按钮
 // onConfirm(action)：用户点选后回传选择的 action
 export default function RebuildConfirmCard({ part, disabled, onConfirm }) {
-  const options = Array.isArray(part.options) && part.options.length ? part.options : ['resume', 'rebuild'];
+  // 兜底不含 resume：后端 V5.19 起 options 按 build 状态动态下发（已建完时刻意不给"继续生成"），
+  // 漏发时兜底渲染出"继续生成"会引导用户点进无效分支，rebuild 是任何状态下都合法的最小集。
+  const options = Array.isArray(part.options) && part.options.length ? part.options : ['rebuild'];
+  // 主按钮取后端下发顺序的第一项（后端按推荐度排序），不再写死 resume——
+  // [rebuild, none_of_these] 组合下写死 resume 会让所有按钮都无主次。
+  const primaryAction = options[0];
 
   if (part.status === 'resolved') {
     const label = ACTION_LABELS[part.chosenAction] || part.chosenAction;
@@ -160,7 +165,7 @@ export default function RebuildConfirmCard({ part, disabled, onConfirm }) {
           {options.map(action => (
             <ActionPill
               key={action}
-              $primary={action === 'resume'}
+              $primary={action === primaryAction}
               $disabled={disabled}
               title={ACTION_HINTS[action] || ''}
               onClick={() => !disabled && onConfirm(action)}

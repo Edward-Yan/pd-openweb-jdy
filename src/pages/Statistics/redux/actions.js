@@ -679,6 +679,18 @@ export const changeControlCheckbox = (event, item) => {
       const isNumber = isNumberControl(item.type);
       const isSplit = [reportTypes.BarChart, reportTypes.LineChart, reportTypes.DualAxes].includes(reportType);
 
+      if (reportType === reportTypes.BidirectionalBarChart && isNumber) {
+        if (!yaxisList.length) {
+          dispatch(addYaxisList(item));
+        } else if (!rightYaxisList.length) {
+          dispatch(addRightYaxisList(item));
+        } else {
+          alert(_l('方向1和方向2仅支持添加一个数值'), 2);
+        }
+
+        return;
+      }
+
       if (reportType === reportTypes.PivotTable) {
         if (isNumber) {
           dispatch(addYaxisList(item));

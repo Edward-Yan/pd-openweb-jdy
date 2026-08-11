@@ -1,9 +1,34 @@
 import { combineReducers } from 'redux';
+import { reportTypes } from '../Charts/reportTypes';
+
+const normalizeBidirectionalBarChartAxes = report => {
+  if (!report || report.reportType !== reportTypes.BidirectionalBarChart) {
+    return report;
+  }
+
+  const yaxisList = report.yaxisList || [];
+  const rightYaxisList = report.rightY ? report.rightY.yaxisList || [] : [];
+
+  if (yaxisList.length <= 1 && rightYaxisList.length <= 1) {
+    return report;
+  }
+
+  return {
+    ...report,
+    yaxisList: yaxisList.slice(0, 1),
+    rightY: report.rightY
+      ? {
+          ...report.rightY,
+          yaxisList: rightYaxisList.slice(0, 1),
+        }
+      : report.rightY,
+  };
+};
 
 const currentReport = (state = {}, action) => {
   switch (action.type) {
     case 'CHANGE_STATISTICS_CURRENT_REPORT':
-      return action.data;
+      return normalizeBidirectionalBarChartAxes(action.data);
     case 'CHANGE_STATISTICS_RESET':
       return {};
     default:
@@ -36,7 +61,7 @@ const worksheetInfo = (state = {}, action) => {
 const reportData = (state = {}, action) => {
   switch (action.type) {
     case 'CHANGE_STATISTICS_REPORT_DATA':
-      return action.data;
+      return normalizeBidirectionalBarChartAxes(action.data);
     case 'CHANGE_STATISTICS_RESET':
       return {};
     default:

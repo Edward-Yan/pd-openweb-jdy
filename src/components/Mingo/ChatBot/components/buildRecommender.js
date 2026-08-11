@@ -70,7 +70,9 @@ async function fetchSuggestions({ projectId, forceRefresh, signal }) {
 // randomSamples：全部推荐（新建应用弹窗芯片展示，不限条数、保持原顺序）。均在异步回调里取并存入 state，
 // 保证一次挂载内稳定不抖动、且不在 render 期调用随机 / 自增。
 // 无 projectId（如应用内）时不请求 agent，直接回退静态样例。
-export function useDailyBuildSuggestions(projectId) {
+// enabled=false 时完全不请求（推荐由 agent 实时生成，隐藏 AI 功能的环境下不应发起）：
+// 保持 status='idle' 与空列表，调用方按「无推荐」渲染即可。Hook 不可条件调用，故用参数控制。
+export function useDailyBuildSuggestions(projectId, enabled = true) {
   const [suggestions, setSuggestions] = useState([]);
   const [nextSuggestion, setNextSuggestion] = useState('');
   const [randomSamples, setRandomSamples] = useState([]);
@@ -154,9 +156,10 @@ export function useDailyBuildSuggestions(projectId) {
   );
 
   useEffect(() => {
+    if (!enabled) return undefined;
     load();
     return () => abortRef.current?.abort();
-  }, [load]);
+  }, [load, enabled]);
 
   const reload = useCallback(() => load({ isReload: true }), [load]);
 

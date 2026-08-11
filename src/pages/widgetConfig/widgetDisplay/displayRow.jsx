@@ -7,7 +7,7 @@ import { Icon, ScrollView } from 'ming-ui';
 import { Tooltip } from 'ming-ui/antd-components';
 import { useGlobalStore } from 'src/common/GlobalStore';
 import GeneratingHeader from '../components/GeneratingHeader';
-import { MAX_CONTROLS_COUNT } from '../config';
+import { getMaxControlsCount } from '../config';
 import { getSectionWidgets } from '../util';
 import BottomDragPointer from './components/BottomDragPointer';
 import FieldRecycleBin from './components/FieldRecycleBin';
@@ -101,6 +101,7 @@ export default function DisplayRow(props) {
     widgetVisible,
     setPanelVisible = () => {},
   } = props;
+  const maxControlsCount = getMaxControlsCount();
   const { commonWidgets = [], tabWidgets = [] } = getSectionWidgets(widgets);
   const noWidgets = isEmpty(widgets);
   const rowsContent = (
@@ -170,9 +171,9 @@ export default function DisplayRow(props) {
                 )}
                 <span className="Font17 Bold mLeft12">{_l('表单设计')}</span>
 
-                <Tooltip title={_l('最多添加%0个字段', MAX_CONTROLS_COUNT)}>
+                <Tooltip title={_l('最多添加%0个字段', maxControlsCount)}>
                   <span className="controlNum Font12 textTertiary pTop3">
-                    {_l('%0/%1', allControls.length, MAX_CONTROLS_COUNT)}
+                    {_l('%0/%1', allControls.length, maxControlsCount)}
                   </span>
                 </Tooltip>
               </div>

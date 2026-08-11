@@ -4,7 +4,58 @@
  */
 export default {
   /**
-   * V4.0：用户主动取消同 sessionId 的活跃 Agent 执行（典型场景：build-app-agent 搭建中途点"停止搭建"）。 鉴权由 service 层 M:MD.AgentService.Core.Agenting.Abstractions.IAgentApplicationService.CancelAsync(MD.AgentService.Core.Agenting.Contracts.AgentCancelRequest,System.Threading.CancellationToken) 内部用 accountId 拼 registry key 隐式完成—— 跨账号自然 NotFound（返回 not_in_flight），无需额外 403 分支。 详见 docs/architecture/api-design.md §10.1。
+   * 赠送一笔免费额度(充值系统在充值成功后回调)。以 `orderId` 幂等,重复回调不二次赠送。
+   * @param {Object} args 请求参数
+   * @param {string} args.projectId 组织 ID(必传)。
+   * @param {string} args.orderId 充值系统订单号(必传,幂等键)。
+   * @param {number} args.bonusCredits 赠送的免费信用点(必传,> 0;由充值系统按活动规则算好直传)。
+   * @param {string} args.expiresAt 过期时刻(可选;不传=永久有效)。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentBillingGrant: function (args, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/billing/grant',
+      method: 'POST',
+    });
+  },
+
+  /**
+   * 作废一笔赠送(订单失效时回调)。把对应赠送桶置 `voided`,剩余额立即失效(已消耗不追回),幂等。 桶尚不存在(void 先于 grant 到达)→ 建作废占位,挡掉后到的同 orderId 赠送。
+   * @param {Object} args 请求参数
+   * @param {string} args.projectId 组织 ID(必传)。
+   * @param {string} args.orderId 充值系统订单号(必传)。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentBillingGrantVoid: function (args, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/billing/grant/void',
+      method: 'POST',
+    });
+  },
+
+  /**
+   * 按自然月汇总免费额度消耗。request.ProjectId 留空=全平台(所有组织汇总);传则钻取单组织。 StartDate/EndDate 为 `yyyy-MM-dd`(含首尾整天)。返回按月明细并<b>补齐区间内空月份</b>(与 MDAPI 一致)。
+   * @param {Object} args 请求参数
+   * @param {string} args.projectId 组织 ID(可选;留空 = 全平台所有组织汇总)。
+   * @param {string} args.startDate 开始日期(必传,`yyyy-MM-dd`,含当天)。
+   * @param {string} args.endDate 结束日期(必传,`yyyy-MM-dd`,含当天整天)。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentBillingInternalMonthlyFreeConsumption: function (args, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/billing/internal/monthly-free-consumption',
+      method: 'POST',
+    });
+  },
+
+  /**
+   * V4.0：用户主动取消同 sessionId 的活跃 Agent 执行（典型场景：build-app-agent 搭建中途点"停止搭建"）。 鉴权由 service 层 M:MD.AgentService.Core.Agenting.Abstractions.IAgentApplicationService.CancelAsync(MD.AgentService.Core.Agenting.Contracts.AgentCancelRequest,System.Threading.CancellationToken) 内部用 accountId 拼 registry key 隐式完成—— 跨账号自然 NotFound（返回 not_in_flight），无需额外 403 分支。 详见 docs/architecture/api-design.md §10.1。 V5.20.3：公开漏斗匿名用户也可取消自己发起的匿名执行。匿名身份与执行流同源（seed=sessionId）， 这里在未登录时按同口径重算 `anon:hash` 写入 `HttpContext.Items`，使 service 层 `_currentUserContext.AccountId` 兜底命中，拼出与注册端一致的 registry key。capability 模型： 仅持有 sessionId 者能算出该 key；猜错 / 跨账号自然 not_in_flight，不泄露任何信息。
    * @param {Object} args 请求参数
    * @param {string} args.sessionId 要取消的会话 ID。后端用此值 + 当前用户的 accountId 拼出 registry key（与 checkpoint 同口径）， 在 MD.AgentService.Core.Agenting.Abstractions.IAgentExecutionRegistry 中查找活跃 CTS 触发取消。
    * @param {Object} options 配置参数
@@ -25,9 +76,11 @@ export default {
    * @param {array} args.attachments V2.10 新增：随本轮消息一起提交的附件列表。null / 空数组视为无附件。 合法性判定升级为「Message / Attachments / CheckpointId 至少一个非空」， 即：纯图片无文字的场景也允许。
    * @param {string} args.agentName 外部显式指定执行的 Agent 名称；存在时优先执行该 Agent。
    * @param {string} args.sessionId 当前请求所属的会话标识。
+   * @param {string} args.language V5.12.4：客户端 UI 选定的界面语言（BCP-47 标签，如 `en` / `zh-CN` / `zh-TW` / `ja` / `th` / `ms`）。 作为会话语言的**权威源**（优先级高于启发式检测）：写了即按它注入 `{{session.language}}` 并冻结，天然覆盖启发式分不开的简繁 / 马来语等。 安全：该值会进 system prompt，MD.AgentService.Core.Agenting.Services.SessionMemory.SessionLanguageResolver 仅放行 BCP-47 形态（字母 + 可选 -子标签），不合法一律忽略、回落检测，杜绝经此字段注入任意文本。 空 / 不合法时回落 ② 会话粘性检测值 → ③ 启发式检测当前消息。
    * @param {string} args.projectId V3.4.5：当前请求关联的明道网络/组织 ID（顶层显式传参）。 与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.Context["projectId"] 等价，但更显眼且类型固定为 string。 优先级（在 ICurrentUserContext.InitializeProjectId 实现里生效）： HTTP query `?projectId=` → 本字段 → `Context["projectId"]` → null。 服务端在 AgentApplicationService 入口完成装配，下游统一通过 ICurrentUserContext.ProjectId 取。
    * @param {string} args.captchaTicket V5.6：腾讯云图形验证码票据（前端验证码组件回吐的 ticket）。仅匿名访问 allowAnonymous agent 且触发验证码阈值时需要； 登录用户无需携带。与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.CaptchaRandstr 成对，由匿名访问闸调腾讯云校验。
    * @param {string} args.captchaRandstr V5.6：腾讯云图形验证码随机串（randstr），与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.CaptchaTicket 成对提交。
+   * @param {string} args.regenerateFromMessageId V6.3 重新生成：要重跑的那条 <b>assistant</b> 消息 ID。传了它即进入「重新生成」语义—— 服务端取该条同轮的 user 提问原文重跑（重走路由），成功后删除「该条及其之后」的全部消息。
    * @param {boolean} args.forceReroute 是否显式要求重新路由。
    * @param {boolean} args.forceRefresh V5.9.2：是否强制刷新（对应前端「强制刷新」按钮）。仅对启用了 V5.9 响应缓存（`responseCache.enabled`）的 agent 有意义： `true` 时<b>跳过缓存读、强制走 LLM 重新生成</b>，但仍把新结果<b>写回缓存</b>（覆盖旧值，后续普通请求命中刷新后的答案）。 按「意图」命名而非缓存实现——调用方只表达「我要新的」，不必知道背后有缓存。不参与 cache key（控制开关，非语义输入）。
    * @param {object} args.context 传递给 Agent 的附加上下文数据。
@@ -55,9 +108,11 @@ export default {
    * @param {array} args.attachments V2.10 新增：随本轮消息一起提交的附件列表。null / 空数组视为无附件。 合法性判定升级为「Message / Attachments / CheckpointId 至少一个非空」， 即：纯图片无文字的场景也允许。
    * @param {string} args.agentName 外部显式指定执行的 Agent 名称；存在时优先执行该 Agent。
    * @param {string} args.sessionId 当前请求所属的会话标识。
+   * @param {string} args.language V5.12.4：客户端 UI 选定的界面语言（BCP-47 标签，如 `en` / `zh-CN` / `zh-TW` / `ja` / `th` / `ms`）。 作为会话语言的**权威源**（优先级高于启发式检测）：写了即按它注入 `{{session.language}}` 并冻结，天然覆盖启发式分不开的简繁 / 马来语等。 安全：该值会进 system prompt，MD.AgentService.Core.Agenting.Services.SessionMemory.SessionLanguageResolver 仅放行 BCP-47 形态（字母 + 可选 -子标签），不合法一律忽略、回落检测，杜绝经此字段注入任意文本。 空 / 不合法时回落 ② 会话粘性检测值 → ③ 启发式检测当前消息。
    * @param {string} args.projectId V3.4.5：当前请求关联的明道网络/组织 ID（顶层显式传参）。 与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.Context["projectId"] 等价，但更显眼且类型固定为 string。 优先级（在 ICurrentUserContext.InitializeProjectId 实现里生效）： HTTP query `?projectId=` → 本字段 → `Context["projectId"]` → null。 服务端在 AgentApplicationService 入口完成装配，下游统一通过 ICurrentUserContext.ProjectId 取。
    * @param {string} args.captchaTicket V5.6：腾讯云图形验证码票据（前端验证码组件回吐的 ticket）。仅匿名访问 allowAnonymous agent 且触发验证码阈值时需要； 登录用户无需携带。与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.CaptchaRandstr 成对，由匿名访问闸调腾讯云校验。
    * @param {string} args.captchaRandstr V5.6：腾讯云图形验证码随机串（randstr），与 MD.AgentService.Core.Agenting.Contracts.ExecuteAgentRequest.CaptchaTicket 成对提交。
+   * @param {string} args.regenerateFromMessageId V6.3 重新生成：要重跑的那条 <b>assistant</b> 消息 ID。传了它即进入「重新生成」语义—— 服务端取该条同轮的 user 提问原文重跑（重走路由），成功后删除「该条及其之后」的全部消息。
    * @param {boolean} args.forceReroute 是否显式要求重新路由。
    * @param {boolean} args.forceRefresh V5.9.2：是否强制刷新（对应前端「强制刷新」按钮）。仅对启用了 V5.9 响应缓存（`responseCache.enabled`）的 agent 有意义： `true` 时<b>跳过缓存读、强制走 LLM 重新生成</b>，但仍把新结果<b>写回缓存</b>（覆盖旧值，后续普通请求命中刷新后的答案）。 按「意图」命名而非缓存实现——调用方只表达「我要新的」，不必知道背后有缓存。不参与 cache key（控制开关，非语义输入）。
    * @param {object} args.context 传递给 Agent 的附加上下文数据。
@@ -76,6 +131,25 @@ export default {
       url: '/api/agent/execute/stream',
       method: 'POST',
       isStream: true,
+    });
+  },
+
+  /**
+   * 测试指定供应商 / 模型的<b>某一项</b>能力。
+   * @param {Object} args 请求参数
+   * @param {string} args.providerId 供应商唯一标识（SDM 侧主键）。必填。
+   * @param {string} args.providerModel 本次测试使用的模型名。必填。 ⚠️ 必须是<b>供应商侧</b>模型名（`ModelProvider.provider_model`，如 `deepseek-v4-pro`）， <b>不是</b>平台展示名（`Model.name`，如 `DeepSeek-v4-pro`）。填成展示名时上游返回 404， 探针会报 `model_not_found` 并在 hint 里提示该区别。
+   * @param {string} args.check 测哪一项。必填。<b>合法值取决于 MD.AgentService.Core.Agenting.Contracts.ProviderProbeRequest.ModelMode</b>： <list type="bullet"><item>`chat`（缺省）：`connectivity` / `text` / `image` / `tools` / `reasoning` （见 MD.AgentService.Core.Agenting.Constants.ProviderProbeConstants.Checks）</item><item>`embedding`：`connectivity` / `vector` / `dimension` （见 MD.AgentService.Core.Agenting.Constants.EmbeddingProbeConstants.Checks）</item></list> 两套值<b>不相交</b>（除 `connectivity` 外），跨模式填写按 `params_invalid` 拒绝， <b>不会</b>被静默接受后返回一个看似正常的结果。
+   * @param {string} args.modelMode 被测模型的类别：`chat`（缺省）或 `embedding`。可选。 缺省即对话模型，<b>已对接的前端不传此字段行为完全不变</b>（向后兼容）。 取值镜像 SDM 的 `ModelMode` 枚举，见 MD.AgentService.Core.Agenting.Constants.ProviderProbeConstants.ModelModes。
+   * @param {Object} args.extraBody
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentProvidersTestCapabilities: function (args, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/providers/test-capabilities',
+      method: 'POST',
     });
   },
 
@@ -124,6 +198,40 @@ export default {
     return agentAPI(rest, {
       ...options,
       url: `/api/agent/sessions/${encodeURIComponent(sessionId)}/resummarize`,
+      method: 'POST',
+    });
+  },
+
+  /**
+   * V6.0 统一分享模型：创建分享实体（登录态）。校验通过后落库 `agent_session_shares` 并返回 `shareId`， 前端随后把 `shareId` 登记为 MDAPI `appentityshare.SourceId` 完成分享创建（两步流程，见设计文档 §6.1）。
+   * @param {Object} args 请求参数
+   * @param {string} args.scope 可见范围三态（见 MD.AgentService.Core.Agenting.Abstractions.SessionShareScopes）： `public`（默认，任何人可看）/ `login`（任何登录用户可看，不校验组织成员）/ `org`（仅目标组织成员可看）。
+   * @param {string} args.projectId 可见范围目标组织 ID；仅 `scope=org` 时必填，其余 scope 不得携带。
+   * @param {string} args.sessionId 来源会话标识（必填，必须属于当前登录用户）。一个分享只对应一个会话。
+   * @param {array} args.messageIds 选中的消息 id 列表；省略 / 空 = 整会话分享，非空 = 只分享这些消息（≤100 条）。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentSessionsShares: function (args, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/sessions/shares',
+      method: 'POST',
+    });
+  },
+
+  /**
+   * V6.1 分享「继续对话」:登录访客带着分享看到的内容,在<b>自己的新会话</b>里继续和该 agent 对话。 授权链复用读取那把闸(clientId Header + CheckShare + 加载实体 + 未知 scope/软删 fail-closed),但 <b>scope 门校验主体换成 [Authorize] 登录 accountId</b>(权威身份,见 M:MD.AgentService.API.Controllers.SessionHistoryController.ResolveShareContextAsync(System.String,System.Threading.CancellationToken,System.String) 的 scopeGateAccountId)。自我分享(登录访客==owner)直接返回原会话不 fork;否则快照 fork 出归属访客的新会话。 详见 docs/architecture/mingo-session-share-design.md §9.4。
+   * @param {Object} args 请求参数
+   * @param {string} args.shareId 分享实体标识(路径参数),即创建接口返回、登记到 MDAPI SourceId 的 shareId。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  agentSessionsSharesContinue: function (args = {}, options = {}) {
+    const { shareId, ...rest } = args;
+    return agentAPI(rest, {
+      ...options,
+      url: `/api/agent/sessions/shares/${encodeURIComponent(shareId)}/continue`,
       method: 'POST',
     });
   },
@@ -349,7 +457,8 @@ export default {
    * @param {string} args.startDate 可选:起始日期 yyyy-MM-dd(含当天 00:00,本地时区);格式非法 400。
    * @param {string} args.endDate 可选:结束日期 yyyy-MM-dd(含当天整日,本地时区);格式非法 400。
    * @param {boolean} args.includeTokens 可选:是否返回 token 汇总(默认 false=不返回,响应省略 tokens 字段)。
-   * @param {boolean} args.onlyWithFreeQuota 可选:为 true 时只返回用了免费额度(聚合后 FreeApplied>0)的笔。<b>默认 true</b>(不传即只返免费额度笔)。 注意 a2a 聚合行拆分留空=0、会被漏掉(见 §15.6)——默认 true 下 a2a 账单及未用免费额度的笔均不显示,要看全部传 false。
+   * @param {boolean} args.onlyWithFreeQuota 可选:为 true 时只返回用了免费额度(聚合后 FreeApplied>0)的笔。<b>默认 true</b>(不传即只返免费额度笔)。 默认 true 下,未用免费额度的笔(全账户扣费/免单)与未结算笔均不显示,要看全部传 false。 ⚠ 旧文档曾称「a2a 账单会被整体漏掉」——**V5.11.13 起已不成立**(免费拆分已回写编排行,见 billing-design §19.8); 仅 V5.11.13 之前且未跑回填脚本的历史笔仍会漏。
+   * @param {string} args.scene 可选:按<b>计费场景</b>过滤(取值为 `Billing.BillableScenes` 的 key,如 `app-build` / `app-query`); 不传/空白=不过滤。未知值不报错、返回空页(取值域由配置决定,服务端不硬编码校验)。 每行返回的 `scene` / `sceneName` 即为可选值与其中文标签。 ⚠️ 与 onlyWithFreeQuota 叠加时可能"筛出空列表":后者默认 true,只返用了免费额度且已结算的笔。 按某场景筛却空白时,先传 `onlyWithFreeQuota=false` 排除这一层再判断。
    * @param {Object} options 配置参数
    * @param {Boolean} options.silent 是否禁止错误弹层
    */
@@ -484,7 +593,6 @@ export default {
       ...options,
       url: `/api/agent/progress/${encodeURIComponent(sessionId)}`,
       method: 'GET',
-      isStream: true,
     });
   },
 
@@ -522,6 +630,40 @@ export default {
     return agentAPI(rest, {
       ...options,
       url: `/api/agent/sessions/${encodeURIComponent(sessionId)}/messages`,
+      method: 'GET',
+    });
+  },
+
+  /**
+   * V5.22：列出当前登录用户的「最近提问」，供前端做可点击的联想/快捷入口，免重复输入。 只读 routable agent 记录（写入侧只记 routable，故库里即「全部 routable」）；按 LastAskedAt 倒序。
+   * @param {Object} args 请求参数
+   * @param {string} args.agentName 可选。传则只看该 agent 下的最近提问；不传则返回该账号<b>全部 routable agent</b> 的混合列表 （每条带 agentName，可区分来源）。
+   * @param {integer} args.size 返回条数上限，默认 20、范围 [1,20]（越界自动收敛，不报错）；recent 是 top-N 小集合，无翻页。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  getAgentSessionsRecent: function (args = {}, options = {}) {
+    return agentAPI(args, {
+      ...options,
+      url: '/api/agent/sessions/recent',
+      method: 'GET',
+    });
+  },
+
+  /**
+   * V6.0 统一分享模型：读取分享内容——<b>shareId 锚点</b>的独立路由。前端拿到的分享标识只有 shareId （MDAPI 分享信息里登记的 SourceId=我方 shareId，没有 sessionId），故分享读取不复用 `{sessionId}/messages`。 授权链：`clientId` Header（必带）→ CheckShare(clientId, shareId) → 加载我方实体 → 按 scope 限流 → 组织内成员校验 → 整会话/选择性分流读取 → 脱敏返回。详见 docs/architecture/mingo-session-share-design.md §6.2。
+   * @param {Object} args 请求参数
+   * @param {string} args.shareId 分享实体标识（路径参数），即创建接口返回、登记到 MDAPI SourceId 的 shareId。
+   * @param {integer} args.page 页码（从 1 起，默认 1）。
+   * @param {integer} args.size 单页条数（默认 50，硬上限 100；page * size 上限 1000）。
+   * @param {Object} options 配置参数
+   * @param {Boolean} options.silent 是否禁止错误弹层
+   */
+  getAgentSessionsSharesMessages: function (args = {}, options = {}) {
+    const { shareId, ...rest } = args;
+    return agentAPI(rest, {
+      ...options,
+      url: `/api/agent/sessions/shares/${encodeURIComponent(shareId)}/messages`,
       method: 'GET',
     });
   },

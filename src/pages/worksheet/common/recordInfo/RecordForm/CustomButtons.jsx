@@ -140,7 +140,23 @@ export const HoverButton = styled(Button)`
   }
 `;
 
-const confirmClick = props => FunctionWrap(CustomButtonConfirm, props);
+// 同一时刻只允许存在一个二次确认弹层。连点提交会走多次 onSave，每次都调到这里，
+// 叠加出的确认框位置完全重合，逐个点确定就会把同一个按钮动作重复执行多次。
+// 这里按弹层 DOM 是否存在来判断，而不是用模块级标志位：FunctionWrap 的 popstate 卸载
+// 只 unmount、不回调 onClose，标志位会永久残留，导致之后再也弹不出确认框
+const confirmClick = props => {
+  if (document.querySelector('.customButtonConfirmDialog')) {
+    // 走调用方的取消分支收尾，避免 await 的 Promise 一直挂起、loading 关不掉
+    if (isFunction(props.onClose)) {
+      props.onClose();
+    }
+
+    return;
+  }
+
+  return FunctionWrap(CustomButtonConfirm, props);
+};
+
 export default class CustomButtons extends React.Component {
   static propTypes = {
     iseditting: PropTypes.bool,

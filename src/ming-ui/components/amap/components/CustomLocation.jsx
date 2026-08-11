@@ -94,11 +94,7 @@ export default class CustomLocation extends Component {
                 <div className="mBottom4 mTop16 bold textSecondary">{item.title}</div>
                 <Input
                   disabled={item.disabled}
-                  value={
-                    isLatLng && customLocation[item.key]
-                      ? toFixed(customLocation[item.key], 6)
-                      : customLocation[item.key] || ''
-                  }
+                  value={customLocation[item.key] || ''}
                   onChange={e =>
                     this.setState({
                       customLocation: {
@@ -109,7 +105,13 @@ export default class CustomLocation extends Component {
                   }
                   onBlur={() => {
                     if (isLatLng && lat && lng) {
-                      setPosition(lng, lat);
+                      const formattedLocation = {
+                        ...customLocation,
+                        lng: toFixed(lng, 6),
+                        lat: toFixed(lat, 6),
+                      };
+                      this.setState({ customLocation: formattedLocation });
+                      setPosition(formattedLocation.lng, formattedLocation.lat);
                     }
                   }}
                 />
@@ -121,7 +123,7 @@ export default class CustomLocation extends Component {
               fullWidth={true}
               disabled={!(lng && lat)}
               onClick={() => {
-                this.props.onAddressChange(customLocation);
+                this.props.onAddressChange({ ...customLocation, lng: toFixed(lng, 6), lat: toFixed(lat, 6) });
               }}
             >
               {_l('确定')}
@@ -136,7 +138,7 @@ export default class CustomLocation extends Component {
             fullWidth={true}
             disabled={!(lng && lat)}
             onClick={() => {
-              this.props.onAddressChange(customLocation);
+              this.props.onAddressChange({ ...customLocation, lng: toFixed(lng, 6), lat: toFixed(lat, 6) });
             }}
           >
             {_l('确定')}

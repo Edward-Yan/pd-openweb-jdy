@@ -14,7 +14,7 @@ import {
   getShowFormat,
   getTitleStyle,
 } from 'src/utils/controlCommon';
-import { MAX_CONTROLS_COUNT, NO_CONTENT_CONTROL, NOT_HAVE_WIDTH_CONFIG } from '../config';
+import { getMaxControlsCount, NO_CONTENT_CONTROL, NOT_HAVE_WIDTH_CONFIG } from '../config';
 import { DISPLAY_TYPE } from '../config/setting';
 import { getRowById, isFullLineControl } from './widgets';
 
@@ -272,9 +272,10 @@ export const isAutoNumberSelectableControl = item => {
  */
 export const isExceedMaxControlLimit = (controls = [], addCount = 0) => {
   const existedControls = controls.filter(item => !NO_CONTENT_CONTROL.includes(item.type)) || [];
+  const maxControlsCount = getMaxControlsCount();
 
-  if (existedControls.length + addCount > MAX_CONTROLS_COUNT) {
-    alert(_l('表单中添加字段数量已达上限（%0个)', MAX_CONTROLS_COUNT), 3);
+  if (existedControls.length + addCount > maxControlsCount) {
+    alert(_l('表单中添加字段数量已达上限（%0个)', maxControlsCount), 3);
     return true;
   }
 

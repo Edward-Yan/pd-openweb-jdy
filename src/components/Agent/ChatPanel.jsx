@@ -18,6 +18,7 @@ import {
   fetchArtifactFile,
   fetchArtifactFileContent,
   fetchArtifactFileList,
+  fetchSessionBuildSnapshot,
   fetchTraceUsage,
   getCompletedText,
   mapAttachmentForRequest,
@@ -47,6 +48,7 @@ import {
   markBuildProgressFinished,
   resolvePlanDrift,
   resolveRebuildConfirm,
+  restorePendingConfirmation,
   upsertRebuildConfirm,
 } from './streamEvents';
 import {
@@ -458,6 +460,9 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
   const roundTraceIdRef = useRef('');
   // 本轮应答 agent：用于收尾时判断是否需要查用量（help-agent 不计费，跳过轮询与展示）
   const roundAgentRef = useRef('');
+  // 本轮 build 开场是否已处理（显面板 + 置 building + 补 appId）：路由信息每条事件都带，
+  // 靠它保证一轮只做一次；每轮 stream 开始时复位。
+  const buildRoundOpenedRef = useRef(false);
   // 在途的用量轮询定时器集合：切会话 / 新建会话 / 卸载时统一清掉，避免轮询写进已不存在的消息。
   const usagePollTimersRef = useRef(new Set());
 
@@ -825,6 +830,24 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
       setMessages(cur =>
         cur.map(m => (m.id === assistantId && m.agentName !== respAgent ? { ...m, agentName: respAgent } : m)),
       );
+    }
+
+    // build 轮开场即显面板：续建（resume）两条既有触发路径都不成立——没有 plan 文件流（不经
+    // artifact-file-writing），应用也早在首轮建好、checkpoint 续跑不重放 create-app 事件，
+    // 即便重放 appId 也与上轮相同（isNewApp 恒 false）。故改用「本轮路由到 build-app-agent」作判据，
+    // 它在 route-selected 即落值、早于任何 step，首建与续建同样覆盖得到。
+    if (respAgent === 'build-app-agent' && !buildRoundOpenedRef.current) {
+      buildRoundOpenedRef.current = true;
+      if (!disableAppBuilder) revealAppBuilder();
+      // 续建轮广播已知 appId，驱动 AppBuilder 打开 iframe 预览跟随进度：同页中断时它一直在 appMetaRef 里，
+      // 刷新后则由 loadSession 从 build 快照补回。首建此刻还没 appId（本轮才会建），不广播空值，
+      // 仍由下面 extractAppCreatedIds 那条路在 create-app 事件到达时广播，时序不变。
+      if (appMetaRef.current.appId) {
+        bus.emit('app:meta', { appId: appMetaRef.current.appId, sessionId });
+      }
+
+      // AppBuilder 里 buildPhase 只在 hasAppId 时才生效（mainStatus），首建这会儿还没 appId，置了也不影响
+      bus.emit('build:phase', 'building');
     }
 
     // 记下本轮 traceId：stream 收尾后据此轮询本轮用量（信用点）。流式事件每条都带，取第一次出现即可。
@@ -1285,6 +1308,7 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
     // 新一轮开始：清掉上一轮残留的 traceId / agent，避免本轮无值时误用上轮的去轮询
     roundTraceIdRef.current = '';
     roundAgentRef.current = '';
+    buildRoundOpenedRef.current = false;
 
     // 记录用户原始 message：路径 E 回写 none_of_these 重路由时须原样带上
     if (promptText) lastUserMessageRef.current = promptText;
@@ -1447,6 +1471,7 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
     // 先把卡片标记为已决策，禁用按钮、展示选择
     setMessages(current => current.map(m => (m.id === driftMessageId ? resolvePlanDrift(m, action) : m)));
     buildResumableRef.current = false;
+    buildRoundOpenedRef.current = false;
 
     const assistant = assistantMessage();
 
@@ -1502,6 +1527,7 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
 
     setMessages(current => current.map(m => (m.id === confirmMessageId ? resolveRebuildConfirm(m, action) : m)));
     buildResumableRef.current = false;
+    buildRoundOpenedRef.current = false;
 
     const assistant = assistantMessage();
 
@@ -1550,8 +1576,14 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
     if (abortRef.current) abortRef.current.abort();
     // 仅 abort 本地 SSE 不会停掉服务端，需显式调取消接口终止该会话正在执行的 run
     cancelAgentRun(sessionId);
-    // 搭建途中暂停（已建出应用即视为有进度）：标记续建态，下次「继续」不重传方案、不误弹 plan 漂移
-    if (appMetaRef.current.appId) buildResumableRef.current = true;
+    // 搭建途中暂停：标记续建态，下次「继续」不重传方案、不误弹 plan 漂移。
+    // 判据取「本轮是 build 轮」或「已建出应用」：只看 appId 会漏掉建应用之前就中断的窗口，
+    // 而无条件置位又会误伤非 build 轮（如问答被中断后，下一条消息会连带丢掉 plan context）。
+    // roundAgentRef 在 route-selected 事件即落值，早于任何 step，故能覆盖那段早期窗口。
+    if (roundAgentRef.current === 'build-app-agent' || appMetaRef.current.appId) {
+      buildResumableRef.current = true;
+    }
+
     setSubmitting(false);
     setExtracting({ doc: 0, image: 0 });
   }
@@ -1613,20 +1645,44 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
     setExtracting({ doc: 0, image: 0 });
     try {
       const isAnonymousMingoPlan = anonymous && isSingleMingoPlan;
-      const history = await fetchAgentSessionMessages(targetSessionId, {
-        includeUsage: !isAnonymousMingoPlan,
-        includeAnonymousPlanArtifact: isAnonymousMingoPlan,
-        rawItems: options.initialHistoryMessages,
-      });
+      // build 快照与历史消息并行拉：续建态只活在内存 ref 里，刷新/切会话后会退回 false，
+      // 导致下一条「继续」重传整份 plan context → 与首建 hash 对不上 → 误弹 plan 漂移；
+      // 挂起中的意图弹层同样只是一次性 SSE 事件，刷新即丢，逃生口 none_of_these 随之消失。
+      // 匿名态无 build 续建语义，跳过该请求。失败按空快照处理（内部已吞异常）。
+      const [history, buildSnapshot] = await Promise.all([
+        fetchAgentSessionMessages(targetSessionId, {
+          includeUsage: !isAnonymousMingoPlan,
+          includeAnonymousPlanArtifact: isAnonymousMingoPlan,
+          rawItems: options.initialHistoryMessages,
+        }),
+        anonymous
+          ? Promise.resolve({ resumable: false, pendingConfirmation: null, appId: '' })
+          : fetchSessionBuildSnapshot(targetSessionId),
+      ]);
+
+      // 回填用户最后一条原始 message：意图弹层选"都不是"(none_of_these)时须原样带回后端供重路由。
+      // 不回填的话刷新后该值退化成字面量"继续"，后端重路由失据、大概率又路由回 build-app。
+      const lastUserMsg = [...history].reverse().find(m => m.role === 'user' && m.rawText);
+      lastUserMessageRef.current = (lastUserMsg && lastUserMsg.rawText) || '';
 
       filesRef.current = {};
-      appMetaRef.current = { name: '', appId: '', sectionIdByName: {} };
+      // appId 取自 build 快照：该会话若已建出应用（含搭建中途中断的），续建轮据此打开 iframe 预览。
+      // 此处只落 ref 不广播 app:meta——切回历史会话不该径直弹出预览浮层，等用户真的续建时再广播。
+      appMetaRef.current = { name: '', appId: buildSnapshot.appId || '', sectionIdByName: {} };
       startedPathsRef.current = new Set();
       committedFilesFetchedRef.current = new Set();
       committedFilesLoadingRef.current = new Map();
       // 还原版本基线：历史里最后一张 plan-card 即最新版本，作为"是否最新"的判定基准
       const planCards = history.flatMap(m => (m.parts || []).filter(p => p.kind === 'plan-card' && p.versionId));
       const latestCard = planCards[planCards.length - 1] || null;
+
+      // 续建态：服务端说有未完成搭建 **且** 最新方案确实是那次搭建用的那份。
+      // built 由 markBuiltPlanCards 按「plan-card 紧邻的下一条 assistant 消息是否 build-app-agent」判定。
+      // 若最新方案尚未搭建过（用户在上次 build 失败/中断后又改出了新方案），就不能标续建态——否则下一条
+      // 「搭建」会 omitPlanContext，后端按 __original_inputs__ 的旧方案建，用户既拿不到新方案，
+      // 也失去 plan 漂移弹层这个纠正机会。此时照常传新 plan，让后端算出不同 hash 正常弹层由用户定夺。
+      // （不刷新时无此问题：每轮 completed 都会重设该 ref，产出新方案那轮自然把它清成 false。）
+      buildResumableRef.current = buildSnapshot.resumable && !(latestCard && !latestCard.built);
       const restoreCard = latestCard || initialPlanArtifactRef;
       const shouldCheckInitialSessionOverview =
         isMobile && autoOpenInitialOverviewRef.current && !initialOverviewOpenedRef.current;
@@ -1658,7 +1714,7 @@ export default function ChatPanel({ runtime = {}, isSingleMingoPlan = false }) {
       setCurrentAppName(appMetaRef.current.name || '');
       setActiveVersionLabel(latestVerLabelRef.current);
       hideAppBuilder();
-      setMessages(history);
+      setMessages(restorePendingConfirmation(history, buildSnapshot.pendingConfirmation));
       setSessionId(targetSessionId);
       setHistoryVisible(false);
       // 历史消息渲染后滚到底部，定位到最新一条

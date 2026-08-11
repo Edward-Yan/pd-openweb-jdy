@@ -172,8 +172,9 @@ const getGlobalMeta = ({ allowNotLogin, requestParams } = {}) => {
       (location.pathname.includes('/public/') && !isPublicMingoPlan()) ||
       location.pathname.includes('/recordfileupload')
     ) {
-      const search = location.search ? `${location.search}&sys_lang=${sysDefaultLang}` : `?sys_lang=${sysDefaultLang}`;
-      location.href = pathCompletion(`${location.pathname}${search}`);
+      const url = new URL(location.href);
+      url.searchParams.set('sys_lang', sysDefaultLang);
+      location.href = pathCompletion(`${url.pathname}${url.search}`);
     } else {
       setCookie('i18n_langtag', sysDefaultLang);
       window.location.reload();

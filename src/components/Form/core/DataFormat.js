@@ -232,6 +232,7 @@ export default class DataFormat {
                   controlId: item.controlId,
                   value: v,
                   isInit,
+                  isDefaultValue: true,
                 });
                 this.onAsyncChange({
                   controlId: item.controlId,
@@ -246,21 +247,41 @@ export default class DataFormat {
             });
 
             if (value) {
-              this.updateDataSource({ controlId: item.controlId, value, isInit });
+              this.updateDataSource({
+                controlId: item.controlId,
+                value,
+                isInit,
+                isDefaultValue: true,
+              });
             }
           }
         } else if (item.advancedSetting && item.advancedSetting.defsource && item.type !== 30) {
           const value = getDynamicValue(this.data, item, this.masterData);
 
           if (this.isMobile && item.type === 29 && _.isString(value) && _.isEmpty(JSON.parse(value))) {
-            this.updateDataSource({ controlId: item.controlId, value: null, isInit });
+            this.updateDataSource({
+              controlId: item.controlId,
+              value: null,
+              isInit,
+              isDefaultValue: true,
+            });
           } else if (value) {
             if (((item.type === 29 && isRelateRecordTableControl(item)) || item.type === 34) && !forceSync) {
               setTimeout(() => {
-                this.updateDataSource({ controlId: item.controlId, value, isInit });
+                this.updateDataSource({
+                  controlId: item.controlId,
+                  value,
+                  isInit,
+                  isDefaultValue: true,
+                });
               }, 0);
             } else {
-              this.updateDataSource({ controlId: item.controlId, value, isInit });
+              this.updateDataSource({
+                controlId: item.controlId,
+                value,
+                isInit,
+                isDefaultValue: true,
+              });
             }
           }
         } else if (
@@ -523,6 +544,7 @@ export default class DataFormat {
     removeUniqueItem = () => {},
     data,
     isInit = false,
+    isDefaultValue = false,
     searchByChange = false,
     userTriggerChange = false,
     ignoreSearch = false, // 禁止触发查询工作表
@@ -741,8 +763,8 @@ export default class DataFormat {
               this.ruleControlIds.push(controlId);
             }
 
-            // 业务规则当前单次操作变更id集合
-            if (!_.includes(this.currentRuleControlIds, controlId) && !isInit) {
+            // 业务规则当前单次操作变更id集合，包含默认值初始化产生的变更
+            if (!_.includes(this.currentRuleControlIds, controlId) && (!isInit || isDefaultValue)) {
               this.currentRuleControlIds.push(controlId);
             }
 
@@ -1148,7 +1170,7 @@ export default class DataFormat {
       console.log('Error Control data:', controlId, value);
     }
 
-    this.getAsyncData(isInit);
+    this.getAsyncData(isInit, isDefaultValue);
   }
 
   /**
@@ -1339,6 +1361,7 @@ export default class DataFormat {
             controlId,
             value,
             isInit: true,
+            isDefaultValue: true,
           });
 
           this.onAsyncChange({
@@ -1391,6 +1414,7 @@ export default class DataFormat {
             controlId,
             value,
             isInit: true,
+            isDefaultValue: true,
           });
 
           this.onAsyncChange({
@@ -1432,6 +1456,7 @@ export default class DataFormat {
               controlId,
               value: mapValue,
               isInit: true,
+              isDefaultValue: true,
             });
           });
           this.onAsyncChange({
@@ -1475,6 +1500,7 @@ export default class DataFormat {
               controlId,
               value,
               isInit: true,
+              isDefaultValue: true,
             });
           });
           this.onAsyncChange({
@@ -1512,6 +1538,7 @@ export default class DataFormat {
                       title: (res.addressComponent || {}).building || '',
                     }),
                     isInit: true,
+                    isDefaultValue: true,
                   });
                 });
                 this.onAsyncChange({
@@ -1605,7 +1632,7 @@ export default class DataFormat {
   /**
    * 获取异步数据
    */
-  getAsyncData(isInit) {
+  getAsyncData(isInit, isDefaultValue) {
     if (_.isEmpty(this.asyncControls)) return;
 
     Object.keys(this.asyncControls).forEach(id => {
@@ -1627,7 +1654,7 @@ export default class DataFormat {
           );
 
           if (!accounts.length) {
-            this.updateDataSource({ controlId: item.controlId, value: '[]', isInit });
+            this.updateDataSource({ controlId: item.controlId, value: '[]', isInit, isDefaultValue });
           } else {
             if (
               !md.global.Account.accountId ||
@@ -1693,6 +1720,7 @@ export default class DataFormat {
                   controlId: item.controlId,
                   value: departments,
                   isInit,
+                  isDefaultValue,
                 });
 
                 this.onAsyncChange({

@@ -62,9 +62,9 @@ export default function Switch({ data, onChange }) {
                       value={_.get(itemnames[index], 'value')}
                       onChange={e => {
                         const tempValue =
-                          getStringBytes(e.target.value.trim()) <= 60 //30个中文字符
-                            ? e.target.value.trim()
-                            : getStrBytesLength(e.target.value.trim(), 60);
+                          getStringBytes(e.target.value) <= 60 //30个中文字符
+                            ? e.target.value
+                            : getStrBytesLength(e.target.value, 60);
                         const newItemNames = itemnames.map((i, idx) =>
                           idx === index ? Object.assign({}, i, { value: tempValue }) : i,
                         );
@@ -85,7 +85,7 @@ export default function Switch({ data, onChange }) {
             autoSize
             value={data.hint}
             placeholder={_l('输入检查内容')}
-            onChange={e => onChange({ hint: e.target.value.trim() })}
+            onChange={e => onChange({ hint: e.target.value })}
           />
         </SettingItem>
       )}

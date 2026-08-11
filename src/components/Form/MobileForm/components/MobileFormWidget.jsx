@@ -155,7 +155,7 @@ export default function MobileFormWidget(props) {
   // 渲染表单项
   const renderWidgetsContent = () => {
     const widgetName = convertControl(item.type);
-    const isFreeField = isCustomWidget(item);
+    const isFreeField = isCustomWidget(item) && !(item.otherSheetControlType === 30 && item.type !== 54);
     let Widgets;
 
     if (isFreeField) {
@@ -181,7 +181,7 @@ export default function MobileFormWidget(props) {
     // (禁用或只读) 且 内容不存在
     if (
       !_.includes([22, 52, 34], item.type) &&
-      !isCustomWidget(item) &&
+      !isFreeField &&
       !(item.type === 29 && isRelateRecordTableControl(item)) &&
       (item.disabled || _.includes([25, 31, 32, 33, 37, 38, 53], item.type) || !isEditable) &&
       ((!item.value && item.value !== 0 && !_.includes([28, 47, 51], item.type)) ||

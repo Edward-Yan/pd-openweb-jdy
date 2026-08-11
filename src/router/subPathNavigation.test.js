@@ -152,7 +152,9 @@ files.forEach(file => {
       "md.global.Config.WebUrl.replace(/\\/+$/, '') + getPathWithoutSubPath(location.pathname) + search",
     ),
   );
-  assert(source.includes('location.href = pathCompletion(`${location.pathname}${search}`);'));
+  assert(!source.includes('`${location.search}&sys_lang=${sysDefaultLang}`'));
+  assert(source.includes("url.searchParams.set('sys_lang', sysDefaultLang);"));
+  assert(source.includes('location.href = pathCompletion(`${url.pathname}${url.search}`);'));
   assert(source.includes('location.href = pathCompletion(`/portal/${md.global.Account.appId}`);'));
   assert(source.includes("location.href = pathCompletion('/dashboard');"));
 }

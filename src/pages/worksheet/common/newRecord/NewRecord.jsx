@@ -230,6 +230,7 @@ function NewRecord(props) {
         <button
           type="button"
           className="ming Button--medium Button saveAndContinueBtn ellipsis mRight12"
+          disabled={loading}
           onClick={submitDraft}
         >
           {_l('存草稿')}
@@ -240,6 +241,7 @@ function NewRecord(props) {
           <button
             type="button"
             className="ming Button--medium Button saveAndContinueBtn ellipsis"
+            disabled={loading}
             onClick={submitNextCreate}
           >
             {advancedSetting.continueBtnText || _l('提交并继续创建')}
@@ -250,6 +252,7 @@ function NewRecord(props) {
         <button
           type="button"
           className="ming Button--medium Button--primary Button mLeft12 ellipsis"
+          disabled={loading}
           onClick={submitRecord}
         >
           {advancedSetting.submitBtnText || _l('提交')}

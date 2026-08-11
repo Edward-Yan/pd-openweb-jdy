@@ -469,6 +469,9 @@ export async function fetchAgentSessionMessages(
     return {
       id: `history-${index}`,
       role,
+      // 用户消息保留原始文本（含 embed 段原文）：恢复历史后意图弹层选"都不是"(none_of_these)时，
+      // 须把用户最后一条原始 message 原样回传后端供重路由；从 parts 反拼会丢 embed 原文。
+      rawText: role === 'user' ? text || '' : undefined,
       name: role === 'user' ? _l('你') : 'Mingo',
       // 本轮解析到的 agent；用于历史加载时判断"是否搭建过 / 最后一条是否搭建"（build-app-agent）
       agentName: stringValue(readField(m, 'agentName')),
@@ -574,6 +577,45 @@ export async function fetchArtifactAppMeta({ artifactId, versionId } = {}) {
 export function cancelAgentRun(sessionId) {
   if (!sessionId) return Promise.resolve();
   return agentAjax.agentCancel({ sessionId }, { silent: true }).catch(() => {});
+}
+
+// 从服务端取会话的 build 快照（SSE 断连/页面刷新后的兜底通道），返回 { resumable, pendingConfirmation, appId }：
+//  - resumable：是否还有未完成的搭建。该标记只靠内存 ref 记不住——刷新或重进会话后组件重挂、退回 false，
+//    下一条「继续」会重传整份 plan context，与首建 hash 对不上 → 误弹「搭建方案有变化」。
+//  - pendingConfirmation：挂起中的意图弹层快照 { stepId, options }。弹层原本只是一次性 SSE 事件，刷新即丢，
+//    而其中的 none_of_these（「我想做点别的」）是用户从一次误路由里脱身的唯一出口，丢了会话就卡在搭建语境里。
+//    后端字段刻意与 SSE completed 事件 payload 同名同义，可直接喂给 upsertRebuildConfirm，无需另写还原分支。
+//  - appId：本次搭建已建出的应用（detail.steps 里 step-create-app 的 outputs）。续建轮 checkpoint 续跑不会重放
+//    create_app / step-create-app 事件，extractAppCreatedIds 取不到 appId，而 AppBuilder 的 iframe 预览必须有
+//    appId 才打得开（见 app:meta 的 `if (appId) setOverlayOpen(true)`）；搭建尚未完成时也没有完成消息可供
+//    pickBuiltAppId 挖取，checkpoint 是这个窗口里唯一还留着 appId 的地方。
+// 后端按 accountId|sessionId 物理隔离，跨账号查不到记录（返回空进度 + resumable=false）。
+// 任何异常一律当作「无未完成搭建、无挂起弹层、无应用」，宁可少还原也不要因为兜底通道失败而阻断会话加载。
+export async function fetchSessionBuildSnapshot(sessionId) {
+  const empty = { resumable: false, pendingConfirmation: null, appId: '' };
+
+  if (!sessionId) return empty;
+
+  try {
+    const res = await agentAjax.getAgentProgress({ sessionId, detail: true }, { silent: true });
+    const body = readField(res, 'data') || res;
+    const pending = readField(body, 'pendingConfirmation');
+    const steps = readField(readField(body, 'detail'), 'steps');
+    const created = (Array.isArray(steps) ? steps : []).find(
+      step => stringValue(readField(step, 'stepId')) === 'step-create-app',
+    );
+
+    return {
+      // resumable 即「有真实进度且未成功收尾」，已覆盖 in_progress / 挂起等确认等各态（success 时后端强制 false），
+      // 不必再叠 status 判断
+      resumable: readField(body, 'resumable') === true,
+      // options 为空的弹层还原出来也点不动（后端 options 为空时本就不回吐），按无挂起处理
+      pendingConfirmation: isRecord(pending) && (readField(pending, 'options') || []).length ? pending : null,
+      appId: stringValue(readField(readField(created, 'outputs'), 'appId')) || '',
+    };
+  } catch {
+    return empty;
+  }
 }
 
 // 取某 plan(artifactId + versionId) 的 build 费用预估。后端响应：{ data: { status, credits: { estimated, max } } }；

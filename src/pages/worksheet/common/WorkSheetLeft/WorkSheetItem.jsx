@@ -5,7 +5,6 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { Icon, MdLink, SvgIcon } from 'ming-ui';
 import { Tooltip } from 'ming-ui/antd-components';
-import alert from 'ming-ui/functions/alert';
 import { getEmbedValue } from 'src/components/Form/core/formUtils/helper';
 import { transferValue } from 'src/pages/widgetConfig/widgetSetting/components/DynamicDefaultValue/util';
 import { canEditApp, canEditData } from 'src/pages/worksheet/redux/actions/util';

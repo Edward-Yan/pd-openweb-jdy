@@ -541,6 +541,12 @@ export default function SheetWorkflow(props) {
         allowTaskRevokeBackNodeId,
       });
 
+      if (!data) {
+        setActionVisible(false);
+        handleCloseDrawer();
+        return;
+      }
+
       instance['taskRevoke']({
         id: data.instanceId,
         workId: data.workId,
@@ -629,6 +635,10 @@ export default function SheetWorkflow(props) {
     const data = _.find(works, {
       allowTaskRevokeBackNodeId,
     });
+
+    if (!data) {
+      return;
+    }
 
     instanceVersion
       .get2({

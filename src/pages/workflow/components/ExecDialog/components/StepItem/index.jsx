@@ -152,7 +152,6 @@ export default class StepItem extends Component {
           <div className="flexRow alignItemsCenter">
             <div className="userName actionUserName">{workItemAccount.fullName}</div>
             <div className="action ellipsis action-13">{_l('撤回')}</div>
-            <div className="flex" />
           </div>
           {this.renderAdditionalContent({ ...item, ...{ operationTime: receiveTime } })}
         </Fragment>
@@ -251,7 +250,6 @@ export default class StepItem extends Component {
                     : operationLogActionText + (_.includes([2], action) ? actionTargetName : '')}
               </div>
               {this.renderLogsContent(item)}
-              <div className="flex" />
             </div>
             {this.renderAdditionalContent(item)}
           </Fragment>
@@ -282,7 +280,6 @@ export default class StepItem extends Component {
                 )}
               </div>
               {this.renderLogsContent(item)}
-              <div className="flex" />
             </div>
             {this.renderAdditionalContent(item)}
           </Fragment>

@@ -120,6 +120,11 @@ export default class RelateRecordDropdown extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
+      // 表格内退出编辑态，提交面板内累积的变更
+      if (prevProps.isediting && !this.props.isediting) {
+        this.commitChange();
+      }
+
       if (!_.isEqual(prevProps.selected, this.props.selected)) {
         this.setState({
           selected: this.props.selected,
@@ -147,6 +152,8 @@ export default class RelateRecordDropdown extends React.Component {
   inputForIOSKeyboardRef = React.createRef();
   cell = React.createRef();
   list = React.createRef();
+  // 面板内累积、尚未向外提交的变更
+  pendingChange = false;
 
   get active() {
     const { isediting } = this.props;
@@ -289,6 +296,7 @@ export default class RelateRecordDropdown extends React.Component {
   // 提供给表单 Tab 事件调用的关闭方法
   closePopup = () => {
     const { onVisibleChange } = this.props;
+    this.commitChange();
     this.setState(
       {
         listvisible: false,
@@ -299,7 +307,7 @@ export default class RelateRecordDropdown extends React.Component {
     );
   };
 
-  handleAdd = (record, cb = () => {}) => {
+  handleAdd = (record, cb = () => {}, { defer } = {}) => {
     const { multiple } = this.props;
     const { selected } = this.state;
 
@@ -315,17 +323,49 @@ export default class RelateRecordDropdown extends React.Component {
           addedIds: oldState.addedIds.concat(record.rowid),
         }),
         () => {
-          this.handleChange();
+          this.handleChange({ defer });
           cb();
         },
       );
     }
   };
 
+  // 批量选择记录，合并为一次变更，避免逐条触发表单联动、业务规则和工作表查询
+  handleAddRecords = records => {
+    const { selected } = this.state;
+    const newRecords = _.uniqBy(
+      records.filter(record => !_.find(selected, r => r.rowid === record.rowid)),
+      'rowid',
+    );
+
+    if (_.isEmpty(newRecords)) {
+      return;
+    }
+
+    const restCount = MAX_COUNT - selected.length;
+
+    if (newRecords.length > restCount) {
+      alert(_l('最多关联%0条', MAX_COUNT), 3);
+    }
+
+    if (restCount <= 0) {
+      return;
+    }
+
+    const addedRecords = newRecords.slice(0, restCount);
+
+    this.setState(
+      oldState => ({
+        selected: oldState.selected.concat(addedRecords),
+        addedIds: oldState.addedIds.concat(addedRecords.map(r => r.rowid)),
+      }),
+      this.handleChange,
+    );
+  };
+
   handleClear = () => {
     const { onVisibleChange } = this.props;
     const { selected } = this.state;
-    selected.forEach(this.handleDelete);
     this.setState(
       {
         selected: [],
@@ -339,14 +379,14 @@ export default class RelateRecordDropdown extends React.Component {
     );
   };
 
-  handleDelete = record => {
+  handleDelete = (record, { defer } = {}) => {
     const { selected, deletedIds = [] } = this.state;
     this.setState(
       {
         selected: selected.filter(r => r.rowid !== record.rowid),
         deletedIds: _.uniq(deletedIds.concat(record.rowid)),
       },
-      this.handleChange,
+      () => this.handleChange({ defer }),
     );
   };
 
@@ -359,10 +399,10 @@ export default class RelateRecordDropdown extends React.Component {
 
       if (selectedRecord) {
         if (this.allowRemove || selectedRecord.isNewAdd) {
-          this.handleDelete(record);
+          this.handleDelete(record, { defer: true });
         }
       } else {
-        this.handleAdd(_.assign({}, record, { isNewAdd: true }));
+        this.handleAdd(_.assign({}, record, { isNewAdd: true }), undefined, { defer: true });
       }
 
       return;
@@ -393,18 +433,33 @@ export default class RelateRecordDropdown extends React.Component {
       const needDelete = selected.slice(-1)[0];
 
       if (needDelete && control.enumDefault !== 1) {
-        this.handleDelete(needDelete);
+        this.handleDelete(needDelete, { defer: true });
       }
     }
   };
 
-  handleChange() {
-    const { multiple, doNotClearKeywordsWhenChange, onChange } = this.props;
+  // 向外提交值变更
+  emitChange() {
+    const { onChange } = this.props;
     let { selected, addedIds, deletedIds } = this.state;
 
     if (selected.length > 1 && _.find(selected, { rowid: 'isEmpty' })) {
       selected = selected.filter(r => r.rowid !== 'isEmpty');
     }
+
+    this.pendingChange = false;
+    onChange(selected, { addedIds, deletedIds });
+  }
+
+  // 提交下拉面板内累积的变更，面板关闭时调用
+  commitChange = () => {
+    if (this.pendingChange) {
+      this.emitChange();
+    }
+  };
+
+  handleChange({ defer } = {}) {
+    const { multiple, doNotClearKeywordsWhenChange } = this.props;
 
     if (multiple) {
       this.focusInput();
@@ -414,7 +469,14 @@ export default class RelateRecordDropdown extends React.Component {
       this.setState({ keywords: '' });
     }
 
-    onChange(selected, { addedIds, deletedIds });
+    // 多选面板内连续勾选时累积变更，等面板关闭再合并提交一次，
+    // 避免每勾选一条都触发表单联动、业务规则重算和工作表查询
+    if (defer && multiple && this.active) {
+      this.pendingChange = true;
+      return;
+    }
+
+    this.emitChange();
   }
 
   focusInput() {
@@ -664,6 +726,7 @@ export default class RelateRecordDropdown extends React.Component {
         onClickAwayExceptions={['.selectRecordsDialog', '.worksheetRelateNewRecordFromSelectRelateRecord']}
         onClickAway={() => {
           if (!newrecordVisible) {
+            this.commitChange();
             onVisibleChange(false);
           }
         }}
@@ -736,9 +799,7 @@ export default class RelateRecordDropdown extends React.Component {
             onChange={records => {
               this.setState({ keywords: '' });
               if (multiple) {
-                records.forEach(record => {
-                  this.handleAdd(_.assign({}, record, { isNewAdd: true }));
-                });
+                this.handleAddRecords(records.map(record => _.assign({}, record, { isNewAdd: true })));
               } else {
                 onChange(records);
                 onVisibleChange(false);
@@ -752,6 +813,7 @@ export default class RelateRecordDropdown extends React.Component {
                 return;
               }
 
+              this.commitChange();
               this.setState({ newrecordVisible: true, listvisible: false });
             }}
             focusInput={() => {
@@ -856,9 +918,7 @@ export default class RelateRecordDropdown extends React.Component {
                 onOk: records => {
                   this.setState({ keywords: '' });
                   if (multiple) {
-                    records.forEach(record => {
-                      this.handleAdd(_.assign({}, record, { isNewAdd: true }));
-                    });
+                    this.handleAddRecords(records.map(record => _.assign({}, record, { isNewAdd: true })));
                   } else {
                     onChange(records);
                     onVisibleChange(false);
@@ -939,6 +999,7 @@ export default class RelateRecordDropdown extends React.Component {
                   this.inputForIOSKeyboardRef.current.focus();
                 }
               } else {
+                this.commitChange();
                 this.setState({ listvisible: false });
               }
 

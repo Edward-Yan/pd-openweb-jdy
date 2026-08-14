@@ -252,6 +252,7 @@ export default class RecordCard extends Component {
     const coverCidControl = _.find(controls, { controlId: coverCid }) || {};
     const { type } = coverCidControl;
     const isIframeCover = isIframeControl(coverCidControl);
+    const formData = type === 47 ? controls.map(control => ({ ...control, value: data[control.controlId] })) : [];
     const { cover } = this;
     const allAttachments = cover ? safeParse(data[coverCid], 'array') : [];
 
@@ -267,7 +268,7 @@ export default class RecordCard extends Component {
         ) : type === 47 ? (
           <BarCode
             {...coverCidControl}
-            formData={data}
+            formData={formData}
             appId={appId}
             className="coverWrapQr"
             worksheetId={worksheetId}

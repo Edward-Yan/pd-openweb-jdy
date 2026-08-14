@@ -34,5 +34,5 @@ package-lock.json
 .scannerwork
 *.llog
 
-
+# Test files
 *.test.js

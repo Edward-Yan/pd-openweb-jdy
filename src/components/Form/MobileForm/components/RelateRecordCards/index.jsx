@@ -481,7 +481,7 @@ class RelateRecordCards extends Component {
 
   handleAdd = newAdded => {
     const { multiple } = this.props;
-    const { count, records, addedIds = [] } = this.state;
+    const { count, records, addedIds = [], deletedIds = [] } = this.state;
     const { isRealCard } = this;
     newAdded = newAdded.map(r => ({ ...r, isNewAdd: true }));
     if (isRealCard) {
@@ -489,6 +489,21 @@ class RelateRecordCards extends Component {
     }
 
     const newRecords = multiple ? _.uniqBy(newAdded.concat(records), r => r.rowid) : newAdded;
+
+    if (!multiple && records.length) {
+      const recordIds = records.map(r => r.rowid);
+      this.setState(
+        {
+          records: newRecords,
+          count: newRecords.length,
+          deletedIds: _.uniq(deletedIds.concat(recordIds)),
+          addedIds: _.uniq(addedIds.filter(id => !_.includes(recordIds, id)).concat(newRecords.map(r => r.rowid))),
+        },
+        this.handleChange,
+      );
+      return;
+    }
+
     this.setState(
       {
         records: newRecords,

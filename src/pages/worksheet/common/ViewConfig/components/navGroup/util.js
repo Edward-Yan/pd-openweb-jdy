@@ -170,12 +170,12 @@ export const HIERARCHY_VIEW_TYPE = [
   {
     text: _l('横向显示'),
     value: '0',
-    icon: 'Horizontal',
+    icon: 'Vertical',
   },
   {
     text: _l('竖向显示'),
     value: '1',
-    icon: 'Vertical',
+    icon: 'Horizontal',
   },
   {
     text: _l('混合显示'),

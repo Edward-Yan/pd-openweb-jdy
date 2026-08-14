@@ -24,14 +24,15 @@ const Container = styled.div`
 `;
 
 const PercentSlider = ({ percent, dimension = 100 }) => {
-  const value = Number(percent * dimension).toFixed(4);
+  const sliderValue = Number(percent * dimension).toFixed(4);
+  const displayValue = Number(percent).toFixed(4);
 
   return (
-    <Container percent={value}>
+    <Container percent={sliderValue}>
       <div className="percentSlider">
         <div className="percentBar" />
       </div>
-      <div className="percentText">{Number(value).toFixed(4)}</div>
+      <div className="percentText">{displayValue}</div>
     </Container>
   );
 };

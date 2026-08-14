@@ -162,6 +162,11 @@ textarea {
   cursor: not-allowed;
 }
 
+/* Zendesk Messaging Web Widget launcher is only shown after opening customer service. */
+iframe#launcher {
+  display: none !important;
+}
+
 .InlineFlex {
   display: inline-flex !important;
 }

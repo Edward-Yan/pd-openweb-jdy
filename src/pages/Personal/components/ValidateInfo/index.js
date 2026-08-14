@@ -224,7 +224,7 @@ export default class ValidateInfoCon extends Component {
 
   // 验证码倒计时
   countdown = () => {
-    let seconds = 30;
+    let seconds = 60;
     timer = setInterval(() => {
       if (seconds <= 0) {
         this.setState({ sendCodeLoading: false, sendCodeTxt: _l('重新发送验证码') });

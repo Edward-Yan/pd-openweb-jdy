@@ -458,7 +458,7 @@ export default props => {
   const { data, removeUploadingFile, ...otherProps } = props;
   const { isMdFile } = props;
 
-  if ('progress' in data) {
+  if (data && typeof data === 'object' && 'progress' in data) {
     const { progress, base } = data;
     return (
       <div className="attachmentSmallCard flexRow alignItemsCenter mobile">

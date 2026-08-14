@@ -5,6 +5,11 @@ export const SupportFindVerifyCodeUrl = () => {
   return md.global.Config.HelpUrl ? href.replace('https://help.mingdao.com', md.global.Config.HelpUrl) : href;
 };
 
+// 私有及海外版本固定不展示验证码帮助；仅国内主站遵循系统帮助配置。
+export const shouldShowVerificationHelp = () => {
+  return !window.platformENV.isOverseas && !window.platformENV.isLocal && !md.global.SysSettings.hideHelpTip;
+};
+
 export const InviteFromType = {
   register: -1, // 主动注册
   friend: 0, // 好友

@@ -68,7 +68,7 @@ const Twofactor = forwardRef(function Twofactor(props, ref) {
   const verifyLen = 6;
   const { type, sendFn, state, isFail, enabledTypes = [], mobilePhone, email, hasSend = false } = props;
   const [verifyCode, setVerifyCodeSecond] = useState('');
-  const [seconds, setSeconds] = useState(30);
+  const [seconds, setSeconds] = useState(60);
   const [hasError, setHasError] = useState(false); // 验证码是否错误
   const otpInputRef = useRef(null);
 
@@ -127,14 +127,14 @@ const Twofactor = forwardRef(function Twofactor(props, ref) {
     }
 
     const now = new Date();
-    const se = parseInt(30 - parseInt((now - t) / 1000));
-    const isIn30 = se <= 30 && se > 0;
+    const se = parseInt(60 - parseInt((now - t) / 1000));
+    const isIn60 = se <= 60 && se > 0;
 
-    if (isFail || !isIn30) {
+    if (isFail || !isIn60) {
       setSeconds(-1);
     }
 
-    if (isIn30) {
+    if (isIn60) {
       setSeconds(se);
     }
   }, [isFail, type, props.timeMap]);

@@ -47,6 +47,10 @@ export function extractMjmlContent(value = '') {
   return match ? match[0].trim() : text;
 }
 
+export function convertRichTextFormulaToMjml(value = '') {
+  return (value || '').replace(/#\{([^{}]+?)\.([^{}]+?)\}/g, '$$$1-$2$$');
+}
+
 export function getFormulaMapWithInsertedField(formulaMap = {}, field = {}) {
   const {
     nodeId,

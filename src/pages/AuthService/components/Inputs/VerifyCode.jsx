@@ -4,7 +4,12 @@ import cx from 'classnames';
 import _ from 'lodash';
 import { captcha } from 'ming-ui/functions';
 import RegisterController from 'src/api/register';
-import { ActionResult, CodeTypeEnum, SupportFindVerifyCodeUrl } from 'src/pages/AuthService/config.js';
+import {
+  ActionResult,
+  CodeTypeEnum,
+  shouldShowVerificationHelp,
+  SupportFindVerifyCodeUrl,
+} from 'src/pages/AuthService/config.js';
 import { isTel, toMDApp, validation } from 'src/pages/AuthService/util.js';
 import { emitter, encrypt } from 'src/utils/common';
 
@@ -97,13 +102,13 @@ export default function (props) {
             updateWarn([
               {
                 tipDom: 'code',
-                warnTxt: md.global.SysSettings.hideHelpTip
-                  ? _l('验证码发送过于频繁')
-                  : _l(
+                warnTxt: shouldShowVerificationHelp()
+                  ? _l(
                       '验证码发送过于频繁，%0收不到验证码？%1',
                       '<a href="' + SupportFindVerifyCodeUrl() + '" target="_blank">',
                       '</a>',
-                    ),
+                    )
+                  : _l('验证码发送过于频繁'),
               },
             ]);
           } else if (data.actionResult == ActionResult.userInfoNotFound) {
@@ -194,13 +199,13 @@ export default function (props) {
           updateWarn([
             {
               tipDom: 'code',
-              warnTxt: md.global.SysSettings.hideHelpTip
-                ? _l('验证码发送成功')
-                : _l(
+              warnTxt: shouldShowVerificationHelp()
+                ? _l(
                     '验证码发送成功，%0收不到验证码？%1',
                     '<a href="' + SupportFindVerifyCodeUrl() + '" target="_blank">',
                     '</a>',
-                  ),
+                  )
+                : _l('验证码发送成功'),
             },
           ]);
           hasWarn = true;

@@ -1,7 +1,7 @@
 import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef } from 'react';
 import cx from 'classnames';
 import { clamp, times } from 'lodash';
-import { SupportFindVerifyCodeUrl } from 'src/pages/AuthService/config.js';
+import { shouldShowVerificationHelp, SupportFindVerifyCodeUrl } from 'src/pages/AuthService/config.js';
 import { TwofactorType } from 'src/pages/AuthService/twofactor/config';
 import { WrapCon } from './styled';
 
@@ -305,7 +305,7 @@ const OtpInput = forwardRef(function OtpInput(props, ref) {
               {timeLeft > 0 && <span className="mLeft10">{timeLeft}s</span>}
             </div>
             {canSend &&
-              !md.global.SysSettings.hideHelpTip &&
+              shouldShowVerificationHelp() &&
               (type === TwofactorType.mobilePhone || type === TwofactorType.email) && (
                 <a href={SupportFindVerifyCodeUrl()} target="_blank" className="textSecondary Hand">
                   {type === TwofactorType.mobilePhone ? _l('收不到短信？') : _l('收不到邮件？')}

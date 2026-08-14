@@ -1,7 +1,7 @@
 import React from 'react';
 import cx from 'classnames';
 import _ from 'lodash';
-import { SupportFindVerifyCodeUrl } from 'src/pages/AuthService/config.js';
+import { shouldShowVerificationHelp, SupportFindVerifyCodeUrl } from 'src/pages/AuthService/config.js';
 import { isTel } from 'src/pages/AuthService/util.js';
 import { emitter } from 'src/utils/common';
 
@@ -17,7 +17,7 @@ export default function (props) {
         GreenWarn: !warn.isError,
       })}
     >
-      {!md.global.SysSettings.hideHelpTip && (
+      {shouldShowVerificationHelp() && (
         <a href={SupportFindVerifyCodeUrl()} target="_blank">
           {_l('收不到验证码？')}
         </a>

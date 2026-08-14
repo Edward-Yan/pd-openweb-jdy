@@ -106,7 +106,7 @@ export default function TelDialog(props) {
   const [code, setCode] = useState('');
   const [{ verifyCodeText, verifyCodeLoading, sending, psd }, setState] = useSetState({
     verifyCodeText: '',
-    verifyCodeLoading: false, // 已发送并在30内true
+    verifyCodeLoading: false, // 已发送并在60秒内为 true
     sending: false,
     psd: '',
   });
@@ -191,7 +191,7 @@ export default function TelDialog(props) {
   };
 
   const countDown = () => {
-    let seconds = 30;
+    let seconds = 60;
     $(codeDiv).focus();
     sendVerifyCodeTimer = setInterval(() => {
       if (seconds <= 0) {

@@ -46,7 +46,7 @@ export default class InitBindAccountDialog extends Component {
       newPwd: '',
       errorMsg: {},
       isSendVerify: false,
-      seconds: 30,
+      seconds: 60,
       loading: false,
     };
     this.handleFieldInput = this.handleFieldInput.bind(this);
@@ -129,6 +129,7 @@ export default class InitBindAccountDialog extends Component {
                 _this.setState(
                   {
                     isSendVerify: true,
+                    seconds: 60,
                   },
                   _this.countdown,
                 );

@@ -130,7 +130,7 @@ async function generate() {
             __api_server__.main = window.__customSubPath__ + __api_server__.main;
           }
 
-          if (location.pathname.indexOf('/portal/') >= 0) {
+          if (location.pathname.indexOf('/portal/') >= 0 || location.pathname.indexOf('/tpAuthPortal') >= 0) {
             window.subPath = window.__customSubPath__ + '/portal';
           }
 

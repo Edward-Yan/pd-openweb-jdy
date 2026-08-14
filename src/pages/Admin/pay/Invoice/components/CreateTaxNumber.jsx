@@ -198,7 +198,7 @@ export default function CreateTaxNumber(props) {
 
   // 验证码倒计时
   const countdown = () => {
-    let seconds = 30;
+    let seconds = 60;
     timer = setInterval(() => {
       if (seconds <= 0) {
         setCodeSending(false);

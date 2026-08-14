@@ -155,6 +155,7 @@ export default function CustomButtonConfirm(props) {
         suffixIcon={<Icon icon="arrow-down-border Font14" />}
         notFoundContent={<span className="textTertiary">{_l('无匹配结果')}</span>}
         dropdownClassName="templateListSelect"
+        getPopupContainer={triggerNode => triggerNode.parentElement}
         onChange={value => setState({ remark: value })}
         onClear={() => setState({ remark: '' })}
         filterOption={(input, option) => option.label.toLowerCase().includes(input.toLowerCase())}

@@ -125,7 +125,7 @@ class TelCon extends React.Component {
     this.state = {
       loading: false,
       verifyCodeText: '',
-      verifyCodeLoading: false, // 已发送并在30内true
+      verifyCodeLoading: false, // 已发送并在60秒内为 true
       focusDiv: '',
     };
   }
@@ -294,7 +294,7 @@ class TelCon extends React.Component {
   };
 
   countDown = () => {
-    let seconds = 30;
+    let seconds = 60;
     $(this.code).focus();
     sendVerifyCodeTimer = setInterval(() => {
       if (seconds <= 0) {

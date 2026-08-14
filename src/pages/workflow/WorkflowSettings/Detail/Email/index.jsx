@@ -20,6 +20,7 @@ import {
 import MJMLEditorDialog from './MJMLEditorDialog';
 import {
   CONTENT_TYPE,
+  convertRichTextFormulaToMjml,
   extractMjmlContent,
   getEmailContentType,
   getFormulaMapWithInsertedField,
@@ -211,9 +212,14 @@ export default class Email extends Component {
 
     this.setState({ saveRequest: true });
 
-    if (data.mjmlValue) {
+    const mjmlValue =
+      emailContentType === CONTENT_TYPE.RICH_TEXT
+        ? convertRichTextFormulaToMjml(data.mjmlValue || '')
+        : data.mjmlValue || '';
+
+    if (mjmlValue) {
       try {
-        const result = await this.convertMjml(data.mjmlValue || '');
+        const result = await this.convertMjml(mjmlValue);
 
         mjmlHtml = result.html;
       } catch (err) {
@@ -236,7 +242,7 @@ export default class Email extends Component {
         ccAccounts,
         bcAccounts,
         emailContentType,
-        mjmlValue: data.mjmlValue || '',
+        mjmlValue,
         mjmlHtml,
       })
       .then(result => {
@@ -290,7 +296,7 @@ export default class Email extends Component {
         {
           agentName: 'rich-text-to-mjml',
           sessionId: genBotSessionId(),
-          message: richTextValue,
+          message: convertRichTextFormulaToMjml(richTextValue),
         },
         { silent: true },
       )
@@ -298,7 +304,7 @@ export default class Email extends Component {
         if (!this.mounted) return;
 
         const responseText = _.get(result, 'data.response.text') || '';
-        const mjmlValue = extractMjmlContent(responseText);
+        const mjmlValue = convertRichTextFormulaToMjml(extractMjmlContent(responseText));
         const currentField = (this.state.data.fields || [])[index] || {};
 
         if ((currentField.fieldValue || '') !== richTextValue) return;

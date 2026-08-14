@@ -256,15 +256,15 @@ export default class TwofactorContainer extends React.Component {
     // 切换验证方式时，禁用重新发送按钮（确保在发送前按钮已被禁用）
     this.twofactorRef.current?.setOtpSending?.(true);
 
-    // 检查该验证方式是否已有发送记录且在30秒内
+    // 检查该验证方式是否已有发送记录且在60秒内
     const sendTime = this.state.timeMap[newType];
 
     if (sendTime) {
       const now = new Date();
       const elapsedSeconds = parseInt((now - sendTime) / 1000);
 
-      // 如果还在30秒内，保留计时器，不重新发送（之前已经发送成功，保持 hasSend 为 true）
-      if (elapsedSeconds < 30 && elapsedSeconds >= 0) {
+      // 如果还在60秒内，保留计时器，不重新发送（之前已经发送成功，保持 hasSend 为 true）
+      if (elapsedSeconds < 60 && elapsedSeconds >= 0) {
         this.setState({ type: newType, hasSend: true }); // 之前已经发送成功，保持为 true
         return;
       }

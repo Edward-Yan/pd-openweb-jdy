@@ -596,7 +596,8 @@ export const getBarCodeValue = ({ data, control, codeInfo }) => {
     return getStringBytes(repVal) <= 128 ? repVal : getStrBytesLength(repVal, 128);
   }
 
-  return String(selectControl.value).substr(0, 300);
+  const value = String(selectControl.value);
+  return getStringBytes(value) <= 500 ? value : getStrBytesLength(value, 500);
 };
 
 // 是否需要校验短信验证码

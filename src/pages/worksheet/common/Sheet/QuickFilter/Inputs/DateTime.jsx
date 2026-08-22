@@ -155,13 +155,8 @@ export default function DateTime(props) {
 
   removeDateLimit(control);
   const showType = _.get(control, 'advancedSetting.showtype');
-  let allowedDateRange = [];
-
-  try {
-    allowedDateRange = JSON.parse(advancedSetting.daterange);
-  } catch (err) {
-    console.log(err);
-  }
+  const parsedDateRange = safeParse(advancedSetting.daterange, 'array');
+  const allowedDateRange = _.isArray(parsedDateRange) ? parsedDateRange : [];
 
   const showDatePicker = dateRange === 18 || (_.isEmpty(allowedDateRange) && dateRange === 0);
   const isEmpty =

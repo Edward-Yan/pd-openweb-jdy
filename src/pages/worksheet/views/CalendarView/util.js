@@ -225,8 +225,14 @@ export const setDataFormat = pram => {
 
 const renderTitleTxt = (worksheetControls, currentView, dataInfo) => {
   const titleControls = getTitleControls(worksheetControls);
+  const viewtitle = _.get(currentView, 'advancedSetting.viewtitle');
+
+  if (!viewtitle && !titleControls) {
+    return _l('未命名');
+  }
+
   return (
-    (_.get(currentView, 'advancedSetting.viewtitle')
+    (viewtitle
       ? renderTitleByViewtitle(dataInfo, worksheetControls, currentView, true)
       : renderCellText(
           {

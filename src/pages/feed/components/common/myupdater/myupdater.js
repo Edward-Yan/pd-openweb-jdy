@@ -1,6 +1,4 @@
-﻿import React from 'react';
-import { Dialog } from 'ming-ui';
-import kcAjax from 'src/api/kc';
+﻿import kcAjax from 'src/api/kc';
 import postAjax from 'src/api/post';
 import 'src/components/autoTextarea/autoTextarea';
 import MentionsInput from 'src/components/MentionsInput';
@@ -404,7 +402,7 @@ const MyUpdater = {
       },
     });
   },
-  PostUpdater: function (result, obj, successCallback, isPost) {
+  PostUpdater: function (result, obj, successCallback) {
     document.querySelector('#textarea_Updater').val(data => {
       let postMsg = data;
 
@@ -507,16 +505,6 @@ const MyUpdater = {
         }
       }
 
-      // 当前动态是不是以问号结尾 “是”则提示加入问答中心
-      if (!isPost && postType == 0) {
-        let reg = /.*[?？吗](\s*@[^\s]+)*\s*$/;
-
-        if (reg.test(postMsg)) {
-          MyUpdater.PostToReward(obj, successCallback);
-          return;
-        }
-      }
-
       // 如果发布内容与原文件名称一致，需要用户确认
       if (postType == '9') {
         let originName = result.attachmentData.length
@@ -594,28 +582,6 @@ const MyUpdater = {
           $(obj).removeAttr('disabled').removeClass('Disabled');
         },
       );
-    });
-  },
-  PostToReward: function (postObj, callback) {
-    Dialog.confirm({
-      title: _l('提出问题'),
-      width: 450,
-      okText: _l('是的'),
-      cancelText: _l('不用了'),
-      onOk: function () {
-        let isEnableReward = false;
-        let rewardMark = 0;
-        $('#hidden_UpdaterType').val('4');
-        MyUpdater.PostUpdater(false, postObj, callback, 'isReward', isEnableReward, rewardMark);
-      },
-      onCancel: function () {
-        MyUpdater.PostUpdater(false, postObj, callback, 'isPost');
-      },
-      children: (
-        <div className="pTop20 pBottom20">
-          <div className="colorPrimary Font16 TxtCenter">{_l('是否将此动态作为问答？')}</div>
-        </div>
-      ),
     });
   },
 };

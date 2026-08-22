@@ -169,11 +169,13 @@ export default function FilterDetail(props) {
   }
 
   function scrollToEnd() {
-    if (scrollRef.current) {
-      setTimeout(() => {
-        scrollRef.current.scrollTop = 9999;
-      }, 10);
-    }
+    setTimeout(() => {
+      const scrollElement = scrollRef.current;
+
+      if (scrollElement) {
+        scrollElement.scrollTop = 9999;
+      }
+    }, 10);
   }
 
   function handleBack() {

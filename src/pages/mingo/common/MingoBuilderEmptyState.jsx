@@ -126,7 +126,7 @@ export default function MingoBuilderEmptyState({ rightOffset = 0, compact = fals
   return (
     <Wrap $rightOffset={rightOffset} $compact={compact} data-mingo-builder-empty-state="true">
       <div>
-        <img className="brand-wordmark" src={mingoLogo} alt="mingo" />
+        <img className="brand-wordmark" src={md.global.SysSettings.aiBrandLogoUrl || mingoLogo} alt="mingo" />
         <div className="title">{_l('正在为您搭建应用...')}</div>
         <div className="description">{_l('确认信息后，即可为您规划应用')}</div>
       </div>

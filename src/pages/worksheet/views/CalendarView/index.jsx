@@ -640,7 +640,10 @@ class RecordCalendarBase extends Component {
               dayHeaderContent={item => {
                 const date = new Date(item.date);
                 const day = date.getDate();
-                const weekday = date.toLocaleDateString(window.getCurrentLang() || 'zh-cn', { weekday: 'short' });
+                const weekday =
+                  item.view.type === 'dayGridMonth'
+                    ? item.text
+                    : date.toLocaleDateString(window.getCurrentLang() || 'zh-cn', { weekday: 'short' });
                 return (
                   <React.Fragment>
                     {item.view.type !== 'dayGridMonth' && this.getLunar(item)}

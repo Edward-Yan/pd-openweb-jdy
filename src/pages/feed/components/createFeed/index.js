@@ -171,7 +171,8 @@ export default function (options) {
     // 发布动态
     postUpdater: function (obj) {
       var $mdUpdaterTextareaUpdater = $('#MDUpdater_textarea_Updater');
-      $mdUpdaterTextareaUpdater.get(0).val(data => {
+      var mdUpdaterTextareaUpdaterEl = $mdUpdaterTextareaUpdater.get(0);
+      var handlePost = data => {
         var postMsg = data || '';
         if (
           !postMsg.trim() ||
@@ -303,8 +304,12 @@ export default function (options) {
             }
 
             $mdUpdaterTextareaUpdater.val('');
-            $mdUpdaterTextareaUpdater.get(0).reset();
-            $mdUpdaterTextareaUpdater.get(0).clearStore();
+
+            if (_.isFunction(mdUpdaterTextareaUpdaterEl.reset)) {
+              mdUpdaterTextareaUpdaterEl.reset();
+              mdUpdaterTextareaUpdaterEl.clearStore();
+            }
+
             MDUpdater.resetUpdater(null, true);
             MDUpdater.renderSelectGroup(MDUpdater.options.selectGroupOptions);
           })
@@ -312,7 +317,13 @@ export default function (options) {
             $(obj).removeAttr('disabled').removeClass('Disabled');
             $('.easyDialogBoxMDUpdater')[0] && $('.easyDialogBoxMDUpdater').parent().remove();
           });
-      });
+      };
+
+      if (_.isFunction(mdUpdaterTextareaUpdaterEl.val)) {
+        mdUpdaterTextareaUpdaterEl.val(handlePost);
+      } else {
+        handlePost(mdUpdaterTextareaUpdaterEl.value);
+      }
     },
     // 拦截层选群组
     dialogChooseGroup: function (el, hidGroupID, projectId) {
@@ -388,7 +399,10 @@ export default function (options) {
           $mdUpdaterTextareaUpdater.removeClass('textTertiary');
         })
         .blur(function () {
-          mdUpdaterTextareaUpdaterEl.store();
+          if (_.isFunction(mdUpdaterTextareaUpdaterEl.store)) {
+            mdUpdaterTextareaUpdaterEl.store();
+          }
+
           if (!$(this).val().trim()) {
             $mdUpdaterTextareaUpdater.val(_l('知会工作是一种美德') + '...').addClass('textTertiary');
           }

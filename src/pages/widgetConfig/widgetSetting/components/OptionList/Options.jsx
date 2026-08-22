@@ -157,10 +157,6 @@ function OptionItem({
 
   const noDelRepeat = options.filter(o => o.key !== key && o.value === value && !o.isDeleted);
 
-  useEffect(() => {
-    setValue(isFocus ? value : '');
-  }, [isFocus]);
-
   const handleBlurCheck = () => {
     if (_.isEmpty(value)) {
       alert(_l('选项不得为空'), 3);
@@ -206,7 +202,10 @@ function OptionItem({
                   id={key}
                   autoFocus={isFocus}
                   value={value}
-                  onFocus={() => setIndex(index)}
+                  onFocus={() => {
+                    setValue(value);
+                    setIndex(index);
+                  }}
                   onKeyDown={e => {
                     if (e.key === 'Enter' && !isOther) {
                       if (handleBlurCheck()) {
@@ -287,7 +286,7 @@ function SelectOptions(props, ref) {
   });
 
   useEffect(() => {
-    setIndexs([...focusIndexs, focusIndex]);
+    setIndexs(prevFocusIndexs => [...prevFocusIndexs, focusIndex]);
   }, [focusIndex]);
 
   useImperativeHandle(ref, () => ({
@@ -421,11 +420,14 @@ function SelectOptions(props, ref) {
         onSortEnd={onSortEnd}
         moveItem={() => setIsDrag(true)}
         renderItem={({ item, index, DragHandle }) => {
+          const currentItem = item && _.find(options, option => option && option.key === item.key);
+          if (!currentItem) return null;
+
           return (
             <OptionItem
               {...props}
-              optionKey={`item_${item.key}`}
-              item={_.find(options, o => o.key === item.key)}
+              optionKey={`item_${currentItem.key}`}
+              item={currentItem}
               idx={index}
               addOption={addOption}
               updateOption={updateOption}

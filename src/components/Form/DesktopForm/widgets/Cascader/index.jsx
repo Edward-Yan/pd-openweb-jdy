@@ -268,7 +268,6 @@ export default function CascaderWidget(props) {
     const verifyIds = ids.filter(id => !widgetValue.find(item => item.sid === id.value));
 
     if (verifyIds.some(id => !canUpdate(id.value))) {
-      alert(_l('不在可选范围内'), 3);
       return;
     }
 
@@ -334,7 +333,6 @@ export default function CascaderWidget(props) {
     const verifyIds = ids.filter(id => !widgetValue.find(item => item.sid === id.value));
 
     if (verifyIds.some(i => !canUpdate(i.value))) {
-      alert(_l('不在可选范围内'), 3);
       return;
     }
 

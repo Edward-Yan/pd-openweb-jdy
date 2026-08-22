@@ -272,7 +272,7 @@ function MingoContent(props, ref) {
       <div className="header">
         <div className="chattingTitle t-flex t-flex-row t-items-center">
           <BgIconButton icon="backspace" onClick={onBack} />
-          <img className="brandWordmark" src={mingoWordmark} alt="Mingo" />
+          <img className="brandWordmark" src={md.global.SysSettings.aiBrandLogoUrl || mingoWordmark} alt="Mingo" />
         </div>
         <BgIconButton.Group gap={6}>
           <BgIconButton

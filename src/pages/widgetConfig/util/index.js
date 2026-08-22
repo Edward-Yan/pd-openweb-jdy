@@ -653,7 +653,7 @@ export const parseDataSource = dataSource => {
 export const checkOptionsRepeat = (controls = [], checkCollections = true) => {
   for (const c of controls) {
     if (_.includes([9, 10, 11], c.type) && c.dataSource ? checkCollections : true) {
-      const noDelOptions = (c.options || []).filter(o => !o.isDeleted);
+      const noDelOptions = (c.options || []).filter(o => o && !o.isDeleted);
       const uniqOptions = _.uniqBy(noDelOptions, 'value');
 
       if (noDelOptions.length !== uniqOptions.length) {

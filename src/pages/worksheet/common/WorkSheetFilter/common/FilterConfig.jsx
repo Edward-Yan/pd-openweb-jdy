@@ -41,7 +41,7 @@ export default function SingleFilter(props) {
     widgetControlData,
     disableAddCondition,
   } = props;
-  let { columns } = props;
+  let { columns = [] } = props;
   const filterWhiteKeys = _.flatten(
     Object.keys(CONTROL_FILTER_WHITELIST).map(key => CONTROL_FILTER_WHITELIST[key].keys),
   );

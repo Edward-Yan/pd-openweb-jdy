@@ -200,7 +200,7 @@ function Mingo(props) {
                 // 点击 logo 回到 welcome 首页：同「新对话」先清掉记住的会话，避免下次打开又恢复上次会话
                 <img
                   className="brandWordmark pointer"
-                  src={mingoWordmark}
+                  src={md.global.SysSettings.aiBrandLogoUrl || mingoWordmark}
                   alt="Mingo"
                   onClick={() => {
                     emitter.emit(AGENT_HEADER_EVENT.NEW_CONVERSATION);
@@ -210,7 +210,11 @@ function Mingo(props) {
               ) : (
                 <>
                   <BgIconButton icon="backspace" onClick={handleBack} />
-                  <img className="brandWordmark" src={mingoWordmark} alt="Mingo" />
+                  <img
+                    className="brandWordmark"
+                    src={md.global.SysSettings.aiBrandLogoUrl || mingoWordmark}
+                    alt="Mingo"
+                  />
                 </>
               )}
             </div>

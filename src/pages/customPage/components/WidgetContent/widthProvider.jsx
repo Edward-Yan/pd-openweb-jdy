@@ -4,6 +4,7 @@ export default function widthProvider(GridOutComponent) {
   return class WidthProvider extends Component {
     state = {
       width: 1280,
+      ready: false,
     };
     mounted = false;
 
@@ -60,17 +61,21 @@ export default function widthProvider(GridOutComponent) {
       if (node instanceof HTMLElement) {
         const nextWidth = typeof width === 'number' ? node.offsetWidth + width : node.offsetWidth;
 
-        if (nextWidth !== this.state.width) {
-          this.setState({ width: nextWidth });
+        if (nextWidth !== this.state.width || !this.state.ready) {
+          this.setState({ width: nextWidth, ready: true });
         }
+      } else if (!this.state.ready) {
+        this.setState({ ready: true });
       }
     };
     render() {
-      if (!this.mounted) {
+      const { ready, ...state } = this.state;
+
+      if (!ready) {
         return <div className={this.props.className} style={this.props.style} />;
       }
 
-      return <GridOutComponent {...this.props} {...this.state} />;
+      return <GridOutComponent {...this.props} {...state} />;
     }
   };
 }

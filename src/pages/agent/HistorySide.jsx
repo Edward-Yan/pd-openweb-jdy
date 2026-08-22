@@ -242,7 +242,7 @@ export default function HistorySide({
     <Con className={cx('t-flex t-flex-col', { 'un-expand': !visible })}>
       <div className="side-header t-flex t-items-center t-justify-between">
         <a href={pathCompletion('/')} className="t-flex t-items-center">
-          <img className="brand-wordmark" src={mingoLogo} alt="mingo" />
+          <img className="brand-wordmark" src={md.global.SysSettings.aiBrandLogoUrl || mingoLogo} alt="mingo" />
         </a>
         <ExpandIcon className="t-flex t-items-center t-justify-center" onClick={onExpand}>
           <i className="icon icon-menu_left"></i>

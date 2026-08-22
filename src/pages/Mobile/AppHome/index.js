@@ -172,7 +172,7 @@ class AppHome extends React.Component {
           className="mingoEntry flexRow alignItemsCenter justifyContentCenter"
           onClick={() => window.mobileNavigateTo('/mobile/mingo')}
         >
-          <img src={mingoImg} alt="Mingo" />
+          <img src={md.global.SysSettings.aiBrandLogoUrl || mingoImg} alt="Mingo" />
         </div>
       </div>
     );

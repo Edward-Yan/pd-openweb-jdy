@@ -13,7 +13,6 @@ import {
   QR_LAYOUT,
   QR_POSITION,
 } from 'worksheet/common/PrintQrBarCode/enum';
-import { getCompressedFontSize } from './util';
 
 export const QRErrorCorrectLevel = {
   L: 1, // 7%
@@ -66,61 +65,22 @@ function mmToPt(mm) {
   return mm * 2.83464567;
 }
 
-function getHeightOfText(text, { fontSize = 12, width = 100, lineHeight = 1.5 } = {}) {
-  let result;
-  const div = document.createElement('div');
-  div.style.width = width + 'px';
-  div.style.fontSize = fontSize + 'px';
-  div.style.fontFamily = 'sans-serif';
-  div.style.lineHeight = lineHeight;
-  div.style.wordBreak = 'break-all';
-  div.style.position = 'absolute';
-  div.style.top = '100px';
-  div.style.left = '100px';
-  div.style.zIndex = '9999999';
-  div.innerText = text;
-  document.body.appendChild(div);
-  result = div.clientHeight;
-  document.body.removeChild(div);
-  return result;
-}
-
-function getWidthOfText(text, fontSize = 12) {
-  let result;
-  const div = document.createElement('div');
-  div.style.display = 'inline-block';
-  div.style.fontSize = fontSize + 'px';
-  div.style.fontFamily = 'sans-serif';
-  div.innerText = text;
-  div.style.wordBreak = 'break-all';
-  div.style.position = 'absolute';
-  div.style.top = '100px';
-  div.style.left = '100px';
-  div.style.zIndex = '9999999';
-  document.body.appendChild(div);
-  result = div.clientWidth;
-  document.body.removeChild(div);
-  return result;
-}
-
-function getLineNumOfText(text = '', { fontSize = 12, width = 100 } = {}) {
-  const height = getHeightOfText(text, { fontSize, width });
-  const lineHeight = getHeightOfText(text.trim()[0] || 'o', { fontSize, width });
-  if (lineHeight === 0) return fontSize;
-  return Math.round(height / lineHeight);
-}
-
-function cutTextByWidth(text, fontSize, maxWidth) {
-  let result = [];
+// 按 PDF 内嵌字体的真实宽度切行
+// 不能用浏览器 DOM/canvas 的 sans-serif 度量：sans-serif 在 mac（Helvetica/苹方）和 windows（Arial/微软雅黑）
+// 解析成不同字体，与内嵌的阿里巴巴普惠体宽度也不一致，切行点会跨平台漂移，
+// 切出的行再被 PDFKit 按真实宽度二次折行，就会出现多余换行和错乱行距
+function cutTextByWidth(doc, text = '', maxWidth) {
+  const result = [];
   let tempText = '';
 
   for (let i = 0; i < text.length; i++) {
-    tempText += text[i];
-    const width = getWidthOfText(tempText, fontSize);
+    const nextText = tempText + text[i];
 
-    if (width > maxWidth) {
-      result.push(tempText.slice(0, -1));
-      tempText = tempText.slice(-1);
+    if (tempText && doc.widthOfString(nextText) > maxWidth) {
+      result.push(tempText);
+      tempText = text[i];
+    } else {
+      tempText = nextText;
     }
   }
 
@@ -427,48 +387,52 @@ export default class Label {
     doc.fillColor(color);
     let textTop = top;
 
+    function applyFont(isBold, size) {
+      doc.font(isBold ? 'alibabaBold' : 'alibaba').fontSize(size);
+    }
+
     function render(textsForRender) {
       textsForRender.forEach(text => {
         const { value, align = 'left', forceInLine, isBold } = text;
         let textFontSize = fontSize;
-        const linesNum = !forceInLine
-          ? getLineNumOfText(value, {
-              fontSize: textFontSize,
-              width,
-            }) || 1
-          : 1;
+        applyFont(isBold, textFontSize);
 
         if (forceInLine) {
-          const newFontSize = getCompressedFontSize(value, width) * (window.isMacOs ? 1 : 0.95);
+          const valueWidth = doc.widthOfString(value);
 
-          if (newFontSize < textFontSize) {
-            textFontSize = newFontSize;
+          if (valueWidth > width) {
+            // 内嵌字体的字符宽度与字号严格成正比，按比例压缩即可一行放下，向下取整留出余量
+            textFontSize = Math.floor(((textFontSize * width) / valueWidth) * 10) / 10;
+            applyFont(isBold, textFontSize);
           }
         }
 
         const normalTextHeight = mmToPt((_this.fontSize * _this.unitSize) / (get(_this, 'options.fontSize') || 1));
-        const textHeight = textFontSize * 1.5 * linesNum;
+        // 上面已按真实宽度切行 / 压缩字号，每段必定单行
+        const textHeight = textFontSize * 1.5;
+        // 传了 width 时 PDFKit 一定会走自动折行，这里改为不传 width、自行处理对齐，避免二次折行
+        const textLeft = align === 'center' ? left + (width - doc.widthOfString(value)) / 2 : left;
         _this.drawRect(left, textTop, width, normalTextHeight);
-        doc
-          .font(isBold ? 'alibabaBold' : 'alibaba')
-          .fontSize(textFontSize)
-          .text(value, left, textTop + (normalTextHeight > textHeight ? (normalTextHeight - textHeight) / 2 : 0), {
-            lineBreak: true,
-            width,
-            height: textHeight,
-            align,
-          });
+        doc.text(value, textLeft, textTop + (normalTextHeight > textHeight ? (normalTextHeight - textHeight) / 2 : 0), {
+          lineBreak: false,
+        });
         textTop += normalTextHeight;
       });
     }
 
     texts.forEach(text => {
-      const cutTexts = text.forceInLine
-        ? [text]
-        : cutTextByWidth(text.value, fontSize, width).map(t => ({
-            ...text,
-            value: t,
-          }));
+      let cutTexts;
+
+      if (text.forceInLine) {
+        cutTexts = [text];
+      } else {
+        applyFont(text.isBold, fontSize);
+        cutTexts = cutTextByWidth(doc, text.value, width).map(t => ({
+          ...text,
+          value: t,
+        }));
+      }
+
       render(
         cutTexts.map(item => ({
           ...item,

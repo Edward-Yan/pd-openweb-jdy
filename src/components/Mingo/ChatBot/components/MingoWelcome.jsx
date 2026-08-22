@@ -562,9 +562,10 @@ export default function MingoWelcome({ onStartTask = () => {}, landing = false, 
     <MingoWelcomeWrap className={cx({ landing, embed })}>
       <div className="inner">
         <div className="topBlock" ref={welcomeBlockRef}>
-          {/* 落地页用静态 logo + 整体垂直居中；抽屉态保持原欢迎动图 */}
-          {landing ? (
-            <img className="welcomeLogo" src={mingoLogo} alt="mingo" />
+          {/* 落地页用静态 logo + 整体垂直居中；抽屉态保持原欢迎动图。
+              配置了 AI 品牌图标时，欢迎动图属 Mingo 专属素材，抽屉态同样降级成静态品牌 logo */}
+          {landing || md.global.SysSettings.aiBrandLogoUrl ? (
+            <img className="welcomeLogo" src={md.global.SysSettings.aiBrandLogoUrl || mingoLogo} alt="mingo" />
           ) : (
             <img key={gifNonce} className="welcomeGif" src={mingoWelcomeGif} alt="" />
           )}

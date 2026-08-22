@@ -184,12 +184,7 @@ let InboxList = class InboxList extends React.Component {
 
   render() {
     return (
-      <ScrollView
-        className="flex inboxBox"
-        allowance={50}
-        disableParentScroll
-        onScrollEnd={this.scrollEvent.bind(this)}
-      >
+      <ScrollView className="flex inboxBox" allowance={50} onScrollEnd={this.scrollEvent.bind(this)}>
         {this.renderList()}
         {this.renderLoading()}
       </ScrollView>

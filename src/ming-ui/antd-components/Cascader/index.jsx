@@ -313,6 +313,7 @@ const Cascader = React.forwardRef(
                   key={nodeValue}
                   className={cx('cascader-option', {
                     expanded: isExpanded,
+                    'has-children': !isLeaf,
                   })}
                   onClick={() => {
                     // 如果有子节点则展开
@@ -450,19 +451,15 @@ const Cascader = React.forwardRef(
       const renderPanelsRecursive = (nodes, level = 0) => {
         if (!nodes || nodes.length === 0) return null;
 
-        const panels = [];
+        const panels = [renderCascaderPanels(nodes, level)];
         const expandedNode = nodes.find(node => expandedKeys.includes(node.value));
 
         if (expandedNode) {
           const nodeChildren = expandedNode.children;
-          panels.push(
-            <Fragment>
-              {renderCascaderPanels(nodes, level)}
-              {nodeChildren && nodeChildren.length > 0 && renderPanelsRecursive(nodeChildren, level + 1)}
-            </Fragment>,
-          );
-        } else {
-          panels.push(renderCascaderPanels(nodes, level));
+
+          if (nodeChildren && nodeChildren.length > 0) {
+            panels.push(...renderPanelsRecursive(nodeChildren, level + 1));
+          }
         }
 
         return panels;

@@ -250,6 +250,8 @@ export default function SelectDialog({ ...args }) {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filtersVisible, setFiltersVisible] = useState(window.localStorage.getItem(`selectDialogFiltersVisible`));
   const [disableMaskDataControls, setDisableMaskDataControls] = useState({});
+  // 弹层里新建记录时新增的选项，工作表模板里还没有，需要在本次弹层内合并使用
+  const [newOptionControls, setNewOptionControls] = useState([]);
   const allowShowIgnoreAllFilters =
     error === ERROR_STATUS.INVALID_CONDITION && isCharge && recordId === 'FAKE_RECORD_ID_FROM_BATCH_EDIT';
   const showNewRecord =
@@ -259,7 +261,10 @@ export default function SelectDialog({ ...args }) {
     worksheetInfo.appId,
     worksheetInfo.worksheetId,
     get(worksheetInfo, 'template.controls', []),
-  );
+  ).map(c => {
+    const newOptionControl = find(newOptionControls, { controlId: c.controlId });
+    return newOptionControl ? { ...c, options: newOptionControl.options } : c;
+  });
   const showControls = control.showControls || args.showControls || [];
   const enableFastFilters = get(control, 'advancedSetting.openfastfilters') !== '0';
   const fastFiltersViewId =
@@ -593,6 +598,16 @@ export default function SelectDialog({ ...args }) {
                     }
                   : {},
               defaultRelatedSheet,
+              // 新建时新增的选项需要同步出去，否则列表和关联记录卡片里该选项字段匹配不到选项、显示为空
+              updateWorksheetControls: (newControls = []) => {
+                setNewOptionControls(prev =>
+                  prev.filter(c => !find(newControls, { controlId: c.controlId })).concat(newControls),
+                );
+
+                if (typeof args.updateWorksheetControls === 'function') {
+                  args.updateWorksheetControls(newControls);
+                }
+              },
               onAdd: row => {
                 if (multiple || singleConfirm) {
                   setRecords(prev => [row, ...prev]);

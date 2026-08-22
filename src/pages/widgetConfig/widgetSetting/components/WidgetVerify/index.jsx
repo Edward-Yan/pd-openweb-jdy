@@ -81,7 +81,7 @@ export default function WidgetVerify(props) {
   const { title, placeholder = [] } = TYPE_TO_TEXT[type] || {};
   const otherText =
     _.get(
-      _.find(options, i => i.key === 'other' && !i.isDeleted),
+      _.find(options, i => i && i.key === 'other' && !i.isDeleted),
       'value',
     ) || _l('其他');
   return (
@@ -225,21 +225,23 @@ export default function WidgetVerify(props) {
         )}
       </div>
 
-      {_.includes([9, 10, 11], type) && showtype !== '2' && _.find(options, i => i.key === 'other' && !i.isDeleted) && (
-        <div className="labelWrap dropLabel">
-          <Checkbox
-            size="small"
-            checked={otherrequired === '1'}
-            onClick={checked => onChange(handleAdvancedSettingChange(data, { otherrequired: checked ? '0' : '1' }))}
-          >
-            <span>{_l('选择“%0”时，补充信息必填', otherText)}</span>
-            <Tooltip placement="bottom" title={_l('勾选后，当用户选中“其他”时，必须在后面的文本框中填写内容。')}>
-              <i className="icon-help tipsIcon textTertiary Font16 pointer"></i>
-            </Tooltip>
-          </Checkbox>
-        </div>
-      )}
-      {_.includes([10], type) && _.find(options, i => i.key === 'other' && !i.isDeleted) && (
+      {_.includes([9, 10, 11], type) &&
+        showtype !== '2' &&
+        _.find(options, i => i && i.key === 'other' && !i.isDeleted) && (
+          <div className="labelWrap dropLabel">
+            <Checkbox
+              size="small"
+              checked={otherrequired === '1'}
+              onClick={checked => onChange(handleAdvancedSettingChange(data, { otherrequired: checked ? '0' : '1' }))}
+            >
+              <span>{_l('选择“%0”时，补充信息必填', otherText)}</span>
+              <Tooltip placement="bottom" title={_l('勾选后，当用户选中“其他”时，必须在后面的文本框中填写内容。')}>
+                <i className="icon-help tipsIcon textTertiary Font16 pointer"></i>
+              </Tooltip>
+            </Checkbox>
+          </div>
+        )}
+      {_.includes([10], type) && _.find(options, i => i && i.key === 'other' && !i.isDeleted) && (
         <div className="labelWrap dropLabel">
           <Checkbox
             size="small"

@@ -1237,6 +1237,7 @@ CreateCalendar.methods = {
         shareID: data.calendarID,
         recurTime: '',
         token: data.token,
+        ajaxRequest,
       },
     });
   },

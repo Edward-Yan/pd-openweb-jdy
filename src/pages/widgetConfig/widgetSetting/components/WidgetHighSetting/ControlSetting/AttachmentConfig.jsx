@@ -415,7 +415,7 @@ function WaterMarkDialog(props) {
               max={180}
               style={{ marginLeft: '10px' }}
               value={Number(fontSize)}
-              onChange={value => setInfo({ valuesize: value.toString() })}
+              onChange={value => value !== null && setInfo({ valuesize: value.toString() })}
             />
             <span className="mLeft10">{_l('磅')}</span>
           </SectionItem>

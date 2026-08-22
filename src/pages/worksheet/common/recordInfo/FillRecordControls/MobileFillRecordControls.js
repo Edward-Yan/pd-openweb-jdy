@@ -161,8 +161,12 @@ let FillRecordControls = class FillRecordControls extends React.Component {
                 c.advancedSetting.allowdelete = '0';
               }
 
+              // 前端拼接的系统字段等控件不一定带 controlPermissions，与 controlState 一致按 '111' 兜底，
+              // 否则这里直接取下标会让整个自定义动作弹层白屏
+              const originControlPermissions = c.controlPermissions || '111';
+
               c.controlPermissions =
-                c.controlPermissions[0] + (writeControl.type === 1 ? '0' : '1') + c.controlPermissions[2];
+                originControlPermissions[0] + (writeControl.type === 1 ? '0' : '1') + originControlPermissions[2];
               c.required = writeControl.type === 3;
               c.fieldPermission = '111';
 

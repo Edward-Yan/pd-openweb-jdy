@@ -20,9 +20,9 @@ const SelectCountryDropdown = ({ data = [], lang, setData, setVisible }) => {
   const filteredData = value
     ? data.filter(
         item =>
-          item.currencyName[lang].includes(value) ||
-          item.currencyCode.includes(value.toLocaleUpperCase()) ||
-          item.symbol.includes(value),
+          _.includes(_.get(item, ['currencyName', lang]), value) ||
+          _.includes(item.currencyCode, value.toLocaleUpperCase()) ||
+          _.includes(item.symbol, value),
       )
     : data;
   return (

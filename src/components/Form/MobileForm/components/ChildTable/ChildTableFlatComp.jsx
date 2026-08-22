@@ -155,6 +155,7 @@ export default function ChildTableFlatComp(props) {
     showExpand,
     widgetStyle,
     control,
+    getMasterFormData = () => [],
     onSave = () => {},
     submitChildTableCheckData = () => {},
     updateIsAddByLine = () => {},
@@ -433,6 +434,7 @@ export default function ChildTableFlatComp(props) {
                     searchConfig={searchConfig}
                     projectId={projectId}
                     masterData={masterData}
+                    getMasterFormData={getMasterFormData}
                     onChange={(data, ids) => {
                       handleChangeFlattenRow(data, ids, item, customWidgetRefs.current[index]);
 
@@ -466,5 +468,6 @@ ChildTableFlatComp.propTypes = {
   onDelete: PropTypes.func,
   showNumber: PropTypes.bool,
   masterData: PropTypes.object,
+  getMasterFormData: PropTypes.func,
   h5abstractids: PropTypes.array,
 };

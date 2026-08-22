@@ -464,12 +464,18 @@ function NewRecord(props) {
       {advancedSetting.continueBtnVisible && offlineUpload !== '1' && (
         <Button
           className="flex mLeft6 mRight6 Font13 bold textSecondary"
+          disabled={loading}
           onClick={() => handleAdd(true, window.isMingDaoApp)}
         >
           {advancedSetting.continueBtnText || _l('提交并继续创建')}
         </Button>
       )}
-      <Button className="flex mLeft6 mRight6 Font13 bold" color="primary" onClick={() => handleAdd(false)}>
+      <Button
+        className="flex mLeft6 mRight6 Font13 bold"
+        color="primary"
+        disabled={loading}
+        onClick={() => handleAdd(false)}
+      >
         {advancedSetting.submitBtnText || _l('提交')}
       </Button>
     </BtnsWrap>

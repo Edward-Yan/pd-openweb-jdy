@@ -180,7 +180,7 @@ export default function Header({
           </a>
         ) : brandWordmark ? (
           <a href={pathCompletion('/')} className="logo t-flex t-items-center">
-            <img className="brand-wordmark" src={mingoWordmark} alt="mingo" />
+            <img className="brand-wordmark" src={md.global.SysSettings.aiBrandLogoUrl || mingoWordmark} alt="mingo" />
           </a>
         ) : (
           <a href={pathCompletion('/')} className="logo t-flex t-items-center">

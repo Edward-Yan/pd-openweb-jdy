@@ -170,6 +170,7 @@ function NewRecordForm(props) {
   const [offlineTempId, setOfflineTempId] = useState('');
   const [filledByAiMap, setFilledByAiMap] = useState({});
   const [isRenderForm, setIsRenderForm] = useState(true);
+  const [formResetFlag, setFormResetFlag] = useState('');
   const { offlineUpload } = getRequest();
 
   const isMobile = browserIsMobile();
@@ -571,6 +572,45 @@ function NewRecordForm(props) {
     }
   }
 
+  // 「清空」恢复内容：不是把表单直接抹空，而是重新走一遍新建记录的空初始化流程，
+  // 让默认值、自定义事件等按新建记录的正常逻辑重新执行一次
+  const handleClearTempRecord = async () => {
+    removeTempRecordValueFromLocal(saveKey, worksheetId);
+    // 取消未落盘的临时保存，否则清空后 pending 的防抖写入会把旧内容再写回本地
+    if (_.isFunction(_.get(cache, 'current.tempSaving.cancel'))) {
+      _.get(cache, 'current.tempSaving.cancel')();
+    }
+
+    cache.current.tempRecordCreateTime = undefined;
+    cache.current.formUserChanged = false;
+    setRestoreVisible(false);
+    setFilledByAiMap({});
+    setRelateRecordData({});
+
+    let newFormdata;
+
+    try {
+      newFormdata = await getFormDataForNewRecord({
+        isCustomButton,
+        worksheetInfo: props.worksheetInfo,
+        defaultRelatedSheet,
+        defaultFormData,
+        defaultFormDataEditable,
+        writeControls,
+      });
+    } catch {
+      // 重新获取初始表单数据失败时，退回到进入时的初始快照
+      newFormdata = cache.current.originFormdata || [];
+    }
+
+    setOriginFormdata(newFormdata);
+    cache.current.originFormdata = newFormdata;
+    setFormdata(newFormdata);
+    setRandom(Math.random().toString());
+    // 表单整体重新挂载，子表 store、自定义事件等回到新建记录初始状态
+    setFormResetFlag(Math.random().toString());
+  };
+
   const applyAPPScanControlChange = useCallback(control => {
     const form = customwidget.current;
 
@@ -839,13 +879,7 @@ function NewRecordForm(props) {
             updateText={_l('确认')}
             cancelText={_l('清空')}
             onUpdate={() => setRestoreVisible(false)}
-            onCancel={() => {
-              removeTempRecordValueFromLocal('tempNewRecord', worksheetId);
-              setFormdata(originFormdata);
-              setRandom(Math.random());
-              setFilledByAiMap({});
-              setRestoreVisible(false);
-            }}
+            onCancel={handleClearTempRecord}
           />
         ) : (
           <EditingBarCon>
@@ -864,13 +898,7 @@ function NewRecordForm(props) {
               updateText={_l('确认')}
               cancelText={_l('清空')}
               onUpdate={() => setRestoreVisible(false)}
-              onCancel={() => {
-                removeTempRecordValueFromLocal('tempNewRecord', worksheetId);
-                setFormdata(originFormdata);
-                setRandom(Math.random());
-                setFilledByAiMap({});
-                setRestoreVisible(false);
-              }}
+              onCancel={handleClearTempRecord}
             />
           </EditingBarCon>
         )}
@@ -931,6 +959,7 @@ function NewRecordForm(props) {
             <div className="customFieldsCon" ref={formcon}>
               {(!isMobile || isRenderForm) && (
                 <RecordForm
+                  key={formResetFlag}
                   from={2}
                   isDraft={isDraft}
                   isMingoCreate={isMingoCreate}

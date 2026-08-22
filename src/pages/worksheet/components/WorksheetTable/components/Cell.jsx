@@ -1,4 +1,4 @@
-import React, { Fragment, memo, useCallback, useRef } from 'react';
+import React, { Fragment, memo, useCallback } from 'react';
 import cx from 'classnames';
 import { every, find, findIndex, get, includes, isEmpty, isEqual, isFunction, isUndefined } from 'lodash';
 import _ from 'lodash';
@@ -12,6 +12,8 @@ import { checkCellIsEmpty, controlIsNumber, isRelateRecordTableControl } from 's
 import { getRecordColor } from 'src/utils/record';
 import CollapseExpandButton from './CollapseExpandButton';
 import DataCell from './DataCell';
+
+const EMPTY_ROW = {};
 
 export function getRelateRecordCountOfControlFromRow(control, row = {}) {
   try {
@@ -313,7 +315,6 @@ function Cell(props) {
     cellProps = {},
   } = data;
   const isHorizontal = direction === 'horizontal';
-  const cellCache = useRef({});
   const { columnIndex, rowIndex } = getIndex({
     columnIndex: props.columnIndex,
     rowIndex: props.rowIndex,
@@ -322,8 +323,7 @@ function Cell(props) {
   const leftFixedCount = grid.leftFixedCount || 1;
   const cellStyle = { ...style };
   const cellIndex = rowIndex * cellColumnCount + columnIndex;
-  const row = rows[isHorizontal ? rowIndex : columnIndex - 1] || {};
-  cellCache.current.row = row;
+  const row = rows[isHorizontal ? rowIndex : columnIndex - 1] || EMPTY_ROW;
 
   // 缓存 getRow 函数
   const getRow = useCallback(() => {

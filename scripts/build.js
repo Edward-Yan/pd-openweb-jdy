@@ -14,7 +14,13 @@ const webpackConfigForMingoEntryWidget = require('../CI/webpack.mingo-entry-widg
 const { ROOT_PATH } = require('./utils');
 
 const isProduction = process.env.NODE_ENV === 'production';
-const blackWordList = ['http://hart-dev.com', 'batheticrecords.com', 'http://developer.yahoo.com/yui/license.html'];
+const blackWordList = [
+  'http://hart-dev.com',
+  'batheticrecords.com',
+  'http://developer.yahoo.com/yui/license.html',
+  'http://tybenz.com',
+];
+const sanitizedAssetExtensions = new Set(['.js', '.css']);
 const keepAliveCommands = new Set(['dev', 'dev:main', 'server', 'server:production', 'watch', 'webpack:watch']);
 
 // 拼接项目根目录下的绝对路径，避免命令执行目录影响文件定位。
@@ -238,20 +244,21 @@ function cleanBuild() {
     .forEach(name => fs.rmSync(resolvePath(name), { recursive: true, force: true }));
 }
 
-// 在 publish 前替换构建产物中的敏感字符串。
+// 在 publish 前替换构建产物和复制后静态资源中的敏感字符串。
 function editCode() {
-  const distPath = resolvePath('build/dist');
   const blackWordPattern = new RegExp(`(${blackWordList.map(escapeRegExp).join('|')})`, 'g');
 
-  walkFiles(distPath, filePath => {
-    if (path.extname(filePath) !== '.js') return;
+  [resolvePath('build/dist'), resolvePath('build/files')].forEach(assetPath => {
+    walkFiles(assetPath, filePath => {
+      if (!sanitizedAssetExtensions.has(path.extname(filePath))) return;
 
-    const content = fs.readFileSync(filePath, 'utf8');
-    const nextContent = content.replace(blackWordPattern, '--****--');
+      const content = fs.readFileSync(filePath, 'utf8');
+      const nextContent = content.replace(blackWordPattern, '--****--');
 
-    if (nextContent !== content) {
-      fs.writeFileSync(filePath, nextContent);
-    }
+      if (nextContent !== content) {
+        fs.writeFileSync(filePath, nextContent);
+      }
+    });
   });
 }
 
@@ -319,9 +326,9 @@ function cleanFile() {
 // 生成发布所需的 html、静态资源，并清理不需要发布的辅助文件。
 async function publish() {
   cleanFile();
-  editCode();
   await generateMainweb();
   copy();
+  editCode();
   console.log(chalk.green('publish success'));
 }
 

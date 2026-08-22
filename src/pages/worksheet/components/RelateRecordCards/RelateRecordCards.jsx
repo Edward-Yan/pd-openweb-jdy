@@ -427,7 +427,13 @@ class RelateRecordCards extends Component {
 
     try {
       const coverFile = _.find(JSON.parse(record[coverId]), file => RegExpValidator.fileIsPicture(file.ext));
-      const { previewUrl = '' } = coverFile;
+      const { previewUrl = '', ext = '' } = coverFile;
+
+      // 七牛媒体处理不支持 svg，加 imageView2 参数会返回错误导致封面裂图
+      if (/^\.?svg$/i.test(ext)) {
+        return previewUrl;
+      }
+
       return previewUrl.indexOf('imageView2') > -1
         ? previewUrl.replace(/imageView2\/\d\/w\/\d+\/h\/\d+(\/q\/\d+)?/, 'imageView2/2/w/200')
         : `${previewUrl}&imageView2/2/w/200`;
@@ -590,6 +596,20 @@ class RelateRecordCards extends Component {
     );
   };
 
+  // 新建关联记录时新增的选项，关联表模板控件里还没有，需要合并进来，否则卡片里该选项字段匹配不到选项、显示为空
+  handleUpdateNewOptionControls = (newOptionControls = []) => {
+    if (_.isEmpty(newOptionControls)) {
+      return;
+    }
+
+    this.setState(({ controls }) => ({
+      controls: controls.map(c => {
+        const newOptionControl = _.find(newOptionControls, nc => nc.controlId === c.controlId);
+        return newOptionControl ? { ...c, options: newOptionControl.options } : c;
+      }),
+    }));
+  };
+
   handleReplaceRecord = oldRecord => {
     const { addedIds = [], deletedIds = [] } = this.state;
     this.handleSelectRecord(newAdded => {
@@ -711,6 +731,7 @@ class RelateRecordCards extends Component {
       defaultRelatedSheet: this.getDefaultRelateSheetValue(),
       controlId: controlId,
       onOk: onOk,
+      updateWorksheetControls: this.handleUpdateNewOptionControls,
       formData: formData,
       isDraft,
       layerId: `mobileSelectRecord-${controlId}`,
@@ -1117,6 +1138,7 @@ class RelateRecordCards extends Component {
                         records: records.map(r => (includes(rowIds, r.rowid) ? { ...r, ...updatedRow } : r)),
                       });
                     }}
+                    updateWorksheetControls={this.handleUpdateNewOptionControls}
                     projectId={projectId}
                     updateRows={(rowIds = [], updatedRow = {}) => {
                       this.setState({
@@ -1154,6 +1176,7 @@ class RelateRecordCards extends Component {
                   onAdd={record => {
                     this.handleAdd([{ ...record, isNewAdd: true }]);
                   }}
+                  updateWorksheetControls={this.handleUpdateNewOptionControls}
                 />
               )}
             </div>

@@ -80,12 +80,13 @@ class WorkSheetLeft extends Component {
   };
   get data() {
     const { data, isCharge, appPkg } = this.props;
+    const sheetList = Array.isArray(data) ? data : [];
     const isOperation = appPkg.permissionType === 2;
     const filterEmptyAppItem =
       isCharge || isOperation ? () => true : item => !(item.type === 2 && _.isEmpty(item.items));
     return (isCharge || isOperation) && appPkg.viewHideNavi
-      ? data
-      : data.filter(item => [1, 4].includes(item.status) && !item.navigateHide).filter(filterEmptyAppItem);
+      ? sheetList
+      : sheetList.filter(item => [1, 4].includes(item.status) && !item.navigateHide).filter(filterEmptyAppItem);
   }
   renderSheetAppItem(item, workSheetItemProps, index) {
     const { groupId, firstGroupIndex } = this.props;

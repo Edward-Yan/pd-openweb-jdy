@@ -547,7 +547,7 @@ const AgentLand = withRouter(props => {
               <i className="icon icon-menu_right"></i>
             </ExpandIcon>
             <a href={pathCompletion('/')} className="t-flex t-items-center">
-              <img className="brand-wordmark" src={mingoLogo} alt="mingo" />
+              <img className="brand-wordmark" src={md.global.SysSettings.aiBrandLogoUrl || mingoLogo} alt="mingo" />
             </a>
           </CollapsedBar>
         )}

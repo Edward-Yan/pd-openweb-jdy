@@ -21,6 +21,20 @@ export default function SubList(props) {
     onChange = () => {},
   } = props;
   const control = { ...props };
+  const masterFormData = formData
+    .map(c =>
+      _.pick(c, [
+        'controlId',
+        'type',
+        'value',
+        'options',
+        'attribute',
+        'enumDefault',
+        'sourceControl',
+        'sourceControlType',
+      ]),
+    )
+    .filter(c => !!c.value);
 
   const debounceChange = _.debounce(onChange, 500);
 
@@ -119,9 +133,7 @@ export default function SubList(props) {
           recordId,
           worksheetId,
           appId,
-          formData: formData
-            .map(c => _.pick(c, ['controlId', 'type', 'value', 'options', 'attribute', 'enumDefault']))
-            .filter(c => !!c.value),
+          formData: masterFormData,
         }}
         onChange={handleChange}
         mobileIsEdit={!disabled && !formDisabled}

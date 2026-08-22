@@ -71,7 +71,7 @@ export default function BarCode({ data, onChange, allControls, from, subListData
         <div className="textTertiary mTop10">
           {enumDefault === 1
             ? _l('编码方式：code128，仅支持数字、字母、符号，最大包含128个字符')
-            : _l('编码方式：QR-code，可支持汉字，最大包含150个字')}
+            : _l('编码方式：QR-code，可支持汉字，最大包含250个字')}
         </div>
       </SettingItem>
       <SettingItem>

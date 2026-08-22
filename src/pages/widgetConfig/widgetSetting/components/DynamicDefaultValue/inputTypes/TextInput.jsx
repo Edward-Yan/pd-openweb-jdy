@@ -129,9 +129,8 @@ export default class TextInput extends Component {
               from !== DYNAMIC_FROM_MODE.FAST_FILTER && this.transferValue(value.trim());
             }}
             onBlur={() => {
-              from === DYNAMIC_FROM_MODE.FAST_FILTER &&
-                this.$tagtextarea.cmObj &&
-                this.transferValue(this.$tagtextarea.cmObj.getValue());
+              const cmObj = this.$tagtextarea?.cmObj;
+              from === DYNAMIC_FROM_MODE.FAST_FILTER && cmObj && this.transferValue(cmObj.getValue());
             }}
           />
         )}

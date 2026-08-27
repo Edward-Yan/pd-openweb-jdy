@@ -116,13 +116,17 @@ class App extends Component {
   }
 
   render() {
-    const { rp, ch } = getAppFeaturesVisible();
+    const { rp, ch, pheader } = getAppFeaturesVisible();
+    const startsWithTask = this.props.location.pathname.startsWith('/apps/task');
+    const startsWithCalendar = this.props.location.pathname.startsWith('/apps/calendar');
+    const hiddleHeader = !pheader || startsWithTask || startsWithCalendar;
+    const hiddleChat = !ch || startsWithTask || startsWithCalendar;
 
     if (md.global.Account.isPortal) {
       return (
         <div id="wrapper" className="flexColumn">
           <div className="flexColumn flex" id="containerWrapper">
-            <PortalPageHeaderRoute />
+            {!hiddleHeader && <PortalPageHeaderRoute />}
             <section id="container">
               <Switch>{this.genRouteComponent(ROUTE_CONFIG_PORTAL)}</Switch>
             </section>
@@ -134,7 +138,7 @@ class App extends Component {
     return (
       <div id="wrapper" className="flexRow">
         <div className="flexColumn flex" id="containerWrapper">
-          <PageHeaderRoute />
+          {!hiddleHeader && <PageHeaderRoute />}
           <section id="container">
             <Switch>
               {this.genRouteComponent(ROUTE_CONFIG)}
@@ -152,7 +156,7 @@ class App extends Component {
 
         {this.checkUpgrade()}
 
-        {ch && (
+        {!hiddleChat  && (
           <section id="chat">
             <Switch>
               <Route path={withoutChatUrl} component={null} />

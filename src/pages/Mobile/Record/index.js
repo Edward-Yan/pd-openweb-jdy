@@ -11,7 +11,7 @@ import { configureStore } from 'src/redux/configureStore';
 
 const RecordInfoPage = props => {
   const { params } = props.match;
-  let { appId, worksheetId, viewId, rowId, from } = params;
+  let { appId, worksheetId, viewId, rowId, from, groupId } = params;
 
   if (rowId.indexOf('-') === -1 && params.rowId === '21') {
     rowId = params.viewId;
@@ -33,6 +33,7 @@ const RecordInfoPage = props => {
       from={from || RECORD_INFO_FROM.WORKSHEET_ROW_LAND}
       getDataType={from}
       isLandPage
+      groupId={groupId}
     />
   );
 };
@@ -54,6 +55,7 @@ export const RecordInfoModal = forwardRef(props => {
     allowEmptySubmit,
     updateSuccess,
     updateRow,
+    groupId,
   } = props;
   const { className, visible, onClose } = props;
   const store = useMemo(configureStore, []);
@@ -80,6 +82,7 @@ export const RecordInfoModal = forwardRef(props => {
         updateSuccess={updateSuccess}
         updateEditStatus={isEditable => setIsEditable(isEditable)}
         updateRow={updateRow}
+        groupId={groupId}
       />
     </Provider>
   );

@@ -57,6 +57,10 @@ async function getValuedPort(port = 30001) {
   return getValuedPort(port + 1);
 }
 
+// 主站接口挂在 /wwwapi/ 前缀下，workflow 接口挂在后端 /workflow/ 前缀下，与主站 /wwwapi/ 不同；
+// 故 workflow_api 代理使用后端根路径 + replace: '/api/workflow/'，其他子服务保持原配置不动。
+const apiServerRoot = publishConfig.apiServer.replace(/\/wwwapi\/?$/, '/api/');
+
 const proxyConfigs = [
   {
     name: 'md_agent_api',
@@ -77,7 +81,8 @@ const proxyConfigs = [
     server: publishConfig.apiServer,
   },
   { name: 'api', path: '/api/', replace: '/', server: publishConfig.apiServer },
-  { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
+  { name: 'workflow_api', path: '/workflow_api/', replace: '/workflow/', server: apiServerRoot },
+  // { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
   { name: 'report_api', path: '/report_api/', replace: '', server: publishConfig.apiServer },
   { name: 'integration_api', path: '/integration_api/', replace: '', server: publishConfig.apiServer },
   { name: 'data_pipeline_api', path: '/data_pipeline_api/', replace: '', server: publishConfig.apiServer },
@@ -110,7 +115,7 @@ function makeProxy({ name, server, path: matchPath, replace }) {
     changeOrigin: true,
     // path 与 replace 相同（如 /api/agent/）的配置等价于 no-op，仍交给 pathRewrite 走一遍统一逻辑
     pathRewrite: { [`^${matchPath}`]: replace },
-    logger: { info: () => {}, warn: console.warn, error: console.error },
+    logger: { info: msg => console.log(`[proxy ${name}]`, msg), warn: console.warn, error: console.error },
     on: {
       error(err, req, res) {
         console.error(`[proxy ${name}] ${req.url} -> ${server} failed:`, err.message);

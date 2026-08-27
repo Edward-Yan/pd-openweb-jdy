@@ -12,10 +12,13 @@ import { getDynamicValue } from 'src/components/Form/core/formUtils';
 import { SHARECARDTYPS, WX_ICON_LIST } from 'src/components/ShareCardConfig/config.js';
 import { permitList } from 'src/pages/FormSet/config.js';
 import { isOpenPermit } from 'src/pages/FormSet/util.js';
+import SendToChatForMobile from 'src/pages/Mobile/components/RecordInfo/SendToChatForMobile/SendToChatForMobile';
+import { isOwner } from 'src/pages/worksheet/common/recordInfo/crtl';
 import { pathCompletion } from 'src/utils/common';
 import { getTitleTextFromControls } from 'src/utils/control';
 import { renderText } from 'src/utils/control';
 import { compatibleMDJS } from 'src/utils/project';
+import { getRecordLandUrl } from 'src/utils/record';
 import { replaceBtnsTranslateInfo } from 'src/utils/translate';
 import AiActionButtons from './RecordAction/AiActionButtons';
 import CustomButtons from './RecordAction/CustomButtons';
@@ -54,6 +57,37 @@ const updateWorksheetRowShareRange = ({ appId, worksheetId, rowId, viewId }) => 
     objectType: 2,
   });
 };
+
+function genCard(from = 'recordInfo', type = 'public', params = {}) {
+  if (from === 'recordInfo' && type === 'private') {
+    return {
+      entityId: params.worksheetId,
+      cardType: 8,
+      title: params.title,
+      extra: {
+        rowId: params.rowId,
+        viewId: params.viewId,
+        appId: params.appId,
+        shareUser: md.global.Account.fullname,
+        appName: params.appName,
+        sheetName: params.sheetName,
+      },
+    };
+  }
+
+  return {
+    cardType: 7,
+    title: params.title,
+    extra: {
+      from,
+      worksheetId: params.worksheetId,
+      appId: params.appId,
+      shareUser: md.global.Account.fullname,
+      appName: params.appName,
+      sheetName: params.sheetName,
+    },
+  };
+}
 
 export const getWorksheetShareUrl = ({ appId, worksheetId, recordId, viewId }) => {
   return worksheetApi
@@ -96,6 +130,7 @@ export default class RecordFooter extends Component {
       shareCardSet: {},
       aiActionBtns: [],
       shareLink: '',
+      sendChatMobileVisible: false,
     };
   }
 
@@ -236,10 +271,20 @@ export default class RecordFooter extends Component {
                 shareLink: this.state.shareLink,
               }),
       },
+      ztttShare: {
+        key: 'ztttShare',
+        name: '分享到中铁通通',
+        info: '分享到中铁通通聊天界面',
+        icon: 'ztttShare',
+        iconClass: 'Font18 Gray_9e',
+        fn: () => this.handleShareToZttt(recordBase),
+      },
     };
-    return [publicShare ? shareObj.publicShare : undefined, innerShare ? shareObj.innerShare : undefined].filter(
-      item => item,
-    );
+    return [
+      shareObj.ztttShare,
+      publicShare ? shareObj.publicShare : undefined,
+      innerShare ? shareObj.innerShare : undefined,
+    ].filter(item => item);
   };
   handleShare = () => {
     const { formData, recordBase, recordInfo } = this.props;
@@ -330,6 +375,11 @@ export default class RecordFooter extends Component {
       },
     });
   };
+
+  handleShareToZttt = () => {
+    this.setState({ sendChatMobileVisible: true });
+  };
+
   handleCollectRecord = () => {
     const { recordBase, recordInfo, refreshCollectRecordList = () => {} } = this.props;
     const { worksheetId, recordId, viewId } = recordBase;
@@ -641,6 +691,49 @@ export default class RecordFooter extends Component {
     );
   }
 
+  renderSendToChat() {
+    const { sendChatMobileVisible } = this.state;
+    const { recordInfo, recordBase } = this.props;
+    const recordTitle = getTitleTextFromControls(recordInfo.formData);
+    // const allowChange = recordBase.isCharge || isOwner(recordInfo.ownerAccount, recordInfo.formData);
+    // const shareRange = recordInfo.shareRange;
+    const params = {
+      worksheetId: recordBase.worksheetId,
+      title: recordTitle,
+      rowId: recordBase.recordId,
+      viewId: recordBase.viewId,
+      appId: recordBase.appId,
+      groupId: recordInfo.groupId,
+      appName: this.props.worksheetInfo?.appName || '',
+      sheetName: this.props.worksheetInfo?.name || '',
+    };
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
+    // const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.groupId}/${params.worksheetId}/${params.viewId}`;//视图url
+    // const shareUrl = getRecordLandUrl({
+    //     appId: params.appId,
+    //     recordId: params.rowId,
+    //     viewId: params.viewId,
+    //     worksheetId: params.worksheetId,
+    //   })
+    const shareUrl = `${shareHostUrl}/app/${params.appId}/${params.worksheetId}/${params.viewId}/row/${params.rowId}`;
+    const chatCard = {
+      ...genCard(recordBase.from, 'private', params),
+      url: shareUrl,
+    };
+    return (
+      <Fragment>
+        {sendChatMobileVisible && (
+          <SendToChatForMobile
+            sendChatMobileVisible={sendChatMobileVisible}
+            card={chatCard}
+            url={chatCard.url}
+            onClose={() => this.setState({ sendChatMobileVisible: false })}
+          />
+        )}
+      </Fragment>
+    );
+  }
+
   render() {
     const { isEditRecord } = this.props;
     return (
@@ -649,6 +742,7 @@ export default class RecordFooter extends Component {
           {isEditRecord ? this.renderEditContent() : this.renderContent()}
         </div>
         {this.renderRecordAction()}
+        {this.renderSendToChat()}
       </Fragment>
     );
   }

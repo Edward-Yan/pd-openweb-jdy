@@ -57,16 +57,15 @@ async function getValuedPort(port = 30001) {
   return getValuedPort(port + 1);
 }
 
-// 主站接口挂在 /wwwapi/ 前缀下，workflow 接口挂在后端 /workflow/ 前缀下，与主站 /wwwapi/ 不同；
-// 故 workflow_api 代理使用后端根路径 + replace: '/api/workflow/'，其他子服务保持原配置不动。
 const apiServerRoot = publishConfig.apiServer.replace(/\/wwwapi\/?$/, '/api/');
+const agentServerRoot = publishConfig.apiServer.replace(/\/wwwapi\/?$/, '/agent/');
 
 const proxyConfigs = [
   {
     name: 'md_agent_api',
     path: '/api/agent/',
     replace: '/api/agent/',
-    server: publishConfig.apiServer,
+    server: agentServerRoot,
   },
   {
     name: 'md_agui_api',
@@ -83,14 +82,14 @@ const proxyConfigs = [
   { name: 'api', path: '/api/', replace: '/', server: publishConfig.apiServer },
   { name: 'workflow_api', path: '/workflow_api/', replace: '/workflow/', server: apiServerRoot },
   // { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
-  { name: 'report_api', path: '/report_api/', replace: '', server: publishConfig.apiServer },
-  { name: 'integration_api', path: '/integration_api/', replace: '', server: publishConfig.apiServer },
+  { name: 'report_api', path: '/report_api/', replace: '/report/', server: apiServerRoot },
+  { name: 'integration_api', path: '/integration_api/', replace: '/integration/', server: apiServerRoot },
   { name: 'data_pipeline_api', path: '/data_pipeline_api/', replace: '', server: publishConfig.apiServer },
   {
     name: 'workflow_plugin_api',
     path: '/workflow_plugin_api/',
     replace: '/workflowplugin/',
-    server: publishConfig.apiServer,
+    server: apiServerRoot,
   },
   {
     name: 'knowledge_api',

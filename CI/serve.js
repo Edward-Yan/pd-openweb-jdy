@@ -57,15 +57,12 @@ async function getValuedPort(port = 30001) {
   return getValuedPort(port + 1);
 }
 
-const apiServerRoot = publishConfig.apiServer.replace(/\/wwwapi\/?$/, '/api/');
-const agentServerRoot = publishConfig.apiServer.replace(/\/wwwapi\/?$/, '/agent/');
-
 const proxyConfigs = [
   {
     name: 'md_agent_api',
     path: '/api/agent/',
     replace: '/api/agent/',
-    server: agentServerRoot,
+    server: publishConfig.apiServer,
   },
   {
     name: 'md_agui_api',
@@ -80,16 +77,15 @@ const proxyConfigs = [
     server: publishConfig.apiServer,
   },
   { name: 'api', path: '/api/', replace: '/', server: publishConfig.apiServer },
-  { name: 'workflow_api', path: '/workflow_api/', replace: '/workflow/', server: apiServerRoot },
-  // { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
-  { name: 'report_api', path: '/report_api/', replace: '/report/', server: apiServerRoot },
-  { name: 'integration_api', path: '/integration_api/', replace: '/integration/', server: apiServerRoot },
+  { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
+  { name: 'report_api', path: '/report_api/', replace: '', server: publishConfig.apiServer },
+  { name: 'integration_api', path: '/integration_api/', replace: '', server: publishConfig.apiServer },
   { name: 'data_pipeline_api', path: '/data_pipeline_api/', replace: '', server: publishConfig.apiServer },
   {
     name: 'workflow_plugin_api',
     path: '/workflow_plugin_api/',
     replace: '/workflowplugin/',
-    server: apiServerRoot,
+    server: publishConfig.apiServer,
   },
   {
     name: 'knowledge_api',
@@ -114,7 +110,7 @@ function makeProxy({ name, server, path: matchPath, replace }) {
     changeOrigin: true,
     // path 与 replace 相同（如 /api/agent/）的配置等价于 no-op，仍交给 pathRewrite 走一遍统一逻辑
     pathRewrite: { [`^${matchPath}`]: replace },
-    logger: { info: msg => console.log(`[proxy ${name}]`, msg), warn: console.warn, error: console.error },
+    logger: { info: () => {}, warn: console.warn, error: console.error },
     on: {
       error(err, req, res) {
         console.error(`[proxy ${name}] ${req.url} -> ${server} failed:`, err.message);

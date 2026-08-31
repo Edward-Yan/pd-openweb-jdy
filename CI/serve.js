@@ -76,6 +76,8 @@ const proxyConfigs = [
     replace: '/api/artifacts/',
     server: publishConfig.apiServer,
   },
+  // SSO 互信 token：专用代理至中铁交投互信系统（https://zttt.crecg-jt.com/api），避免跨域。
+  { name: 'zttt_api', path: '/zttt_api/', replace: '', server: publishConfig.ztttApiServer },
   { name: 'api', path: '/api/', replace: '/', server: publishConfig.apiServer },
   { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
   { name: 'report_api', path: '/report_api/', replace: '', server: publishConfig.apiServer },

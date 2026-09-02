@@ -8,6 +8,11 @@ import instanceVersion from 'src/pages/workflow/api/instanceVersion';
 import ArchivedList from 'src/components/ArchivedList';
 import verifyPassword from 'src/components/verifyPassword';
 import { pathCompletion } from 'src/utils/common';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  shouldUseWorkflowIframe,
+  buildWorkflowDetailUrl,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import Card from './Card';
 import { getStateParam, TABS } from './config';
 import { getTodoCount } from './Entry';
@@ -110,6 +115,7 @@ export default class MyProcess extends Component {
       approveLoading: false,
       rejectLoading: false,
       allReadLoading: false,
+      iframeSrc: '',
     };
   }
 
@@ -1133,10 +1139,17 @@ export default class MyProcess extends Component {
                 )
               }
               onAlreadyRead={this.handleAlreadyRead}
-              onClick={() => {
-                this.setState({
-                  selectCard: item,
-                });
+              onClick={async () => {
+                if (shouldUseWorkflowIframe(item)) {
+                  // appid 命中 → 先置 selectCard，异步拿 URL，拿到后再渲染 Modal
+                  this.setState({ selectCard: item, iframeSrc: '' });
+                  try {
+                    const src = await buildWorkflowDetailUrl(item);
+                    this.setState({ iframeSrc: src });
+                  } catch (_) {}
+                } else {
+                  this.setState({ selectCard: item, iframeSrc: '' });
+                }
               }}
               onAddApproveRecord={item => {
                 const { approveCards } = this.state;
@@ -1175,6 +1188,7 @@ export default class MyProcess extends Component {
       encryptType,
       rejectVisible,
       archivedItem,
+      iframeSrc,
     } = this.state;
     return (
       <div className="myProcessWrapper">
@@ -1258,51 +1272,65 @@ export default class MyProcess extends Component {
           )}
         </div>
         {selectCard ? (
-          <Suspense fallback={null}>
-            <LoadableExecDialog
-              id={selectCard.id}
-              workId={selectCard.workId}
-              onClose={() => {
-                this.setState({
-                  selectCard: null,
-                });
-              }}
-              onRead={() => {
-                if (stateTab === TABS.WAITING_EXAMINE) {
-                  this.handleRead(this.state.selectCard);
-                }
-              }}
-              onSave={() => {
-                if ([TABS.WAITING_APPROVE, TABS.WAITING_FILL].includes(stateTab)) {
-                  alert(_l('操作成功'));
-                  this.handleSave(this.state.selectCard);
-                }
-              }}
-              onError={() => {
-                if ([TABS.WAITING_APPROVE, TABS.WAITING_FILL].includes(stateTab)) {
-                  this.handleSave(this.state.selectCard);
-                }
-
-                if (stateTab === TABS.MY_SPONSOR || stateTab === TABS.COMPLETE) {
-                  const { list } = this.state;
-                  const newList = list.filter(n => n.workId !== selectCard.workId);
+          shouldUseWorkflowIframe(selectCard) ? (
+            // appid 命中 → 用 iframe 替换原生审批详情弹框
+            iframeSrc ? (
+              <IframeModal
+                visible
+                src={iframeSrc}
+                title={selectCard.title || _l('审批详情')}
+                onClose={() => {
+                  this.setState({ selectCard: null, iframeSrc: '' });
+                }}
+              />
+            ) : null
+          ) : (
+            <Suspense fallback={null}>
+              <LoadableExecDialog
+                id={selectCard.id}
+                workId={selectCard.workId}
+                onClose={() => {
                   this.setState({
-                    list: newList,
+                    selectCard: null,
                   });
-
-                  if (stateTab === TABS.MY_SPONSOR) {
-                    const countData = _.isEmpty(this.props.countData) ? this.state.countData : this.props.countData;
-                    const { mySponsor } = countData;
-                    this.updateCountData({ ...countData, mySponsor: mySponsor - 1 });
+                }}
+                onRead={() => {
+                  if (stateTab === TABS.WAITING_EXAMINE) {
+                    this.handleRead(this.state.selectCard);
                   }
-                }
+                }}
+                onSave={() => {
+                  if ([TABS.WAITING_APPROVE, TABS.WAITING_FILL].includes(stateTab)) {
+                    alert(_l('操作成功'));
+                    this.handleSave(this.state.selectCard);
+                  }
+                }}
+                onError={() => {
+                  if ([TABS.WAITING_APPROVE, TABS.WAITING_FILL].includes(stateTab)) {
+                    this.handleSave(this.state.selectCard);
+                  }
 
-                this.setState({
-                  selectCard: null,
-                });
-              }}
-            />
-          </Suspense>
+                  if (stateTab === TABS.MY_SPONSOR || stateTab === TABS.COMPLETE) {
+                    const { list } = this.state;
+                    const newList = list.filter(n => n.workId !== selectCard.workId);
+                    this.setState({
+                      list: newList,
+                    });
+
+                    if (stateTab === TABS.MY_SPONSOR) {
+                      const countData = _.isEmpty(this.props.countData) ? this.state.countData : this.props.countData;
+                      const { mySponsor } = countData;
+                      this.updateCountData({ ...countData, mySponsor: mySponsor - 1 });
+                    }
+                  }
+
+                  this.setState({
+                    selectCard: null,
+                  });
+                }}
+              />
+            </Suspense>
+          )
         ) : null}
         {(approveType || encryptType) && this.renderSignatureDialog()}
         {rejectVisible && this.renderRejectDialog()}

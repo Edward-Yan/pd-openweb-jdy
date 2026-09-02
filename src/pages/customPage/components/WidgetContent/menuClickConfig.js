@@ -1,5 +1,6 @@
 import localForage from 'localforage';
 import _ from 'lodash';
+import worksheetApi from 'src/api/worksheet';
 
 /**
  * 固定常量
@@ -240,7 +241,6 @@ export async function buildDetailUrl(config, row, worksheetInfo) {
   });
 
   // 替换 detailUrl 模板里的空占位参数
-  // 模板形如 "...&instanceId=&nodeId=&..." ，要把每个参数的空值用真实值替换
   let url = config.detailUrl;
   _.forEach(params, (value, key) => {
     // 匹配 &key= 或 &key=& 后的空值（包括 &key=value 已有值也覆盖，但 doc 模板里都是空）
@@ -258,4 +258,91 @@ export async function buildDetailUrl(config, row, worksheetInfo) {
 export function preloadWorksheetBaseInfo(worksheetId) {
   if (!worksheetId) return Promise.resolve(null);
   return loadWorksheetBaseInfo(worksheetId);
+}
+
+/**
+ * 流程待办卡片 → 审批详情 iframe URL 模板（参考 menuClickConfig "待办台账" 条目）
+ */
+const WORKFLOW_APP_ID = '2537d1b8-170a-4c02-abdf-124e610b194c';
+const WORKFLOW_WORKSHEET_ID = '6a632c256f0d1cf1793b75d0';
+const WORKFLOW_DETAIL_URL_TEMPLATE =
+  'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo';
+
+/**
+ * 流程待办卡片的 app.id 值命中时，用 iframe 替换默认 ExecDialog
+ */
+export function shouldUseWorkflowIframe(item) {
+  return _.get(item, 'app.id') === WORKFLOW_APP_ID;
+}
+
+/**
+ * 为流程待办卡片（MyProcess）构建审批详情 iframe URL
+ *
+ *   - "关联实例" → instanceId（UUID）
+ *   - "节点ID"   → nodeId
+ *
+ * @param {object} item - 待办卡片数据（from instanceVersion.getTodoList）
+ *   关键字段：id=流程实例ID, workId=工作项ID
+ * @returns {Promise<string>}
+ */
+export async function buildWorkflowDetailUrl(item) {
+  if (!item) return '';
+
+  let instanceId = '';
+  let nodeId = '';
+
+  try {
+    // 1. 通过 workId 反查 worksheet 行 ID
+    const workItemRes = await worksheetApi.getWorkItem({
+      instanceId: item.id,
+      workId: item.workId,
+    });
+    const rowId = _.get(workItemRes, 'rowId') || '';
+
+    if (rowId) {
+      const rowRes = await worksheetApi.getRowByID({
+        worksheetId: WORKFLOW_WORKSHEET_ID,
+        rowId,
+        getTemplate: true,
+      });
+
+      const receiveControls =
+        _.get(rowRes, 'receiveControls') ||
+        _.get(rowRes, 'row.receiveControls') ||
+        [];
+
+      // 按 controlName 取值
+      const relation = _.find(receiveControls, { controlName: '关联实例' });
+      instanceId = relation?.value || '';
+
+      const node = _.find(receiveControls, { controlName: '节点ID' });
+      nodeId = node?.value || '';
+
+      const params = {
+        instanceId,
+        nodeId,
+        runNodeRowId: item.workId || '',
+        userId: _.get(md, 'global.Account.accountId') || '',
+        appid: WORKFLOW_APP_ID,
+      };
+
+      let url = WORKFLOW_DETAIL_URL_TEMPLATE;
+      _.forEach(params, (value, key) => {
+        const re = new RegExp(`(${key}=)([^&]*)`, 'g');
+        url = url.replace(re, `$1${encodeURIComponent(value)}`);
+      });
+
+      return url;
+    }
+  } catch (e) {
+    console.log('[buildWorkflowDetailUrl] 获取 worksheet 行数据失败，退化为最小 URL', e);
+  }
+
+  const runNodeRowId = item.workId || '';
+  const userId = _.get(md, 'global.Account.accountId') || '';
+  let url = WORKFLOW_DETAIL_URL_TEMPLATE;
+  url = url.replace(/(runNodeRowId=)([^&]*)/, `$1${encodeURIComponent(runNodeRowId)}`);
+  url = url.replace(/(userId=)([^&]*)/, `$1${encodeURIComponent(userId)}`);
+  url = url.replace(/(appid=)([^&]*)/, `$1${encodeURIComponent(WORKFLOW_APP_ID)}`);
+  return url;
 }

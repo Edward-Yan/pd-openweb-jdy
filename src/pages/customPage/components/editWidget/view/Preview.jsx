@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useRef } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import _ from 'lodash';
 import styled from 'styled-components';
@@ -8,6 +8,12 @@ import homeAppApi from 'src/api/homeApp';
 import { navigateTo } from 'src/router/navigateTo';
 import { getTranslateInfo } from 'src/utils/app';
 import { browserIsMobile, pathCompletion } from 'src/utils/common';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  getMenuConfig,
+  buildDetailUrl,
+  preloadWorksheetBaseInfo,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 
 const Wrap = styled.div`
   display: flex;
@@ -161,6 +167,54 @@ export function View(props) {
   const Component = isMobileLayout ? LoadableMobileSingleView : LoadableSingleView;
   const showTitle = config.showTitle ?? true;
 
+  // === iframe 弹框相关 ===
+  const menuConfigRef = useRef(null);
+  const worksheetInfoRef = useRef(null);
+  const [iframeState, setIframeState] = useState({ visible: false, src: '', title: '' });
+
+  // 首次挂载时判断是否命中 iframe 菜单，预加载 worksheet controls
+  useEffect(() => {
+    const currentMenuAppId = id;
+    const cfg = getMenuConfig(currentMenuAppId);
+    menuConfigRef.current = cfg;
+
+    if (cfg) {
+      // 预加载 worksheet 定义（用于查 controlId）
+      preloadWorksheetBaseInfo(cfg.worksheetId).then(info => {
+        worksheetInfoRef.current = info;
+      });
+
+      // 挂全局 hook 拦截行点击
+      window.__CUSTOM_PAGE_IFRAME_HOOK__ = {
+        enabled: true,
+        onRowClick: row => {
+          const cfg = menuConfigRef.current;
+          if (!cfg) return;
+
+          buildDetailUrl(cfg, row, worksheetInfoRef.current).then(url => {
+            if (!url) {
+              console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
+              return;
+            }
+            setIframeState({
+              visible: true,
+              src: url,
+            });
+          });
+        },
+      };
+
+      return () => {
+        // 卸载时清理 hook（避免误触发其他页面）
+        if (window.__CUSTOM_PAGE_IFRAME_HOOK__?.enabled) {
+          window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
+        }
+      };
+    }
+
+    return undefined;
+  }, [apkId, appId]);
+
   if (_.isEmpty(viewId)) {
     return (
       <EmptyView className="SingleViewWrap valignWrapper emptyView">
@@ -216,6 +270,13 @@ export function View(props) {
           }
         />
       </Suspense>
+
+      {/* iframe 详情弹框 */}
+      <IframeModal
+        visible={iframeState.visible}
+        src={iframeState.src}
+        onClose={() => setIframeState({ visible: false, src: '', title: '' })}
+      />
     </ViewWrap>
   );
 }

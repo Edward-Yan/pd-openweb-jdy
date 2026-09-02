@@ -22,7 +22,11 @@ import { browserIsMobile } from 'src/utils/common';
  * 兼容：handlePushState / handleReplaceState 旧 API 保留，内部转发到新栈实现。
  */
 const _layerStack = [];
+// 标记由弹层历史栈消费的事件，供页面级 popstate 监听区分“关闭弹层”和“页面返回”。
+const _historyLayerPopstateEvents = new WeakSet();
 let _popstateListenerBound = false;
+// 主动关闭会先清理栈再 history.go，使用计数保留该次回退仍属于弹层操作的信息。
+let _pendingHistoryLayerPopstates = 0;
 let _seqCounter = 0;
 
 const _getUrlWithParams = urlParams => {
@@ -52,22 +56,37 @@ const _readStateSeq = () => {
 const _bindPopstateOnce = () => {
   if (_popstateListenerBound) return;
   _popstateListenerBound = true;
-  window.addEventListener('popstate', () => {
-    if (!_layerStack.length) return;
-    const top = _layerStack[_layerStack.length - 1];
-    const currentSeq = _readStateSeq();
-    // 当前 history.state 的 seq 小于栈顶的 seq → 用户回退一帧，关栈顶弹层
-    // 当前 seq ≥ 栈顶 seq → 自家 history.go 引起的消化帧（pop 中已 splice），忽略
-    if (currentSeq >= top.seq) return;
-    _layerStack.pop();
+  window.addEventListener(
+    'popstate',
+    event => {
+      if (_pendingHistoryLayerPopstates > 0) {
+        _pendingHistoryLayerPopstates -= 1;
+        _historyLayerPopstateEvents.add(event);
+        return;
+      }
 
-    try {
-      top.onClose && top.onClose();
-    } catch (err) {
-      console.error('[mobileNavigation] popstate onClose error', err);
-    }
-  });
+      if (!_layerStack.length) return;
+      _historyLayerPopstateEvents.add(event);
+      const top = _layerStack[_layerStack.length - 1];
+      const currentSeq = _readStateSeq();
+      // 当前 history.state 的 seq 小于栈顶的 seq → 用户回退一帧，关栈顶弹层
+      // 当前 seq ≥ 栈顶 seq → 自家 history.go 引起的消化帧（pop 中已 splice），忽略
+      if (currentSeq >= top.seq) return;
+      _layerStack.pop();
+
+      try {
+        top.onClose && top.onClose();
+      } catch (err) {
+        console.error('[mobileNavigation] popstate onClose error', err);
+      }
+    },
+    // 页面级监听可能更早注册；捕获阶段先完成事件标记，确保后续监听能够正确识别。
+    true,
+  );
 };
+
+/** 判断本次 popstate 是否由移动端弹层返回栈消费 */
+export const isHistoryLayerPopstate = event => Boolean(event && _historyLayerPopstateEvents.has(event));
 
 /**
  * 把弹层入栈，并 push 一帧 history，state 中带唯一 __layerSeq 用于 popstate 判定。
@@ -109,7 +128,11 @@ export const popHistoryLayer = id => {
   const steps = _layerStack.length - idx;
   // 先清栈，让随后 history.go 触发的 popstate 在监听器中被识别为消化帧
   _layerStack.splice(idx, steps);
-  if (steps > 0) history.go(-steps);
+  if (steps > 0) {
+    _pendingHistoryLayerPopstates += 1;
+    history.go(-steps);
+  }
+
   return true;
 };
 

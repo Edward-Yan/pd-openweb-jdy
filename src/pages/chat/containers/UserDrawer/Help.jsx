@@ -3,37 +3,8 @@ import cx from 'classnames';
 import _ from 'lodash';
 import { Icon } from 'ming-ui';
 import { emitter } from 'src/utils/common';
+import { openZendeskWidget } from 'src/utils/services/zendeskWidget';
 import { PopoverWrap } from '../ChatList/Avatar/styled';
-
-let monitorZendesk = false;
-
-const handleCloseZendesk = event => {
-  const { target } = event;
-
-  if (target.classList.contains('zendeskWrap') || target.parentNode.classList.contains('zendeskWrap')) {
-    return;
-  }
-
-  window.zE('messenger', 'close');
-};
-
-const handleOpenZendesk = () => {
-  if (!window.zE) return;
-  if (!monitorZendesk) {
-    window.zE('messenger:on', 'open', () => {
-      document.body.addEventListener('click', handleCloseZendesk, false);
-    });
-    window.zE('messenger:on', 'close', () => {
-      document.body.removeEventListener('click', handleCloseZendesk, false);
-    });
-    window.addEventListener('beforeunload', () => {
-      window.zE('messenger', 'close');
-    });
-  }
-
-  monitorZendesk = true;
-  window.zE('messenger', 'open');
-};
 
 const collections = () => {
   const lang = window.getCurrentLang();
@@ -122,18 +93,16 @@ const renderProjectsPopover = ({ onClose = () => {}, onCloseHelpPopover = () => 
               if (_.includes(['partnerSupport'], v.id)) {
                 return (
                   <div
-                    className={cx('itemWrap flexRow alignItemsCenter pointer', {
-                      zendeskWrap: window.platformENV.isOverseas,
-                    })}
+                    className="itemWrap flexRow alignItemsCenter pointer"
                     key={v.id}
                     onClick={() => {
                       if (v.id === 'partnerSupport') {
+                        onCloseHelpPopover(); // 先关闭帮助浮层
+                        onClose(); // 再关闭侧边抽屉
+
                         if (window.platformENV.isOverseas) {
-                          handleOpenZendesk();
+                          openZendeskWidget();
                         } else {
-                          // window.mdCustomerServiceOpen && window.mdCustomerServiceOpen();
-                          onCloseHelpPopover(); // 先关闭帮助浮层
-                          onClose(); // 再关闭侧边抽屉
                           setTimeout(() => {
                             window.mingoPendingStartTask = { callFromHelp: true };
                             emitter.emit('SET_MINGO_VISIBLE');

@@ -36,7 +36,7 @@ export default function MongoDBGuide(props) {
           '如果数据源的连接器选项配置和数据库服务器配置不一致时，可能会出现同步错误或者创建同步任务失败的情况。此时可尝试添加额外的连接器选项参数配置。',
         )}
         <a
-          href="https://ververica.github.io/flink-cdc-connectors/master/content/connectors/mysql-cdc%28ZH%29.html#id6"
+          href="https://nightlies.apache.org/flink/flink-cdc-docs-release-3.5/docs/connectors/flink-sources/mongodb-cdc/"
           target="_blank"
           className="mLeft8"
         >

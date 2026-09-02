@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: "
-"POT-Creation-Date: 2026-07-14 17:50:50"
+"POT-Creation-Date: 2026-08-26 14:36:28"
 "Language-Team: English"
 "Language: en_US"
 "MIME-Version: 1.0"
@@ -279,7 +279,7 @@ msgstr "Trigger by Worksheet"
 
 #: Disabled references:1
 msgid "定时触发"
-msgstr "Trigger by Scheduled"
+msgstr "Triggered on Schedule"
 
 #: Disabled references:1
 msgid "日期触发"
@@ -567,7 +567,7 @@ msgstr "item %0"
 
 #: Disabled references:1
 msgid "字段 %0 个"
-msgstr "%0 Fields"
+msgstr "%0 Field(s)"
 
 #: Disabled references:1
 msgid "视图 %0 个"
@@ -1079,15 +1079,11 @@ msgstr "Manage Attachments"
 
 #: Disabled references:1
 msgid "全部下载"
-msgstr "all files"
+msgstr "Download all"
 
 #: Disabled references:1
 msgid "未命名"
 msgstr "Unnamed"
-
-#: Disabled references:1
-msgid "不在可选范围内"
-msgstr "Not within the optional range"
 
 #: Disabled references:1
 msgid "最多可选择20项"
@@ -1103,7 +1099,7 @@ msgstr "Please enter more keywords"
 
 #: Disabled references:1
 msgid "数据源异常"
-msgstr "Data source exception"
+msgstr "Source Unavailable"
 
 #: Disabled references:1
 msgid "数据加载中..."
@@ -1580,6 +1576,10 @@ msgstr "Take Photo"
 #: Disabled references:1
 msgid "拍摄"
 msgstr "Shoot"
+
+#: Disabled references:1
+msgid "不在可选范围内"
+msgstr "Not within the optional range"
 
 #: Disabled references:1
 msgid "%0级"
@@ -2691,11 +2691,11 @@ msgstr "You can enter / paste content to start 👇"
 
 #: Disabled references:1
 msgid "下次试试在工作表页面直接粘贴剪贴板内容，可以自动激活智能创建，更方便喔～"
-msgstr "Paste clipboard content directly into the table page to auto-trigger smart creation—easier than ever!"
+msgstr "Next time, paste directly into the worksheet for faster Smart Create～"
 
 #: Disabled references:1
 msgid "✨AI根据输入内容智能推测或联网搜索相关信息，为您补全尽可能多的字段"
-msgstr "✨AI will smartly infer or fetch information from your input to fill fields automatically"
+msgstr "✨AI uses your input and online sources to fill in as many fields as possible"
 
 #: Disabled references:1
 msgid "AI只填写输入内容中明确包含的字段"
@@ -2767,7 +2767,7 @@ msgstr "Tabs"
 
 #: Disabled references:1
 msgid "已保存%0个字段"
-msgstr "%0 fields saved"
+msgstr "%0 field(s) saved"
 
 #: Disabled references:1
 msgid "已新建关联表 <b>%0</b>。点击开始为您继续生成关联表字段。"
@@ -3035,7 +3035,7 @@ msgstr "The application has been closed"
 
 #: Disabled references:1
 msgid "应用已删除"
-msgstr "Application has been deleted"
+msgstr "App Deleted"
 
 #: Disabled references:1
 msgid "你还不是应用成员，无权访问此应用"
@@ -3087,7 +3087,7 @@ msgstr "The application has been returned. If you wish to use it, please repurch
 
 #: Disabled references:1
 msgid "申请加入"
-msgstr "Apply to Join"
+msgstr "Request to Join"
 
 #: Disabled references:1
 msgid "重新安装"
@@ -3103,7 +3103,7 @@ msgstr "Renew Now"
 
 #: Disabled references:1
 msgid "申请加入应用"
-msgstr "Apply to Join Application"
+msgstr "Request to Join the App"
 
 #: Disabled references:1
 msgid "填写申请说明"
@@ -3211,7 +3211,7 @@ msgstr "File contains unsupported format"
 
 #: Disabled references:1
 msgid "附件总大小超过 %0，请您分批次上传"
-msgstr "The total size of attachments exceeds %0. Please upload in batches."
+msgstr "The total size of attachments exceeds %0. Please upload in batches"
 
 #: Disabled references:1
 msgid "应用附件上传量已到最大值"
@@ -3323,7 +3323,7 @@ msgstr "Position:"
 
 #: Disabled references:1
 msgid "未填写"
-msgstr "Not filled"
+msgstr "Not provided"
 
 #: Disabled references:1
 msgid "生日"
@@ -5019,7 +5019,7 @@ msgstr "Please ensure the postal code is correct"
 
 #: Disabled references:1
 msgid "手机号码未正确填写"
-msgstr "The mobile number is not filled in correctly"
+msgstr "Mobile number entered incorrectly"
 
 #: Disabled references:1
 msgid "请输入正确的传真号"
@@ -5995,15 +5995,15 @@ msgstr "Complete Contact Information"
 
 #: Disabled references:1
 msgid "组织信息：未填写"
-msgstr "Org Info: Not filled"
+msgstr "Org Info: Not provided"
 
 #: Disabled references:1
 msgid "联系人姓名：未填写"
-msgstr "Contact Name: Not Filled"
+msgstr "Contact name: Not provided"
 
 #: Disabled references:1
 msgid "联系电话：未填写"
-msgstr "Contact number: Not filled in"
+msgstr "Contact number: Not provided"
 
 #: Disabled references:1
 msgid "如需获取合同，请拨打400-665-6655，我们将尽快为您提供。如需获取发票，请在完成支付后前往 组织管理 -> 账务中心，自助申请。"
@@ -7107,7 +7107,7 @@ msgstr "Business Assistant"
 
 #: Disabled references:1
 msgid "账号已注销"
-msgstr "Account has been canceled"
+msgstr "Account has been deleted"
 
 #: Disabled references:1
 msgid "复制ID"
@@ -7336,6 +7336,10 @@ msgstr "Case insensitive"
 #: Disabled references:1
 msgid "看不清，换一张"
 msgstr "Can't see clearly? Change another one."
+
+#: Disabled references:1
+msgid "加载失败，请刷新重试"
+msgstr ""
 
 #: Disabled references:1
 msgid "管理应用“%0”"
@@ -7755,7 +7759,7 @@ msgstr "Buy Now"
 
 #: Disabled references:1
 msgid "未发布"
-msgstr "Unpublished"
+msgstr "Draft"
 
 #: Disabled references:1
 msgid "外部链接"
@@ -7844,7 +7848,7 @@ msgstr "Visible Devices"
 
 #: Disabled references:1
 msgid "操作人"
-msgstr "Operator"
+msgstr "Actor"
 
 #: Disabled references:1
 msgid "导出时间"
@@ -8160,7 +8164,7 @@ msgstr "Match users, departments, and positions"
 
 #: Disabled references:1
 msgid "将工作表、工作流、角色中的人员部门职位与网络中的进行匹配可保证应用的完整性"
-msgstr "Matching personnel departments and positions in worksheets, workflows, and roles with those in the network ensures the integrity of the application"
+msgstr "Match the members, departments, and positions in worksheets, workflows, and roles with those in the network to preserve app integrity"
 
 #: Disabled references:1
 msgid "立即导入"
@@ -8264,7 +8268,7 @@ msgstr "Worksheet"
 
 #: Disabled references:1
 msgid "人员事件"
-msgstr "Personnel"
+msgstr "Member"
 
 #: Disabled references:1
 msgid "Webhook"
@@ -8568,7 +8572,7 @@ msgstr "Move failed"
 
 #: Disabled references:1
 msgid "添加时间"
-msgstr "Set Time"
+msgstr "Joined At"
 
 #: Disabled references:1
 msgid "添加人"
@@ -8716,7 +8720,7 @@ msgstr "No global variables available"
 
 #: Disabled references:1
 msgid "值"
-msgstr "Number"
+msgstr "Value"
 
 #: Disabled references:1
 msgid "值为空"
@@ -9324,7 +9328,7 @@ msgstr "Get App List"
 
 #: Disabled references:1
 msgid "获取应用信息"
-msgstr "Get Application Information"
+msgstr "Get App Information"
 
 #: Disabled references:1
 msgid "创建应用项分组"
@@ -9332,11 +9336,11 @@ msgstr "Create App Item Group"
 
 #: Disabled references:1
 msgid "批量创建应用项"
-msgstr "Bulk Create Application Items"
+msgstr "Bulk Create App Items"
 
 #: Disabled references:1
 msgid "编辑应用"
-msgstr "Edit Application"
+msgstr "Edit App"
 
 #: Disabled references:1
 msgid "删除应用"
@@ -9348,7 +9352,7 @@ msgstr "Get Worksheet List"
 
 #: Disabled references:1
 msgid "获取工作表详情"
-msgstr "Get Worksheet Details View"
+msgstr "Get Worksheet Details"
 
 #: Disabled references:1
 msgid "编辑工作表"
@@ -9360,23 +9364,23 @@ msgstr "Delete Worksheet"
 
 #: Disabled references:1
 msgid "行记录"
-msgstr "Row record"
+msgstr "Row Record"
 
 #: Disabled references:1
 msgid "获取行记录详情"
-msgstr "View Row Details"
+msgstr "View Record Details"
 
 #: Disabled references:1
 msgid "创建行记录"
-msgstr "Create Row"
+msgstr "Create Record"
 
 #: Disabled references:1
 msgid "更新行记录"
-msgstr "Update Row"
+msgstr "Update Record"
 
 #: Disabled references:1
 msgid "删除行记录"
-msgstr "Delete Row"
+msgstr "Delete Record"
 
 #: Disabled references:1
 msgid "获取行记录列表"
@@ -9436,11 +9440,11 @@ msgstr "Edit Custom Page"
 
 #: Disabled references:1
 msgid "获取触发流程列表"
-msgstr "Get Triggered Flow List"
+msgstr "Get Triggered Workflow Details"
 
 #: Disabled references:1
 msgid "获取触发流程详情"
-msgstr "View Triggered Flow Details"
+msgstr "Get Triggered Workflow Details"
 
 #: Disabled references:1
 msgid "获取工作流结构"
@@ -9448,11 +9452,11 @@ msgstr "Get Workflow Structure"
 
 #: Disabled references:1
 msgid "获取审批流程执行列表"
-msgstr "Get Approval Flow Execution List"
+msgstr "Get Approval Workflow List"
 
 #: Disabled references:1
 msgid "获取审批流程执行详情"
-msgstr "View approval workflow execution details"
+msgstr "Get Approval Workflow Details"
 
 #: Disabled references:1
 msgid "批量创建工作流节点"
@@ -9480,11 +9484,11 @@ msgstr "To-do"
 
 #: Disabled references:1
 msgid "获取用户流程待办列表"
-msgstr "Get User Workflow Task List"
+msgstr "Get User Task List"
 
 #: Disabled references:1
 msgid "获取审批待办详情"
-msgstr "Get Approval Task Details View"
+msgstr "Get Approval Task Details"
 
 #: Disabled references:1
 msgid "批量审批"
@@ -9532,7 +9536,7 @@ msgstr "Get Role Details"
 
 #: Disabled references:1
 msgid "成员退出所有角色"
-msgstr "Remove all roles from member"
+msgstr "Remove Member from All Roles"
 
 #: Disabled references:1
 msgid "获取角色列表"
@@ -9540,7 +9544,7 @@ msgstr "Get Role List"
 
 #: Disabled references:1
 msgid "角色移除成员"
-msgstr "Remove Role Member"
+msgstr "Remove Members from Role"
 
 #: Disabled references:1
 msgid "角色添加成员"
@@ -9548,7 +9552,7 @@ msgstr "Add Members to Role"
 
 #: Disabled references:1
 msgid "选项集"
-msgstr "Options Set"
+msgstr "Option Set"
 
 #: Disabled references:1
 msgid "创建选项"
@@ -9576,7 +9580,7 @@ msgstr "Get Knowledge Base List"
 
 #: Disabled references:1
 msgid "向量知识库检索"
-msgstr "Vector Knowledge Base Retrieval"
+msgstr "Retrieval Vector Knowledge Base"
 
 #: Disabled references:1
 msgid "查找组织部门"
@@ -9904,7 +9908,7 @@ msgstr "Please select the users to export"
 
 #: Disabled references:1
 msgid "人员"
-msgstr "Personnel"
+msgstr "Member"
 
 #: Disabled references:1
 msgid "批量导出"
@@ -10381,7 +10385,7 @@ msgstr "Key Name"
 
 #: Disabled references:1
 msgid "授权服务"
-msgstr "Authorized Service"
+msgstr "Service"
 
 #: Disabled references:1
 msgid "已禁用"
@@ -10657,7 +10661,7 @@ msgstr "Please enter a custom display name"
 
 #: Disabled references:1
 msgid "端口号必须为数字"
-msgstr "The port number must be a number"
+msgstr "The port number must be numeric"
 
 #: Disabled references:1
 msgid "根据组在对应的DN检索账户"
@@ -10745,7 +10749,7 @@ msgstr "WEB-Mobile"
 
 #: Disabled references:1
 msgid "若”WEB-移动端“未填写，通过WEB-移动端登录时，系统默认使用”WEB-PC端“地址登录"
-msgstr "If WEB-Mobile is not filled in, when logging in via WEB-Mobile, the system will use the WEB-PC address to sign in by default."
+msgstr "If WEB-Mobile is not provided, when logging in via WEB-Mobile, the system will use the WEB-PC address to sign in by default"
 
 #: Disabled references:1
 msgid "取消集成"
@@ -12941,7 +12945,7 @@ msgstr "UI Operation"
 
 #: Disabled references:1
 msgid "个人访问令牌"
-msgstr "Personal Access Token"
+msgstr "Access Token"
 
 #: Disabled references:1
 msgid "应用密钥"
@@ -13149,11 +13153,11 @@ msgstr "The account has been requested for cancellation"
 
 #: Disabled references:1
 msgid "移除人员"
-msgstr "Remove Personnel"
+msgstr "Remove Member"
 
 #: Disabled references:1
 msgid "注销"
-msgstr "Log out"
+msgstr "Delete"
 
 #: Disabled references:1
 msgid "交接"
@@ -13457,7 +13461,7 @@ msgstr "Transaction Records"
 
 #: Disabled references:1
 msgid "信用点消费"
-msgstr "Credits Consumption"
+msgstr "Credits"
 
 #: Disabled references:1
 msgid "确定取消该订单？"
@@ -13533,7 +13537,7 @@ msgstr "Async workflows have a delay of about 5 minutes, and the system automati
 
 #: Disabled references:1
 msgid "AI 福利点消费"
-msgstr "AI Credits Consumption"
+msgstr "AI Free Credits"
 
 #: Disabled references:1
 msgid "按照时间筛选"
@@ -14505,7 +14509,7 @@ msgstr "Publish Notice"
 
 #: Disabled references:1
 msgid "可以在组织内群发通告，支持附件、私信、Email"
-msgstr "Can send group notifications within the organization, support attachments, private messages, and emails"
+msgstr "Send organization-wide announcements with attachments via direct message or email"
 
 #: Disabled references:1
 msgid "用户排行、动态更新、文档、图片等统计信息"
@@ -14553,7 +14557,7 @@ msgstr "The maximum length for the role name is 30"
 
 #: Disabled references:1
 msgid "编辑人事权限"
-msgstr "Edit Personnel Permissions"
+msgstr "Edit Member Permissions"
 
 #: Disabled references:1
 msgid "编辑权限"
@@ -15777,7 +15781,7 @@ msgstr "Org-Admin"
 
 #: Disabled references:1
 msgid "中配置财务角色，并将相关人员加入角色执行审核开票"
-msgstr "configure financial roles and add personnel for review and invoicing"
+msgstr "configure financial roles and add members for review and invoicing"
 
 #: Disabled references:1
 msgid "销方银行信息"
@@ -17513,7 +17517,7 @@ msgstr "Security - Data & Access"
 
 #: Disabled references:1
 msgid "对组织成员的数据访问、下载与关键操作进行统一管控，降低数据泄露与误操作风险"
-msgstr "Centralize control over data access, downloads, and critical actions for organization members to reduce data leakage and misoperation risks."
+msgstr "Centrally manage organization members’ data access, downloads, and critical actions to reduce the risk of data leaks and errors"
 
 #: Disabled references:1
 msgid "应用访问策略"
@@ -17529,7 +17533,7 @@ msgstr "Restrict Attachment Download"
 
 #: Disabled references:1
 msgid "限制成员在特定网络或设备环境下下载附件，防止文件外泄"
-msgstr "Restrict members to download attachments only in specified networks or device environments to prevent data leakage"
+msgstr "Restrict attachment downloads to approved networks or devices to prevent data leakage"
 
 #: Disabled references:1
 msgid "为组织内所有应用内容显示屏幕水印，防止截图、拍照等场景下的数据外泄"
@@ -17701,7 +17705,7 @@ msgstr "Once enabled, the restriction allows only authorized administrators to u
 
 #: Disabled references:1
 msgid "允许一小时内免验证 (默认)"
-msgstr "Allow one-hour verification-free period (default)"
+msgstr "Skip verification for 1 hour (default)"
 
 #: Disabled references:1
 msgid "每次操作均需验证"
@@ -17745,7 +17749,7 @@ msgstr "Current settings:"
 
 #: Disabled references:1
 msgid "允许一小时内免验证"
-msgstr "Allow one-hour verification-free"
+msgstr "Skip verification for 1 hour"
 
 #: Disabled references:1
 msgid "AI 模型授权规则"
@@ -18537,7 +18541,7 @@ msgstr "Bulk Offboard by User ID"
 
 #: Disabled references:1
 msgid "离职(%0)"
-msgstr "Resigned (%0)"
+msgstr "Offboard (%0)"
 
 #: Disabled references:1
 msgid "请输入需要办理离职的成员 ID，每行输入一个。最多批量离职50个成员"
@@ -18605,7 +18609,7 @@ msgstr "Please enter the phone number or Email address"
 
 #: Disabled references:1
 msgid "人员信息"
-msgstr "Personnel Info"
+msgstr "Member Info"
 
 #: Disabled references:1
 msgid "非组织超级管理员无法修改组织超级管理员姓名/手机号/邮箱"
@@ -18645,7 +18649,15 @@ msgstr "Pin sorting in \"%0\""
 
 #: Disabled references:1
 msgid "在人员选择层、通讯录中按部门查看时，按设置的排序显示"
-msgstr "When viewing by dept in personnel selection and contacts, display by set sorting"
+msgstr "Display members in the set order when browsing by department in the member selector or contacts"
+
+#: Disabled references:1
+msgid "刷新中，请稍后查看"
+msgstr "Refreshing, please check back later"
+
+#: Disabled references:1
+msgid "刷新失败"
+msgstr "Refresh failed"
 
 #: Disabled references:1
 msgid "在进行工作表和工作流的所有下级部门检索时，若所有下级部门总数超过2000（含），系统将默认仅获取当前部门的“一级子部门”所有部门。"
@@ -18662,6 +18674,10 @@ msgstr "Import Depts"
 #: Disabled references:1
 msgid "导出部门"
 msgstr "Export Depts"
+
+#: Disabled references:1
+msgid "刷新部门列表"
+msgstr "Refresh Department List"
 
 #: Disabled references:1
 msgid "删除“%0”"
@@ -18690,6 +18706,10 @@ msgstr "Some parent depts are missing. Please restore them first"
 #: Disabled references:1
 msgid "复制 ID"
 msgstr "Copy ID"
+
+#: Disabled references:1
+msgid "刷新部门成员信息"
+msgstr "Refresh Department Member Information"
 
 #: Disabled references:1
 msgid "添加子部门"
@@ -18873,7 +18893,7 @@ msgstr "Phone / Email"
 
 #: Disabled references:1
 msgid "加入时间"
-msgstr "Join time"
+msgstr "Joined At"
 
 #: Disabled references:1
 msgid "导入新成员失败列表"
@@ -18933,15 +18953,11 @@ msgstr "Not Activated"
 
 #: Disabled references:1
 msgid "仅看无部门人员"
-msgstr "Only view no dept. personnel"
+msgstr "Show Members Without a Department Only"
 
 #: Disabled references:1
 msgid "更多邀请"
 msgstr "Invite More"
-
-#: Disabled references:1
-msgid "刷新失败"
-msgstr "Refresh failed"
 
 #: Disabled references:1
 msgid "刷新所有成员信息"
@@ -19348,6 +19364,10 @@ msgid "角色存在成员，无法删除"
 msgstr "Cannot delete the role because it has existing members."
 
 #: Disabled references:1
+msgid "刷新角色成员信息"
+msgstr "Refresh Role Member Information"
+
+#: Disabled references:1
 msgid "停用后，当前停用的角色将对用户隐藏，角色下的成员不会移除。"
 msgstr "When deactivated, role will be hidden, assigned members are unaffected."
 
@@ -19378,6 +19398,10 @@ msgstr "Import Role"
 #: Disabled references:1
 msgid "导出角色"
 msgstr "Export Role"
+
+#: Disabled references:1
+msgid "刷新角色列表"
+msgstr "Refresh Role List"
 
 #: Disabled references:1
 msgid "暂无结果"
@@ -20145,7 +20169,7 @@ msgstr "Data Format"
 
 #: Disabled references:1
 msgid "字段已删除"
-msgstr "Field has been deleted"
+msgstr "Field Deleted"
 
 #: Disabled references:1
 msgid "记录数量"
@@ -20169,7 +20193,7 @@ msgstr "Limit reached"
 
 #: Disabled references:1
 msgid "计算字段"
-msgstr "Calculated Field"
+msgstr "Calculation Field"
 
 #: Disabled references:1
 msgid "计算"
@@ -20701,7 +20725,7 @@ msgstr "View Reference"
 
 #: Disabled references:1
 msgid "共%0个字段"
-msgstr "A total of %0 fields"
+msgstr "A total of %0 field(s)"
 
 #: Disabled references:1
 msgid "搜索工作表"
@@ -21588,8 +21612,8 @@ msgid "知识库用量超限，请联系组织管理员增购额度"
 msgstr "Knowledge base limit reached. Please contact your admin to upgrade"
 
 #: Disabled references:1
-msgid "开启后，对 %0 格式的附件使用视觉模型解析，提升复杂文档的结构还原准确率。"
-msgstr "Once enabled, visual models are used to parse attachments in %0 format, improving accuracy in reconstructing complex document structures."
+msgid "开启后，对 %0 格式的附件进行增强解析，提升复杂文档的内容提取效果；暂不识别文档内图片内容。"
+msgstr "When enabled, improves %0 attachment parsing for complex content extraction. Document images are not supported yet."
 
 #: Disabled references:1
 msgid "向量数据库服务未部署，知识库暂不可用"
@@ -22009,7 +22033,7 @@ msgstr "Approval instructions"
 
 #: Disabled references:1
 msgid "填写说明"
-msgstr "Filling Instructions"
+msgstr "Instructions"
 
 #: Disabled references:1
 msgid "通知说明"
@@ -22689,11 +22713,11 @@ msgstr "Password verification failed!"
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销！"
-msgstr "If you have organizations not logged out, go to My Account - My Org to log out before logging out !"
+msgstr "Please leave all organizations in My Account > My Org. before deleting your account！"
 
 #: Disabled references:1
 msgid "账号已申请注销！"
-msgstr "The account has been requested for cancellation!"
+msgstr "Account deletion request submitted!"
 
 #: Disabled references:1
 msgid "state过期或错误！"
@@ -22709,7 +22733,7 @@ msgstr "Agree (revocable within 15 days after cancellation)"
 
 #: Disabled references:1
 msgid "确认注销"
-msgstr "Confirm Cancellation"
+msgstr "Confirm Deletion"
 
 #: Disabled references:1
 msgid "%0 分 %1 秒"
@@ -22741,7 +22765,7 @@ msgstr "1 hour"
 
 #: Disabled references:1
 msgid "您于%0  申请账号注销"
-msgstr "You requested account deletion on %0."
+msgstr "You requested account deletion on %0"
 
 #: Disabled references:1
 msgid "账号将在"
@@ -22828,12 +22852,12 @@ msgid "账号已注册"
 msgstr "Account has been registered"
 
 #: Disabled references:1
-msgid "验证码发送过于频繁"
-msgstr "Verification code sent too frequently"
-
-#: Disabled references:1
 msgid "验证码发送过于频繁，%0收不到验证码？%1"
 msgstr "Verification code sent too frequently, %0 not receiving the verification code? %1"
+
+#: Disabled references:1
+msgid "验证码发送过于频繁"
+msgstr "Verification code sent too frequently"
 
 #: Disabled references:1
 msgid "账号未注册"
@@ -22956,10 +22980,6 @@ msgid "图形验证码校验失败"
 msgstr "CAPTCHA validation failed"
 
 #: Disabled references:1
-msgid "返回登录页面"
-msgstr "Return to login page"
-
-#: Disabled references:1
 msgid "找回密码"
 msgstr "Retrieve Password"
 
@@ -22978,10 +22998,6 @@ msgstr "Login with password"
 #: Disabled references:1
 msgid "使用验证码登录"
 msgstr "Login with verification code"
-
-#: Disabled references:1
-msgid "或通过以下方式"
-msgstr "Or Sign in with"
 
 #: Disabled references:1
 msgid "小程序登录"
@@ -23012,6 +23028,14 @@ msgid "登录%14002"
 msgstr "Login"
 
 #: Disabled references:1
+msgid "还没有账号?"
+msgstr "Don't have an account?"
+
+#: Disabled references:1
+msgid "免费注册"
+msgstr "Sign Up for Free"
+
+#: Disabled references:1
 msgid "下次自动登录"
 msgstr "Remember me"
 
@@ -23030,10 +23054,6 @@ msgstr "Continue"
 #: Disabled references:1
 msgid "此小程序仅支持组织内部员工登录使用"
 msgstr "This mini program is only supported for internal employees of the organization to log in and use."
-
-#: Disabled references:1
-msgid "注册新账号"
-msgstr "Register a new account"
 
 #: Disabled references:1
 msgid "使用 Microsoft 登录"
@@ -23748,6 +23768,14 @@ msgid "%0邀请您加入"
 msgstr "%0 invites you to join"
 
 #: Disabled references:1
+msgid "注册并加入"
+msgstr "Sign Up and Join"
+
+#: Disabled references:1
+msgid "已有账号"
+msgstr "Already have an account"
+
+#: Disabled references:1
 msgid "我同意接收短信"
 msgstr "I agree to receive SMS"
 
@@ -23764,20 +23792,8 @@ msgid "《隐私条款》"
 msgstr "Privacy Policy"
 
 #: Disabled references:1
-msgid "注册并加入"
-msgstr "Sign Up and Join"
-
-#: Disabled references:1
 msgid "登录并加入"
 msgstr "Log in and join"
-
-#: Disabled references:1
-msgid "已有账号"
-msgstr "Already have an account"
-
-#: Disabled references:1
-msgid "登录已有账号"
-msgstr "Already have an account"
 
 #: Disabled references:1
 msgid "邀请您加入"
@@ -24649,7 +24665,7 @@ msgstr "Modify within"
 
 #: Disabled references:1
 msgid "已选择%0个字段"
-msgstr "%0 fields selected"
+msgstr "%0 field(s) selected"
 
 #: Disabled references:1
 msgid "月%02068"
@@ -24741,7 +24757,7 @@ msgstr "Please enter the button label"
 
 #: Disabled references:1
 msgid "设置填写说明"
-msgstr "Set Filling Instructions"
+msgstr "Set Instructions"
 
 #: Disabled references:1
 msgid "详细内容"
@@ -24941,7 +24957,7 @@ msgstr "Parameters cannot be empty"
 
 #: Disabled references:1
 msgid "填写人群"
-msgstr "Filler Group"
+msgstr "Assignee Group"
 
 #: Disabled references:1
 msgid "扩展参数"
@@ -25394,10 +25410,6 @@ msgstr "Select the main table as the primary data source for printing. The syste
 #: Disabled references:1
 msgid "复制自定义动作“%0”"
 msgstr "Copy custom action \"%0\""
-
-#: Disabled references:1
-msgid "将复制目标自定义动作的所有节点和配置"
-msgstr "Copy all nodes and configurations of the target custom action"
 
 #: Disabled references:1
 msgid "动作将被删除，请确认执行此操作"
@@ -25906,7 +25918,7 @@ msgstr "Public Sharing"
 
 #: Disabled references:1
 msgid "检索加速"
-msgstr "Retrieval Speed up"
+msgstr "Search Acceleration"
 
 #: Disabled references:1
 msgid "编辑保护"
@@ -26447,12 +26459,12 @@ msgid "不允许查看"
 msgstr "Not allowed to view"
 
 #: Disabled references:1
-msgid "允许将视图对外公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
-msgstr "Allow public access to views and records with sharing link"
+msgid "允许将视图公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
+msgstr "Allow public view sharing, link users can access view and all records"
 
 #: Disabled references:1
-msgid "允许将记录对外公开分享，获得链接的所有人都可以查看记录"
-msgstr "Allow public access to records with sharing link"
+msgid "允许将记录公开分享，获得链接的所有人都可以查看记录"
+msgstr "Allow public sharing, accessible via link"
 
 #: Disabled references:1
 msgid "有分享权限的用户"
@@ -26856,7 +26868,7 @@ msgstr "Reply %0 :"
 
 #: Disabled references:1
 msgid "发表讨论"
-msgstr "Post Discussion"
+msgstr "Comment"
 
 #: Disabled references:1
 msgid "@全体"
@@ -26880,7 +26892,7 @@ msgstr "Favorite Applications"
 
 #: Disabled references:1
 msgid "人员管理"
-msgstr "Personnel Management"
+msgstr "Member Management"
 
 #: Disabled references:1
 msgid "不显示隐藏的应用项"
@@ -27128,11 +27140,11 @@ msgstr "Would you like to remove this member?"
 
 #: Disabled references:1
 msgid "无法退出非“人员”类型成员加入的角色"
-msgstr "Cannot exit a role joined by non-'personnel' type members"
+msgstr "Cannot exit a role joined by non-'Member' type members"
 
 #: Disabled references:1
 msgid "非“人员”类型的成员，只能由管理员或运营者操作"
-msgstr "Only administrators or operators can operate non-\"personnel\" type members"
+msgstr "Only administrators or operators can operate non-\"Member\" type members"
 
 #: Disabled references:1
 msgid "托付失败"
@@ -27157,11 +27169,11 @@ msgstr "Application name error"
 
 #: Disabled references:1
 msgid "可以配置应用，管理应用下所有数据和人员"
-msgstr "You can configure the application and manage all data and personnel under it."
+msgstr "You can configure apps and manage all data and members under it"
 
 #: Disabled references:1
 msgid "管理所有数据和人员，不可配置应用"
-msgstr "Manage all data and personnel, non-configurable apps"
+msgstr "Manage all data and members, but cannot configure apps"
 
 #: Disabled references:1
 msgid "开发者只能配置应用"
@@ -27589,7 +27601,7 @@ msgstr "%0 people selected"
 
 #: Disabled references:1
 msgid "或签（一名审批人通过或否决即可）"
-msgstr "Or-Sign (One approver's approval or rejection is sufficient)"
+msgstr "Or-Sign (One approval or rejection is sufficient)"
 
 #: Disabled references:1
 msgid "会签（需所有审批人通过）"
@@ -27961,11 +27973,11 @@ msgstr "Free Input"
 
 #: Disabled references:1
 msgid "新建%0"
-msgstr "New %0"
+msgstr "Create %0"
 
 #: Disabled references:1
 msgid "不存在符合条件的%0"
-msgstr "No %0 found that meets the criteria"
+msgstr "No matching %0"
 
 #: Disabled references:1
 msgid "无匹配的结果"
@@ -27997,7 +28009,7 @@ msgstr "Print/Export"
 
 #: Disabled references:1
 msgid "系统打印"
-msgstr "System print"
+msgstr "System Print"
 
 #: Disabled references:1
 msgid "清空当前会话后将开始新对话。"
@@ -28113,7 +28125,7 @@ msgstr "View Profile"
 
 #: Disabled references:1
 msgid "请选择人员"
-msgstr "Please select personnel"
+msgstr "Select Members"
 
 #: Disabled references:1
 msgid "请选择部门"
@@ -28125,7 +28137,7 @@ msgstr "Search Person"
 
 #: Disabled references:1
 msgid "全体人员"
-msgstr "All personnel"
+msgstr "All Members"
 
 #: Disabled references:1
 msgid "按部门选择"
@@ -28137,7 +28149,7 @@ msgstr "All Departments"
 
 #: Disabled references:1
 msgid "暂无人员"
-msgstr "No personnel available"
+msgstr "No Members Available"
 
 #: Disabled references:1
 msgid "按外部门户选择"
@@ -28230,314 +28242,6 @@ msgstr "Failed to add, please try again later"
 #: Disabled references:1
 msgid "AI 填写"
 msgstr "AI Autofill"
-
-#: Disabled references:1
-msgid "平铺"
-msgstr "Radio"
-
-#: Disabled references:1
-msgid "流程节点"
-msgstr "Process Node"
-
-#: Disabled references:1
-msgid "备注/签名"
-msgstr "Remarks/Signature"
-
-#: Disabled references:1
-msgid "(%0委托)"
-msgstr "(Delegated by %0)"
-
-#: Disabled references:1
-msgid "(%0操作)"
-msgstr "(%0 operation)"
-
-#: Disabled references:1
-msgid "退回到%0"
-msgstr "Return to %0"
-
-#: Disabled references:1
-msgid "无需填写"
-msgstr "No need to add"
-
-#: Disabled references:1
-msgid "打印人："
-msgstr "Printed by:"
-
-#: Disabled references:1
-msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
-msgstr "Cross-domain attachments detected. Skipped export. Download directly from the record."
-
-#: Disabled references:1
-msgid "预览: %0"
-msgstr "Preview: %0"
-
-#: Disabled references:1
-msgid "编辑模板"
-msgstr "Edit Template"
-
-#: Disabled references:1
-msgid "生成失败时，请点击此处刷新试试"
-msgstr "If generation fails, please click here to refresh and try again"
-
-#: Disabled references:1
-msgid "正在导出"
-msgstr "Exporting"
-
-#: Disabled references:1
-msgid "导出Word"
-msgstr "Export Word"
-
-#: Disabled references:1
-msgid "保存为打印模板"
-msgstr "Save as Print Template"
-
-#: Disabled references:1
-msgid "导出为excel"
-msgstr "Export to Excel"
-
-#: Disabled references:1
-msgid "导出为word"
-msgstr "Export to Word"
-
-#: Disabled references:1
-msgid "保存模板"
-msgstr "Save Template"
-
-#: Disabled references:1
-msgid "模板名称"
-msgstr "Name"
-
-#: Disabled references:1
-msgid "企业Logo"
-msgstr "Company Logo"
-
-#: Disabled references:1
-msgid "在企业管理后台中设置"
-msgstr "Set up in the enterprise management backend"
-
-#: Disabled references:1
-msgid "记录标题"
-msgstr "Record Title"
-
-#: Disabled references:1
-msgid "打印时间"
-msgstr "Print Time"
-
-#: Disabled references:1
-msgid "打印人"
-msgstr "Printer"
-
-#: Disabled references:1
-msgid "对外公开分享链接"
-msgstr "For external sharing"
-
-#: Disabled references:1
-msgid "内部成员访问链接"
-msgstr "For internal members"
-
-#: Disabled references:1
-msgid "选项字段平铺打印"
-msgstr "Print options in tile layout"
-
-#: Disabled references:1
-msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
-msgstr "Once enabled, the tile selection field will be printed with unchecked options"
-
-#: Disabled references:1
-msgid "打印值为空的字段"
-msgstr "Print fields with null values"
-
-#: Disabled references:1
-msgid "开启后，没有内容的字段会显示并可以打印"
-msgstr "Once enabled, empty fields will be displayed and can be printed"
-
-#: Disabled references:1
-msgid "文字大小"
-msgstr "Text size"
-
-#: Disabled references:1
-msgid "名称宽度"
-msgstr "Name Width"
-
-#: Disabled references:1
-msgid "表单字段"
-msgstr "Form Field"
-
-#: Disabled references:1
-msgid "手写签名"
-msgstr "Handwritten Signature"
-
-#: Disabled references:1
-msgid "选择打印字段"
-msgstr "Select Print Fields"
-
-#: Disabled references:1
-msgid "附加信息"
-msgstr "Additional Information"
-
-#: Disabled references:1
-msgid "审批签名位置"
-msgstr "Approval Signature Location"
-
-#: Disabled references:1
-msgid "填写人"
-msgstr "Filler"
-
-#: Disabled references:1
-msgid "审批人"
-msgstr "Approver"
-
-#: Disabled references:1
-msgid "转交"
-msgstr "Forward"
-
-#: Disabled references:1
-msgid "通过申请"
-msgstr "Approve"
-
-#: Disabled references:1
-msgid "否决申请"
-msgstr "Reject"
-
-#: Disabled references:1
-msgid "转审"
-msgstr "Forward"
-
-#: Disabled references:1
-msgid "添加审批人"
-msgstr "Add an approver"
-
-#: Disabled references:1
-msgid "被移除"
-msgstr "Removed"
-
-#: Disabled references:1
-msgid "撤回后重新发起"
-msgstr "Withdrawn and relaunched"
-
-#: Disabled references:1
-msgid "审批前加签"
-msgstr "Add Approver Beforehand"
-
-#: Disabled references:1
-msgid "通过申请并加签"
-msgstr "Approved and add an approver"
-
-#: Disabled references:1
-msgid "修改申请内容"
-msgstr "Modify application content"
-
-#: Disabled references:1
-msgid "无需审批"
-msgstr "No Approval Required"
-
-#: Disabled references:1
-msgid "拥有者："
-msgstr "Owner:"
-
-#: Disabled references:1
-msgid "创建人："
-msgstr "Creator:"
-
-#: Disabled references:1
-msgid "创建时间："
-msgstr "Creation Time:"
-
-#: Disabled references:1
-msgid "最近修改时间："
-msgstr "Last modified time:"
-
-#: Disabled references:1
-msgid "最近修改人："
-msgstr "Last modified by:"
-
-#: Disabled references:1
-msgid "审批意见"
-msgstr "Solicit approval comments"
-
-#: Disabled references:1
-msgid "Word 模板"
-msgstr "Word Template"
-
-#: Disabled references:1
-msgid "Excel 模板"
-msgstr "Excel Template"
-
-#: Disabled references:1
-msgid "在明细内显示"
-msgstr "Show in details"
-
-#: Disabled references:1
-msgid "在明细表下方显示"
-msgstr "Display below the detailed table"
-
-#: Disabled references:1
-msgid "缩略图"
-msgstr "Thumbnail"
-
-#: Disabled references:1
-msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
-msgstr "Only image types support thumbnail printing, non-image types will be displayed at the end with their file names."
-
-#: Disabled references:1
-msgid "%0 级"
-msgstr "Level %0"
-
-#: Disabled references:1
-msgid "批量打印"
-msgstr "Batch Print"
-
-#: Disabled references:1
-msgid "工作流打印"
-msgstr "Workflow Print"
-
-#: Disabled references:1
-msgid "保存成功，请到打印模板中查看"
-msgstr "Saved, please check in the print template"
-
-#: Disabled references:1
-msgid "正在生成文件..."
-msgstr "Generating..."
-
-#: Disabled references:1
-msgid "您是否保存本次修改？"
-msgstr "Do you want to save the changes？"
-
-#: Disabled references:1
-msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
-msgstr "You have unsaved changes. Save before leaving?"
-
-#: Disabled references:1
-msgid "否，放弃保存"
-msgstr "No, waive the changes"
-
-#: Disabled references:1
-msgid "是，保存修改"
-msgstr "Yes, save the changes"
-
-#: Disabled references:1
-msgid "导出成功！"
-msgstr "Export successful!"
-
-#: Disabled references:1
-msgid "下载%0文件"
-msgstr "Download %0"
-
-#: Disabled references:1
-msgid "正在导出Excel文件..."
-msgstr "Exporting Excel ..."
-
-#: Disabled references:1
-msgid "正在导出Word文件..."
-msgstr "Exporting Word ..."
-
-#: Disabled references:1
-msgid "包含图片时生成速度较慢，请耐心等待..."
-msgstr "The generation speed is slower when images are included. Please be patient..."
-
-#: Disabled references:1
-msgid "记录或模板已删除"
-msgstr "Record or template has been deleted"
 
 #: Disabled references:1
 msgid "加入/创建组织"
@@ -29017,7 +28721,7 @@ msgstr "CLI access policy not enabled"
 
 #: Disabled references:1
 msgid "需组织管理员在「组织后台 - 数据与访问」中开启后才能使用"
-msgstr "Requires Organization Admins enablement in Org Admin > Data & Access"
+msgstr "Must be enabled by an organization admin in Org Admin > Data & Access"
 
 #: Disabled references:1
 msgid "同时安装配套Skills"
@@ -29365,19 +29069,19 @@ msgstr "Change Email"
 
 #: Disabled references:1
 msgid "您是否确认注销账号？"
-msgstr "Cancel your account?"
+msgstr "Delete your account?"
 
 #: Disabled references:1
 msgid "账号一旦注销将无法登录平台，且会解除与第三方账号的绑定关系、身份、账号信息等将被清空且无法找回"
-msgstr "Once the account is cancelled, you will not be able to sign in to the platform and will be released from the connected relationship with the third party account, identity, account information, etc. will be emptied and cannot be recovered."
+msgstr "Deleting your account will prevent you from logging in. Third-party account connections will be removed, and all identity and account information will be permanently deleted and cannot be recovered."
 
 #: Disabled references:1
 msgid "注销失败，请稍后再试"
-msgstr "Logout failed, please try again later"
+msgstr "Account deletion failed. Please try again later."
 
 #: Disabled references:1
 msgid "注销账户"
-msgstr "Deactivate Account"
+msgstr "Delete Account"
 
 #: Disabled references:1
 msgid "请输入8-20位，需包含字母和数字"
@@ -29425,7 +29129,7 @@ msgstr "Log Out"
 
 #: Disabled references:1
 msgid "注销此账户"
-msgstr "Cancel this account"
+msgstr "Delete this account"
 
 #: Disabled references:1
 msgid "外部协作应用"
@@ -29557,7 +29261,7 @@ msgstr "Enable 2FA for an extra layer of security during login"
 
 #: Disabled references:1
 msgid "验证方式"
-msgstr "Auth Method"
+msgstr "Verification Method"
 
 #: Disabled references:1
 msgid "当启用多种验证方式时，首选的验证方式为："
@@ -29565,11 +29269,11 @@ msgstr "Preferred verification method when multiple options are enabled:"
 
 #: Disabled references:1
 msgid "短信验证码"
-msgstr "SMS Verification Code"
+msgstr "SMS Verification"
 
 #: Disabled references:1
 msgid "邮箱验证码"
-msgstr "Email Verification Code"
+msgstr "Email Verification"
 
 #: Disabled references:1
 msgid "身份验证器应用 (TOTP)"
@@ -29601,7 +29305,7 @@ msgstr "Login Device"
 
 #: Disabled references:1
 msgid "仅允许单设备登录"
-msgstr "Allow single device login only"
+msgstr "Allow Single Device Login Only"
 
 #: Disabled references:1
 msgid "PC或移动端各只允许同时登录一个设备。账号在新设备登录时，原设备自动下线"
@@ -29774,7 +29478,7 @@ msgstr "You are the only administrator of the platform and cannot log out"
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销"
-msgstr "If you have organizations not logged out, go to My Account - My Org to log out before logging out"
+msgstr "Please leave all organizations in My Account > My Org. before deleting your account"
 
 #: Disabled references:1
 msgid "账户与隐私"
@@ -30074,11 +29778,11 @@ msgstr "You are the super administrator of the organization 【%0】"
 
 #: Disabled references:1
 msgid "请先注销组织或交接后方可注销。"
-msgstr "Please log out of the organization or hand over before you can log out."
+msgstr "Please delete or transfer your organization before deleting your account."
 
 #: Disabled references:1
 msgid "前往注销"
-msgstr "Go to Logout"
+msgstr "Delete account"
 
 #: Disabled references:1
 msgid "请指定成员"
@@ -30178,7 +29882,7 @@ msgstr "Select authorized application"
 
 #: Disabled references:1
 msgid "请选择接口范围"
-msgstr "Select interface scope"
+msgstr "Select API Permissions"
 
 #: Disabled references:1
 msgid "%0 不允许使用个人访问令牌"
@@ -30210,7 +29914,7 @@ msgstr "+Add"
 
 #: Disabled references:1
 msgid "接口范围"
-msgstr "Interface Scope"
+msgstr "API Permissions"
 
 #: Disabled references:1
 msgid "创建个人访问令牌"
@@ -30258,7 +29962,7 @@ msgstr "Org. admins cannot use personal access tokens"
 
 #: Disabled references:1
 msgid "个人访问令牌代表您的身份，用于 HAP 数据的操作访问。您可自定义权限范围和数据访问权限。️安全提示：令牌具有账户权限，请勿分享给他人。"
-msgstr "Personal access tokens identify you and enable HAP data operations. Customize scopes as needed. Tip: Tokens have account-level permissions—keep them secure."
+msgstr "Personal access tokens act on your behalf to access HAP data. Customize scopes and data access as needed. Tip: Tokens carry your account permissions—keep them secure."
 
 #: Disabled references:1
 msgid "API 文档"
@@ -30302,7 +30006,7 @@ msgstr "Edit Name"
 
 #: Disabled references:1
 msgid "使用："
-msgstr "Use:"
+msgstr "Used for:"
 
 #: Disabled references:1
 msgid "账户资料"
@@ -30534,7 +30238,7 @@ msgstr "World Map"
 
 #: Disabled references:1
 msgid "包含全球地图，暂不支持搜索名称定位。"
-msgstr "Includes a global map, search name location is not supported yet."
+msgstr "Includes a global map; searching locations by name is not yet supported."
 
 #: Disabled references:1
 msgid "支持搜索地点名称定位，地图信息只包含：中国大陆、香港、澳门、台湾地区"
@@ -30542,7 +30246,7 @@ msgstr "Search locations within Chinese mainland, Hong Kong, Macau, and Taiwan o
 
 #: Disabled references:1
 msgid "浏览器新消息通知"
-msgstr "Browser New Msg Alert"
+msgstr "Browser Message Alerts"
 
 #: Disabled references:1
 msgid "当有新消息时以何种方式提醒"
@@ -30577,6 +30281,38 @@ msgid "行列转置"
 msgstr "Transpose"
 
 #: Disabled references:1
+msgid "平铺"
+msgstr "Tiled"
+
+#: Disabled references:1
+msgid "流程节点"
+msgstr "Process Node"
+
+#: Disabled references:1
+msgid "备注/签名"
+msgstr "Remarks/Signature"
+
+#: Disabled references:1
+msgid "(%0委托)"
+msgstr "(Delegated by %0)"
+
+#: Disabled references:1
+msgid "(%0操作)"
+msgstr "(%0 operation)"
+
+#: Disabled references:1
+msgid "退回到%0"
+msgstr "Return to %0"
+
+#: Disabled references:1
+msgid "无需填写"
+msgstr "No need to add"
+
+#: Disabled references:1
+msgid "打印人："
+msgstr "Printed by:"
+
+#: Disabled references:1
 msgid "复制打印链接"
 msgstr "Copy Print Link"
 
@@ -30585,12 +30321,112 @@ msgid "当前打印服务在第三方应用内无法直接打开。请复制下�
 msgstr "The print service cannot be accessed directly through third-party integrations. Please copy the link below and open it in your browser to proceed."
 
 #: Disabled references:1
+msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
+msgstr "Cross-domain attachments detected. Skipped export. Download directly from the record."
+
+#: Disabled references:1
 msgid "导出数量超出系统上限，请减少数量后重试"
 msgstr "Export limit exceeded. Reduce the quantity and try again"
 
 #: Disabled references:1
+msgid "编辑模板"
+msgstr "Edit Template"
+
+#: Disabled references:1
+msgid "预览: %0"
+msgstr "Preview: %0"
+
+#: Disabled references:1
 msgid "pdf生成失败时，请点击此处刷新试试"
 msgstr "If PDF generation fails, please click here to refresh and try again"
+
+#: Disabled references:1
+msgid "正在导出"
+msgstr "Exporting"
+
+#: Disabled references:1
+msgid "导出Word"
+msgstr "Export Word"
+
+#: Disabled references:1
+msgid "保存为打印模板"
+msgstr "Save as Print Template"
+
+#: Disabled references:1
+msgid "导出为excel"
+msgstr "Export to Excel"
+
+#: Disabled references:1
+msgid "导出为word"
+msgstr "Export to Word"
+
+#: Disabled references:1
+msgid "保存模板"
+msgstr "Save Template"
+
+#: Disabled references:1
+msgid "模板名称"
+msgstr "Name"
+
+#: Disabled references:1
+msgid "企业Logo"
+msgstr "Company Logo"
+
+#: Disabled references:1
+msgid "在企业管理后台中设置"
+msgstr "Set up in the enterprise management backend"
+
+#: Disabled references:1
+msgid "记录标题"
+msgstr "Record Title"
+
+#: Disabled references:1
+msgid "打印时间"
+msgstr "Print Time"
+
+#: Disabled references:1
+msgid "打印人"
+msgstr "Printer"
+
+#: Disabled references:1
+msgid "公开分享链接"
+msgstr "Public Sharing Link"
+
+#: Disabled references:1
+msgid "内部成员访问链接"
+msgstr "For internal members"
+
+#: Disabled references:1
+msgid "选项字段平铺打印"
+msgstr "Print options in tile layout"
+
+#: Disabled references:1
+msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
+msgstr "Once enabled, the tile selection field will be printed with unchecked options"
+
+#: Disabled references:1
+msgid "打印值为空的字段"
+msgstr "Print fields with null values"
+
+#: Disabled references:1
+msgid "开启后，没有内容的字段会显示并可以打印"
+msgstr "Once enabled, empty fields will be displayed and can be printed"
+
+#: Disabled references:1
+msgid "文字大小"
+msgstr "Text size"
+
+#: Disabled references:1
+msgid "名称宽度"
+msgstr "Name Width"
+
+#: Disabled references:1
+msgid "表单字段"
+msgstr "Form Field"
+
+#: Disabled references:1
+msgid "手写签名"
+msgstr "Handwritten Signature"
 
 #: Disabled references:1
 msgid "纸张"
@@ -30605,12 +30441,184 @@ msgid "布局"
 msgstr "Layout"
 
 #: Disabled references:1
+msgid "选择打印字段"
+msgstr "Select Print Fields"
+
+#: Disabled references:1
+msgid "附加信息"
+msgstr "Additional Information"
+
+#: Disabled references:1
+msgid "审批签名位置"
+msgstr "Approval Signature Location"
+
+#: Disabled references:1
+msgid "填写人"
+msgstr "Form Assignee"
+
+#: Disabled references:1
+msgid "审批人"
+msgstr "Approver"
+
+#: Disabled references:1
+msgid "转交"
+msgstr "Forward"
+
+#: Disabled references:1
+msgid "通过申请"
+msgstr "Approve"
+
+#: Disabled references:1
+msgid "否决申请"
+msgstr "Reject"
+
+#: Disabled references:1
+msgid "转审"
+msgstr "Forward"
+
+#: Disabled references:1
+msgid "添加审批人"
+msgstr "Add an approver"
+
+#: Disabled references:1
+msgid "被移除"
+msgstr "Removed"
+
+#: Disabled references:1
+msgid "撤回后重新发起"
+msgstr "Withdrawn and relaunched"
+
+#: Disabled references:1
+msgid "审批前加签"
+msgstr "Add Approver Beforehand"
+
+#: Disabled references:1
+msgid "通过申请并加签"
+msgstr "Approved and add an approver"
+
+#: Disabled references:1
+msgid "修改申请内容"
+msgstr "Modify application content"
+
+#: Disabled references:1
+msgid "无需审批"
+msgstr "No Approval Required"
+
+#: Disabled references:1
+msgid "拥有者："
+msgstr "Owner:"
+
+#: Disabled references:1
+msgid "创建人："
+msgstr "Creator:"
+
+#: Disabled references:1
+msgid "创建时间："
+msgstr "Creation Time:"
+
+#: Disabled references:1
+msgid "最近修改时间："
+msgstr "Last modified time:"
+
+#: Disabled references:1
+msgid "最近修改人："
+msgstr "Last modified by:"
+
+#: Disabled references:1
+msgid "审批意见"
+msgstr "Solicit approval comments"
+
+#: Disabled references:1
+msgid "Word 模板"
+msgstr "Word Template"
+
+#: Disabled references:1
+msgid "Excel 模板"
+msgstr "Excel Template"
+
+#: Disabled references:1
+msgid "在明细内显示"
+msgstr "Show in details"
+
+#: Disabled references:1
+msgid "在明细表下方显示"
+msgstr "Display below the detailed table"
+
+#: Disabled references:1
 msgid "纵向"
 msgstr "Vertical"
 
 #: Disabled references:1
 msgid "横向"
 msgstr "Horizontal"
+
+#: Disabled references:1
+msgid "缩略图"
+msgstr "Thumbnail"
+
+#: Disabled references:1
+msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
+msgstr "Only image types support thumbnail printing, non-image types will be displayed at the end with their file names."
+
+#: Disabled references:1
+msgid "%0 级"
+msgstr "Level %0"
+
+#: Disabled references:1
+msgid "批量打印"
+msgstr "Batch Print"
+
+#: Disabled references:1
+msgid "工作流打印"
+msgstr "Workflow Print"
+
+#: Disabled references:1
+msgid "保存成功，请到打印模板中查看"
+msgstr "Saved, please check in the print template"
+
+#: Disabled references:1
+msgid "正在生成文件..."
+msgstr "Generating..."
+
+#: Disabled references:1
+msgid "您是否保存本次修改？"
+msgstr "Do you want to save the changes？"
+
+#: Disabled references:1
+msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
+msgstr "You have unsaved changes. Save before leaving?"
+
+#: Disabled references:1
+msgid "否，放弃保存"
+msgstr "No, waive the changes"
+
+#: Disabled references:1
+msgid "是，保存修改"
+msgstr "Yes, save the changes"
+
+#: Disabled references:1
+msgid "导出成功！"
+msgstr "Export successful!"
+
+#: Disabled references:1
+msgid "下载%0文件"
+msgstr "Download %0"
+
+#: Disabled references:1
+msgid "正在导出Excel文件..."
+msgstr "Exporting Excel ..."
+
+#: Disabled references:1
+msgid "正在导出Word文件..."
+msgstr "Exporting Word ..."
+
+#: Disabled references:1
+msgid "包含图片时生成速度较慢，请耐心等待..."
+msgstr "The generation speed is slower when images are included. Please be patient..."
+
+#: Disabled references:1
+msgid "记录或模板已删除"
+msgstr "Record or template has been deleted"
 
 #: Disabled references:1
 msgid "暂未设置用户协议"
@@ -30922,23 +30930,23 @@ msgstr "Team"
 
 #: Disabled references:1
 msgid "通过工作表管理应用成员额外的扩展信息字段"
-msgstr "Manage any additional extended fields for app members through worksheet."
+msgstr "Manage additional member fields through a worksheet"
 
 #: Disabled references:1
 msgid "在角色权限、筛选器中可以使用用户的扩展信息字段来作为动态筛选条件"
-msgstr "The user’s extended fields can be used as dynamic criteria in the role permissions or filters"
+msgstr "Use member extension fields as dynamic filters in role permissions and filters"
 
 #: Disabled references:1
 msgid "如在销售管理应用中"
-msgstr "Such as in sales management applications"
+msgstr "For example, in a sales management app"
 
 #: Disabled references:1
 msgid "可以通过建立成员表来管理销售人员的团队、地区、关联订单等扩展信息"
-msgstr "You can manage extended info such as teams, regions, associated orders, and more for salesmen by establishing a member worksheet"
+msgstr "Create a member worksheet to manage extended information such as sales teams, regions, and related orders"
 
 #: Disabled references:1
 msgid "可以根据订单所关联的团队，来筛选出当前销售人员所在团队的订单"
-msgstr "You can filter the orders associated with the team related to the current salesperson's team."
+msgstr "Filter orders by their associated team to show only those belonging to the current salesperson’s team"
 
 #: Disabled references:1
 msgid "建立用户扩展信息表"
@@ -31018,7 +31026,7 @@ msgstr "Please provide a reason for rejection"
 
 #: Disabled references:1
 msgid "%0个人员申请加入"
-msgstr "%0 personnel apply to join"
+msgstr "%0 Members Applied to Join"
 
 #: Disabled references:1
 msgid "通过"
@@ -31058,7 +31066,7 @@ msgstr "%0 positions"
 
 #: Disabled references:1
 msgid "%0名人员"
-msgstr "%0 personnel"
+msgstr "%0 Members"
 
 #: Disabled references:1
 msgid "角色负责人"
@@ -31150,7 +31158,7 @@ msgstr "Select the target role"
 
 #: Disabled references:1
 msgid "扩展"
-msgstr "Expand"
+msgstr "Extensions"
 
 #: Disabled references:1
 msgid "勾选时，普通角色可以查看应用下所有角色和人员。未勾选时，对普通角色直接隐藏用户入口"
@@ -31194,7 +31202,7 @@ msgstr "Once enabled, admins and operators can access the application with diffe
 
 #: Disabled references:1
 msgid "角色调试"
-msgstr "Role debug"
+msgstr "Debug Role"
 
 #: Disabled references:1
 msgid "手机邀请"
@@ -31263,10 +31271,6 @@ msgstr "Download Template"
 #: Disabled references:1
 msgid "邀请用户并发送短信/邮箱"
 msgstr "Invite users and send SMS/Email"
-
-#: Disabled references:1
-msgid "（短信%0/条、邮箱%1/封，自动从企业账户扣除。）"
-msgstr "(Each SMS costs %0 and each email costs %1, automatically charged to the corporate account.)"
 
 #: Disabled references:1
 msgid "从Excel导入数据"
@@ -31382,7 +31386,7 @@ msgstr "Worksheet in other apps"
 
 #: Disabled references:1
 msgid "工作表已删除"
-msgstr "Worksheet deleted"
+msgstr "Worksheet Deleted"
 
 #: Disabled references:1
 msgid "查询满足以下条件的记录"
@@ -32205,8 +32209,8 @@ msgid "对所有记录只有查看权限"
 msgstr "Read-only to all records"
 
 #: Disabled references:1
-msgid "可查看加入的，只能编辑、删除自己拥有的记录"
-msgstr "View all added records, but can only edit or delete records you own"
+msgid "可查看自己加入的，只能编辑、删除自己拥有的记录"
+msgstr "View joined records; edit and delete only your own records"
 
 #: Disabled references:1
 msgid "可查看所有记录，但只能编辑、删除自己拥有的记录"
@@ -32234,11 +32238,11 @@ msgstr "Batch operation refers to the function of bulk selecting records in the 
 
 #: Disabled references:1
 msgid "管理员可以配置应用，管理应用下所有数据和人员"
-msgstr "Administrators can configure applications and manage all data and personnel under the apps."
+msgstr "Administrators can configure apps and manage all data and members within them"
 
 #: Disabled references:1
 msgid "拥有所有权限"
-msgstr "All permissions owned"
+msgstr "All Permissions"
 
 #: Disabled references:1
 msgid "运营者"
@@ -33226,7 +33230,7 @@ msgstr "All Data"
 
 #: Disabled references:1
 msgid "显示%0个字段"
-msgstr "Display %0 fields"
+msgstr "Display %0 field(s)"
 
 #: Disabled references:1
 msgid "自定义显示字段"
@@ -33282,7 +33286,7 @@ msgstr "Custom Display Items"
 
 #: Disabled references:1
 msgid "显示%0项字段"
-msgstr "Show %0 fields"
+msgstr "Show %0 field(s)"
 
 #: Disabled references:1
 msgid "设置漏斗图中显示的项，未显示项仅在图形中隐藏，仍会向上累计"
@@ -33519,10 +33523,6 @@ msgstr "Gradient"
 #: Disabled references:1
 msgid "前往组织后台编辑颜色"
 msgstr "Edit color in the Org. Admin"
-
-#: Disabled references:1
-msgid "保存为个人颜色"
-msgstr "Save as Personal Color"
 
 #: Disabled references:1
 msgid "图形颜色"
@@ -34281,6 +34281,10 @@ msgid "还没有个人图表"
 msgstr "No personal charts yet"
 
 #: Disabled references:1
+msgid "方向1和方向2仅支持添加一个数值"
+msgstr "Directions 1 and 2 support only one value each"
+
+#: Disabled references:1
 msgid "不允许添加重复粒度"
 msgstr "Duplicate granularity is not allowed"
 
@@ -34410,28 +34414,50 @@ msgid "（4）在打印 Excel 模板时，多张图片排列可能导致撑高�
 msgstr "(4) When printing Excel templates, multiple images may stretch cells and misalign merges. Press F to enable fill mode, which prevents cell height changes. Example: #{attachement$[auto*20_F]$} or #{attachment$[auto*90_HF]$}"
 
 #: Disabled references:1
-msgid "5. 可通过代码 #{[qrcode]字段名$[20*20]$} 或 #{[barcode]字段名$[40*10]$} 获取任意字段的二维码或条形码。其中：[20*20]、[40*10] 表示二维码/条形码的宽高尺寸，单位为 mm；二维码编码方式为 QR-code，最大包含 150 个字，支持汉字；条形码编码方式为 code128，最大包含 30 个字符，仅支持数字、字母、符号。"
-msgstr "5. Use #{[qrcode]FieldName$[20*20]$} or #{[barcode]FieldName$[40*10]$} to generate a QR Code or Barcode. Dimensions [20*20] and [40*10] are in mm. QR Codes (up to 150 characters, including Chinese) use QR-code encoding, while Barcodes (up to 30 characters: numbers, letters, symbols) use Code128 encoding."
+msgid "5. 可通过代码 #{[qrcode]字段名$[20*20_H]$} 或 #{[barcode]字段名$[40*10]$}，获取任意字段的二维码或条形码。其中，[20*20]、[40*10] 表示二维码或条形码的宽高尺寸，单位为 mm。二维码采用 QR Code 编码，最多支持 150 个字符，支持汉字；条形码采用 Code 128 编码，最多支持 30 个字符，支持数字、字母及常用符号。"
+msgstr "5. Generate QR Code or Barcode via code:  
+- QR Code: `#{[qrcode]FieldName$[20*20_H]$}`. Size: 20x20 mm, supports QR Code (up to 150 characters, including Chinese).  
+- Barcode: `#{[barcode]FieldName$[40*10]$}`. Size: 40x10 mm, supports Code 128 (up to 30 characters, including numbers, letters, and symbols)."
 
 #: Disabled references:1
-msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽高固定为 20*20。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
-msgstr "(1) QR Code size is fixed at 20x20, supporting only square displays with no auto-resizing."
+msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽度和高度均为 20 mm。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
+msgstr "(1) Fix QR code size to [20*20], with both width and height set to 20mm, ensuring square display, no auto-resizing."
 
 #: Disabled references:1
-msgid "（2）条形码尺寸支持 4 种设置方式。[40*auto] 表示宽度固定为 40，高度按比例自适应；[auto*10] 表示高度固定为 10，宽度按比例自适应；[40*10_auto] 表示宽高在 40*10 的范围内同时自适应；[40*10] 表示宽高为固定尺寸。"
-msgstr "(2) Barcode size offers four configuration modes: [40*auto] for fixed width (40) with adaptive height, [auto*10] for fixed height (10) with adaptive width, [40*10_auto] for adaptive dimensions within a 40*10 range, and [40*10] for fixed width and height."
+msgid "（2）二维码支持配置容错率，在尺寸后添加容错率代码，例如：#{[qrcode]字段名$[20*20_H]$}。支持以下两种写法："
+msgstr "(2) QR code supports error correction level configuration. Add the error correction level code directly after the size, e.g., #{[qrcode]FieldName$[20*20_H]$}. Supports the following two formats:"
 
 #: Disabled references:1
-msgid "（3）条形码默认显示下方文字。如需隐藏条形码下方的显示值，可增加 _NT 控制隐藏。例如：#{[barcode]字段名$[40*10_NT]$} 表示隐藏条形码下方文字；不加 _NT 仍按原逻辑显示。"
-msgstr "(3) By default, barcodes display text below. To hide it, add _NT. For example: #{[barcode]FieldName$[40*10_NT]$} hides the text; omit _NT to keep it visible."
+msgid "字母代码：L、M、Q、H"
+msgstr "Letter Codes: L, M, Q, H"
 
 #: Disabled references:1
-msgid "（4）示例代码：#{[qrcode]字段名$[20*20]$} 表示获取固定尺寸为 20*20 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40，高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10，宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示获取固定尺寸为 40*10 的条形码，并隐藏下方文字。"
-msgstr "(4) Sample code:  
-- `#{[qrcode]FieldName$[20*20]$}` generates a 20x20 fixed-size QR code.  
-- `#{[barcode]FieldName$[40*auto]$}` generates a barcode with a fixed width of 40 and adaptive height.  
-- `#{[barcode]FieldName$[auto*10]$}` generates a barcode with a fixed height of 10 and adaptive width.  
-- `#{[barcode]FieldName$[40*10_NT]$}` generates a 40x10 fixed-size barcode without displaying text below."
+msgid "数值代码：7、15、25、30，也兼容 7%、15%、25%、30%"
+msgstr "Value codes: 7, 15, 25, 30; also supports 7%, 15%, 25%, 30%"
+
+#: Disabled references:1
+msgid "对应关系为：L = 7%、M = 15%、Q = 25%、H = 30%。容错率越高，二维码被遮挡或污损后仍可识别的能力越强，但可容纳的有效内容会相应减少。"
+msgstr "Error correction levels: L = 7%, M = 15%, Q = 25%, H = 30%. Higher error correction improves QR code readability under damage but reduces storage capacity."
+
+#: Disabled references:1
+msgid "例如：#{[qrcode]字段名$[20*20_Q]$}、#{[qrcode]字段名$[20*20_25]$} 与 #{[qrcode]字段名$[20*20_25%]$}，均表示生成尺寸为 20 × 20 mm、容错率为 25% 的二维码。"
+msgstr "For example: #{[qrcode]FieldName$[20*20_Q]$}, #{[qrcode]FieldName$[20*20_25]$}, and #{[qrcode]FieldName$[20*20_25%]$} are all used to generate a 20×20 mm QR code with 25% error correction level."
+
+#: Disabled references:1
+msgid "（3）条形码支持 4 种尺寸设置方式：[40*auto] 表示宽度固定为 40 mm，高度按比例自适应；[auto*10] 表示高度固定为 10 mm，宽度按比例自适应；[40*10_auto] 表示宽高均为 40 × 10 mm，并根据内容自适应；[40*10] 表示宽高固定为 40 × 10 mm。"
+msgstr "(3) Barcode supports 4 size options: [40*auto] Fixed width 40 mm, adaptive height; [auto*10] Fixed height 10 mm, adaptive width; [40*10_auto] 40×10 mm with content fit; [40*10] Fixed 40×10 mm"
+
+#: Disabled references:1
+msgid "（4）条形码默认显示下方文字。如需隐藏条形码下方的文字，可增加 _NT 控制参数，例如：#{[barcode]字段名$[40*10_NT]$}。未添加 _NT 时，仍按原有方式显示文字。"
+msgstr "(4) Barcodes display text below by default. To hide text, add the _NT parameter, e.g., #{[barcode]FieldName$[40*10_NT]$}. Without _NT, text is displayed by default."
+
+#: Disabled references:1
+msgid "（5）示例：#{[qrcode]字段名$[20*20_H]$} 表示生成尺寸为 20 × 20 mm、容错率为 30% 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40 mm、高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10 mm、宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示生成固定尺寸为 40 × 10 mm 的条形码，并隐藏下方文字。"
+msgstr "(5) Examples:  
+#{[qrcode]FieldName$[20*20_H]$}: Generate a 20 × 20 mm QR code with 30% error correction  
+#{[barcode]FieldName$[40*auto]$}: Barcode with 40 mm width and auto height  
+#{[barcode]FieldName$[auto*10]$}: Barcode with 10 mm height and auto width  
+#{[barcode]FieldName$[40*10_NT]$}: Generate a 40 × 10 mm barcode with text hidden"
 
 #: Disabled references:1
 msgid "6. 如需不打印没有数据的关联表/子表，请将代码：#NoDataNotPrint[start]# 和 #NoDataNotPrint[end]# 插入到模板中，代码之间的关联记录/子表没有数据则不会打印。"
@@ -34755,7 +34781,7 @@ msgstr "Add Meeting Location"
 
 #: Disabled references:1
 msgid "未填写会议地点"
-msgstr "Meeting location not filled in"
+msgstr "Meeting location not provided"
 
 #: Disabled references:1
 msgid "重复:"
@@ -35043,7 +35069,7 @@ msgstr "Yellow"
 
 #: Disabled references:1
 msgid "未填写地址"
-msgstr "Address not filled in"
+msgstr "Address not provided"
 
 #: Disabled references:1
 msgid "成员:"
@@ -35872,7 +35898,7 @@ msgstr "@me"
 
 #: Disabled references:1
 msgid "提到我的群组"
-msgstr "Mention my group"
+msgstr "mention my group"
 
 #: Disabled references:1
 msgid "普通讨论"
@@ -35916,11 +35942,11 @@ msgstr "Attendance Notification"
 
 #: Disabled references:1
 msgid "提到了你"
-msgstr "Mentioned you"
+msgstr "mentioned you"
 
 #: Disabled references:1
 msgid "提到了你所在的群组"
-msgstr "Mentioned your group"
+msgstr "mentioned your group"
 
 #: Disabled references:1
 msgid "在回复中提到了你"
@@ -35928,19 +35954,19 @@ msgstr " mentioned you in reply"
 
 #: Disabled references:1
 msgid "在回复中提到了你所在的群组"
-msgstr "Your group was mentioned in the reply"
+msgstr "mentioned your group in a reply"
 
 #: Disabled references:1
 msgid "回复了你"
-msgstr "Replied to you"
+msgstr "replied to you"
 
 #: Disabled references:1
 msgid "发表了任务讨论"
-msgstr "Posted a task discussion"
+msgstr "commented on this task"
 
 #: Disabled references:1
 msgid "在任务讨论中提到了你"
-msgstr " mentioned you in task discussion"
+msgstr "mentioned you in task comments"
 
 #: Disabled references:1
 msgid "在任务讨论中回复了你"
@@ -35948,48 +35974,47 @@ msgstr "replied to you in task discussion"
 
 #: Disabled references:1
 msgid "在项目讨论中提到了你"
-msgstr "mentioned you in project discussion"
+msgstr "mentioned you in project comments"
 
 #: Disabled references:1
 msgid "在项目讨论中回复了你"
-msgstr "replied you in project discussion"
+msgstr "replied you in project comments"
 
 #: Disabled references:1
 msgid "发表了日程讨论"
-msgstr "Published the schedule discussion"
+msgstr "commented on this event"
 
 #: Disabled references:1
 msgid "在日程讨论中提到了你"
-msgstr "mentioned you in event discussion"
+msgstr "mentioned you in event comments"
 
 #: Disabled references:1
 msgid "在日程讨论中回复了你"
-msgstr "replied you in event discussion"
+msgstr "replied you in event comments"
 
 #: Disabled references:1
 msgid "在审批讨论中提到了你"
-msgstr "mentioned you in the approval discussion"
+msgstr "mentioned you in the approval comments"
 
 #: Disabled references:1
 msgid "在审批讨论中回复了你"
-msgstr "replied you in the approval discussion"
+msgstr "replied you in the approval comments"
 
 #: Disabled references:1
 msgid "发表了审批讨论"
-msgstr "Posted an approval discussion"
+msgstr "commented on this approval"
 
 #: Disabled references:1
 msgid "在考勤讨论中提到了你"
-msgstr "mentioned you in the attendance discussion
-"
+msgstr "mentioned you in the attendance comments"
 
 #: Disabled references:1
 msgid "在考勤讨论中回复了你"
-msgstr "replied you in the attendance discussion"
+msgstr "replied you in the attendance comments"
 
 #: Disabled references:1
 msgid "发表了考勤讨论"
-msgstr "Posted attendance discussion"
+msgstr "commented on this attendance record"
 
 #: Disabled references:1
 msgid "在%0讨论中回复了你"
@@ -36001,7 +36026,7 @@ msgstr "mentioned you at %0"
 
 #: Disabled references:1
 msgid "发表了%0讨论"
-msgstr "Posted %0"
+msgstr "commented on %0"
 
 #: Disabled references:1
 msgid "在%0中发布了讨论"
@@ -36301,7 +36326,7 @@ msgstr "Load failed, click to reload."
 
 #: Disabled references:1
 msgid "已关闭消息免打扰"
-msgstr "Disabled Do Not Disturb"
+msgstr "Do Not Disturb is off"
 
 #: Disabled references:1
 msgid "已开启消息免打扰"
@@ -36605,7 +36630,7 @@ msgstr "This group must be joined to access"
 
 #: Disabled references:1
 msgid "申请加入此群组"
-msgstr "Apply to join this group"
+msgstr "Request to join this group"
 
 #: Disabled references:1
 msgid "暂无新的好友"
@@ -37689,7 +37714,7 @@ msgstr "Email binding failed"
 
 #: Disabled references:1
 msgid "告诉我您想搭建的应用，或者从下面推荐中选择一个尝试"
-msgstr "Describe the app you'd like to build, or choose a suggestion below to try"
+msgstr "Tell us what you want to build, or choose a suggestion below to get started"
 
 #: Disabled references:1
 msgid "物业，报修工单、巡检打卡、费用催缴的应用"
@@ -37869,7 +37894,7 @@ msgstr "Please enter the voting item"
 
 #: Disabled references:1
 msgid "知会工作是一种美德"
-msgstr "Sharing work is a virtue"
+msgstr "Share an update with your team..."
 
 #: Disabled references:1
 msgid "分享文件"
@@ -37914,22 +37939,6 @@ msgstr "Monthly traffic limit for the knowledge center has been exceeded, cannot
 #: Disabled references:1
 msgid "发布动态失败"
 msgstr "Failed to publish post"
-
-#: Disabled references:1
-msgid "提出问题"
-msgstr "Ask a question"
-
-#: Disabled references:1
-msgid "是的"
-msgstr "Yes"
-
-#: Disabled references:1
-msgid "不用了"
-msgstr "No, thanks"
-
-#: Disabled references:1
-msgid "是否将此动态作为问答？"
-msgstr "Do you want to send this post as a Question?"
 
 #: Disabled references:1
 msgid "请预览链接"
@@ -38773,7 +38782,7 @@ msgstr "Send error message notifications to the owner when API call fails"
 
 #: Disabled references:1
 msgid "内不发送同类错误通知"
-msgstr "interval to send same kind of error notification"
+msgstr "cooldown for similar error notifications"
 
 #: Disabled references:1
 msgid "将 API 授权给"
@@ -39249,7 +39258,7 @@ msgstr "Use Python"
 
 #: Disabled references:1
 msgid "更新未发布"
-msgstr "Update not published"
+msgstr "Draft updates"
 
 #: Disabled references:1
 msgid "监控"
@@ -41285,7 +41294,7 @@ msgstr "Configure Destination"
 
 #: Disabled references:1
 msgid "人员ID"
-msgstr "Personnel ID"
+msgstr "Member ID"
 
 #: Disabled references:1
 msgid "部门系统ID"
@@ -41598,7 +41607,7 @@ msgstr "Off"
 
 #: Disabled references:1
 msgid "有更新未发布"
-msgstr "Updates not released"
+msgstr "Drafts"
 
 #: Disabled references:1
 msgid "已读取(行)"
@@ -42678,7 +42687,7 @@ msgstr "(Expired)"
 
 #: Disabled references:1
 msgid "授权给指定组织"
-msgstr "Authorize to a designated organization"
+msgstr "Authorize the following organizations"
 
 #: Disabled references:1
 msgid "暂无提交的代码"
@@ -42782,7 +42791,7 @@ msgstr "Export Plugin"
 
 #: Disabled references:1
 msgid "将插件导出为 .mdye 格式，可以导入到其他组织使用"
-msgstr "Export the plugin in .mdye format, which can be imported by other organizations"
+msgstr "Export the plugin as an `.mdye` file for use in other organizations"
 
 #: Disabled references:1
 msgid "导出中..."
@@ -42806,7 +42815,7 @@ msgstr "Plugins are not available after expiry, leaving blanks is permanent"
 
 #: Disabled references:1
 msgid "请选择授权到期时间"
-msgstr "Please select the authorization expiration date"
+msgstr "Please select the authorization expiry time"
 
 #: Disabled references:1
 msgid "不在该列表内的组织不可导入，留空则所有组织可导入"
@@ -42822,7 +42831,7 @@ msgstr "One per row, up to 10"
 
 #: Disabled references:1
 msgid "检测到已有插件"
-msgstr "Detected existing plugins"
+msgstr "Existing Plugin Found"
 
 #: Disabled references:1
 msgid "检测到当前组织中存在相同的插件，您可以选择导入已有插件或者创建一个新插件"
@@ -42938,7 +42947,7 @@ msgstr "Published on"
 
 #: Disabled references:1
 msgid "未发布版本"
-msgstr "Unreleased Version"
+msgstr "Draft Version"
 
 #: Disabled references:1
 msgid "发布新版本"
@@ -43018,7 +43027,7 @@ msgstr "Available to the all organization when enabled; disabling does not affec
 
 #: Disabled references:1
 msgid "最近操作"
-msgstr "Recent Activities"
+msgstr "Recent Activity"
 
 #: Disabled references:1
 msgid "开发文档"
@@ -43294,7 +43303,7 @@ msgstr "Product Development"
 
 #: Disabled references:1
 msgid "行政人事"
-msgstr "Administrative Personnel"
+msgstr "HR & Administration"
 
 #: Disabled references:1
 msgid "销售管理"
@@ -43442,7 +43451,7 @@ msgstr "3、Visibility permissions for members on tasks within the project"
 
 #: Disabled references:1
 msgid "仅影响项目成员和在公开范围内人员，管理员固定为对项目下所有任务可见且可查看详情"
-msgstr "Only affects project members and personnel within the public scope. Administrators are fixed to be able to see and view details of all tasks under the project."
+msgstr "Only affects project members and people within the public scope. Administrators can always view all project tasks and their details."
 
 #: Disabled references:1
 msgid "获取链接与二维码"
@@ -44186,11 +44195,11 @@ msgstr "After closing, task notifications will stop, but @mentions in discussion
 
 #: Disabled references:1
 msgid "已开启提醒"
-msgstr "Reminder enabled"
+msgstr "Reminder On"
 
 #: Disabled references:1
 msgid "已关闭提醒"
-msgstr "Reminder turned off"
+msgstr "Reminder Off"
 
 #: Disabled references:1
 msgid "锁定后任务成员将无法完成和修改任务内容（但仍可参与任务讨论）"
@@ -44978,7 +44987,7 @@ msgstr "Delete the project and all tasks under the project"
 
 #: Disabled references:1
 msgid "申请加入项目1"
-msgstr "Apply to Join Project 1"
+msgstr "Request to Join Project 1"
 
 #: Disabled references:1
 msgid "向负责人说明你想要加入项目的原因"
@@ -45310,7 +45319,7 @@ msgstr "Sort by set order"
 
 #: Disabled references:1
 msgid "按关联视图的排序"
-msgstr "Sort by related View"
+msgstr "Sort by linked View"
 
 #: Disabled references:1
 msgid "省-市"
@@ -45694,7 +45703,7 @@ msgstr "Layout"
 
 #: Disabled references:1
 msgid "双向关联"
-msgstr "Bi-Association"
+msgstr "Two-way Link"
 
 #: Disabled references:1
 msgid "字段属性"
@@ -46350,11 +46359,11 @@ msgstr "Associated %0"
 
 #: Disabled references:1
 msgid "新版本如果要建立双向关联，需要前往关联表（%0）中添加关联本表（%1）的关联记录"
-msgstr "To establish a bi-directional relationship for a new edition, go to the related worksheet (%0) and add the related records linked to the same worksheet (%1)"
+msgstr "To create a two-way link in the new version, go to the linked table (%0) and add a linked record for this table (%1)"
 
 #: Disabled references:1
 msgid "什么是双向关联?"
-msgstr "What is bidirectional association?"
+msgstr "What is Two-way Link?"
 
 #: Disabled references:1
 msgid "在"
@@ -49590,11 +49599,11 @@ msgstr "Display scale"
 
 #: Disabled references:1
 msgid "关联视图"
-msgstr "Related View"
+msgstr "Link View"
 
 #: Disabled references:1
 msgid "设置关联视图，统一控制关联记录的排序方式、选择范围、和打开记录时的视图。字段本身设置的排序和打开记录视图优先级高于此配置；过滤选择范围的效果为叠加。"
-msgstr "Setting associating with the view will unify control the selection range, the view when records are opened, and how the associated records are sorted. The priority of sorting and opening record view set by the field is higher than that of the configuration; filtering the selection range will overlay it."
+msgstr "Set a linked view to control sorting, selection scope, and how linked records open. Field-level settings take priority, while selection filters are combined."
 
 #: Disabled references:1
 msgid "请先选择关联表"
@@ -49718,7 +49727,7 @@ msgstr "Scope of designated persons"
 
 #: Disabled references:1
 msgid "指定人员"
-msgstr "Designated personnel"
+msgstr "Designated members"
 
 #: Disabled references:1
 msgid "指定部门"
@@ -50042,11 +50051,11 @@ msgstr "Delete records"
 
 #: Disabled references:1
 msgid "允许打开记录"
-msgstr "Open records"
+msgstr "Allow opening records"
 
 #: Disabled references:1
 msgid "按关联视图配置"
-msgstr "Configure by Associated View"
+msgstr "Configure by Linked View"
 
 #: Disabled references:1
 msgid "允许导出"
@@ -50334,7 +50343,7 @@ msgstr "Fill interlaced row"
 
 #: Disabled references:1
 msgid "标题行文字换行"
-msgstr "Wrap the title line"
+msgstr "Wrap header text"
 
 #: Disabled references:1
 msgid "分页"
@@ -50630,7 +50639,7 @@ msgstr "The current worksheet is being referenced by the following workflow node
 
 #: Disabled references:1
 msgid "展示工作流对当前字段的关键引用，主要包括筛选条件、动态值设置、人员配置等可能影响流程执行或数据准确性的引用"
-msgstr "Display key workflow references for the current fields, including filters, dynamic values, personnel settings, and other factors impacting process execution or data accuracy."
+msgstr "Show key workflow references to the current field, including filters, dynamic values, and personnel settings that may affect workflow execution or data accuracy"
 
 #: Disabled references:1
 msgid "当前字段正被以下业务规则的筛选条件使用"
@@ -50926,7 +50935,7 @@ msgstr "Existing association"
 
 #: Disabled references:1
 msgid "检测到所选表已关联 %0，是否建立"
-msgstr "The selected table is detected to be associated with %0, continue to create?"
+msgstr "%0 is linked to the selected table."
 
 #: Disabled references:1
 msgid "同步数据？"
@@ -51357,8 +51366,8 @@ msgid "编码方式：code128，仅支持数字、字母、符号，最大包含
 msgstr "Encoding method: code128, supports only numbers, letters, and symbols, with a max of 128 characters"
 
 #: Disabled references:1
-msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
-msgstr "Encoding format: QR Code, supports Chinese characters, with a max of 150 characters"
+msgid "编码方式：QR-code，可支持汉字，最大包含250个字"
+msgstr "Encoding: QR code; supports Chinese characters, up to 250 characters"
 
 #: Disabled references:1
 msgid "容错率"
@@ -51670,7 +51679,7 @@ msgstr "When the display mode is card and dropdown list:"
 
 #: Disabled references:1
 msgid "1、【按设置的排序】和【按关联视图的排序】两种排序方式仅限在关联数量不超过5条时生效，超出后会继续按添加时的顺序。"
-msgstr "1. The sorting methods \"Sort by set order\" and \"Sort by related view\" work only with up to 5 associations; beyond that, the order follows the addition sequence."
+msgstr "1. The sorting methods \"Sort by set order\" and \"Sort by linked view\" work only with up to 5 associations; beyond that, the order follows the addition sequence."
 
 #: Disabled references:1
 msgid "2、当排序方式为【按添加时间排序】时，支持拖拽排序，且当关联记录数量小于50条时生效。"
@@ -52222,7 +52231,7 @@ msgstr "No process found"
 
 #: Disabled references:1
 msgid "组织人员事件触发"
-msgstr "Trigger by Personnel"
+msgstr "Triggered by Member Events"
 
 #: Disabled references:1
 msgid "外部用户事件触发"
@@ -52322,7 +52331,7 @@ msgstr "Triggered when a new record is added or an existing record changes in th
 
 #: Disabled references:1
 msgid "定时触发%03012"
-msgstr "Trigger by Scheduled"
+msgstr "Triggered on Schedule"
 
 #: Disabled references:1
 msgid "按照设定的时间周期循环触发流程"
@@ -52338,11 +52347,11 @@ msgstr "Specify a date field to trigger the workflow based on the date, such as 
 
 #: Disabled references:1
 msgid "组织人员事件触发%03014"
-msgstr "Trigger by Personnel"
+msgstr "Triggered by Member Events"
 
 #: Disabled references:1
 msgid "当组织中有人员入职/离职时触发"
-msgstr "Triggered when personnel join/leave the organization"
+msgstr "Triggered when a member joins or leaves the organization"
 
 #: Disabled references:1
 msgid "部门事件触发"
@@ -52674,7 +52683,7 @@ msgstr "Subprocess can be created and executed during the flow of a process."
 
 #: Disabled references:1
 msgid "当组织人员入/离职或外部用户注册/登录/删除时运行流程"
-msgstr "Run processes when organizational personnel join/leave or external users register/login/delete"
+msgstr "Run the workflow when a member joins or leaves the organization, or when an external user registers, signs in, or is deleted"
 
 #: Disabled references:1
 msgid "封装应用中可被复用的数据处理能力，自定义输入/输出"
@@ -52714,7 +52723,7 @@ msgstr "Time"
 
 #: Disabled references:1
 msgid "人员事件%03005"
-msgstr "Personnel"
+msgstr "Member"
 
 #: Disabled references:1
 msgid "子流程%03006"
@@ -52754,7 +52763,7 @@ msgstr "When a new employee joins"
 
 #: Disabled references:1
 msgid "当人员离职时"
-msgstr "When personnel leave the company"
+msgstr "When a member leaves the organization"
 
 #: Disabled references:1
 msgid "当创建部门时"
@@ -52770,15 +52779,15 @@ msgstr "When a new user registers"
 
 #: Disabled references:1
 msgid "当用户注销时"
-msgstr "When the user logs out"
+msgstr "When a user deletes their account"
 
 #: Disabled references:1
 msgid "当用户登录时"
-msgstr "When the user logs in"
+msgstr "When a user logs in"
 
 #: Disabled references:1
 msgid "当用户被停用时"
-msgstr "When the user is disabled"
+msgstr "When a user is disabled"
 
 #: Disabled references:1
 msgid "%0 开始"
@@ -52990,7 +52999,7 @@ msgstr "Select Project"
 
 #: Disabled references:1
 msgid "工作表无效或已删除"
-msgstr "Worksheet is invalid or has been deleted"
+msgstr "Worksheet Invalid or Deleted"
 
 #: Disabled references:1
 msgid "项目无效或已删除"
@@ -53166,7 +53175,7 @@ msgstr "The judgment value of the filter condition cannot be empty"
 
 #: Disabled references:1
 msgid "有必填字段未填写"
-msgstr "There are required fields that have not been filled out"
+msgstr "Some required fields are missing"
 
 #: Disabled references:1
 msgid "部分退款金额不能为空"
@@ -54310,7 +54319,7 @@ msgstr "Bcc"
 
 #: Disabled references:1
 msgid "选择人员、邮箱地址或输入邮箱"
-msgstr "Select personnel, email or enter email"
+msgstr "Select members or enter an email address"
 
 #: Disabled references:1
 msgid "附件总大小不超过50M"
@@ -54406,7 +54415,7 @@ msgstr "You must select a filter field"
 
 #: Disabled references:1
 msgid "从人员字段获取"
-msgstr "Get from personnel field"
+msgstr "Get from member field"
 
 #: Disabled references:1
 msgid "设置筛选条件，获得满足条件的数据。如果未添加筛选条件，则只从字段中获得第一名人员的相关信息"
@@ -54414,7 +54423,7 @@ msgstr "Set the filter to find the data that meets the conditions. If no filter 
 
 #: Disabled references:1
 msgid "从组织人员中获取"
-msgstr "Retrieve from organizational personnel"
+msgstr "Get from Organization Members"
 
 #: Disabled references:1
 msgid "设置筛选条件，获得满足条件的数据。如果未添加筛选条件，则只从当前组织的所有人员中获得第一名（最新入职）人员的相关信息"
@@ -54426,7 +54435,7 @@ msgstr "Set filter criteria to obtain data that meets the conditions. If no filt
 
 #: Disabled references:1
 msgid "设置筛选条件，获得满足条件的数据。如果未添加筛选条件，则获得当前组织的所有人员的相关信息"
-msgstr "Set filtering criteria to obtain data that meets the criteria. If no filtering criteria are added, all relevant information about personnel in the current organization will be retrieved."
+msgstr "Set filters to retrieve data that meets specific criteria. Without filters, all member information in the organization will be displayed"
 
 #: Disabled references:1
 msgid "从部门字段获取"
@@ -54506,7 +54515,7 @@ msgstr "Get information about one user, including personal info (name, gender, b
 
 #: Disabled references:1
 msgid "获取一个部门的相关信息，包含部门名称、部门负责人、部门人员及上下级部门，供流程中的其他节点使用。"
-msgstr "Obtain information related to a department, including department name, department head, department personnel, and superior and subordinate departments, for use by other nodes in the process."
+msgstr "Get department-related information, including its name, head, members, and hierarchical relationships, for use by other nodes in the process."
 
 #: Disabled references:1
 msgid "获取一名外部用户的相关信息，包含用户名、手机号、角色、用户状态、openid和自定义字段，供流程中的其他节点使用。"
@@ -54514,7 +54523,7 @@ msgstr "Get information about external user, including name, phone number, role,
 
 #: Disabled references:1
 msgid "获取一个组织角色的相关信息，包含角色名称、备注、角色下人员，供流程中的其他节点使用。"
-msgstr "Obtain relevant information about an organizational role, including the role name, notes, and the personnel under the role, for use by other nodes in the process."
+msgstr "Get an organizational role's name, description, and members for use in process workflows."
 
 #: Disabled references:1
 msgid "获取多名人员的相关信息，包含个人信息（姓名、性别、生日、手机、邮箱）和组织信息（部门、职位、工号、上下级（可选）），供流程中的其他节点使用。"
@@ -54522,7 +54531,7 @@ msgstr "Obtain relevant information of multiple individuals, including personal 
 
 #: Disabled references:1
 msgid "获取多个部门的相关信息，包含部门名称、部门负责人、部门人员及上下级部门，供流程中的其他节点使用。"
-msgstr "Obtain relevant information for multiple departments, including department name, department head, department personnel, and superior and subordinate departments, for use by other nodes in the process."
+msgstr "Obtain relevant information for multiple departments, including department name, department head, department members, and superior and subordinate departments, for use by other nodes in the process."
 
 #: Disabled references:1
 msgid "获取多名外部用户的相关信息，包含用户名、手机号、角色、用户状态、openid和自定义字段，供流程中的其他节点使用。"
@@ -54530,7 +54539,7 @@ msgstr "Obtain relevant information about multiple external users, including use
 
 #: Disabled references:1
 msgid "获取多个组织角色的相关信息，包含角色名称、备注、角色下人员，供流程中的其他节点使用。"
-msgstr "Obtain relevant information about multiple organizational roles, including role names, remarks, and personnel under each role, for use by other nodes in the process."
+msgstr "Get details about organizational roles, including role names, descriptions, and associated members, for use by other process nodes."
 
 #: Disabled references:1
 msgid "选择查找对象"
@@ -54542,7 +54551,7 @@ msgstr "Get one at random on the basis of filtering"
 
 #: Disabled references:1
 msgid "获取汇报关系"
-msgstr "Get reporting relationship"
+msgstr "Get Reporting Relationship"
 
 #: Disabled references:1
 msgid "同时获取人员的汇报关系信息"
@@ -55439,11 +55448,11 @@ msgstr "Create a Draft Record"
 
 #: Disabled references:1
 msgid "推送人"
-msgstr "Receiver"
+msgstr "Recipient"
 
 #: Disabled references:1
 msgid "添加推送人"
-msgstr "Add Receiver"
+msgstr "Add Recipient"
 
 #: Disabled references:1
 msgid "指定时间后"
@@ -55466,8 +55475,8 @@ msgid "必须选择一个目标工作表"
 msgstr "You must select a target worksheet"
 
 #: Disabled references:1
-msgid "通过解析内部成员访问或对外公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
-msgstr "By parsing the record links accessed by internal members or externally shared, corresponding record objects can be obtained for use by other nodes in the workflow. For example: a warehouse manager uses a scanner on the PC to scan the product's QR code, writes the link to the record in the text box, and the workflow parses the associated product for automated inbound and outbound processes."
+msgid "通过解析内部成员访问或公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
+msgstr "Extract the corresponding record object via parsing the link for use in other workflow nodes, enabling automated inventory management when a warehouse manager scans product QR codes into the system."
 
 #: Disabled references:1
 msgid "根据筛选条件和排序规则从工作表中查找符合条件的第一条数据，并在获取的同时对记录进行更新（原子性防止并发操作，适用于出入库等场景）"
@@ -55719,7 +55728,7 @@ msgstr "The end execution time cannot be later than the current time"
 
 #: Disabled references:1
 msgid "生成初始七次的执行时间"
-msgstr "Generate the initial 7 times of execution time"
+msgstr "Generate the next 7 scheduled execution times"
 
 #: Disabled references:1
 msgid "每分钟都触发"
@@ -56159,7 +56168,7 @@ msgstr "Pass a value to the parameter of subflow as its initial value"
 
 #: Disabled references:1
 msgid "发送服务号消息是指向已关注服务号的微信用户发送模版消息。发送对象支持使用人员字段（通过微信授权注册的外部门户用户）或文本字段（存储微信服务号openid）。使用微信服务号模板消息需要组织后台绑定已认证的企业服务号，并在微信服务号后台开通“模板消息”功能。"
-msgstr "Sending service account messages means sending template messages to WeChat followers. Recipients can be personnel fields (external portal users registered via WeChat authorization) or text fields (storing WeChat service account openid). To use WeChat service account template messages, the organization’s backend must bind an authenticated enterprise service account and enable the \"template message\" feature in the WeChat service account backend."
+msgstr "Sending service account messages means sending template messages to WeChat followers. Recipients can be member fields (external portal users registered via WeChat authorization) or text fields (storing WeChat service account openid). To use WeChat service account template messages, the organization’s backend must bind an authenticated enterprise service account and enable the \"template message\" feature in the WeChat service account backend."
 
 #: Disabled references:1
 msgid "注意：若发送对象为外部用户，请选择与外部门户一致的微信服务号，否则会发送失败。"
@@ -56375,11 +56384,11 @@ msgstr "Designated Person"
 
 #: Disabled references:1
 msgid "指定填写人"
-msgstr "Assign Filler"
+msgstr "Assign Assignee"
 
 #: Disabled references:1
 msgid "填写人操作"
-msgstr "Filler Operation"
+msgstr "Form Assignee Action"
 
 #: Disabled references:1
 msgid "转交他人填写"
@@ -56391,7 +56400,7 @@ msgstr "Can forward to:"
 
 #: Disabled references:1
 msgid "填写人为空时"
-msgstr "When the filler is empty"
+msgstr "When the form assignee Is empty"
 
 #: Disabled references:1
 msgid "启用后，用户输入登录密码后才可进行提交"
@@ -56467,7 +56476,7 @@ msgstr "Delegate by the workflow owner"
 
 #: Disabled references:1
 msgid "由指定人员代理"
-msgstr "Delegate by the specified personnel"
+msgstr "Delegate to a specific member"
 
 #: Disabled references:1
 msgid "流程结束"
@@ -56583,7 +56592,7 @@ msgstr "Set the following nodes as mandatory"
 
 #: Disabled references:1
 msgid "审批/填写人为空时（默认设置）"
-msgstr "When the approver/filler is empty (default setting)"
+msgstr "When the approver/form assignee is empty (default setting)"
 
 #: Disabled references:1
 msgid "设置节点负责人为空时的默认处理方式，在每个节点中也可单独设置。"
@@ -56603,11 +56612,11 @@ msgstr "Print Template not available"
 
 #: Disabled references:1
 msgid "允许审批人撤回上次审批结果"
-msgstr "Allow approver to withdraw approval"
+msgstr "Allow approval withdrawal"
 
 #: Disabled references:1
 msgid "当没有上级负责人时，由当前人员进行处理"
-msgstr "When there is no superior in charge, handle by the current personnel"
+msgstr "When there is no superior in charge, handle by the current member"
 
 #: Disabled references:1
 msgid "指在审批流程中当人员设置为直属上级、上级部门负责人时。如果当前人员没有直属上级，则由本人自己处理；如果当前人员、部门没有上级部门，则由本部门负责人处理。未勾选时，则按照为空处理。"
@@ -56631,7 +56640,7 @@ msgstr "Reminder: Batch operations are not affected"
 
 #: Disabled references:1
 msgid "审批流程中允许查看他人填写字段"
-msgstr "Allow viewing fields filled by others in approval process"
+msgstr "Allow viewing fields filled by others"
 
 #: Disabled references:1
 msgid "审批和填写节点中查看他人填写内容"
@@ -56867,7 +56876,7 @@ msgstr "New param"
 
 #: Disabled references:1
 msgid "人员已删除"
-msgstr "Personnel deleted"
+msgstr "Member Deleted"
 
 #: Disabled references:1
 msgid "角色已删除"
@@ -56899,7 +56908,7 @@ msgstr "No users assigned to this role"
 
 #: Disabled references:1
 msgid "部门下未设置人员"
-msgstr "No personnel assigned to department"
+msgstr "No members in this department"
 
 #: Disabled references:1
 msgid "职位下未设置人员"
@@ -56915,7 +56924,7 @@ msgstr "Organization-wide roles are not supported"
 
 #: Disabled references:1
 msgid "指定人员代理"
-msgstr "Delegate by the specified personnel"
+msgstr "Delegate to a specific member"
 
 #: Disabled references:1
 msgid "使用发起节点中的默认设置"
@@ -57047,7 +57056,7 @@ msgstr "Refresh foreign fields and summary results"
 
 #: Disabled references:1
 msgid "所有填写人"
-msgstr "All fillers"
+msgstr "All Form Assignees"
 
 #: Disabled references:1
 msgid "未审的审批人"
@@ -57347,7 +57356,7 @@ msgstr "Parameter value cannot be empty"
 
 #: Disabled references:1
 msgid "在以上日期"
-msgstr "At the Date above"
+msgstr "On the selected date"
 
 #: Disabled references:1
 msgid "在以上日期时间"
@@ -57379,7 +57388,7 @@ msgstr "Ignore null value"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示是其中任何一个值时，即符合条件"
-msgstr "When multiple selected, anyone among them IS the selection will meet the condition"
+msgstr "When multiple values are selected, any matching value meets the condition"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示不是其中所有值时，才符合条件"
@@ -57511,11 +57520,11 @@ msgstr "No executable actions set"
 
 #: Disabled references:1
 msgid "校准了%0个字段"
-msgstr "Calibrated %0 fields"
+msgstr "Calibrated %0 field(s)"
 
 #: Disabled references:1
 msgid "修改了%0个字段"
-msgstr "Modified %0 fields"
+msgstr "Modified %0 field(s)"
 
 #: Disabled references:1
 msgid "个字段存在异常"
@@ -57531,7 +57540,7 @@ msgstr "Batch Add"
 
 #: Disabled references:1
 msgid "填写了%0个字段"
-msgstr "Filled in %0 fields"
+msgstr "Filled in %0 field(s)"
 
 #: Disabled references:1
 msgid "未设置关联他表字段"
@@ -58019,15 +58028,15 @@ msgstr "Send custom request"
 
 #: Disabled references:1
 msgid "未设置填写人"
-msgstr "Not set filler"
+msgstr "No Form Assignee Set"
 
 #: Disabled references:1
 msgid "填写人："
-msgstr "Filler:"
+msgstr "Form Assignee:"
 
 #: Disabled references:1
 msgid "填写%0个字段"
-msgstr "Fill in %0 fields"
+msgstr "Fill in %0 field(s)"
 
 #: Disabled references:1
 msgid "未设置可填写字段"
@@ -58639,7 +58648,7 @@ msgstr "Org/Department"
 
 #: Disabled references:1
 msgid "获取单条人员"
-msgstr "Get Single Personnel"
+msgstr "Get a Single Member"
 
 #: Disabled references:1
 msgid "从成员字段或组织中获取单个成员信息"
@@ -58663,7 +58672,7 @@ msgstr "Search from all organization members"
 
 #: Disabled references:1
 msgid "获取多条人员"
-msgstr "Get Multiple Personnel"
+msgstr "Get Multiple Members"
 
 #: Disabled references:1
 msgid "从成员字段或组织中获取多个成员信息"
@@ -58671,11 +58680,11 @@ msgstr "Get multiple member information from Member/Org field"
 
 #: Disabled references:1
 msgid "获取多条人员信息"
-msgstr "Get multiple personnel information"
+msgstr "Get information about multiple members"
 
 #: Disabled references:1
 msgid "获取多名人员的相关信息，包含个人信息（姓名、性别、生日、手机、邮箱）和组织信息（部门、职位、工号、上下级（可选））"
-msgstr "Get relevant information for multiple personnel, including personal information (name, gender, birthday, phone, email) and organizational information (department, position, work id, superior/subordinate (optional))"
+msgstr "Get relevant information for multiple members, including personal information (name, gender, birthday, phone, email) and organizational information (department, position, work id, superior/subordinate (optional))"
 
 #: Disabled references:1
 msgid "获取单条部门"
@@ -58711,7 +58720,7 @@ msgstr "Get multiple department information"
 
 #: Disabled references:1
 msgid "获取多个部门的相关信息，包含部门名称、部门负责人、部门人员及上下级部门"
-msgstr "Obtain relevant information from multiple departments, including department name, department head, department personnel, and subordinate departments."
+msgstr "Get information from various departments, including their name, head, members, and sub-departments"
 
 #: Disabled references:1
 msgid "获取单条组织角色"
@@ -58727,7 +58736,7 @@ msgstr "Get single organization role information"
 
 #: Disabled references:1
 msgid "获取一个组织角色的相关信息，包含角色名称、备注、角色下人员"
-msgstr "Get relevant information about an organizational role, including the role name, notes, and personnel under the role"
+msgstr "Get details about an organizational role, including its name, notes, and associated members"
 
 #: Disabled references:1
 msgid "从所有组织角色中查找"
@@ -58747,7 +58756,7 @@ msgstr "Get multiple organization role information"
 
 #: Disabled references:1
 msgid "获取多个组织角色的相关信息，包含角色名称、备注、角色下人员"
-msgstr "Get information on multiple organizational roles, including role names, notes, and personnel under the roles"
+msgstr "Get details for various organizational roles, including role names, descriptions, and assigned members"
 
 #: Disabled references:1
 msgid "支付/开票"
@@ -59104,6 +59113,10 @@ msgstr "Rename Version"
 #: Disabled references:1
 msgid "恢复到此版本"
 msgstr "Restore to this version"
+
+#: Disabled references:1
+msgid "版本%26016"
+msgstr "Version"
 
 #: Disabled references:1
 msgid "编辑中…"
@@ -59559,15 +59572,15 @@ msgstr "The worksheet in the action node (Add Row Record) has been deleted."
 
 #: Disabled references:1
 msgid "填写/审批/通知节点中人员未填写或人员不存，或已离职（不在流程所在的组织下）"
-msgstr "The personnel in the fill/approval/notification node has not filled out, or the personnel does not exist, or has left (not under the organization of the process)"
+msgstr "Members in form, approval, or notification nodes are missing, invalid, or have left the organization running the workflow"
 
 #: Disabled references:1
 msgid "填写/审批/通知节点中人员未填写，或已离职（不在流程所在的组织下）"
-msgstr "Personnel not filled in at the fill/approval/notification node, or have left (not in the organization where the process is located)"
+msgstr "Members in form, approval, or notification nodes are missing or have left the workflow’s organization"
 
 #: Disabled references:1
 msgid "填写/审批/通知节点中角色中没有人员（不在流程所在的组织下）"
-msgstr "No personnel in roles at fill/approve/notify nodes (not under the organization of the process)"
+msgstr "Roles in form, approval, or notification nodes have no members in the workflow’s organization"
 
 #: Disabled references:1
 msgid "节点所在分支为空"
@@ -59795,7 +59808,7 @@ msgstr "Invalid Approver"
 
 #: Disabled references:1
 msgid "填写人无效"
-msgstr "Invalid Filler"
+msgstr "Invalid Form Assignee"
 
 #: Disabled references:1
 msgid "数据丢失"
@@ -59883,7 +59896,7 @@ msgstr "Approval Flow Trigger"
 
 #: Disabled references:1
 msgid "人员事件触发"
-msgstr "Personnel Trigger"
+msgstr "Member Trigger"
 
 #: Disabled references:1
 msgid "获得指定关联记录"
@@ -60011,7 +60024,7 @@ msgstr "Number of decimal places in a numeric field"
 
 #: Disabled references:1
 msgid "仅支持分支节点条件判断"
-msgstr "Only support branch node condition judgment"
+msgstr "Applies only to branch conditions"
 
 #: Disabled references:1
 msgid "文本格式化"
@@ -60427,7 +60440,7 @@ msgstr "Started filling in"
 
 #: Disabled references:1
 msgid "开始未填写"
-msgstr "Start not filled"
+msgstr "Start time not provided"
 
 #: Disabled references:1
 msgid "结束等于"
@@ -60447,7 +60460,7 @@ msgstr "End filled"
 
 #: Disabled references:1
 msgid "结束未填写"
-msgstr "End not filled"
+msgstr "End time not provided"
 
 #: Disabled references:1
 msgid "属于%03080"
@@ -60891,11 +60904,11 @@ msgstr "(Original Initiator is Empty)"
 
 #: Disabled references:1
 msgid "（原填写人）"
-msgstr "(Original Filler)"
+msgstr "(Original Form Assignee)"
 
 #: Disabled references:1
 msgid "（没有填写人）"
-msgstr "(No Filler)"
+msgstr "(No Form Assignee)"
 
 #: Disabled references:1
 msgid "（原审批人）"
@@ -61815,7 +61828,7 @@ msgstr "○ Each worksheet allows only one text index;"
 
 #: Disabled references:1
 msgid "○ 一个索引只能包含一个「选项」类型的字段，如单选/多选/人员/部门等；"
-msgstr "○ An index can only contain one \"option\" type field, such as single select/multiple select/personnel/department, etc.;"
+msgstr "○ An index can only contain one \"option\" type field, such as single select/multiple select/member/department, etc.;"
 
 #: Disabled references:1
 msgid "索引越多越好吗？"
@@ -61866,8 +61879,8 @@ msgid "选择索引字段"
 msgstr "Select Index Field"
 
 #: Disabled references:1
-msgid "每张工作表只能创建一个「文本索引」或者「文本字段全文索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
-msgstr "Each worksheet can only create one \"text index\" or \"full-text index for text fields\"; when creating a \"text index\", it cannot include \"option fields\"; each index can only contain one \"option field\"."
+msgid "每张工作表只能创建一个「文本索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
+msgstr "Each table allows only one text index; text index cannot include select fields; each index can include only one select field"
 
 #: Disabled references:1
 msgid "建立唯一索引后，字段的值不允许重复。如果字段为非必填，则整个工作表只能有一条为空的数据，以保证数据的唯一性"
@@ -62168,6 +62181,10 @@ msgstr "Exchange"
 #: Disabled references:1
 msgid "编码方式：code128，仅支持数字、字母、符号，最大包含30个字符"
 msgstr "Encoding method: code128, supports only numbers, letters, and symbols, max of 30 characters"
+
+#: Disabled references:1
+msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
+msgstr "Encoding format: QR Code, supports Chinese characters, with a max of 150 characters"
 
 #: Disabled references:1
 msgid "条形码数据源"
@@ -62787,7 +62804,7 @@ msgstr "Configure the required plugin parameters in JSON format"
 
 #: Disabled references:1
 msgid "常规（多条）"
-msgstr "General (Multiple)"
+msgstr "Standard (Multiple)"
 
 #: Disabled references:1
 msgid "在左侧显示卡片列表，可切换查看记录详情"
@@ -62795,11 +62812,11 @@ msgstr "Display the card list on the left side, switch to view record details"
 
 #: Disabled references:1
 msgid "仅显示详情（一条）"
-msgstr "Show Details (One)"
+msgstr "Details only (Single)"
 
 #: Disabled references:1
 msgid "显示第一条记录的详情"
-msgstr "Display the details of the first record"
+msgstr "Displays details for the first record"
 
 #: Disabled references:1
 msgid "详情设置"
@@ -62807,7 +62824,7 @@ msgstr "Detail Settings"
 
 #: Disabled references:1
 msgid "显示记录标题"
-msgstr "Display Record Title"
+msgstr "Show record title"
 
 #: Disabled references:1
 msgid "一行三列布局时，最多只能设置3个显示字段"
@@ -62939,7 +62956,7 @@ msgstr "Set Location"
 
 #: Disabled references:1
 msgid "按关联视图的配置"
-msgstr "Configuration by association view"
+msgstr "Configure by Linked View"
 
 #: Disabled references:1
 msgid "未设置（按添加时间顺序）"
@@ -64607,7 +64624,7 @@ msgstr "When the following selected errors exist in the data, this row of data i
 
 #: Disabled references:1
 msgid "支持的字段类型包括：姓名、手机号、邮箱、工号、人员ID"
-msgstr "The supported field types are: name, mobile phone number, mailbox, work id and personnel id"
+msgstr "The supported field types are: name, mobile phone number, mailbox, work id and member id"
 
 #: Disabled references:1
 msgid "支持的字段类型包括：名称、部门系统ID"
@@ -64763,7 +64780,7 @@ msgstr "Data import - upload excel (1/3)"
 
 #: Disabled references:1
 msgid "支持10MB以内的xls、xlsx、csv文件, 最大行数不超过%0行，列数不超过200列；导入多选类型的控件，请确保Excel字段内各个选项/人员用“，”隔开；导入地区控件，省市县之间以“/”隔开，如：江西省/上饶市/铅山县，如填写的地区格式没有“/”，则会按照名称精准匹配"
-msgstr "Supports xls, xlsx, and csv files up to 10MB, with a maximum row count of %0 and no more than 200 columns; when importing multi-select type controls, please ensure each option/person in the Excel fields is separated by a “,”; for importing regional controls, separate provinces, cities, and counties with “/”, such as: Jiangxi Province/Shangrao City/Qianshan County; if the format of the entered region does not include “/”, it will be matched precisely by name."
+msgstr "Supports XLS, XLSX, and CSV files up to 10 MB, with no more than %0 rows and 200 columns. For multi-select fields, separate options or members with commas. For location fields, separate province, city, and district with “/”, for example: Jiangxi Province/Shangrao City/Qianshan County. Locations without “/” will be matched exactly by name."
 
 #: Disabled references:1
 msgid "已选择%0条草稿"
@@ -65943,7 +65960,7 @@ msgstr "Recent Chats"
 
 #: Disabled references:1
 msgid "未找到相关的人员或群聊"
-msgstr "No related personnel or group chat found"
+msgstr "No Matching Members or Group Chats Found"
 
 #: Disabled references:1
 msgid "发送到"
@@ -66179,7 +66196,7 @@ msgstr "Hidden View"
 
 #: Disabled references:1
 msgid "更新了 %0 个字段"
-msgstr "Updated %0 fields"
+msgstr "Updated %0 field(s)"
 
 #: Disabled references:1
 msgid "无数据或无权限查看"
@@ -66195,7 +66212,7 @@ msgstr "Copy the UA information at creation"
 
 #: Disabled references:1
 msgid "更新了 %0个字段"
-msgstr "Updated %0 fields"
+msgstr "Updated %0 field(s)"
 
 #: Disabled references:1
 msgid "部分字段无权限不可见"
@@ -66347,7 +66364,7 @@ msgstr "(via %0)"
 
 #: Disabled references:1
 msgid "更新%0个字段"
-msgstr "Update %0 fields"
+msgstr "Update %0 field(s)"
 
 #: Disabled references:1
 msgid "创建了记录（导入）"
@@ -66679,7 +66696,7 @@ msgstr "Double-click to create a record"
 
 #: Disabled references:1
 msgid "插件未发布"
-msgstr "Plugin Not Released"
+msgstr "Draft Plugin"
 
 #: Disabled references:1
 msgid "插件开发中"
@@ -66815,7 +66832,7 @@ msgstr "Globally display task scheduling based on task timing and the dependenci
 
 #: Disabled references:1
 msgid "选择一个字段作为资源，数据将按照该资源的占用时间显示在时间轴上。支持的字段：选项、等级、人员、部门、组织角色、关联记录（单条、多条）"
-msgstr "Select a field as a resource, and the data will be displayed on the timeline according to the resource's occupied time. Supported fields: options, levels, personnel, departments, organizational roles, related records (single, multiple)"
+msgstr "Select a field as the resource. Records will be displayed on the timeline based on when the resource is occupied. Supported fields: Options, Rating, Members, Departments, Organization Roles, and Related Records (single or multiple)"
 
 #: Disabled references:1
 msgid "选择一个定位字段，前200条数据将按照此字段中的位置显示在地图中。"
@@ -67564,7 +67581,7 @@ msgstr "Get Row Record Log POST"
 
 #: Disabled references:1
 msgid "按操作者ID筛选"
-msgstr "Filter by Operator ID"
+msgstr "Filter by Actor ID"
 
 #: Disabled references:1
 msgid "按控件ID筛选"

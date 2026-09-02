@@ -164,6 +164,7 @@ export default function HomePage({ match, location: routerLocation, authority })
       <BalanceManage
         visible={data.balanceManageVisible || false}
         projectId={projectId}
+        isNocolySaas={isNocolySaas}
         value={_.pick(data, [
           'autoPurchaseWorkflowExtPack',
           'autoPurchaseApkStorageExtPack',

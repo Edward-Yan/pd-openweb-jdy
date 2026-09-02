@@ -53,31 +53,15 @@ const AIWelfarePointValue = styled.span`
   }
 `;
 
-const AI_WELFARE_FREE_GIFT_BY_VERSION = {
-  1: 50,
-  2: 100,
-  3: 200,
-};
-
 // 组织管理首页-账户信用点卡片
 export default function AccountBalance(props) {
-  const {
-    projectId,
-    data,
-    isMingdaoSaas,
-    authority,
-    isTrial,
-    isFree,
-    trialAuthenticate,
-    refreshFlag,
-    updateData = () => {},
-  } = props;
+  const { projectId, data, authority, isTrial, isFree, trialAuthenticate, refreshFlag, updateData = () => {} } = props;
+  const isSaas = !window.platformENV.isLocal;
   const [agentBillingFreeQuota, setAgentBillingFreeQuota] = useState({});
   const { balanceInfo } = data;
   const hasBalance = authority.includes(PERMISSION_ENUM.FINANCE);
   const hasBalanceInfo = !_.isEmpty(balanceInfo) && hasBalance;
-  const versionIdV2 = _.get(data, 'currentLicense.version.versionIdV2');
-  const freeGift = data.licenseType === 2 ? 100 : AI_WELFARE_FREE_GIFT_BY_VERSION[versionIdV2] || 0;
+  const { grantedMonthlyCredits = 0 } = agentBillingFreeQuota;
 
   const renderAIWelfarePointValue = () => {
     if (isFree) {
@@ -87,7 +71,7 @@ export default function AccountBalance(props) {
     const { giftRemaining = 0, monthlyRemaining = 0 } = agentBillingFreeQuota;
     const monthlyRemainingNode = (
       <Tooltip
-        title={_l('每月1日00:00自动刷新为 %0 福利点，不累加', formatNumberThousand(freeGift))}
+        title={_l('每月1日00:00自动刷新为 %0 福利点，不累加', formatNumberThousand(grantedMonthlyCredits))}
         placement="bottom"
       >
         <span className="monthlyRemaining">{formatNumberThousand(monthlyRemaining)}</span>
@@ -108,7 +92,7 @@ export default function AccountBalance(props) {
   };
 
   const getAgentBillingFreeQuota = useCallback(() => {
-    if (!projectId || !isMingdaoSaas) return;
+    if (!projectId || !isSaas) return;
 
     agentAjax
       .getAgentBillingFreeQuota({ projectId }, { silent: true })
@@ -118,7 +102,7 @@ export default function AccountBalance(props) {
       .catch(() => {
         setAgentBillingFreeQuota({});
       });
-  }, [isMingdaoSaas, projectId]);
+  }, [isSaas, projectId]);
 
   // 设置信用点警告提醒
   const setBalanceLimitNotice = ({ noticeEnabled, balanceLimit, notifiers, noticeTypes, closeDialog = () => {} }) => {
@@ -224,7 +208,7 @@ export default function AccountBalance(props) {
             <Tooltip
               title={
                 <div>
-                  {isMingdaoSaas ? (
+                  {isSaas ? (
                     <Fragment>
                       <div>
                         {_l(
@@ -268,7 +252,7 @@ export default function AccountBalance(props) {
             onClick={() => updateData({ hideBalance: !data.hideBalance })}
           />
         </div>
-        {isMingdaoSaas && (
+        {isSaas && (
           <AIWelfarePointLine className="Font14">
             <span>{_l('AI 福利点:')}</span>
             {renderAIWelfarePointValue()}
@@ -287,7 +271,6 @@ export default function AccountBalance(props) {
               (window.platformENV.isOverseas ? (
                 <PurchaseExpandPack className="blueBtn" text={_l('充值')} type="recharge" projectId={projectId} />
               ) : (
-                isMingdaoSaas &&
                 (data.authType || !isTrial) && (
                   <span className="blueBtn Bold" onClick={handleClickRecherge}>
                     {_l('充值')}
@@ -299,7 +282,7 @@ export default function AccountBalance(props) {
                 <span className="whiteBtn Bold" onClick={() => navigateTo(`/admin/billinfo/${projectId}/recharge`)}>
                   {_l('使用明细')}
                 </span>
-                {isMingdaoSaas && (
+                {isSaas && (
                   <span className="whiteBtn Bold" onClick={() => updateData({ balanceManageVisible: true })}>
                     {_l('管理')}
                   </span>

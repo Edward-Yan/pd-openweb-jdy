@@ -6,6 +6,7 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import { Icon } from 'ming-ui';
 import { chartNav } from 'statistics/common/chartNav';
+import { htmlEncodeReg } from 'src/utils/common';
 import * as actions from './redux/actions';
 
 const Wrap = styled.div`
@@ -91,8 +92,8 @@ const LinkageBtn = props => {
                         dangerouslySetInnerHTML={{
                           __html: _l(
                             '%0是%1',
-                            `<span class="bold mRight2">${n.controlName}</span>`,
-                            `<span class="bold mLeft2">${n.controlValue || '--'}</span>`,
+                            `<span class="bold mRight2">${htmlEncodeReg(n.controlName)}</span>`,
+                            `<span class="bold mLeft2">${htmlEncodeReg(n.controlValue || '--')}</span>`,
                           ),
                         }}
                       ></div>

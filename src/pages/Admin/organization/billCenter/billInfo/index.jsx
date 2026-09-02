@@ -162,12 +162,6 @@ const AIWelfarePointValue = styled.span`
   }
 `;
 
-const AI_WELFARE_FREE_GIFT_BY_VERSION = {
-  1: 50,
-  2: 100,
-  3: 200,
-};
-
 const getAgentBillingDetailItems = res => {
   const data = _.get(res, 'data', res);
 
@@ -214,9 +208,9 @@ const formatMsDate = dateStr => {
 
 export default function BillInfo({ match }) {
   const { projectId, type: routeType } = _.get(match, 'params');
-  const isMingdaoSaas = !window.platformENV.isOverseas && !window.platformENV.isLocal;
+  const isSaas = !window.platformENV.isLocal;
   const recordType = routeType || localStorage.getItem('billInfoType') || 'paid';
-  const availableRecordTypes = isMingdaoSaas ? ['paid', 'recharge', 'aiBenefit'] : ['paid', 'recharge'];
+  const availableRecordTypes = isSaas ? ['paid', 'recharge', 'aiBenefit'] : ['paid', 'recharge'];
   const type = _.includes(availableRecordTypes, recordType) ? recordType : 'paid';
   const [data, setData] = useSetState({});
   const [paras, setPara] = useSetState({
@@ -256,12 +250,12 @@ export default function BillInfo({ match }) {
 
   const { balance, list = [], allCount } = data;
   const { pageIndex, status, pageSize, startDate, endDate, recordTypes } = paras;
-  const { licenseType, version = {} } = getCurrentProject(projectId, true);
+  const { licenseType } = getCurrentProject(projectId, true);
   const isPaid = licenseType === 1;
   const isFree = licenseType === 0;
   const isRechargeType = displayRecordType === 'recharge';
   const isAiBenefitType = displayRecordType === 'aiBenefit';
-  const freeGift = licenseType === 2 ? 100 : AI_WELFARE_FREE_GIFT_BY_VERSION[version.versionIdV2] || 0;
+  const { grantedMonthlyCredits = 0 } = agentBillingFreeQuota;
 
   const renderAIWelfarePointValue = () => {
     if (isFree) {
@@ -292,7 +286,7 @@ export default function BillInfo({ match }) {
   };
 
   const getAgentBillingFreeQuota = useCallback(() => {
-    if (!projectId || !isMingdaoSaas) return;
+    if (!projectId || !isSaas) return;
 
     agentAjax
       .getAgentBillingFreeQuota({ projectId }, { silent: true })
@@ -302,7 +296,7 @@ export default function BillInfo({ match }) {
       .catch(() => {
         setAgentBillingFreeQuota({});
       });
-  }, [isMingdaoSaas, projectId, setAgentBillingFreeQuota]);
+  }, [isSaas, projectId, setAgentBillingFreeQuota]);
 
   const fetchData = useCallback(() => {
     return orderAjax
@@ -324,7 +318,7 @@ export default function BillInfo({ match }) {
   };
 
   const fetchAiBenefitData = useCallback(() => {
-    if (!isMingdaoSaas) return;
+    if (!isSaas) return;
 
     setAiBenefitLoading(true);
     const { page, size, startDate: sd, endDate: ed } = aiBenefitParas;
@@ -355,7 +349,7 @@ export default function BillInfo({ match }) {
       .finally(() => {
         setAiBenefitLoading(false);
       });
-  }, [isMingdaoSaas, projectId, aiBenefitParas, setAiBenefitData, setAiBenefitLoading]);
+  }, [isSaas, projectId, aiBenefitParas, setAiBenefitData, setAiBenefitLoading]);
 
   // 导出
   const exportOrderRecord = () => {
@@ -538,29 +532,32 @@ export default function BillInfo({ match }) {
                   return _.isNil(value) || value === '' || !_.isFinite(Number(value)) || Number(value) !== 0;
                 })
                 .map((item, index) => {
-                const timeText = formatMsDate(item.createTime);
-                const detailLabel =
-                  item.sceneName && item.agentName
-                    ? `${item.sceneName} · ${item.agentName}`
-                    : item.sceneName || item.agentName || '-';
+                  const timeText = formatMsDate(item.createTime);
+                  const detailLabel =
+                    item.sceneName && item.agentName
+                      ? `${item.sceneName} · ${item.agentName}`
+                      : item.sceneName || item.agentName || '-';
 
-                return (
-                  <div className="agentBillingDetailRow" key={`${agentBillingDetail.traceId}_${index}`}>
-                    <Tooltip title={item.sceneName || item.scene} placement="top">
-                      <div className="detailName overflow_ellipsis">{detailLabel || '-'}</div>
-                    </Tooltip>
-                    <div className="model overflow_ellipsis" title={item.model}>
-                      {item.model || '-'}
+                  return (
+                    <div className="agentBillingDetailRow" key={`${agentBillingDetail.traceId}_${index}`}>
+                      <Tooltip title={item.sceneName || item.scene} placement="top">
+                        <div className="detailName overflow_ellipsis">{detailLabel || '-'}</div>
+                      </Tooltip>
+                      <div className="model overflow_ellipsis" title={item.model}>
+                        {item.model || '-'}
+                      </div>
+                      <div
+                        className="credits"
+                        title={agentBillingDetail.isFreeApplied ? item.freeApplied : item.credits}
+                      >
+                        -{formatBillingNumber(agentBillingDetail.isFreeApplied ? item.freeApplied : item.credits)}
+                      </div>
+                      <div className="createTime" title={timeText}>
+                        {timeText}
+                      </div>
                     </div>
-                    <div className="credits" title={agentBillingDetail.isFreeApplied ? item.freeApplied : item.credits}>
-                      -{formatBillingNumber(agentBillingDetail.isFreeApplied ? item.freeApplied : item.credits)}
-                    </div>
-                    <div className="createTime" title={timeText}>
-                      {timeText}
-                    </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           ) : (
             <div className="emptyList">{_l('暂无扣费明细')}</div>
@@ -591,11 +588,11 @@ export default function BillInfo({ match }) {
   }, [displayRecordType, fetchData]);
 
   useEffect(() => {
-    if (isMingdaoSaas && displayRecordType === 'aiBenefit') {
+    if (isSaas && displayRecordType === 'aiBenefit') {
       const timer = setTimeout(fetchAiBenefitData, 0);
       return () => clearTimeout(timer);
     }
-  }, [fetchAiBenefitData, isMingdaoSaas, displayRecordType]);
+  }, [fetchAiBenefitData, isSaas, displayRecordType]);
 
   const renderPay = ({ status, payAccountInfo = {}, orderId, recordType }) => {
     const { accountId, avatar, fullname } = payAccountInfo;
@@ -905,7 +902,7 @@ export default function BillInfo({ match }) {
               <PurchaseExpandPack className="mLeft10 nowrap" text={_l('充值')} type="recharge" projectId={projectId} />
             ))}
 
-          {isMingdaoSaas && (
+          {isSaas && (
             <AIWelfarePointLine className="Font14 mLeft20">
               <span>{_l('AI 福利点:')}</span>
               {renderAIWelfarePointValue()}
@@ -918,7 +915,9 @@ export default function BillInfo({ match }) {
                           '「AI 福利点」为平台赠送额度（1福利点=1个信用点），仅抵扣 Mingo AI 功能费用；使用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费。',
                         )}
                       </div>
-                      <div className="mTop12">{_l('每月赠送%0福利点，当月1日00:00自动刷新，不累加。', freeGift)}</div>
+                      <div className="mTop12">
+                        {_l('每月赠送%0福利点，当月1日00:00自动刷新，不累加。', grantedMonthlyCredits)}
+                      </div>
                     </Fragment>
                   }
                   placement="bottom"
@@ -960,7 +959,7 @@ export default function BillInfo({ match }) {
                 <i className="icon icon-help Font14 mLeft5 textDisabled hoverColorPrimary TxtMiddle" />
               </Tooltip>
             </li>
-            {isMingdaoSaas && (
+            {isSaas && (
               <li
                 className={cx({ active: isAiBenefitType })}
                 onClick={() => {

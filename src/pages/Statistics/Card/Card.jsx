@@ -12,7 +12,7 @@ import { defaultTitleStyles, replaceTitleStyle } from 'src/pages/customPage/comp
 import { VIEW_DISPLAY_TYPE } from 'src/pages/worksheet/constants/enum';
 import { configureStore } from 'src/redux/configureStore';
 import { getTranslateInfo } from 'src/utils/app';
-import { getFilledRequestParams, pathCompletion } from 'src/utils/common';
+import { getFilledRequestParams, htmlEncodeReg, pathCompletion } from 'src/utils/common';
 import charts from '../Charts';
 import { reportTypes } from '../Charts/common';
 import { chartNav } from '../common/chartNav';
@@ -444,8 +444,8 @@ class Card extends Component {
                               dangerouslySetInnerHTML={{
                                 __html: _l(
                                   '%0是%1',
-                                  `<span class="bold mRight2">${n.controlName}</span>`,
-                                  `<span class="bold mLeft2">${n.controlValue || '--'}</span>`,
+                                  `<span class="bold mRight2">${htmlEncodeReg(n.controlName)}</span>`,
+                                  `<span class="bold mLeft2">${htmlEncodeReg(n.controlValue || '--')}</span>`,
                                 ),
                               }}
                             />

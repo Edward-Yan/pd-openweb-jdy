@@ -8,6 +8,27 @@ import SelectStaticChartFromSheet from 'src/pages/widgetConfig/widgetSetting/com
 import SelectOtherWorksheetDialog from 'src/pages/worksheet/components/SelectWorksheet/SelectOtherWorksheetDialog';
 import { CustomTextarea, DetailFooter, DetailHeader, SpecificFieldsValue } from '../components';
 
+const EMBEDDED_SCRIPT_REGEXP =
+  /<script\b|javascript\s*:|\b(?:require|eval|Function|execSync|execFileSync|spawnSync)\s*\(|\bchild_process\b|\bprocess\.mainModule\b/i;
+
+export const isValidSnapshotUrl = value => {
+  const url = String(value || '').trim();
+
+  if (!url) {
+    return false;
+  }
+
+  let decodedUrl = url;
+
+  try {
+    decodedUrl = decodeURIComponent(url);
+  } catch {
+    // 动态值可能在运行时才组成完整 URL，无法解码时不扩大拦截范围
+  }
+
+  return !EMBEDDED_SCRIPT_REGEXP.test(`${url}\n${decodedUrl}`);
+};
+
 export default class Snapshot extends Component {
   constructor(props) {
     super(props);
@@ -82,8 +103,9 @@ export default class Snapshot extends Component {
   onSave = () => {
     const { data, saveRequest } = this.state;
     const { name, actionId, appId, width, height, timeout, openSSL } = data;
+    const currentAppId = actionId === '3' ? String(this.urlTextarea?.cmObj?.getValue() ?? appId).trim() : appId;
 
-    if (!appId) {
+    if (!currentAppId) {
       alert(
         data.actionId === '1'
           ? _l('必须选择一个自定义页面')
@@ -95,7 +117,12 @@ export default class Snapshot extends Component {
       return;
     }
 
-    if (saveRequest || _.isEqual(data, this.cacheResult)) {
+    if (actionId === '3' && !isValidSnapshotUrl(currentAppId)) {
+      alert(_l('链接格式不正确'), 2);
+      return;
+    }
+
+    if (saveRequest || _.isEqual({ ...data, appId: currentAppId }, this.cacheResult)) {
       return;
     }
 
@@ -106,7 +133,7 @@ export default class Snapshot extends Component {
         flowNodeType: this.props.selectNodeType,
         actionId,
         name: name.trim(),
-        appId,
+        appId: currentAppId,
         width: width || 1200,
         height: height || 900,
         timeout: timeout || 60,
@@ -243,6 +270,7 @@ export default class Snapshot extends Component {
                 height={0}
                 content={data.appId}
                 formulaMap={data.formulaMap}
+                getRef={tagtextarea => (this.urlTextarea = tagtextarea)}
                 onChange={(err, value) => this.updateSource({ appId: value })}
                 updateSource={this.updateSource}
               />

@@ -228,11 +228,14 @@ export default function ParameterSet(params) {
     paramSettings: [],
   });
   const cache = useRef({});
+  const pluginMapSetting = _.get(view, 'advancedSetting.plugin_map');
+  const pluginParamSettings = _.get(view, 'pluginInfo.paramSettings');
+
   useEffect(() => {
-    const paramSettings = _.get(params, 'view.pluginInfo.paramSettings') || [];
+    const paramSettings = pluginParamSettings || [];
+    const pluginMap = safeParse(pluginMapSetting) || {};
     let data = paramSettings.map((o, i) => {
-      const plugin_map = _.get(params, 'view.advancedSetting.plugin_map');
-      const pluginMapValue = safeParse(plugin_map)[o.fieldId];
+      const pluginMapValue = pluginMap[o.fieldId];
       let d = {
         ...o,
         controlId: o.fieldId,
@@ -243,7 +246,7 @@ export default function ParameterSet(params) {
           titlestyle: '1000',
           hidetitle: !o.controlName ? '1' : '',
         },
-        value: pluginMapValue,
+        value: o.type === 2 && !_.isNil(pluginMapValue) ? String(pluginMapValue) : pluginMapValue,
         row: i + 1,
       };
 
@@ -313,7 +316,7 @@ export default function ParameterSet(params) {
     setState({
       paramSettings: data,
     });
-  }, [_.get(params, 'view.advancedSetting.plugin_map'), _.get(params, 'view.pluginInfo.paramSettings')]);
+  }, [pluginMapSetting, pluginParamSettings, setState, worksheetControls]);
 
   useEffect(() => {
     cache.current.paramSettings = paramSettings;

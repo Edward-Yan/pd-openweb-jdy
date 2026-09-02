@@ -11,6 +11,7 @@ import ajaxRequest from 'src/api/taskCenter';
 import Commenter from 'src/components/comment/commenter';
 import CommentList from 'src/components/comment/commentList';
 import Editor from 'src/pages/PageHeader/AppPkgHeader/AppDetail/EditorDiaLogContent';
+import { htmlEncodeReg } from 'src/utils/common';
 import editFolder from '../../components/editFolder/editFolder';
 import { clearFolderTip } from '../../redux/actions';
 import { checkIsProject, errorMessage } from '../../utils/utils';
@@ -1068,7 +1069,7 @@ class FolderDetail extends Component {
                   ) : (
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: _l('对群组 %0 公开', '<span class="bold">' + groupNames + '</span>'),
+                        __html: _l('对群组 %0 公开', '<span class="bold">' + htmlEncodeReg(groupNames) + '</span>'),
                       }}
                     />
                   )}

@@ -224,6 +224,8 @@ function Texts(props) {
     };
   }
 
+  const recordName = entityName || _l('记录');
+
   return (
     <div>
       {records.map((record, i) => {
@@ -250,7 +252,7 @@ function Texts(props) {
         );
       })}
       {allowNewRecord && (
-        <Tooltip title={`新建${entityName || _l('记录')}`}>
+        <Tooltip title={_l('新建%0', recordName)}>
           <RecordTextAdd style={records.length ? { marginLeft: 13 } : {}} onClick={onAdd}>
             <i className="icon icon-plus"></i>
           </RecordTextAdd>

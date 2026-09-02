@@ -270,11 +270,7 @@ const Embed = props => {
                     fromEmbed: true,
                     isAddRecord: enumDefault2 !== 1,
                     searchRecord: true,
-                    ...(viewType === VIEW_DISPLAY_TYPE.sheet
-                      ? {
-                          pageCount: rownum,
-                        }
-                      : {}),
+                    pageCount: rownum,
                     fullShowTable: true,
                     minRowCount: 2,
                     isDraft,

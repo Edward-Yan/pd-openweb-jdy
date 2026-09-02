@@ -127,12 +127,14 @@ export const addFlowNode =
       })
       .then(result => {
         const { workflowDetail } = _.cloneDeep(getState().workflow);
+        const addFlowNodes = _.get(result, 'addFlowNodes') || [];
+        const updateFlowNodes = _.get(result, 'updateFlowNodes') || [];
 
         if (workflowDetail.id !== processId) {
           const nodeId = getApprovalProcessNodeId(workflowDetail.flowNodeMap, processId);
 
           if (nodeId) {
-            result.addFlowNodes.concat(result.updateFlowNodes).forEach(item => {
+            addFlowNodes.concat(updateFlowNodes).forEach(item => {
               if ((workflowDetail.flowNodeMap[nodeId].processNode.flowNodeMap[item.id] || {}).appType === 9) {
                 workflowDetail.flowNodeMap[nodeId].processNode.flowNodeMap[item.id].nextId = item.nextId;
               } else {
@@ -141,7 +143,7 @@ export const addFlowNode =
             });
           }
         } else {
-          result.addFlowNodes.concat(result.updateFlowNodes).forEach(item => {
+          addFlowNodes.concat(updateFlowNodes).forEach(item => {
             workflowDetail.flowNodeMap[item.id] = item;
           });
         }
@@ -156,7 +158,9 @@ export const addFlowNode =
           publishStatus: 1,
         });
 
-        callback(result.addFlowNodes[0]);
+        if (addFlowNodes[0]) {
+          callback(addFlowNodes[0]);
+        }
       });
   };
 

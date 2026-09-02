@@ -1,6 +1,6 @@
 ﻿import LinkifyIt from 'linkify-it';
 import moment from 'moment';
-import { browserIsMobile, pathCompletion } from 'src/utils/common';
+import { browserIsMobile, htmlEncodeReg, pathCompletion } from 'src/utils/common';
 import { MSGTYPES, SOURCE_TYPE } from './constants';
 
 export const formatInboxItem = function (inboxItem) {
@@ -100,26 +100,26 @@ export const formatInboxItem = function (inboxItem) {
       break;
     // 工作表
     case MSGTYPES.WorkSheetReply:
-      typeName = _l('在%0讨论中回复了你', discussion.entityName);
+      typeName = _l('在%0讨论中回复了你', htmlEncodeReg(discussion.entityName));
       break;
     case MSGTYPES.WorkSheetMentioned:
-      typeName = _l('在%0讨论中提到了你', discussion.entityName);
+      typeName = _l('在%0讨论中提到了你', htmlEncodeReg(discussion.entityName));
       break;
     case MSGTYPES.WorkSheetComment:
-      typeName = _l('发表了%0讨论', discussion.entityName);
+      typeName = _l('发表了%0讨论', htmlEncodeReg(discussion.entityName));
       break;
     // 工作表记录
     case MSGTYPES.WorkSheetRowReply:
-      typeName = _l('在%0讨论中回复了你', discussion.entityName);
+      typeName = _l('在%0讨论中回复了你', htmlEncodeReg(discussion.entityName));
       break;
     case MSGTYPES.WorkSheetRowMentioned:
-      typeName = _l('在%0讨论中提到了你', discussion.entityName);
+      typeName = _l('在%0讨论中提到了你', htmlEncodeReg(discussion.entityName));
       break;
     case MSGTYPES.WorkSheetRowComment:
-      typeName = _l('发表了%0讨论', discussion.entityName);
+      typeName = _l('发表了%0讨论', htmlEncodeReg(discussion.entityName));
       break;
     case MSGTYPES.FocusMessage:
-      typeName = _l('在%0中发布了讨论', discussion.entityName);
+      typeName = _l('在%0中发布了讨论', htmlEncodeReg(discussion.entityName));
       break;
 
     default:

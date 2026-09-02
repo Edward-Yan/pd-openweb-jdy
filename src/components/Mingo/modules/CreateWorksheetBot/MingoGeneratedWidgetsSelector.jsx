@@ -12,7 +12,7 @@ import { DEFAULT_CONFIG } from 'src/pages/widgetConfig/config/widget';
 import { WIDGETS_TO_API_TYPE_ENUM } from 'src/pages/widgetConfig/config/widget';
 import { getIconByType } from 'src/pages/widgetConfig/util';
 import LoadingDots from 'src/pages/widgetConfig/widgetSetting/components/DevelopWithAI/ChatBot/LoadingDots';
-import { emitter } from 'src/utils/common';
+import { emitter, htmlEncodeReg } from 'src/utils/common';
 import { changeCodeOfAIGenControl, convertAiRecommendControlToControlData } from 'src/utils/control';
 import { parseStreamingJsonlData } from 'src/utils/sse';
 
@@ -228,7 +228,7 @@ function CreateWorksheetOfRelateRecord({
           dangerouslySetInnerHTML={{
             __html: _l(
               '所选关联字段 <b>%0</b> 暂无已有工作表，将为您创建工作表后再继续添加字段',
-              relateControls.map(item => item.controlName).join('、'),
+              relateControls.map(item => htmlEncodeReg(item.controlName)).join('、'),
             ),
           }}
         />

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: "
-"POT-Creation-Date: 2026-07-14 17:50:50"
+"POT-Creation-Date: 2026-08-26 14:36:28"
 "Language-Team: Malay"
 "Language: ms"
 "MIME-Version: 1.0"
@@ -279,7 +279,7 @@ msgstr "Pencetus Mengikut Lembaran Kerja"
 
 #: Disabled references:1
 msgid "定时触发"
-msgstr "Trigger ikut jadual"
+msgstr "Dicetus Pada Jadual"
 
 #: Disabled references:1
 msgid "日期触发"
@@ -295,7 +295,7 @@ msgstr "Trigger Tidak Dikenali"
 
 #: Disabled references:1
 msgid "仪表盘"
-msgstr "Dashboard"
+msgstr "Papan pemuka"
 
 #: Disabled references:1
 msgid "工作台"
@@ -535,7 +535,7 @@ msgstr "Sedang muat naik…"
 
 #: Disabled references:1
 msgid "解析中"
-msgstr "Parsing"
+msgstr "Menghuraikan"
 
 #: Disabled references:1
 msgid "已上传"
@@ -1079,15 +1079,11 @@ msgstr "Urus Lampiran"
 
 #: Disabled references:1
 msgid "全部下载"
-msgstr "semua fail"
+msgstr "Muat Turun Semua"
 
 #: Disabled references:1
 msgid "未命名"
 msgstr "Tanpa Nama"
-
-#: Disabled references:1
-msgid "不在可选范围内"
-msgstr "Di luar julat pilihan"
 
 #: Disabled references:1
 msgid "最多可选择20项"
@@ -1103,7 +1099,7 @@ msgstr "Sila masukkan lebih banyak kata kunci"
 
 #: Disabled references:1
 msgid "数据源异常"
-msgstr "Sumber Data ralat"
+msgstr "Sumber tidak tersedia"
 
 #: Disabled references:1
 msgid "数据加载中..."
@@ -1580,6 +1576,10 @@ msgstr "Ambil Foto"
 #: Disabled references:1
 msgid "拍摄"
 msgstr "Tembak"
+
+#: Disabled references:1
+msgid "不在可选范围内"
+msgstr "Di luar julat pilihan"
 
 #: Disabled references:1
 msgid "%0级"
@@ -2691,11 +2691,11 @@ msgstr "Masukkan atau tampal kandungan untuk mula 👇"
 
 #: Disabled references:1
 msgid "下次试试在工作表页面直接粘贴剪贴板内容，可以自动激活智能创建，更方便喔～"
-msgstr "Tampal kandungan clipboard terus ke page table untuk auto-trigger smart creation—lebih mudah dari sebelum ini!"
+msgstr "Lain Kali, Tampal Terus ke Lembaran Kerja untuk Buat Pintar Lebih Pantas～"
 
 #: Disabled references:1
 msgid "✨AI根据输入内容智能推测或联网搜索相关信息，为您补全尽可能多的字段"
-msgstr "✨AI akan isi medan secara automatik berdasarkan input anda"
+msgstr "✨AI menggunakan input anda dan sumber dalam talian untuk mengisi sebanyak mungkin medan"
 
 #: Disabled references:1
 msgid "AI只填写输入内容中明确包含的字段"
@@ -3035,7 +3035,7 @@ msgstr "Aplikasi telah ditutup"
 
 #: Disabled references:1
 msgid "应用已删除"
-msgstr "Aplikasi telah dipadam"
+msgstr "Aplikasi dipadam"
 
 #: Disabled references:1
 msgid "你还不是应用成员，无权访问此应用"
@@ -5115,7 +5115,7 @@ msgstr "Pelan Perbandingan Terperinci"
 
 #: Disabled references:1
 msgid "免费版"
-msgstr "Free"
+msgstr "Percuma"
 
 #: Disabled references:1
 msgid "标准版"
@@ -5231,11 +5231,11 @@ msgstr "300G/bulan tahun"
 
 #: Disabled references:1
 msgid "AI 福利点"
-msgstr "Kredit Bonus AI"
+msgstr "Kredit Percuma AI"
 
 #: Disabled references:1
 msgid "「AI 福利点」（1福利点=1个信用点）可用于抵扣 mingo 中AI搭建和查询功能费用，组织所有用户共享；使用 AI 搭建应用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费"
-msgstr "Kredit Bonus AI (1 kredit hadiah = 1 kredit) boleh digunakan untuk menampung kos ciri binaan dan pertanyaan AI dalam Mingo, dikongsi semua pengguna; ditolak dahulu sebelum kredit umum"
+msgstr "Kredit Bonus AI (1 kredit hadiah = 1 kredit) boleh digunakan untuk kos AI dalam pembinaan dan carian di Mingo, dikongsi oleh semua pengguna; ditolak dahulu sebelum kredit umum"
 
 #: Disabled references:1
 msgid "一次性赠送50"
@@ -5539,7 +5539,7 @@ msgstr "500,000"
 
 #: Disabled references:1
 msgid "数据同步"
-msgstr "Data Sync"
+msgstr "Penyegerakan data"
 
 #: Disabled references:1
 msgid "数据同步任务数"
@@ -6235,7 +6235,7 @@ msgstr "Subtask"
 
 #: Disabled references:1
 msgid "免费"
-msgstr "Free"
+msgstr "Percuma"
 
 #: Disabled references:1
 msgid "试用"
@@ -7338,6 +7338,10 @@ msgid "看不清，换一张"
 msgstr "Tak jelas? Tukar lain."
 
 #: Disabled references:1
+msgid "加载失败，请刷新重试"
+msgstr ""
+
+#: Disabled references:1
 msgid "管理应用“%0”"
 msgstr "Pengurusan App “%0”"
 
@@ -7843,7 +7847,7 @@ msgstr "Peranti Kelihatan"
 
 #: Disabled references:1
 msgid "操作人"
-msgstr "Operator"
+msgstr "Pelakon"
 
 #: Disabled references:1
 msgid "导出时间"
@@ -8567,7 +8571,7 @@ msgstr "Pindah gagal"
 
 #: Disabled references:1
 msgid "添加时间"
-msgstr "Tetap Masa"
+msgstr "Masa Menyertai"
 
 #: Disabled references:1
 msgid "添加人"
@@ -8715,7 +8719,7 @@ msgstr "Tiada global variables"
 
 #: Disabled references:1
 msgid "值"
-msgstr "Nombor"
+msgstr "Nilai"
 
 #: Disabled references:1
 msgid "值为空"
@@ -8903,7 +8907,7 @@ msgstr "Had ditetapkan kepada"
 
 #: Disabled references:1
 msgid "重置"
-msgstr "Reset"
+msgstr "Tetapkan semula"
 
 #: Disabled references:1
 msgid "全局配置"
@@ -9331,7 +9335,7 @@ msgstr "Buat Kumpulan Item Aplikasi"
 
 #: Disabled references:1
 msgid "批量创建应用项"
-msgstr "Buat Aplikasi Secara Pukal"
+msgstr "Buat Item Aplikasi Secara Pukal"
 
 #: Disabled references:1
 msgid "编辑应用"
@@ -9347,7 +9351,7 @@ msgstr "Dapatkan Senarai Lembaran Kerja"
 
 #: Disabled references:1
 msgid "获取工作表详情"
-msgstr "Dapatkan Paparan Butiran Lembaran Kerja"
+msgstr "Dapatkan Butiran Lembaran Kerja"
 
 #: Disabled references:1
 msgid "编辑工作表"
@@ -9367,15 +9371,15 @@ msgstr "Lihat Butiran Row"
 
 #: Disabled references:1
 msgid "创建行记录"
-msgstr "Buat Row"
+msgstr "Buat Rekod"
 
 #: Disabled references:1
 msgid "更新行记录"
-msgstr "Kemas kini Row"
+msgstr "Kemas Kini Rekod"
 
 #: Disabled references:1
 msgid "删除行记录"
-msgstr "Padam Row"
+msgstr "Padam Rekod"
 
 #: Disabled references:1
 msgid "获取行记录列表"
@@ -9435,11 +9439,11 @@ msgstr "Sunting Halaman Tersuai"
 
 #: Disabled references:1
 msgid "获取触发流程列表"
-msgstr "Dapatkan Senarai Aliran Dicetus"
+msgstr "Dapatkan Butiran Workflow Dicetuskan"
 
 #: Disabled references:1
 msgid "获取触发流程详情"
-msgstr "Paparan Butiran Aliran Dicetus"
+msgstr "Dapatkan Butiran Workflow Terpicu"
 
 #: Disabled references:1
 msgid "获取工作流结构"
@@ -9447,11 +9451,11 @@ msgstr "Dapatkan Struktur Aliran Kerja"
 
 #: Disabled references:1
 msgid "获取审批流程执行列表"
-msgstr "Dapatkan Senarai Pelaksanaan Aliran Kelulusan"
+msgstr "Dapatkan Senarai Aliran Kelulusan"
 
 #: Disabled references:1
 msgid "获取审批流程执行详情"
-msgstr "Paparan butiran pelaksanaan aliran kerja kelulusan"
+msgstr "Dapatkan Butiran Aliran Kelulusan"
 
 #: Disabled references:1
 msgid "批量创建工作流节点"
@@ -9479,11 +9483,11 @@ msgstr "Senarai Tugasan"
 
 #: Disabled references:1
 msgid "获取用户流程待办列表"
-msgstr "Dapatkan Senarai Tugasan Aliran Kerja Pengguna"
+msgstr "Dapatkan Senarai Tugasan Pengguna"
 
 #: Disabled references:1
 msgid "获取审批待办详情"
-msgstr "Dapatkan Paparan Butiran Tugas Kelulusan"
+msgstr "Dapatkan Butiran Tugas Kelulusan"
 
 #: Disabled references:1
 msgid "批量审批"
@@ -9531,7 +9535,7 @@ msgstr "Dapatkan Butiran Peranan"
 
 #: Disabled references:1
 msgid "成员退出所有角色"
-msgstr "Padam semua peranan dari ahli"
+msgstr "Padam Semua Peranan dari Ahli"
 
 #: Disabled references:1
 msgid "获取角色列表"
@@ -9575,7 +9579,7 @@ msgstr "Dapatkan Senarai Knowledge Base"
 
 #: Disabled references:1
 msgid "向量知识库检索"
-msgstr "Pengambilan Knowledge Base"
+msgstr "Pengambilan Vektor Knowledge Base"
 
 #: Disabled references:1
 msgid "查找组织部门"
@@ -9631,7 +9635,7 @@ msgstr "Ciri AI Mingo"
 
 #: Disabled references:1
 msgid "关闭后，当AI福利点用完后，将不会继续扣除信用点，且无法使用MingoAI付费功能"
-msgstr "Apabila dinyahaktifkan, Kredit Bonus AI tidak lagi menggunakan Kredit, dan ciri berbayar MingoAI tidak dapat diakses"
+msgstr "Apabila dilumpuhkan, kredit organisasi tidak akan digunakan selepas Kredit Percuma AI habis. Ciri Mingo AI berasaskan kredit tidak tersedia."
 
 #: Disabled references:1
 msgid "发送短信"
@@ -9983,7 +9987,7 @@ msgstr "Delegasi To-do"
 
 #: Disabled references:1
 msgid "每月1日00:00自动刷新为 %0 福利点，不累加"
-msgstr "Muat Semula Auto kepada %0 kredit percuma pada 00:00 setiap 1hb. Tidak terkumpul"
+msgstr "Muat semula secara auto kepada %0 kredit percuma pada 00:00 setiap 1hb. Tidak berakumulasi"
 
 #: Disabled references:1
 msgid "请先完成组织身份认证"
@@ -10003,7 +10007,7 @@ msgstr "Kredit digunakan secara automatik untuk ciri AI Mingo, emel, SMS, dan pe
 
 #: Disabled references:1
 msgid "其中「AI 福利点」为平台赠送额度（1福利点=1个信用点），仅抵扣 Mingo AI功能费用；使用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费。"
-msgstr "Kredit Bonus AI ialah kredit yang diberikan oleh platform, hanya untuk ciri AI Mingo (1 Kredit Bonus AI = 1 Kredit). Kredit ini akan digunakan dahulu sebelum kredit umum ditolak selepas habis."
+msgstr "Kredit Percuma AI ialah kredit yang diberikan oleh platform, hanya untuk ciri AI Mingo (1 Kredit Percuma AI = 1 Kredit). Ia akan digunakan dahulu, diikuti kredit umum selepas habis."
 
 #: Disabled references:1
 msgid "「信用点」用于发送邮件、短信等计费服务自动扣费。为避免系统功能不可用，请确保账户信用点余额充足。"
@@ -10023,7 +10027,7 @@ msgstr "Kredit Amaran"
 
 #: Disabled references:1
 msgid "AI 福利点:"
-msgstr "Kredit Bonus AI:"
+msgstr "Kredit Percuma AI"
 
 #: Disabled references:1
 msgid "认证组织+10信用点"
@@ -10379,7 +10383,7 @@ msgstr "Nama Kunci"
 
 #: Disabled references:1
 msgid "授权服务"
-msgstr "Servis Dibenarkan"
+msgstr "Servis"
 
 #: Disabled references:1
 msgid "已禁用"
@@ -10655,7 +10659,7 @@ msgstr "Sila masukkan nama paparan custom"
 
 #: Disabled references:1
 msgid "端口号必须为数字"
-msgstr "Nombor port mesti nombor"
+msgstr "Nombor port mesti guna nilai digit"
 
 #: Disabled references:1
 msgid "根据组在对应的DN检索账户"
@@ -10907,7 +10911,7 @@ msgstr "Sedang dikira, sila tunggu"
 
 #: Disabled references:1
 msgid "同步"
-msgstr "Sync"
+msgstr "Segerak"
 
 #: Disabled references:1
 msgid "请先开通飞书待办权限"
@@ -11127,7 +11131,7 @@ msgstr "%0 pautan"
 
 #: Disabled references:1
 msgid "1. 登录企业微信 — 定位到“应用管理”"
-msgstr "1. Log masuk WeCom dan pergi ke \"应用管理\""
+msgstr "1. Log masuk WeCom — pergi ke “Pengurusan Aplikasi”"
 
 #: Disabled references:1
 msgid "登录企业微信 — 定位到“应用管理”"
@@ -12940,7 +12944,7 @@ msgstr "Operasi UI"
 
 #: Disabled references:1
 msgid "个人访问令牌"
-msgstr "Token Akses Peribadi"
+msgstr "Token Akses"
 
 #: Disabled references:1
 msgid "应用密钥"
@@ -13152,7 +13156,7 @@ msgstr "Padam Personel"
 
 #: Disabled references:1
 msgid "注销"
-msgstr "Log keluar"
+msgstr "Padam"
 
 #: Disabled references:1
 msgid "交接"
@@ -13448,7 +13452,7 @@ msgstr "Ahli Tidak Diketahui"
 
 #: Disabled references:1
 msgid "获取AI福利点记录失败"
-msgstr "Gagal Dapatkan Rekod Kredit Bonus AI"
+msgstr "Gagal mendapatkan rekod Kredit Percuma AI"
 
 #: Disabled references:1
 msgid "支付记录"
@@ -13456,7 +13460,7 @@ msgstr "Rekod Transaksi"
 
 #: Disabled references:1
 msgid "信用点消费"
-msgstr "Penggunaan Kredit"
+msgstr "Kredit"
 
 #: Disabled references:1
 msgid "确定取消该订单？"
@@ -13504,7 +13508,7 @@ msgstr "Salin Bill ID"
 
 #: Disabled references:1
 msgid "暂无AI福利点扣费记录"
-msgstr "Tiada rekod Kredit Bonus AI yet"
+msgstr "Tiada rekod Kredit Percuma AI yet"
 
 #: Disabled references:1
 msgid "组织 - 账务"
@@ -13520,11 +13524,11 @@ msgstr "Tetapan Invois"
 
 #: Disabled references:1
 msgid "「AI 福利点」为平台赠送额度（1福利点=1个信用点），仅抵扣 Mingo AI 功能费用；使用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费。"
-msgstr "Kredit Bonus AI ialah kredit yang diberikan oleh platform, hanya untuk ciri Mingo AI (1 Kredit Bonus AI = 1 Kredit). Kredit ini digunakan dahulu sebelum kredit umum ditolak."
+msgstr "Kredit Percuma AI ialah kredit yang diberikan oleh platform dan hanya digunakan untuk ciri Mingo AI (1 Kredit Percuma AI = 1 Kredit). Kredit ini akan digunakan dahulu sebelum kredit umum ditolak selepas habis."
 
 #: Disabled references:1
 msgid "每月赠送%0福利点，当月1日00:00自动刷新，不累加。"
-msgstr "Dapatkan %0 kredit hadiah percuma setiap bulan. Ia akan dimuat semula secara automatik pada 00:00 hari pertama dan tidak dibawa ke bulan seterusnya."
+msgstr "Dapatkan %0 kredit hadiah percuma setiap bulan. Kredit akan muat semula secara automatik pada 00:00 hari pertama dan tidak dibawa ke bulan berikutnya."
 
 #: Disabled references:1
 msgid "异步执行的工作流扣费存在约 5 分钟延迟，同时系统会将 5 分钟内相同操作自动合并成一条扣费记录，如5分钟内相同流程的扣费信息"
@@ -13532,7 +13536,7 @@ msgstr "Workflow Tak Segerak ada kelewatan sekitar 5 minit, dan sistem akan gabu
 
 #: Disabled references:1
 msgid "AI 福利点消费"
-msgstr "Penggunaan Kredit AI"
+msgstr "Kredit Percuma AI"
 
 #: Disabled references:1
 msgid "按照时间筛选"
@@ -14078,7 +14082,7 @@ msgstr "Kredit Ditambah, Terima"
 
 #: Disabled references:1
 msgid "AI 福利点；多充多送可叠加。"
-msgstr "Kredit Bonus AI; Lagi Tambah Nilai, Lagi Banyak Ganjaran. Boleh Digabung."
+msgstr "Kredit Percuma AI; Lagi Tambah Nilai, Lagi Banyak Ganjaran. Boleh Digabung."
 
 #: Disabled references:1
 msgid "活动截止时间：2026 年 7 月 31 日。"
@@ -14094,7 +14098,7 @@ msgstr "Baki kredit selepas pembelian: %0"
 
 #: Disabled references:1
 msgid "AI 福利点余额：%0"
-msgstr "Baki Kredit Bonus AI: %0"
+msgstr "Baki Kredit Percuma AI: %0"
 
 #: Disabled references:1
 msgid "信用点付款"
@@ -14454,7 +14458,7 @@ msgstr "Ahli"
 
 #: Disabled references:1
 msgid "按发表动态更新数量降序排列"
-msgstr "Ikut post"
+msgstr "Susun mengikut bilangan kemas kini siaran secara menurun"
 
 #: Disabled references:1
 msgid "发布动态更新数量"
@@ -14506,7 +14510,7 @@ msgstr "Terbit Notis"
 
 #: Disabled references:1
 msgid "可以在组织内群发通告，支持附件、私信、Email"
-msgstr "Boleh hantar pemberitahuan kumpulan dalam organisasi, sokong lampiran, mesej peribadi, dan emel"
+msgstr "Hantar pengumuman organisasi bersama lampiran melalui mesej langsung atau emel"
 
 #: Disabled references:1
 msgid "用户排行、动态更新、文档、图片等统计信息"
@@ -15670,7 +15674,7 @@ msgstr "Amaun Cukai"
 
 #: Disabled references:1
 msgid "发票详情-%0"
-msgstr "Butiran Invois"
+msgstr "Butiran invois - %0"
 
 #: Disabled references:1
 msgid "状态："
@@ -15742,7 +15746,7 @@ msgstr "Sahkan Red Flush"
 
 #: Disabled references:1
 msgid "冲红原因"
-msgstr "Sebab Pembalikan"
+msgstr "Sebab pembalikan"
 
 #: Disabled references:1
 msgid "付费开通"
@@ -17514,7 +17518,7 @@ msgstr "Sekuriti - Data & Akses"
 
 #: Disabled references:1
 msgid "对组织成员的数据访问、下载与关键操作进行统一管控，降低数据泄露与误操作风险"
-msgstr "Pusatkan kawalan akses data, muat turun, dan tindakan kritikal untuk ahli organisasi bagi mengurangkan risiko kebocoran data dan kesilapan operasi."
+msgstr "Urus capaian data, muat turun, dan tindakan kritikal ahli organisasi secara berpusat untuk mengurangkan risiko kebocoran dan ralat data"
 
 #: Disabled references:1
 msgid "应用访问策略"
@@ -17530,7 +17534,7 @@ msgstr "Hadkan Muat Turun Lampiran"
 
 #: Disabled references:1
 msgid "限制成员在特定网络或设备环境下下载附件，防止文件外泄"
-msgstr "Hadkan ahli untuk muat turun lampiran hanya dalam network atau persekitaran device tertentu bagi mengelakkan kebocoran data"
+msgstr "Hadkan Muat Turun Lampiran kepada Rangkaian atau Peranti Diluluskan untuk Elak Kebocoran Data"
 
 #: Disabled references:1
 msgid "为组织内所有应用内容显示屏幕水印，防止截图、拍照等场景下的数据外泄"
@@ -17702,7 +17706,7 @@ msgstr "Apabila diaktifkan, hanya pentadbir yang diberi kebenaran boleh guna."
 
 #: Disabled references:1
 msgid "允许一小时内免验证 (默认)"
-msgstr "Benarkan tempoh satu jam tanpa verifikasi (lalai)"
+msgstr "Langkau Pengesahan Selama 1 Jam (Lalai)"
 
 #: Disabled references:1
 msgid "每次操作均需验证"
@@ -17746,7 +17750,7 @@ msgstr "Tetapan semasa"
 
 #: Disabled references:1
 msgid "允许一小时内免验证"
-msgstr "Benarkan satu jam tanpa pengesahan"
+msgstr "Langkau Pengesahan Selama 1 Jam"
 
 #: Disabled references:1
 msgid "AI 模型授权规则"
@@ -18170,7 +18174,7 @@ msgstr "Edisi Berbayar"
 
 #: Disabled references:1
 msgid "，请"
-msgstr "Sila berikan teks UI English yang ingin diterjemahkan."
+msgstr ", sila"
 
 #: Disabled references:1
 msgid "调整您的座席数"
@@ -18649,6 +18653,14 @@ msgid "在人员选择层、通讯录中按部门查看时，按设置的排序�
 msgstr "Paparan ikut jabatan dalam pemilihan pengguna dan kontak, ikut susunan yang ditetapkan"
 
 #: Disabled references:1
+msgid "刷新中，请稍后查看"
+msgstr "Sedang Muat Semula, Sila Semak Semula Nanti"
+
+#: Disabled references:1
+msgid "刷新失败"
+msgstr "Segar semula gagal"
+
+#: Disabled references:1
 msgid "在进行工作表和工作流的所有下级部门检索时，若所有下级部门总数超过2000（含），系统将默认仅获取当前部门的“一级子部门”所有部门。"
 msgstr "Jika jumlah sub-jabatan dalam worksheet dan workflow melebihi 2,000, sistem akan paparkan hanya sub-jabatan tahap pertama bagi jabatan semasa."
 
@@ -18663,6 +18675,10 @@ msgstr "Import Jabatan"
 #: Disabled references:1
 msgid "导出部门"
 msgstr "Eksport Jabatan"
+
+#: Disabled references:1
+msgid "刷新部门列表"
+msgstr "Muat Semula Senarai Jabatan"
 
 #: Disabled references:1
 msgid "删除“%0”"
@@ -18691,6 +18707,10 @@ msgstr "Beberapa induk jabatan tiada. Sila pulihkan dahulu."
 #: Disabled references:1
 msgid "复制 ID"
 msgstr "Salin ID"
+
+#: Disabled references:1
+msgid "刷新部门成员信息"
+msgstr "Muat Semula Maklumat Ahli Jabatan"
 
 #: Disabled references:1
 msgid "添加子部门"
@@ -18939,10 +18959,6 @@ msgstr "Hanya paparan tanpa staf jabatan"
 #: Disabled references:1
 msgid "更多邀请"
 msgstr "Jemput Lagi"
-
-#: Disabled references:1
-msgid "刷新失败"
-msgstr "Segar semula gagal"
 
 #: Disabled references:1
 msgid "刷新所有成员信息"
@@ -19349,6 +19365,10 @@ msgid "角色存在成员，无法删除"
 msgstr "Tidak boleh padam peranan kerana ada ahli sedia ada."
 
 #: Disabled references:1
+msgid "刷新角色成员信息"
+msgstr "Muat Semula Maklumat Ahli Peranan"
+
+#: Disabled references:1
 msgid "停用后，当前停用的角色将对用户隐藏，角色下的成员不会移除。"
 msgstr "Bila dinyahaktif, peranan akan disembunyi, ahli yang ditetapkan tidak terjejas."
 
@@ -19381,6 +19401,10 @@ msgid "导出角色"
 msgstr "Eksport Peranan"
 
 #: Disabled references:1
+msgid "刷新角色列表"
+msgstr "Muat Semula Senarai Peranan"
+
+#: Disabled references:1
 msgid "暂无结果"
 msgstr "Tiada hasil"
 
@@ -19402,7 +19426,7 @@ msgstr "Favorit"
 
 #: Disabled references:1
 msgid "市场"
-msgstr "Market"
+msgstr "Pasaran"
 
 #: Disabled references:1
 msgid "应用库%01000"
@@ -19906,7 +19930,7 @@ msgstr "Format pautan tidak sah"
 
 #: Disabled references:1
 msgid "宣传栏"
-msgstr "Banner"
+msgstr "Sepanduk"
 
 #: Disabled references:1
 msgid "支持 jpg、jpeg、png、gif格式，2MB以内"
@@ -20146,7 +20170,7 @@ msgstr "Format Data"
 
 #: Disabled references:1
 msgid "字段已删除"
-msgstr "Medan telah dipadam"
+msgstr "Medan dipadam"
 
 #: Disabled references:1
 msgid "记录数量"
@@ -20170,7 +20194,7 @@ msgstr "Had limit"
 
 #: Disabled references:1
 msgid "计算字段"
-msgstr "Medan Dikira"
+msgstr "Medan Pengiraan"
 
 #: Disabled references:1
 msgid "计算"
@@ -20286,7 +20310,7 @@ msgstr "Resync gagal. Cuba lagi nanti."
 
 #: Disabled references:1
 msgid "重新同步"
-msgstr "Resync"
+msgstr "Segerak semula"
 
 #: Disabled references:1
 msgid "检测中..."
@@ -21270,7 +21294,7 @@ msgstr "Masukkan kata kunci untuk uji cari"
 
 #: Disabled references:1
 msgid "检索到 %0 个结果"
-msgstr "0 hasil dijumpai"
+msgstr "%0 hasil ditemui"
 
 #: Disabled references:1
 msgid "增强命中"
@@ -21382,7 +21406,7 @@ msgstr "Lampiran: %0 bahagian"
 
 #: Disabled references:1
 msgid "共 %0 个分块"
-msgstr "Tiada teks untuk diterjemahkan. Sila sertakan teks UI bahasa Inggeris untuk diterjemahkan ke Bahasa Melayu."
+msgstr "%0 blok"
 
 #: Disabled references:1
 msgid "知识范围有调整。确认保存后将对已分块数据重新计算分块。"
@@ -21558,7 +21582,7 @@ msgstr "Di luar julat"
 
 #: Disabled references:1
 msgid "大于"
-msgstr "Please provide the English UI text for translation."
+msgstr "Lebih besar daripada"
 
 #: Disabled references:1
 msgid "大于等于"
@@ -21566,11 +21590,11 @@ msgstr "Lebih daripada"
 
 #: Disabled references:1
 msgid "小于"
-msgstr "Please provide the English UI text you would like translated."
+msgstr "Kurang daripada"
 
 #: Disabled references:1
 msgid "小于等于"
-msgstr "Sila masukkan teks UI Inggeris yang ingin diterjemahkan."
+msgstr "Kurang daripada"
 
 #: Disabled references:1
 msgid "选中"
@@ -21589,8 +21613,8 @@ msgid "知识库用量超限，请联系组织管理员增购额度"
 msgstr "Had limit Knowledge Base. Hubungi admin untuk naik taraf"
 
 #: Disabled references:1
-msgid "开启后，对 %0 格式的附件使用视觉模型解析，提升复杂文档的结构还原准确率。"
-msgstr "Apabila diaktifkan, visual model digunakan untuk parse lampiran dalam format %0, meningkatkan ketepatan rekonstruksi struktur dokumen kompleks."
+msgid "开启后，对 %0 格式的附件进行增强解析，提升复杂文档的内容提取效果；暂不识别文档内图片内容。"
+msgstr "Apabila diaktifkan, meningkatkan penyahhuraian lampiran %0 untuk pengekstrakan kandungan kompleks. Imej dokumen belum disokong."
 
 #: Disabled references:1
 msgid "向量数据库服务未部署，知识库暂不可用"
@@ -22010,7 +22034,7 @@ msgstr "Arahan Kelulusan"
 
 #: Disabled references:1
 msgid "填写说明"
-msgstr "Arahan Pengisian"
+msgstr "Arahan"
 
 #: Disabled references:1
 msgid "通知说明"
@@ -22214,7 +22238,7 @@ msgstr "Bilangan backup file tanpa had"
 
 #: Disabled references:1
 msgid "每个备份文件仅保留%0天有效期，超过%0天的会自动删除"
-msgstr "Setiap fail backup disimpan selama %0 hari sahaja, dan yang lebih lama akan dipadam secara automatik."
+msgstr "Setiap fail sandaran akan disimpan selama %0 hari sahaja; fail yang berusia lebih daripada %0 hari akan dipadam secara automatik."
 
 #: Disabled references:1
 msgid "备份文件一年有效，占用应用附件存储量"
@@ -22690,11 +22714,11 @@ msgstr "Verifikasi kata laluan gagal!"
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销！"
-msgstr "Jika ada organisasi belum log keluar, pergi ke Akaun Saya - My Org untuk log keluar sebelum log keluar!"
+msgstr "Sila pergi ke Pusat Peribadi > Organisasi Saya untuk keluar daripada semua organisasi sebelum memadam akaun."
 
 #: Disabled references:1
 msgid "账号已申请注销！"
-msgstr "Akaun telah diminta untuk pembatalan!"
+msgstr "Permohonan pemadaman akaun telah dihantar!"
 
 #: Disabled references:1
 msgid "state过期或错误！"
@@ -22710,7 +22734,7 @@ msgstr "Setuju (boleh dibatalkan dalam 15 hari selepas pembatalan)"
 
 #: Disabled references:1
 msgid "确认注销"
-msgstr "Sahkan Batal"
+msgstr "Sahkan pemadaman"
 
 #: Disabled references:1
 msgid "%0 分 %1 秒"
@@ -22829,12 +22853,12 @@ msgid "账号已注册"
 msgstr "Akaun telah didaftarkan"
 
 #: Disabled references:1
-msgid "验证码发送过于频繁"
-msgstr "Kod verifikasi dihantar terlalu kerap"
-
-#: Disabled references:1
 msgid "验证码发送过于频繁，%0收不到验证码？%1"
 msgstr "Kod verifikasi dihantar terlalu kerap, %0 tidak terima kod verifikasi? %1"
+
+#: Disabled references:1
+msgid "验证码发送过于频繁"
+msgstr "Kod verifikasi dihantar terlalu kerap"
 
 #: Disabled references:1
 msgid "账号未注册"
@@ -22957,10 +22981,6 @@ msgid "图形验证码校验失败"
 msgstr "Pengesahan CAPTCHA Gagal"
 
 #: Disabled references:1
-msgid "返回登录页面"
-msgstr "Kembali ke laman login"
-
-#: Disabled references:1
 msgid "找回密码"
 msgstr "Dapatkan Kata Laluan"
 
@@ -22979,10 +22999,6 @@ msgstr "Log masuk dengan kata laluan"
 #: Disabled references:1
 msgid "使用验证码登录"
 msgstr "Log masuk dengan kod verifikasi"
-
-#: Disabled references:1
-msgid "或通过以下方式"
-msgstr "Atau Log masuk dengan"
 
 #: Disabled references:1
 msgid "小程序登录"
@@ -23013,6 +23029,14 @@ msgid "登录%14002"
 msgstr "Log masuk"
 
 #: Disabled references:1
+msgid "还没有账号?"
+msgstr "Tiada akaun?"
+
+#: Disabled references:1
+msgid "免费注册"
+msgstr "Daftar Edisi Percuma"
+
+#: Disabled references:1
 msgid "下次自动登录"
 msgstr "Ingat saya"
 
@@ -23031,10 +23055,6 @@ msgstr "Teruskan"
 #: Disabled references:1
 msgid "此小程序仅支持组织内部员工登录使用"
 msgstr "Mini program ini hanya untuk login dan guna oleh pekerja dalaman organisasi."
-
-#: Disabled references:1
-msgid "注册新账号"
-msgstr "Daftar akaun baru"
 
 #: Disabled references:1
 msgid "使用 Microsoft 登录"
@@ -23749,6 +23769,14 @@ msgid "%0邀请您加入"
 msgstr "%0 menjemput anda untuk join"
 
 #: Disabled references:1
+msgid "注册并加入"
+msgstr "Daftar dan Sertai"
+
+#: Disabled references:1
+msgid "已有账号"
+msgstr "Sudah ada akaun"
+
+#: Disabled references:1
 msgid "我同意接收短信"
 msgstr "Saya setuju terima SMS"
 
@@ -23765,20 +23793,8 @@ msgid "《隐私条款》"
 msgstr "Dasar Privasi"
 
 #: Disabled references:1
-msgid "注册并加入"
-msgstr "Daftar dan Sertai"
-
-#: Disabled references:1
 msgid "登录并加入"
 msgstr "Log masuk dan sertai"
-
-#: Disabled references:1
-msgid "已有账号"
-msgstr "Sudah ada akaun"
-
-#: Disabled references:1
-msgid "登录已有账号"
-msgstr "Sudah ada akaun"
 
 #: Disabled references:1
 msgid "邀请您加入"
@@ -24742,7 +24758,7 @@ msgstr "Sila masukkan label butang"
 
 #: Disabled references:1
 msgid "设置填写说明"
-msgstr "Tetapkan Arahan Pengisian"
+msgstr "Set Arahan"
 
 #: Disabled references:1
 msgid "详细内容"
@@ -25374,7 +25390,7 @@ msgstr "Pengecaman Medan"
 
 #: Disabled references:1
 msgid "解析"
-msgstr "Parse"
+msgstr "Huraikan"
 
 #: Disabled references:1
 msgid "解析快麦云打印接口返回的渲染数据，自动生成需要绑定的模板字段。"
@@ -25395,10 +25411,6 @@ msgstr "Pilih jadual utama sebagai sumber data utama untuk cetakan. Sistem akan 
 #: Disabled references:1
 msgid "复制自定义动作“%0”"
 msgstr "Salin custom action \"%0\""
-
-#: Disabled references:1
-msgid "将复制目标自定义动作的所有节点和配置"
-msgstr "Salin semua node dan konfigurasi custom action sasaran"
 
 #: Disabled references:1
 msgid "动作将被删除，请确认执行此操作"
@@ -26138,7 +26150,7 @@ msgstr "Indeks Teks"
 
 #: Disabled references:1
 msgid "手动为大数据量的工作表建立合适的索引，可以加快工作表检索速度，最多创建%0个。"
-msgstr "Buat index yang sesuai secara manual untuk lembaran kerja dengan data besar boleh mempercepatkan carian lembaran kerja, sehingga %"
+msgstr "Membuat indeks yang sesuai secara manual untuk lembaran kerja dengan jumlah data yang besar boleh mempercepatkan pengambilan data, sehingga %0 indeks."
 
 #: Disabled references:1
 msgid "创建索引"
@@ -26445,12 +26457,12 @@ msgid "不允许查看"
 msgstr "Tak dibenarkan untuk paparan"
 
 #: Disabled references:1
-msgid "允许将视图对外公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
-msgstr "Benarkan akses awam ke paparan dan rekod dengan pautan perkongsian"
+msgid "允许将视图公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
+msgstr "Benarkan Perkongsian Paparan Awam, Pengguna Pautan Boleh Akses Paparan Dan Semua Rekod"
 
 #: Disabled references:1
-msgid "允许将记录对外公开分享，获得链接的所有人都可以查看记录"
-msgstr "Benarkan akses awam ke rekod dengan pautan perkongsian"
+msgid "允许将记录公开分享，获得链接的所有人都可以查看记录"
+msgstr "Benarkan Perkongsian Awam, Boleh Diakses Melalui Pautan"
 
 #: Disabled references:1
 msgid "有分享权限的用户"
@@ -26486,7 +26498,7 @@ msgstr "Guna tajuk rekod secara default"
 
 #: Disabled references:1
 msgid "基础设置"
-msgstr "Asas"
+msgstr "Tetapan asas"
 
 #: Disabled references:1
 msgid "确认层设置"
@@ -26854,7 +26866,7 @@ msgstr "Balas %0 :"
 
 #: Disabled references:1
 msgid "发表讨论"
-msgstr "Siaran Perbincangan"
+msgstr "Komen"
 
 #: Disabled references:1
 msgid "@全体"
@@ -27454,7 +27466,7 @@ msgstr "Diproses"
 
 #: Disabled references:1
 msgid "您将通过选择的%0个审批事项 ?"
-msgstr "Anda telah pilih 0% item kelulusan?"
+msgstr "Anda akan meluluskan %0 item kelulusan yang dipilih?"
 
 #: Disabled references:1
 msgid "请先勾选需要处理的审批"
@@ -27586,7 +27598,7 @@ msgstr "%0 orang dipilih"
 
 #: Disabled references:1
 msgid "或签（一名审批人通过或否决即可）"
-msgstr "Atau Tanda Tangan (Satu pelulus lulus atau tolak sudah cukup)"
+msgstr "Atau Tanda Tangan (Satu kelulusan atau penolakan sudah mencukupi)"
 
 #: Disabled references:1
 msgid "会签（需所有审批人通过）"
@@ -27958,11 +27970,11 @@ msgstr "Input Percuma"
 
 #: Disabled references:1
 msgid "新建%0"
-msgstr "Baru %0"
+msgstr "Cipta %0"
 
 #: Disabled references:1
 msgid "不存在符合条件的%0"
-msgstr "Tiada %0 yang menepati kriteria"
+msgstr "Tiada %0 yang sepadan"
 
 #: Disabled references:1
 msgid "无匹配的结果"
@@ -28227,314 +28239,6 @@ msgstr "Gagal tambah. Cuba lagi."
 #: Disabled references:1
 msgid "AI 填写"
 msgstr "AI Autofill"
-
-#: Disabled references:1
-msgid "平铺"
-msgstr "Radio"
-
-#: Disabled references:1
-msgid "流程节点"
-msgstr "Node Proses"
-
-#: Disabled references:1
-msgid "备注/签名"
-msgstr "Catatan/Tandatangan"
-
-#: Disabled references:1
-msgid "(%0委托)"
-msgstr "(Diwakilkan oleh %0)"
-
-#: Disabled references:1
-msgid "(%0操作)"
-msgstr "Operasi %0"
-
-#: Disabled references:1
-msgid "退回到%0"
-msgstr "Kembali ke %0"
-
-#: Disabled references:1
-msgid "无需填写"
-msgstr "Tak perlu tambah"
-
-#: Disabled references:1
-msgid "打印人："
-msgstr "Dicetak oleh:"
-
-#: Disabled references:1
-msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
-msgstr "Lampiran cross-domain dikesan. Eksport diabaikan. Muat turun terus dari rekod."
-
-#: Disabled references:1
-msgid "预览: %0"
-msgstr "Paparan: %0"
-
-#: Disabled references:1
-msgid "编辑模板"
-msgstr "Sunting Templat"
-
-#: Disabled references:1
-msgid "生成失败时，请点击此处刷新试试"
-msgstr "Jika gagal jana, klik sini untuk refresh dan cuba lagi"
-
-#: Disabled references:1
-msgid "正在导出"
-msgstr "Sedang eksport"
-
-#: Disabled references:1
-msgid "导出Word"
-msgstr "Eksport Word"
-
-#: Disabled references:1
-msgid "保存为打印模板"
-msgstr "Simpan sebagai Templat Cetakan"
-
-#: Disabled references:1
-msgid "导出为excel"
-msgstr "Eksport ke Excel"
-
-#: Disabled references:1
-msgid "导出为word"
-msgstr "Eksport ke Word"
-
-#: Disabled references:1
-msgid "保存模板"
-msgstr "Simpan Templat"
-
-#: Disabled references:1
-msgid "模板名称"
-msgstr "Nama"
-
-#: Disabled references:1
-msgid "企业Logo"
-msgstr "Logo Syarikat"
-
-#: Disabled references:1
-msgid "在企业管理后台中设置"
-msgstr "Setup dalam Enterprise Management后台"
-
-#: Disabled references:1
-msgid "记录标题"
-msgstr "Tajuk Rekod"
-
-#: Disabled references:1
-msgid "打印时间"
-msgstr "Masa Cetak"
-
-#: Disabled references:1
-msgid "打印人"
-msgstr "Pencetak"
-
-#: Disabled references:1
-msgid "对外公开分享链接"
-msgstr "Untuk perkongsian luar"
-
-#: Disabled references:1
-msgid "内部成员访问链接"
-msgstr "Untuk ahli dalaman"
-
-#: Disabled references:1
-msgid "选项字段平铺打印"
-msgstr "Opsyen Cetak dalam Tile Layout"
-
-#: Disabled references:1
-msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
-msgstr "Selepas diaktifkan, medan pemilihan tile akan dicetak dengan pilihan tidak ditanda"
-
-#: Disabled references:1
-msgid "打印值为空的字段"
-msgstr "Cetak medan dengan nilai null"
-
-#: Disabled references:1
-msgid "开启后，没有内容的字段会显示并可以打印"
-msgstr "Bila diaktifkan, medan kosong akan dipaparkan dan boleh dicetak"
-
-#: Disabled references:1
-msgid "文字大小"
-msgstr "Saiz Teks"
-
-#: Disabled references:1
-msgid "名称宽度"
-msgstr "Lebar Nama"
-
-#: Disabled references:1
-msgid "表单字段"
-msgstr "Medan Borang"
-
-#: Disabled references:1
-msgid "手写签名"
-msgstr "Tandatangan Tulisan Tangan"
-
-#: Disabled references:1
-msgid "选择打印字段"
-msgstr "Pilih Medan Cetak"
-
-#: Disabled references:1
-msgid "附加信息"
-msgstr "Maklumat Lanjutan"
-
-#: Disabled references:1
-msgid "审批签名位置"
-msgstr "Lokasi Tandatangan Kelulusan"
-
-#: Disabled references:1
-msgid "填写人"
-msgstr "Pengisi"
-
-#: Disabled references:1
-msgid "审批人"
-msgstr "Pelulus"
-
-#: Disabled references:1
-msgid "转交"
-msgstr "Teruskan"
-
-#: Disabled references:1
-msgid "通过申请"
-msgstr "Lulus"
-
-#: Disabled references:1
-msgid "否决申请"
-msgstr "Tolak"
-
-#: Disabled references:1
-msgid "转审"
-msgstr "Teruskan"
-
-#: Disabled references:1
-msgid "添加审批人"
-msgstr "Tambah pelulus"
-
-#: Disabled references:1
-msgid "被移除"
-msgstr "Dibuang"
-
-#: Disabled references:1
-msgid "撤回后重新发起"
-msgstr "Ditarik balik dan dilancarkan semula"
-
-#: Disabled references:1
-msgid "审批前加签"
-msgstr "Tambah Pelulus Awal"
-
-#: Disabled references:1
-msgid "通过申请并加签"
-msgstr "Dilulus dan tambah pelulus"
-
-#: Disabled references:1
-msgid "修改申请内容"
-msgstr "Ubah kandungan aplikasi"
-
-#: Disabled references:1
-msgid "无需审批"
-msgstr "Tiada Kelulusan Diperlukan"
-
-#: Disabled references:1
-msgid "拥有者："
-msgstr "Pemilik"
-
-#: Disabled references:1
-msgid "创建人："
-msgstr "Pencipta"
-
-#: Disabled references:1
-msgid "创建时间："
-msgstr "Waktu Buat"
-
-#: Disabled references:1
-msgid "最近修改时间："
-msgstr "Masa terakhir diubah:"
-
-#: Disabled references:1
-msgid "最近修改人："
-msgstr "Diubah kali terakhir oleh:"
-
-#: Disabled references:1
-msgid "审批意见"
-msgstr "Minta komen kelulusan"
-
-#: Disabled references:1
-msgid "Word 模板"
-msgstr "Templat Word"
-
-#: Disabled references:1
-msgid "Excel 模板"
-msgstr "Templat Excel"
-
-#: Disabled references:1
-msgid "在明细内显示"
-msgstr "Paparan terperinci"
-
-#: Disabled references:1
-msgid "在明细表下方显示"
-msgstr "Paparkan di bawah jadual terperinci"
-
-#: Disabled references:1
-msgid "缩略图"
-msgstr "Thumbnail"
-
-#: Disabled references:1
-msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
-msgstr "Hanya jenis imej boleh cetak thumbnail, jenis bukan imej akan dipaparkan di akhir dengan nama fail."
-
-#: Disabled references:1
-msgid "%0 级"
-msgstr "Tahap %0"
-
-#: Disabled references:1
-msgid "批量打印"
-msgstr "Cetak Batch"
-
-#: Disabled references:1
-msgid "工作流打印"
-msgstr "Cetak Aliran Kerja"
-
-#: Disabled references:1
-msgid "保存成功，请到打印模板中查看"
-msgstr "Berjaya disimpan, sila semak dalam print template"
-
-#: Disabled references:1
-msgid "正在生成文件..."
-msgstr "Menjana..."
-
-#: Disabled references:1
-msgid "您是否保存本次修改？"
-msgstr "Simpan perubahan?"
-
-#: Disabled references:1
-msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
-msgstr "Anda ada perubahan yang belum disimpan. Simpan sebelum keluar?"
-
-#: Disabled references:1
-msgid "否，放弃保存"
-msgstr "Tidak, abaikan perubahan"
-
-#: Disabled references:1
-msgid "是，保存修改"
-msgstr "Ya, simpan perubahan"
-
-#: Disabled references:1
-msgid "导出成功！"
-msgstr "Eksport berjaya!"
-
-#: Disabled references:1
-msgid "下载%0文件"
-msgstr "Muat turun %0"
-
-#: Disabled references:1
-msgid "正在导出Excel文件..."
-msgstr "Sedang eksport Excel ..."
-
-#: Disabled references:1
-msgid "正在导出Word文件..."
-msgstr "Sedang eksport Word ..."
-
-#: Disabled references:1
-msgid "包含图片时生成速度较慢，请耐心等待..."
-msgstr "Kelajuan penjanaan lebih perlahan bila ada imej. Sila tunggu..."
-
-#: Disabled references:1
-msgid "记录或模板已删除"
-msgstr "Rekod atau template telah dipadam"
 
 #: Disabled references:1
 msgid "加入/创建组织"
@@ -29014,7 +28718,7 @@ msgstr "Dasar Akses CLI Tidak Diaktifkan"
 
 #: Disabled references:1
 msgid "需组织管理员在「组织后台 - 数据与访问」中开启后才能使用"
-msgstr "Memerlukan pengaktifan Pentadbir Organisasi di Pentadbir Organisasi > Data & Akses"
+msgstr "Perlu diaktifkan oleh Pentadbir Organisasi dalam Pentadbir Organisasi > Data & Akses"
 
 #: Disabled references:1
 msgid "同时安装配套Skills"
@@ -29366,15 +29070,15 @@ msgstr "Batal akaun anda?"
 
 #: Disabled references:1
 msgid "账号一旦注销将无法登录平台，且会解除与第三方账号的绑定关系、身份、账号信息等将被清空且无法找回"
-msgstr "Selepas akaun dibatalkan, anda tidak boleh log masuk ke platform. Hubungan dengan akaun pihak ketiga, identiti dan maklumat akaun akan dipadam dan tidak boleh dipulihkan."
+msgstr "Selepas akaun dipadam, anda tidak lagi boleh log masuk ke platform. Pautan dengan akaun pihak ketiga akan dibatalkan, dan maklumat identiti serta akaun akan dipadam secara kekal dan tidak boleh dipulihkan"
 
 #: Disabled references:1
 msgid "注销失败，请稍后再试"
-msgstr "Logout gagal. Cuba lagi."
+msgstr "Gagal memadam akaun. Sila cuba lagi kemudian."
 
 #: Disabled references:1
 msgid "注销账户"
-msgstr "Nyahaktif Akaun"
+msgstr "Padam akaun"
 
 #: Disabled references:1
 msgid "请输入8-20位，需包含字母和数字"
@@ -29422,7 +29126,7 @@ msgstr "Log keluar"
 
 #: Disabled references:1
 msgid "注销此账户"
-msgstr "Batal akaun ini"
+msgstr "Padam Akaun Ini"
 
 #: Disabled references:1
 msgid "外部协作应用"
@@ -29498,7 +29202,7 @@ msgstr "Pemberitahuan Log masuk"
 
 #: Disabled references:1
 msgid "使用微信扫码绑定账号，开启登录微信提醒"
-msgstr "Im"
+msgstr "Imbas untuk memautkan akaun WeChat dan aktifkan peringatan log masuk WeChat."
 
 #: Disabled references:1
 msgid "我已经绑定了微信账号"
@@ -29554,7 +29258,7 @@ msgstr "Aktifkan 2FA untuk keselamatan tambahan semasa login"
 
 #: Disabled references:1
 msgid "验证方式"
-msgstr "Kaedah Auth"
+msgstr "Kaedah Pengesahan"
 
 #: Disabled references:1
 msgid "当启用多种验证方式时，首选的验证方式为："
@@ -29771,7 +29475,7 @@ msgstr "Anda satu-satunya pentadbir platform dan tidak boleh log keluar"
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销"
-msgstr "Jika ada organisasi belum log keluar, pergi ke Akaun Saya - Org Saya untuk log keluar sebelum log keluar"
+msgstr "Sila pergi ke Pusat Peribadi > Organisasi Saya untuk keluar daripada semua organisasi sebelum memadam akaun."
 
 #: Disabled references:1
 msgid "账户与隐私"
@@ -30071,11 +29775,11 @@ msgstr "Anda ialah super administrator organisasi 【%0】"
 
 #: Disabled references:1
 msgid "请先注销组织或交接后方可注销。"
-msgstr "Sila log keluar dari organisasi atau serah tugas sebelum log keluar."
+msgstr "Sila padam atau pindahkan organisasi sebelum memadam akaun."
 
 #: Disabled references:1
 msgid "前往注销"
-msgstr "Pergi ke Logout"
+msgstr "Padam akaun"
 
 #: Disabled references:1
 msgid "请指定成员"
@@ -30175,7 +29879,7 @@ msgstr "Pilih aplikasi yang dibenarkan"
 
 #: Disabled references:1
 msgid "请选择接口范围"
-msgstr "Pilih skop interface"
+msgstr "Pilih Kebenaran API"
 
 #: Disabled references:1
 msgid "%0 不允许使用个人访问令牌"
@@ -30207,7 +29911,7 @@ msgstr "+Tambah"
 
 #: Disabled references:1
 msgid "接口范围"
-msgstr "Skop Antaramuka"
+msgstr "Kebenaran API"
 
 #: Disabled references:1
 msgid "创建个人访问令牌"
@@ -30255,7 +29959,7 @@ msgstr "Pentadbir Organisasi tidak boleh gunakan token capaian peribadi."
 
 #: Disabled references:1
 msgid "个人访问令牌代表您的身份，用于 HAP 数据的操作访问。您可自定义权限范围和数据访问权限。️安全提示：令牌具有账户权限，请勿分享给他人。"
-msgstr "Token capaian peribadi mengenal pasti anda dan membolehkan operasi data HAP. Sesuaikan skop mengikut keperluan. Tip: Token mempunyai kebenaran peringkat akaun—pastikan ia selamat."
+msgstr "Token capaian peribadi bertindak bagi pihak anda untuk mengakses data HAP. Sesuaikan skop dan capaian data mengikut keperluan. Tip: Token membawa kebenaran akaun anda—pastikan ia selamat."
 
 #: Disabled references:1
 msgid "API 文档"
@@ -30531,7 +30235,7 @@ msgstr "Paparan Peta Dunia"
 
 #: Disabled references:1
 msgid "包含全球地图，暂不支持搜索名称定位。"
-msgstr "Termasuk peta global, cari lokasi nama belum disokong."
+msgstr "Termasuk peta global; carian lokasi mengikut nama belum disokong."
 
 #: Disabled references:1
 msgid "支持搜索地点名称定位，地图信息只包含：中国大陆、香港、澳门、台湾地区"
@@ -30539,7 +30243,7 @@ msgstr "Cari lokasi dalam China, Hong Kong, Macau dan Taiwan sahaja"
 
 #: Disabled references:1
 msgid "浏览器新消息通知"
-msgstr "Amaran Msg Baru Browser"
+msgstr "Pemberitahuan Mesej Pelayar"
 
 #: Disabled references:1
 msgid "当有新消息时以何种方式提醒"
@@ -30574,6 +30278,38 @@ msgid "行列转置"
 msgstr "Transpose"
 
 #: Disabled references:1
+msgid "平铺"
+msgstr "Susunan berjubin"
+
+#: Disabled references:1
+msgid "流程节点"
+msgstr "Node Proses"
+
+#: Disabled references:1
+msgid "备注/签名"
+msgstr "Catatan/Tandatangan"
+
+#: Disabled references:1
+msgid "(%0委托)"
+msgstr "(Diwakilkan oleh %0)"
+
+#: Disabled references:1
+msgid "(%0操作)"
+msgstr "Operasi %0"
+
+#: Disabled references:1
+msgid "退回到%0"
+msgstr "Kembali ke %0"
+
+#: Disabled references:1
+msgid "无需填写"
+msgstr "Tak perlu tambah"
+
+#: Disabled references:1
+msgid "打印人："
+msgstr "Dicetak oleh:"
+
+#: Disabled references:1
 msgid "复制打印链接"
 msgstr "Salin Cetak Pautan"
 
@@ -30582,12 +30318,112 @@ msgid "当前打印服务在第三方应用内无法直接打开。请复制下�
 msgstr "Perkhidmatan cetak tidak boleh diakses terus melalui Integrasi Pihak Ketiga. Salin pautan di bawah dan buka dalam penyemak imbas untuk meneruskan."
 
 #: Disabled references:1
+msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
+msgstr "Lampiran cross-domain dikesan. Eksport diabaikan. Muat turun terus dari rekod."
+
+#: Disabled references:1
 msgid "导出数量超出系统上限，请减少数量后重试"
 msgstr "Had eksport melebihi had. Kurangkan kuantiti dan cuba lagi."
 
 #: Disabled references:1
+msgid "编辑模板"
+msgstr "Sunting Templat"
+
+#: Disabled references:1
+msgid "预览: %0"
+msgstr "Paparan: %0"
+
+#: Disabled references:1
 msgid "pdf生成失败时，请点击此处刷新试试"
 msgstr "Jika PDF gagal dijana, klik sini untuk refresh dan cuba lagi"
+
+#: Disabled references:1
+msgid "正在导出"
+msgstr "Sedang eksport"
+
+#: Disabled references:1
+msgid "导出Word"
+msgstr "Eksport Word"
+
+#: Disabled references:1
+msgid "保存为打印模板"
+msgstr "Simpan sebagai Templat Cetakan"
+
+#: Disabled references:1
+msgid "导出为excel"
+msgstr "Eksport ke Excel"
+
+#: Disabled references:1
+msgid "导出为word"
+msgstr "Eksport ke Word"
+
+#: Disabled references:1
+msgid "保存模板"
+msgstr "Simpan Templat"
+
+#: Disabled references:1
+msgid "模板名称"
+msgstr "Nama"
+
+#: Disabled references:1
+msgid "企业Logo"
+msgstr "Logo Syarikat"
+
+#: Disabled references:1
+msgid "在企业管理后台中设置"
+msgstr "Tetapkan dalam bahagian pentadbiran perusahaan"
+
+#: Disabled references:1
+msgid "记录标题"
+msgstr "Tajuk Rekod"
+
+#: Disabled references:1
+msgid "打印时间"
+msgstr "Masa Cetak"
+
+#: Disabled references:1
+msgid "打印人"
+msgstr "Pencetak"
+
+#: Disabled references:1
+msgid "公开分享链接"
+msgstr "Pautan Perkongsian Awam"
+
+#: Disabled references:1
+msgid "内部成员访问链接"
+msgstr "Untuk ahli dalaman"
+
+#: Disabled references:1
+msgid "选项字段平铺打印"
+msgstr "Opsyen Cetak dalam Tile Layout"
+
+#: Disabled references:1
+msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
+msgstr "Selepas diaktifkan, medan pemilihan tile akan dicetak dengan pilihan tidak ditanda"
+
+#: Disabled references:1
+msgid "打印值为空的字段"
+msgstr "Cetak medan dengan nilai null"
+
+#: Disabled references:1
+msgid "开启后，没有内容的字段会显示并可以打印"
+msgstr "Bila diaktifkan, medan kosong akan dipaparkan dan boleh dicetak"
+
+#: Disabled references:1
+msgid "文字大小"
+msgstr "Saiz Teks"
+
+#: Disabled references:1
+msgid "名称宽度"
+msgstr "Lebar Nama"
+
+#: Disabled references:1
+msgid "表单字段"
+msgstr "Medan Borang"
+
+#: Disabled references:1
+msgid "手写签名"
+msgstr "Tandatangan Tulisan Tangan"
 
 #: Disabled references:1
 msgid "纸张"
@@ -30602,12 +30438,184 @@ msgid "布局"
 msgstr "Susun Atur"
 
 #: Disabled references:1
+msgid "选择打印字段"
+msgstr "Pilih Medan Cetak"
+
+#: Disabled references:1
+msgid "附加信息"
+msgstr "Maklumat Lanjutan"
+
+#: Disabled references:1
+msgid "审批签名位置"
+msgstr "Lokasi Tandatangan Kelulusan"
+
+#: Disabled references:1
+msgid "填写人"
+msgstr "Pengisi"
+
+#: Disabled references:1
+msgid "审批人"
+msgstr "Pelulus"
+
+#: Disabled references:1
+msgid "转交"
+msgstr "Teruskan"
+
+#: Disabled references:1
+msgid "通过申请"
+msgstr "Lulus"
+
+#: Disabled references:1
+msgid "否决申请"
+msgstr "Tolak"
+
+#: Disabled references:1
+msgid "转审"
+msgstr "Teruskan"
+
+#: Disabled references:1
+msgid "添加审批人"
+msgstr "Tambah pelulus"
+
+#: Disabled references:1
+msgid "被移除"
+msgstr "Dibuang"
+
+#: Disabled references:1
+msgid "撤回后重新发起"
+msgstr "Ditarik balik dan dilancarkan semula"
+
+#: Disabled references:1
+msgid "审批前加签"
+msgstr "Tambah Pelulus Awal"
+
+#: Disabled references:1
+msgid "通过申请并加签"
+msgstr "Dilulus dan tambah pelulus"
+
+#: Disabled references:1
+msgid "修改申请内容"
+msgstr "Ubah kandungan aplikasi"
+
+#: Disabled references:1
+msgid "无需审批"
+msgstr "Tiada Kelulusan Diperlukan"
+
+#: Disabled references:1
+msgid "拥有者："
+msgstr "Pemilik"
+
+#: Disabled references:1
+msgid "创建人："
+msgstr "Pencipta"
+
+#: Disabled references:1
+msgid "创建时间："
+msgstr "Waktu Buat"
+
+#: Disabled references:1
+msgid "最近修改时间："
+msgstr "Masa terakhir diubah:"
+
+#: Disabled references:1
+msgid "最近修改人："
+msgstr "Diubah kali terakhir oleh:"
+
+#: Disabled references:1
+msgid "审批意见"
+msgstr "Minta komen kelulusan"
+
+#: Disabled references:1
+msgid "Word 模板"
+msgstr "Templat Word"
+
+#: Disabled references:1
+msgid "Excel 模板"
+msgstr "Templat Excel"
+
+#: Disabled references:1
+msgid "在明细内显示"
+msgstr "Paparan terperinci"
+
+#: Disabled references:1
+msgid "在明细表下方显示"
+msgstr "Paparkan di bawah jadual terperinci"
+
+#: Disabled references:1
 msgid "纵向"
 msgstr "Menegak"
 
 #: Disabled references:1
 msgid "横向"
 msgstr "Mendatar"
+
+#: Disabled references:1
+msgid "缩略图"
+msgstr "Thumbnail"
+
+#: Disabled references:1
+msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
+msgstr "Hanya jenis imej boleh cetak thumbnail, jenis bukan imej akan dipaparkan di akhir dengan nama fail."
+
+#: Disabled references:1
+msgid "%0 级"
+msgstr "Tahap %0"
+
+#: Disabled references:1
+msgid "批量打印"
+msgstr "Cetak Batch"
+
+#: Disabled references:1
+msgid "工作流打印"
+msgstr "Cetak Aliran Kerja"
+
+#: Disabled references:1
+msgid "保存成功，请到打印模板中查看"
+msgstr "Berjaya disimpan, sila semak dalam print template"
+
+#: Disabled references:1
+msgid "正在生成文件..."
+msgstr "Menjana..."
+
+#: Disabled references:1
+msgid "您是否保存本次修改？"
+msgstr "Simpan perubahan?"
+
+#: Disabled references:1
+msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
+msgstr "Anda ada perubahan yang belum disimpan. Simpan sebelum keluar?"
+
+#: Disabled references:1
+msgid "否，放弃保存"
+msgstr "Tidak, abaikan perubahan"
+
+#: Disabled references:1
+msgid "是，保存修改"
+msgstr "Ya, simpan perubahan"
+
+#: Disabled references:1
+msgid "导出成功！"
+msgstr "Eksport berjaya!"
+
+#: Disabled references:1
+msgid "下载%0文件"
+msgstr "Muat turun %0"
+
+#: Disabled references:1
+msgid "正在导出Excel文件..."
+msgstr "Sedang eksport Excel ..."
+
+#: Disabled references:1
+msgid "正在导出Word文件..."
+msgstr "Sedang eksport Word ..."
+
+#: Disabled references:1
+msgid "包含图片时生成速度较慢，请耐心等待..."
+msgstr "Kelajuan penjanaan lebih perlahan bila ada imej. Sila tunggu..."
+
+#: Disabled references:1
+msgid "记录或模板已删除"
+msgstr "Rekod atau template telah dipadam"
 
 #: Disabled references:1
 msgid "暂未设置用户协议"
@@ -30919,23 +30927,23 @@ msgstr "Team"
 
 #: Disabled references:1
 msgid "通过工作表管理应用成员额外的扩展信息字段"
-msgstr "Urus field tambahan untuk ahli app melalui lembaran kerja."
+msgstr "Urus Medan Ahli Tambahan Melalui Lembaran Kerja"
 
 #: Disabled references:1
 msgid "在角色权限、筛选器中可以使用用户的扩展信息字段来作为动态筛选条件"
-msgstr "Field lanjutan pengguna boleh digunakan sebagai kriteria dinamik dalam kebenaran peranan atau penapis"
+msgstr "Guna medan lanjutan ahli sebagai tapis dinamik dalam peranan dan tapis kebenaran"
 
 #: Disabled references:1
 msgid "如在销售管理应用中"
-msgstr "Contohnya dalam aplikasi sales management"
+msgstr "Contohnya, dalam aplikasi pengurusan jualan"
 
 #: Disabled references:1
 msgid "可以通过建立成员表来管理销售人员的团队、地区、关联订单等扩展信息"
-msgstr "Urus info tambahan seperti team, region, order berkaitan dan lain-lain untuk jurujual dengan cipta member lembaran kerja"
+msgstr "Buat Lembaran Kerja Ahli untuk urus maklumat tambahan seperti pasukan jualan, wilayah dan pesanan berkaitan"
 
 #: Disabled references:1
 msgid "可以根据订单所关联的团队，来筛选出当前销售人员所在团队的订单"
-msgstr "Anda boleh tapis order yang berkait dengan team salesperson semasa."
+msgstr "Tapis pesanan mengikut pasukan berkaitan untuk paparkan hanya pesanan milik pasukan jurujual semasa"
 
 #: Disabled references:1
 msgid "建立用户扩展信息表"
@@ -31147,7 +31155,7 @@ msgstr "Pilih Peranan Sasaran"
 
 #: Disabled references:1
 msgid "扩展"
-msgstr "Kembangkan"
+msgstr "Pemalam"
 
 #: Disabled references:1
 msgid "勾选时，普通角色可以查看应用下所有角色和人员。未勾选时，对普通角色直接隐藏用户入口"
@@ -31260,10 +31268,6 @@ msgstr "Muat turun Templat"
 #: Disabled references:1
 msgid "邀请用户并发送短信/邮箱"
 msgstr "Jemput pengguna dan hantar SMS/E-mel"
-
-#: Disabled references:1
-msgid "（短信%0/条、邮箱%1/封，自动从企业账户扣除。）"
-msgstr "Setiap SMS berharga %0 dan setiap emel berharga %1, caj akan ditolak secara automatik dari akaun korporat."
 
 #: Disabled references:1
 msgid "从Excel导入数据"
@@ -31379,7 +31383,7 @@ msgstr "Lembaran Kerja dalam app lain"
 
 #: Disabled references:1
 msgid "工作表已删除"
-msgstr "Lembaran Kerja dipadam"
+msgstr "Lembaran kerja dipadam"
 
 #: Disabled references:1
 msgid "查询满足以下条件的记录"
@@ -32202,8 +32206,8 @@ msgid "对所有记录只有查看权限"
 msgstr "Hanya-baca untuk semua rekod"
 
 #: Disabled references:1
-msgid "可查看加入的，只能编辑、删除自己拥有的记录"
-msgstr "Lihat semua rekod yang ditambah, tapi hanya boleh sunting atau padam rekod sendiri"
+msgid "可查看自己加入的，只能编辑、删除自己拥有的记录"
+msgstr "Paparan rekod disertai; sunting dan padam hanya rekod anda"
 
 #: Disabled references:1
 msgid "可查看所有记录，但只能编辑、删除自己拥有的记录"
@@ -32235,7 +32239,7 @@ msgstr "Pentadbir boleh konfigurasi aplikasi dan urus semua data serta pengguna 
 
 #: Disabled references:1
 msgid "拥有所有权限"
-msgstr "Semua kebenaran dimiliki"
+msgstr "Semua Kebenaran"
 
 #: Disabled references:1
 msgid "运营者"
@@ -33518,10 +33522,6 @@ msgid "前往组织后台编辑颜色"
 msgstr "Pergi ke konsol organisasi untuk sunting warna"
 
 #: Disabled references:1
-msgid "保存为个人颜色"
-msgstr "Simpan sebagai Warna Peribadi"
-
-#: Disabled references:1
 msgid "图形颜色"
 msgstr "Warna Carta"
 
@@ -34278,6 +34278,10 @@ msgid "还没有个人图表"
 msgstr "Belum ada carta peribadi"
 
 #: Disabled references:1
+msgid "方向1和方向2仅支持添加一个数值"
+msgstr "Arah 1 dan 2 hanya sokong satu nilai setiap satu"
+
+#: Disabled references:1
 msgid "不允许添加重复粒度"
 msgstr "Granularity duplicate tidak dibenarkan"
 
@@ -34407,28 +34411,50 @@ msgid "（4）在打印 Excel 模板时，多张图片排列可能导致撑高�
 msgstr "Semasa mencetak templat Excel, imej berganda boleh memanjangkan sel dan menyebabkan merge tidak sejajar. Tekan F untuk aktifkan fill mode, yang menghalang perubahan ketinggian sel. Contoh: #{attachement$[auto*20_F]$} atau #{attachment$[auto*90_HF]$}"
 
 #: Disabled references:1
-msgid "5. 可通过代码 #{[qrcode]字段名$[20*20]$} 或 #{[barcode]字段名$[40*10]$} 获取任意字段的二维码或条形码。其中：[20*20]、[40*10] 表示二维码/条形码的宽高尺寸，单位为 mm；二维码编码方式为 QR-code，最大包含 150 个字，支持汉字；条形码编码方式为 code128，最大包含 30 个字符，仅支持数字、字母、符号。"
-msgstr "5. Guna #{[qrcode]FieldName$[20*20]$} atau #{[barcode]FieldName$[40*10]$} untuk jana Kod QR atau Kod Bar. Dimensi [20*20] dan [40*10] dalam mm. Kod QR (hingga 150 aksara, termasuk Cina) guna pengekodan QR-code, manakala Kod Bar (hingga 30 aksara: nombor, huruf, simbol) guna pengekodan Code128."
+msgid "5. 可通过代码 #{[qrcode]字段名$[20*20_H]$} 或 #{[barcode]字段名$[40*10]$}，获取任意字段的二维码或条形码。其中，[20*20]、[40*10] 表示二维码或条形码的宽高尺寸，单位为 mm。二维码采用 QR Code 编码，最多支持 150 个字符，支持汉字；条形码采用 Code 128 编码，最多支持 30 个字符，支持数字、字母及常用符号。"
+msgstr "5. Jana Kod QR atau Kod Bar melalui kod:  
+- Kod QR: `#{[qrcode]FieldName$[20*20_H]$}`. Saiz: 20x20 mm, sokong Kod QR (sehingga 150 aksara, termasuk Cina).  
+- Kod Bar: `#{[barcode]FieldName$[40*10]$}`. Saiz: 40x10 mm, sokong Kod 128 (sehingga 30 aksara, termasuk nombor, huruf dan simbol)."
 
 #: Disabled references:1
-msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽高固定为 20*20。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
-msgstr "(1) Saiz Kod QR ditetapkan pada 20x20, hanya menyokong paparan segi empat sama tanpa pelarasan automatik."
+msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽度和高度均为 20 mm。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
+msgstr "Tetapkan saiz Kod QR kepada [20*20], lebar dan tinggi 20mm, paparan segi empat sama tanpa pelarasan automatik."
 
 #: Disabled references:1
-msgid "（2）条形码尺寸支持 4 种设置方式。[40*auto] 表示宽度固定为 40，高度按比例自适应；[auto*10] 表示高度固定为 10，宽度按比例自适应；[40*10_auto] 表示宽高在 40*10 的范围内同时自适应；[40*10] 表示宽高为固定尺寸。"
-msgstr "(2) Saiz Kod Bar menawarkan empat mod konfigurasi: [40*auto] untuk lebar tetap (40) dengan tinggi adaptif, [auto*10] untuk tinggi tetap (10) dengan lebar adaptif, [40*10_auto] untuk dimensi adaptif dalam julat 40*10, dan [40*10] untuk lebar dan tinggi tetap."
+msgid "（2）二维码支持配置容错率，在尺寸后添加容错率代码，例如：#{[qrcode]字段名$[20*20_H]$}。支持以下两种写法："
+msgstr "(2) Kod QR menyokong tetapan tahap pembetulan ralat. Tambah kod tahap pembetulan ralat terus selepas saiz, cth: #{[qrcode]FieldName$[20*20_H]$}. Menyokong dua format berikut:"
 
 #: Disabled references:1
-msgid "（3）条形码默认显示下方文字。如需隐藏条形码下方的显示值，可增加 _NT 控制隐藏。例如：#{[barcode]字段名$[40*10_NT]$} 表示隐藏条形码下方文字；不加 _NT 仍按原逻辑显示。"
-msgstr "(3) Secara lalai, kod bar memaparkan teks di bawah. Untuk sembunyikan, tambah _NT. Contoh: #{[barcode]FieldName$[40*10_NT]$} akan sembunyikan teks; buang _NT untuk kekalkan teks."
+msgid "字母代码：L、M、Q、H"
+msgstr "Kod Huruf: L, M, Q, H"
 
 #: Disabled references:1
-msgid "（4）示例代码：#{[qrcode]字段名$[20*20]$} 表示获取固定尺寸为 20*20 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40，高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10，宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示获取固定尺寸为 40*10 的条形码，并隐藏下方文字。"
-msgstr "(4) Contoh kod:  
-- `#{[qrcode]FieldName$[20*20]$}` jana Kod QR bersaiz tetap 20x20.  
-- `#{[barcode]FieldName$[40*auto]$}` jana kod bar dengan lebar tetap 40 dan tinggi adaptif.  
-- `#{[barcode]FieldName$[auto*10]$}` jana kod bar dengan tinggi tetap 10 dan lebar adaptif.  
-- `#{[barcode]FieldName$[40*10_NT]$}` jana kod bar bersaiz tetap 40x10 tanpa paparan teks di bawah."
+msgid "数值代码：7、15、25、30，也兼容 7%、15%、25%、30%"
+msgstr "Kod Nilai: 7, 15, 25, 30; juga menyokong 7%, 15%, 25%, 30%"
+
+#: Disabled references:1
+msgid "对应关系为：L = 7%、M = 15%、Q = 25%、H = 30%。容错率越高，二维码被遮挡或污损后仍可识别的能力越强，但可容纳的有效内容会相应减少。"
+msgstr "Tahap pembetulan ralat: L = 7%, M = 15%, Q = 25%, H = 30%. Tahap pembetulan ralat lebih tinggi meningkatkan kebolehbacaan Kod QR jika rosak tetapi mengurangkan kapasiti storan."
+
+#: Disabled references:1
+msgid "例如：#{[qrcode]字段名$[20*20_Q]$}、#{[qrcode]字段名$[20*20_25]$} 与 #{[qrcode]字段名$[20*20_25%]$}，均表示生成尺寸为 20 × 20 mm、容错率为 25% 的二维码。"
+msgstr "Contohnya: #{[qrcode]FieldName$[20*20_Q]$}, #{[qrcode]FieldName$[20*20_25]$}, dan #{[qrcode]FieldName$[20*20_25%]$} semuanya digunakan untuk menjana Kod QR 20×20 mm dengan tahap pembetulan ralat 25%."
+
+#: Disabled references:1
+msgid "（3）条形码支持 4 种尺寸设置方式：[40*auto] 表示宽度固定为 40 mm，高度按比例自适应；[auto*10] 表示高度固定为 10 mm，宽度按比例自适应；[40*10_auto] 表示宽高均为 40 × 10 mm，并根据内容自适应；[40*10] 表示宽高固定为 40 × 10 mm。"
+msgstr "(3) Kod Bar menyokong 4 pilihan saiz: [40*auto] Lebar tetap 40 mm, tinggi boleh ubah; [auto*10] Tinggi tetap 10 mm, lebar boleh ubah; [40*10_auto] 40×10 mm sesuai kandungan; [40*10] Tetap 40×10 mm"
+
+#: Disabled references:1
+msgid "（4）条形码默认显示下方文字。如需隐藏条形码下方的文字，可增加 _NT 控制参数，例如：#{[barcode]字段名$[40*10_NT]$}。未添加 _NT 时，仍按原有方式显示文字。"
+msgstr "(4) Kod Bar paparkan teks di bawah secara lalai. Untuk sembunyikan teks, tambah parameter _NT, cth: #{[barcode]FieldName$[40*10_NT]$}. Tanpa _NT, teks dipaparkan secara lalai."
+
+#: Disabled references:1
+msgid "（5）示例：#{[qrcode]字段名$[20*20_H]$} 表示生成尺寸为 20 × 20 mm、容错率为 30% 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40 mm、高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10 mm、宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示生成固定尺寸为 40 × 10 mm 的条形码，并隐藏下方文字。"
+msgstr "(5) Contoh:  
+#{[qrcode]FieldName$[20*20_H]$}: Jana Kod QR 20 × 20 mm dengan pembetulan ralat 30%  
+#{[barcode]FieldName$[40*auto]$}: Kod Bar lebar 40 mm tinggi auto  
+#{[barcode]FieldName$[auto*10]$}: Kod Bar tinggi 10 mm lebar auto  
+#{[barcode]FieldName$[40*10_NT]$}: Jana Kod Bar 40 × 10 mm tanpa teks"
 
 #: Disabled references:1
 msgid "6. 如需不打印没有数据的关联表/子表，请将代码：#NoDataNotPrint[start]# 和 #NoDataNotPrint[end]# 插入到模板中，代码之间的关联记录/子表没有数据则不会打印。"
@@ -35802,7 +35828,7 @@ msgstr "Dari Projek"
 
 #: Disabled references:1
 msgid "来自%0"
-msgstr "D"
+msgstr "Daripada %0"
 
 #: Disabled references:1
 msgid "数据不存在或已删除"
@@ -35870,7 +35896,7 @@ msgstr "@me"
 
 #: Disabled references:1
 msgid "提到我的群组"
-msgstr "Mention group saya"
+msgstr "mention group saya"
 
 #: Disabled references:1
 msgid "普通讨论"
@@ -35914,11 +35940,11 @@ msgstr "Pemberitahuan Kehadiran"
 
 #: Disabled references:1
 msgid "提到了你"
-msgstr "Mention anda"
+msgstr "mention anda"
 
 #: Disabled references:1
 msgid "提到了你所在的群组"
-msgstr "Menyebut group anda"
+msgstr "menyebut group anda"
 
 #: Disabled references:1
 msgid "在回复中提到了你"
@@ -35926,15 +35952,15 @@ msgstr "mention anda dalam balasan"
 
 #: Disabled references:1
 msgid "在回复中提到了你所在的群组"
-msgstr "Group anda disebut dalam balasan"
+msgstr "menyebut kumpulan anda dalam balasan"
 
 #: Disabled references:1
 msgid "回复了你"
-msgstr "Balas kepada anda"
+msgstr "balas kepada anda"
 
 #: Disabled references:1
 msgid "发表了任务讨论"
-msgstr "Telah post perbincangan task"
+msgstr "telah post perbincangan task"
 
 #: Disabled references:1
 msgid "在任务讨论中提到了你"
@@ -35950,11 +35976,11 @@ msgstr "menyebut anda dalam perbincangan projek"
 
 #: Disabled references:1
 msgid "在项目讨论中回复了你"
-msgstr "Balas anda dalam perbincangan projek"
+msgstr "balas anda dalam perbincangan projek"
 
 #: Disabled references:1
 msgid "发表了日程讨论"
-msgstr "Jadual perbincangan telah diterbitkan"
+msgstr "mengulas acara ini"
 
 #: Disabled references:1
 msgid "在日程讨论中提到了你"
@@ -35974,7 +36000,7 @@ msgstr "balas anda dalam perbincangan kelulusan"
 
 #: Disabled references:1
 msgid "发表了审批讨论"
-msgstr "Hantar perbincangan kelulusan"
+msgstr "komen pada kelulusan ini"
 
 #: Disabled references:1
 msgid "在考勤讨论中提到了你"
@@ -35986,7 +36012,7 @@ msgstr "balas anda dalam perbincangan kehadiran"
 
 #: Disabled references:1
 msgid "发表了考勤讨论"
-msgstr "Perbincangan kehadiran dipaparkan"
+msgstr "komen pada rekod kehadiran ini"
 
 #: Disabled references:1
 msgid "在%0讨论中回复了你"
@@ -35998,7 +36024,7 @@ msgstr "sebut nama anda di %0"
 
 #: Disabled references:1
 msgid "发表了%0讨论"
-msgstr "Dipaparkan %0"
+msgstr "memberi komen pada %0"
 
 #: Disabled references:1
 msgid "在%0中发布了讨论"
@@ -36298,7 +36324,7 @@ msgstr "Gagal dimuat, klik untuk reload."
 
 #: Disabled references:1
 msgid "已关闭消息免打扰"
-msgstr "Do Not Disturb dilumpuhkan"
+msgstr "Mod Jangan Ganggu telah dimatikan"
 
 #: Disabled references:1
 msgid "已开启消息免打扰"
@@ -37686,7 +37712,7 @@ msgstr "E-mel gagal dihubungkan"
 
 #: Disabled references:1
 msgid "告诉我您想搭建的应用，或者从下面推荐中选择一个尝试"
-msgstr "Terangkan aplikasi yang ingin dibina, atau pilih cadangan di bawah untuk cuba"
+msgstr "Terangkan aplikasi yang ingin anda bina, atau pilih cadangan di bawah untuk bermula"
 
 #: Disabled references:1
 msgid "物业，报修工单、巡检打卡、费用催缴的应用"
@@ -37866,7 +37892,7 @@ msgstr "Sila masukkan item undian"
 
 #: Disabled references:1
 msgid "知会工作是一种美德"
-msgstr "Berkongsi kerja adalah satu nilai baik"
+msgstr "Kongsi kemas kini dengan pasukan anda..."
 
 #: Disabled references:1
 msgid "分享文件"
@@ -37911,22 +37937,6 @@ msgstr "Had trafik bulanan untuk knowledge center telah melebihi had, tidak bole
 #: Disabled references:1
 msgid "发布动态失败"
 msgstr "Gagal terbit post"
-
-#: Disabled references:1
-msgid "提出问题"
-msgstr "Tanya soalan"
-
-#: Disabled references:1
-msgid "是的"
-msgstr "Ya"
-
-#: Disabled references:1
-msgid "不用了"
-msgstr "Tak, terima kasih"
-
-#: Disabled references:1
-msgid "是否将此动态作为问答？"
-msgstr "Hantar post ini sebagai Soalan?"
 
 #: Disabled references:1
 msgid "请预览链接"
@@ -38770,7 +38780,7 @@ msgstr "Hantar pemberitahuan mesej ralat kepada pemilik bila API call gagal"
 
 #: Disabled references:1
 msgid "内不发送同类错误通知"
-msgstr "Jeda hantar pemberitahuan ralat sama"
+msgstr "sebelum menghantar semula pemberitahuan ralat yang sama"
 
 #: Disabled references:1
 msgid "将 API 授权给"
@@ -39010,7 +39020,7 @@ msgstr "Ubah Konfigurasi"
 
 #: Disabled references:1
 msgid "Basic Auth 鉴权认证"
-msgstr "Basic Auth"
+msgstr "Pengesahan Basic Auth"
 
 #: Disabled references:1
 msgid "OAuth 鉴权认证"
@@ -39246,7 +39256,7 @@ msgstr "Guna Python"
 
 #: Disabled references:1
 msgid "更新未发布"
-msgstr "Update belum diterbitkan"
+msgstr "Draf Kemas Kini"
 
 #: Disabled references:1
 msgid "监控"
@@ -39898,7 +39908,7 @@ msgstr "Tarikh & Masa"
 
 #: Disabled references:1
 msgid "例如，上次同步范围是1至100，本次将从大于100开始。"
-msgstr "Contohnya, sync range sebelum ini dari 1 hingga 100. Kali ini akan mula dari lebih 100."
+msgstr "Contohnya, julat penyegerakan sebelum ini dari 1 hingga 100. Kali ini akan mula dari lebih 100."
 
 #: Disabled references:1
 msgid "注意：此方式无法同步修改的数据"
@@ -41594,7 +41604,7 @@ msgstr "Mati"
 
 #: Disabled references:1
 msgid "有更新未发布"
-msgstr "Kemas kini belum dikeluarkan"
+msgstr "Draf"
 
 #: Disabled references:1
 msgid "已读取(行)"
@@ -42674,7 +42684,7 @@ msgstr "(Tamat Tempoh)"
 
 #: Disabled references:1
 msgid "授权给指定组织"
-msgstr "Luluskan kepada organisasi yang ditetapkan"
+msgstr "Benarkan Organisasi Berikut"
 
 #: Disabled references:1
 msgid "暂无提交的代码"
@@ -42778,7 +42788,7 @@ msgstr "Export Pemalam"
 
 #: Disabled references:1
 msgid "将插件导出为 .mdye 格式，可以导入到其他组织使用"
-msgstr "Export pemalam dalam format .mdye untuk diimport oleh organisasi lain"
+msgstr "Eksport pemalam sebagai fail .mdye untuk digunakan dalam organisasi lain"
 
 #: Disabled references:1
 msgid "导出中..."
@@ -42934,7 +42944,7 @@ msgstr "Diterbitkan pada"
 
 #: Disabled references:1
 msgid "未发布版本"
-msgstr "Versi Belum Dilancar"
+msgstr "Versi Draf"
 
 #: Disabled references:1
 msgid "发布新版本"
@@ -43438,7 +43448,7 @@ msgstr "3. Kebenaran visibiliti ahli pada task dalam projek"
 
 #: Disabled references:1
 msgid "仅影响项目成员和在公开范围内人员，管理员固定为对项目下所有任务可见且可查看详情"
-msgstr "Hanya ahli projek dan staf dalam skop awam terkesan. Pentadbir boleh melihat semua task dan butiran bawah projek."
+msgstr "Hanya memberi kesan kepada ahli projek dan pengguna dalam skop awam. Pentadbir sentiasa boleh melihat semua tugas projek dan butirannya."
 
 #: Disabled references:1
 msgid "获取链接与二维码"
@@ -43926,7 +43936,7 @@ msgstr "Bilangan task lewat dimiliki pengguna sekarang."
 
 #: Disabled references:1
 msgid "截止到目前为止任务负责人负责的任务逾期时间统计，包含进行中和已完成的逾期时间，向下取整。如：3个进行中任务逾期时间累计为15小时，则显示总逾期0天，若累计为26小时，则显示总逾期1天，以此类推"
-msgstr "Jumlah masa tertunda untuk Task yang dimiliki pengguna sekarang."
+msgstr "Jumlah tempoh tertunggak bagi tugas yang dikendalikan oleh pengguna setakat ini, termasuk tugas yang sedang berjalan dan yang telah selesai, dibundarkan ke bawah. Contoh: jika jumlah tempoh tertunggak bagi 3 tugas yang sedang berjalan ialah 15 jam, jumlahnya dipaparkan sebagai 0 hari; jika 26 jam, dipaparkan sebagai 1 hari, dan seterusnya."
 
 #: Disabled references:1
 msgid "平均完成任务时间（天）"
@@ -43934,7 +43944,7 @@ msgstr "Purata Masa Selesai Tugasan (Hari)"
 
 #: Disabled references:1
 msgid "截止到目前为止任务负责人平均完成任务的时间统计，向下取整。如：3个进行中任务逾期时间累计为15小时，则显示总逾期0天，若累计为26小时，则显示总逾期1天，以此类推"
-msgstr "Purata tempoh Task dimiliki pengguna setakat ini"
+msgstr "Purata tempoh penyelesaian tugas yang dikendalikan oleh pengguna setakat ini, dibundarkan ke bawah. Contoh: jika jumlah tempoh tertunggak bagi 3 tugas yang sedang berjalan ialah 15 jam, jumlahnya dipaparkan sebagai 0 hari; jika 26 jam, dipaparkan sebagai 1 hari, dan seterusnya."
 
 #: Disabled references:1
 msgid "当前看板任务情况（个）"
@@ -44182,11 +44192,11 @@ msgstr "Selepas ditutup, pemberitahuan task akan berhenti, tapi @mention dalam p
 
 #: Disabled references:1
 msgid "已开启提醒"
-msgstr "Peringatan diaktifkan"
+msgstr "Peringatan Aktif"
 
 #: Disabled references:1
 msgid "已关闭提醒"
-msgstr "Reminder dimatikan"
+msgstr "Pemberitahuan Dimatikan"
 
 #: Disabled references:1
 msgid "锁定后任务成员将无法完成和修改任务内容（但仍可参与任务讨论）"
@@ -44562,7 +44572,7 @@ msgstr "Tambah Orang Bertanggungjawab"
 
 #: Disabled references:1
 msgid "等%0人"
-msgstr "dsb."
+msgstr "dan %0 orang lagi"
 
 #: Disabled references:1
 msgid "加为项目成员"
@@ -45690,7 +45700,7 @@ msgstr "Susun Atur"
 
 #: Disabled references:1
 msgid "双向关联"
-msgstr "Bi-Asosiasi"
+msgstr "Pautan Dua Hala"
 
 #: Disabled references:1
 msgid "字段属性"
@@ -46346,11 +46356,11 @@ msgstr "Berkaitan %0"
 
 #: Disabled references:1
 msgid "新版本如果要建立双向关联，需要前往关联表（%0）中添加关联本表（%1）的关联记录"
-msgstr "Untuk tetapkan hubungan dua hala bagi edition baru, pergi ke worksheet berkaitan (%0) dan tambah rekod berkaitan yang dipaut ke worksheet yang sama (%1)"
+msgstr "Untuk membuat Pautan Dua Hala dalam versi baharu, pergi ke jadual yang dipautkan (%0) dan tambah Rekod Dipautkan untuk jadual ini (%1)"
 
 #: Disabled references:1
 msgid "什么是双向关联?"
-msgstr "Apa itu bidirectional association?"
+msgstr "Apakah Pautan Dua Hala?"
 
 #: Disabled references:1
 msgid "在"
@@ -47223,9 +47233,7 @@ msgstr "Sokong ruang, inden dan baris baru semasa sunting"
 
 #: Disabled references:1
 msgid "1.函数返回值需要保证和当前子表的数据结构完全一致，从而对子表数据进行全量替换更新。否则将会导致未知异常问题。%02.此功能仅提供给熟悉代码的用户使用，可以自由处理子表数据实现复杂业务逻辑。普通用户请谨慎使用！%1"
-msgstr "1. Fungsi mesti pulangkan nilai yang selaras dengan struktur data subform semasa untuk memastikan penggantian dan kemas kini data berjalan lancar. Sebarang ketidaksepadanan boleh menyebabkan error yang tak dijangka. %0
-
-2. Ciri ini untuk pengguna berpengalaman yang mahir coding dan boleh urus data subform untuk logik bisnes yang kompleks. Pengguna biasa, guna dengan hati-hati! %1"
+msgstr "1. Nilai pulangan fungsi mesti sepadan sepenuhnya dengan struktur data subborang semasa supaya data subborang dapat diganti dan dikemas kini sepenuhnya. Jika tidak, ralat tidak dijangka mungkin berlaku. %02. Ciri ini hanya untuk pengguna yang biasa dengan kod dan boleh mengendalikan data subborang bagi melaksanakan logik perniagaan yang kompleks. Pengguna biasa hendaklah menggunakan ciri ini dengan berhati-hati! %1"
 
 #: Disabled references:1
 msgid "查看代码说明>"
@@ -49594,7 +49602,7 @@ msgstr "Paparan Berkaitan"
 
 #: Disabled references:1
 msgid "设置关联视图，统一控制关联记录的排序方式、选择范围、和打开记录时的视图。字段本身设置的排序和打开记录视图优先级高于此配置；过滤选择范围的效果为叠加。"
-msgstr "Tetapan berkaitan dengan paparan akan kawal julat pilihan, paparan bila rekod dibuka, dan cara rekod berkaitan diisih. Keutamaan isihan dan paparan rekod oleh medan lebih tinggi dari konfigurasi; penapisan julat pilihan akan tindih tetapan lain."
+msgstr "Tetapkan Paparan Pautan untuk kawal Susunan, Skop Pilihan, dan cara Rekod Pautan dibuka. Tetapan per Medan diutamakan, manakala Tapis Pilihan digabungkan."
 
 #: Disabled references:1
 msgid "请先选择关联表"
@@ -50334,7 +50342,7 @@ msgstr "Isi baris berselang"
 
 #: Disabled references:1
 msgid "标题行文字换行"
-msgstr "Bungkus baris tajuk"
+msgstr "Balut Teks Pengepala"
 
 #: Disabled references:1
 msgid "分页"
@@ -50630,7 +50638,7 @@ msgstr "Worksheet semasa dirujuk oleh node aliran kerja berikut"
 
 #: Disabled references:1
 msgid "展示工作流对当前字段的关键引用，主要包括筛选条件、动态值设置、人员配置等可能影响流程执行或数据准确性的引用"
-msgstr "Papar rujukan utama Aliran Kerja untuk Medan Semasa, termasuk Tapis, Nilai Dinamik, Tetapan Personel, dan faktor lain yang mempengaruhi pelaksanaan proses atau ketepatan data."
+msgstr "Tunjuk rujukan utama aliran kerja untuk medan semasa, termasuk tapis, nilai dinamik, dan tetapan kakitangan yang boleh menjejaskan pelaksanaan aliran kerja atau ketepatan data"
 
 #: Disabled references:1
 msgid "当前字段正被以下业务规则的筛选条件使用"
@@ -50926,7 +50934,7 @@ msgstr "Asosiasi sedia ada"
 
 #: Disabled references:1
 msgid "检测到所选表已关联 %0，是否建立"
-msgstr "Table yang dipilih dikaitkan dengan %0, teruskan buat?"
+msgstr "%0 dipautkan ke jadual terpilih."
 
 #: Disabled references:1
 msgid "同步数据？"
@@ -51357,8 +51365,8 @@ msgid "编码方式：code128，仅支持数字、字母、符号，最大包含
 msgstr "Kaedah pengekodan: code128, hanya sokong nombor, huruf, dan simbol, maksimum 128 aksara"
 
 #: Disabled references:1
-msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
-msgstr "Format pengekodan: Kod QR, sokong aksara Cina, maksima 150 aksara"
+msgid "编码方式：QR-code，可支持汉字，最大包含250个字"
+msgstr "Pengekodan: Kod QR; menyokong aksara Cina, hingga 250 aksara"
 
 #: Disabled references:1
 msgid "容错率"
@@ -52170,7 +52178,7 @@ msgstr "Apabila kuota eksekusi bulanan turun ke 2%, sistem akan automatik beli 1
 
 #: Disabled references:1
 msgid "开启后，当月剩余执行额度为2%时，自动购买 %0 100信用点/1万次 %1 的单月包，从账户信用点中扣款"
-msgstr "Jika diaktifkan, apabila kuota pelaksanaan bulanan turun ke 2%, pakej 1 bulan (100 kredit setiap 10,000 %1) akan dibeli dan ditolak secara automatik dari akaun anda."
+msgstr "Jika diaktifkan, apabila baki kuota pelaksanaan bulanan turun kepada 2%, pakej bulanan %0 100 kredit bagi setiap 10,000 kali %1 akan dibeli secara automatik dan ditolak daripada kredit akaun."
 
 #: Disabled references:1
 msgid "自动化工作流"
@@ -52322,7 +52330,7 @@ msgstr "Trigger bila rekod baru ditambah atau rekod sedia ada berubah dalam lemb
 
 #: Disabled references:1
 msgid "定时触发%03012"
-msgstr "Pencetus Masa"
+msgstr "Dicetuskan Mengikut Jadual"
 
 #: Disabled references:1
 msgid "按照设定的时间周期循环触发流程"
@@ -52990,7 +52998,7 @@ msgstr "Pilih Projek"
 
 #: Disabled references:1
 msgid "工作表无效或已删除"
-msgstr "Lembaran Kerja tidak sah atau telah dipadam"
+msgstr "Tidak sah atau dipadam"
 
 #: Disabled references:1
 msgid "项目无效或已删除"
@@ -53166,7 +53174,7 @@ msgstr "Nilai syarat penapis tidak boleh kosong"
 
 #: Disabled references:1
 msgid "有必填字段未填写"
-msgstr "Ada medan wajib yang belum diisi"
+msgstr "Beberapa Medan Wajib Tiada"
 
 #: Disabled references:1
 msgid "部分退款金额不能为空"
@@ -55095,7 +55103,7 @@ msgstr "Keluar dari loop bila parameter capai syarat di bawah. Kemas kini nilai 
 
 #: Disabled references:1
 msgid "当“start”参数值大于“end”参数值时，退出循环"
-msgstr "Keluar dari loop apabila nilai parameter 'start' lebih besar daripada nilai parameter 'end'"
+msgstr "Keluar dari gelung apabila nilai parameter 'mula' lebih besar daripada nilai parameter 'tamat'"
 
 #: Disabled references:1
 msgid "最大循环次数"
@@ -55466,8 +55474,8 @@ msgid "必须选择一个目标工作表"
 msgstr "Pilih lembaran kerja sasaran"
 
 #: Disabled references:1
-msgid "通过解析内部成员访问或对外公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
-msgstr "Dengan memparsing pautan rekod yang diakses oleh ahli dalaman atau dikongsi secara luaran, objek rekod berkaitan boleh digunakan oleh node lain dalam workflow. Contoh: pengurus stor gunakan scanner di PC untuk imbas Kod QR produk, masukkan pautan rekod dalam kotak teks, dan workflow akan parsing produk berkaitan untuk proses keluar masuk automatik."
+msgid "通过解析内部成员访问或公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
+msgstr "Ekstrak objek rekod berkaitan melalui pentafsiran pautan untuk digunakan dalam nod Aliran Kerja lain, membolehkan pengurusan inventori automatik apabila penyelia gudang mengimbas Kod QR produk ke dalam sistem."
 
 #: Disabled references:1
 msgid "根据筛选条件和排序规则从工作表中查找符合条件的第一条数据，并在获取的同时对记录进行更新（原子性防止并发操作，适用于出入库等场景）"
@@ -56467,7 +56475,7 @@ msgstr "Wakil oleh pemilik aliran kerja"
 
 #: Disabled references:1
 msgid "由指定人员代理"
-msgstr "Wakil oleh personel yang ditetapkan"
+msgstr "Delegasikan kepada ahli tertentu"
 
 #: Disabled references:1
 msgid "流程结束"
@@ -56603,7 +56611,7 @@ msgstr "Print Template tidak tersedia"
 
 #: Disabled references:1
 msgid "允许审批人撤回上次审批结果"
-msgstr "Benarkan pelulus tarik balik kelulusan"
+msgstr "Benarkan penarikan balik kelulusan"
 
 #: Disabled references:1
 msgid "当没有上级负责人时，由当前人员进行处理"
@@ -56631,7 +56639,7 @@ msgstr "Peringatan: Batch operations tidak terjejas"
 
 #: Disabled references:1
 msgid "审批流程中允许查看他人填写字段"
-msgstr "Benarkan lihat medan yang diisi oleh pengguna lain dalam proses approval"
+msgstr "Benarkan melihat medan yang diisi oleh pengguna lain"
 
 #: Disabled references:1
 msgid "审批和填写节点中查看他人填写内容"
@@ -56915,7 +56923,7 @@ msgstr "Peranan organisasi tidak disokong"
 
 #: Disabled references:1
 msgid "指定人员代理"
-msgstr "Wakil oleh personel yang ditetapkan"
+msgstr "Delegasikan kepada ahli tertentu"
 
 #: Disabled references:1
 msgid "使用发起节点中的默认设置"
@@ -57379,7 +57387,7 @@ msgstr "Abaikan nilai null"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示是其中任何一个值时，即符合条件"
-msgstr "Jika berbilang dipilih, mana-mana satu akan memenuhi syarat"
+msgstr "Jika beberapa nilai dipilih, sebarang nilai yang sepadan memenuhi syarat"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示不是其中所有值时，才符合条件"
@@ -58573,7 +58581,7 @@ msgstr "Ubah nilai global variable App/Org dalam aliran kerja"
 
 #: Disabled references:1
 msgid "开发者%03041"
-msgstr "Developer"
+msgstr "Pembangun"
 
 #: Disabled references:1
 msgid "API 连接与认证%03042"
@@ -59108,6 +59116,10 @@ msgid "恢复到此版本"
 msgstr "Pulih ke versi ini"
 
 #: Disabled references:1
+msgid "版本%26016"
+msgstr "Versi"
+
+#: Disabled references:1
 msgid "编辑中…"
 msgstr "Sedang Sunting…"
 
@@ -59361,7 +59373,7 @@ msgstr "Paparan proses dalam Serial Waiting"
 
 #: Disabled references:1
 msgid "（日志生成%0后自动删除）"
-msgstr "Noted! Please provide your English UI text for translation."
+msgstr "(Padam secara automatik selepas %0 dijana)"
 
 #: Disabled references:1
 msgid "触发流程数据"
@@ -60013,7 +60025,7 @@ msgstr "Bilangan tempat perpuluhan dalam medan nombor"
 
 #: Disabled references:1
 msgid "仅支持分支节点条件判断"
-msgstr "Hanya sokong penghakiman kondisi node cawangan"
+msgstr "Hanya Digunakan untuk Syarat Cawangan"
 
 #: Disabled references:1
 msgid "文本格式化"
@@ -60917,7 +60929,7 @@ msgstr "(Tiada Salinan Kepada)"
 
 #: Disabled references:1
 msgid "代理"
-msgstr "Proxy"
+msgstr "Proksi"
 
 #: Disabled references:1
 msgid "撤回委托"
@@ -61868,8 +61880,8 @@ msgid "选择索引字段"
 msgstr "Pilih Medan Indeks"
 
 #: Disabled references:1
-msgid "每张工作表只能创建一个「文本索引」或者「文本字段全文索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
-msgstr "Setiap worksheet hanya boleh buat satu \"text index\" atau \"full-text index for text fields\"; semasa buat \"text index\", tak boleh termasuk \"option fields\"; setiap index hanya boleh ada satu \"option field\"."
+msgid "每张工作表只能创建一个「文本索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
+msgstr "Setiap jadual hanya membenarkan satu indeks teks; indeks teks tidak boleh merangkumi medan pilih; setiap indeks hanya boleh merangkumi satu medan pilih"
 
 #: Disabled references:1
 msgid "建立唯一索引后，字段的值不允许重复。如果字段为非必填，则整个工作表只能有一条为空的数据，以保证数据的唯一性"
@@ -62170,6 +62182,10 @@ msgstr "Tukar"
 #: Disabled references:1
 msgid "编码方式：code128，仅支持数字、字母、符号，最大包含30个字符"
 msgstr "Kaedah encoding: code128, hanya nombor, huruf dan simbol, maks 30 aksara"
+
+#: Disabled references:1
+msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
+msgstr "Format pengekodan: Kod QR, sokong aksara Cina, maksima 150 aksara"
 
 #: Disabled references:1
 msgid "条形码数据源"
@@ -62789,7 +62805,7 @@ msgstr "Konfigurasi parameter pemalam wajib dalam format JSON"
 
 #: Disabled references:1
 msgid "常规（多条）"
-msgstr "Umum (Pelbagai)"
+msgstr "Standard (Pelbagai)"
 
 #: Disabled references:1
 msgid "在左侧显示卡片列表，可切换查看记录详情"
@@ -62797,11 +62813,11 @@ msgstr "Papar senarai card di sebelah kiri, tukar ke paparan butiran rekod"
 
 #: Disabled references:1
 msgid "仅显示详情（一条）"
-msgstr "Paparan Butiran (Satu)"
+msgstr "Paparan Butiran (Pilih Satu)"
 
 #: Disabled references:1
 msgid "显示第一条记录的详情"
-msgstr "Papar butiran rekod pertama"
+msgstr "Papar Butiran Rekod Pertama"
 
 #: Disabled references:1
 msgid "详情设置"
@@ -64765,7 +64781,7 @@ msgstr "Import Data - muat naik excel (1/3)"
 
 #: Disabled references:1
 msgid "支持10MB以内的xls、xlsx、csv文件, 最大行数不超过%0行，列数不超过200列；导入多选类型的控件，请确保Excel字段内各个选项/人员用“，”隔开；导入地区控件，省市县之间以“/”隔开，如：江西省/上饶市/铅山县，如填写的地区格式没有“/”，则会按照名称精准匹配"
-msgstr "Sokong fail xls, xlsx, dan csv sehingga 10MB, maksimum %0 baris dan tidak lebih 200 lajur; bila import Pilih berbilang, pastikan setiap pilihan/orang dipisahkan dengan “,”; untuk import kawalan kawasan, pisahkan negeri, bandar, dan daerah dengan “/”, contoh: Jiangxi Province/Shangrao City/Qianshan County; jika format kawasan tidak ada “/”, padanan akan dibuat ikut nama tepat."
+msgstr "Menyokong fail XLS, XLSX dan CSV sehingga 10 MB, maksimum %0 baris dan 200 lajur. Untuk medan Pilih Berbilang, asingkan pilihan atau ahli dengan koma. Untuk medan lokasi, asingkan negeri, bandar dan daerah dengan “/”, contoh: Jiangxi Province/Shangrao City/Qianshan County. Lokasi tanpa “/” akan dipadankan tepat mengikut nama."
 
 #: Disabled references:1
 msgid "已选择%0条草稿"
@@ -66707,7 +66723,7 @@ msgstr "Double-click untuk buat rekod"
 
 #: Disabled references:1
 msgid "插件未发布"
-msgstr "Pemalam belum diterbitkan"
+msgstr "Draf Plugin"
 
 #: Disabled references:1
 msgid "插件开发中"
@@ -67594,7 +67610,7 @@ msgstr "Dapatkan Rekod Baris Log POST"
 
 #: Disabled references:1
 msgid "按操作者ID筛选"
-msgstr "Tapis ikut Operator ID"
+msgstr "Tapis Ikut ID Pelakon"
 
 #: Disabled references:1
 msgid "按控件ID筛选"
@@ -67688,7 +67704,7 @@ msgstr "Ikut jenis penapis, masukkan satu nilai sahaja. Rujuk AccountID khas."
 
 #: Disabled references:1
 msgid "日期范围，枚举值DateRangeEnum 请参考"
-msgstr "Julat tarikh"
+msgstr "Julat tarikh; rujuk nilai enum DateRangeEnum."
 
 #: Disabled references:1
 msgid "日期范围类型，1：天 2：周 3：月 4：季 5：年"

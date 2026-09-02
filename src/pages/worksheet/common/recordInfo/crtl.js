@@ -207,7 +207,9 @@ export function updateRecord(
     .catch(err => {
       console.error(err);
       handleCallback(err);
-      alert(_l('保存失败，请稍后重试'), 2);
+      if (err.status !== 401) {
+        alert(_l('保存失败，请稍后重试'), 2);
+      }
     });
 }
 

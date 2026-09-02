@@ -91,11 +91,7 @@ export default class WidgetsVerifyCode extends Component {
     };
 
     const captchaFuc = () => {
-      if (md.global.getCaptchaType() === 1) {
-        new captcha(cb, onCancel);
-      } else {
-        new TencentCaptcha(md.global.Config.CaptchaAppId.toString(), cb, { needFeedBack: false }).show();
-      }
+      new captcha(cb, onCancel);
     };
 
     // 前3次关闭图像验证

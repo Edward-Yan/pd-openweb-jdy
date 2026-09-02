@@ -97,7 +97,7 @@ SelectSendTo.prototype = {
           return;
         }
 
-        if (e.keyCode === 38 && !ST.isHoverList) {
+        if (e.keyCode === 38 && !ST.isHoverList && $list.length) {
           $list
             .removeClass('active')
             .eq(index - 1 >= 0 ? index - 1 : 0)
@@ -106,7 +106,7 @@ SelectSendTo.prototype = {
           return;
         }
 
-        if (e.keyCode === 40 && !ST.isHoverList) {
+        if (e.keyCode === 40 && !ST.isHoverList && $list.length) {
           $list
             .removeClass('active')
             .eq(index + 1 <= $list.length - 1 ? index + 1 : $list.length - 1)

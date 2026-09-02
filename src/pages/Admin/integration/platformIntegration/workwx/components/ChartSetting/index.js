@@ -64,7 +64,8 @@ export default function ChartSetting(props) {
           disabled={!newURL}
           className="mLeft20"
           onClick={() => {
-            setCopyValue(pathCompletion(`/auth/chatTools?p=${projectId}&url=${newURL.split('?')[0]}`));
+            const targetUrl = encodeURIComponent(newURL.split('?')[0]);
+            setCopyValue(pathCompletion(`/auth/chatTools?p=${projectId}&url=${targetUrl}`));
           }}
         >
           {_l('生成企微链接')}

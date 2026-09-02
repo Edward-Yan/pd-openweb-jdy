@@ -157,10 +157,6 @@ const getSearchWorksheetData = async props => {
       ...(_.get(window, 'shareState.shareId') ? { relationWorksheetId: queryConfig.worksheetId } : {}),
     };
 
-    if (window.isPublicWorksheet) {
-      params.formId = window.publicWorksheetShareId;
-    }
-
     const resultData = await sheetAjax.getFilterRowsByQueryDefault(params);
 
     if (_.get(resultData, 'resultCode') === 1) {
@@ -404,10 +400,6 @@ const getSearchWorksheetResult = async props => {
       sortControls: moreSort,
       ...(_.get(window, 'shareState.shareId') ? { relationWorksheetId: currentSearchConfig.worksheetId } : {}),
     };
-
-    if (window.isPublicWorksheet) {
-      params.formId = window.publicWorksheetShareId;
-    }
 
     const resultData = await sheetAjax.getFilterRowsByQueryDefault(params);
 

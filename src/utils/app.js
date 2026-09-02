@@ -241,12 +241,13 @@ export const shareGetAppLangDetail = data => {
   const appLang = new URL(location.href).searchParams.get('app_lang');
   const isBaseLang = appLang === PUBLIC_APP_BASE_LANG;
   const langKey = isBaseLang ? '' : appLang || getAppLangCode(getCurrentLang());
-  const { appId, projectId } = data;
+  const { appId, projectId, worksheetId } = data;
   return new Promise(resolve => {
     appManagementApi
       .getAppLangs({
         appId,
         projectId,
+        ...(worksheetId ? { worksheetId } : {}),
       })
       .then(data => {
         window[`appLangs-${appId}`] = data || [];
@@ -266,6 +267,7 @@ export const shareGetAppLangDetail = data => {
               appId,
               projectId,
               appLangId: langInfo.id,
+              ...(worksheetId ? { worksheetId } : {}),
             })
             .then(lang => {
               window[`langData-${appId}`] = lang.items;

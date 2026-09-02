@@ -12,7 +12,7 @@ import { getTitleControlIdFromRelateControl } from 'src/components/Form/core/uti
 import { selectRecords } from 'src/components/SelectRecords';
 import { searchRecordInDialog } from 'src/pages/worksheet/components/SearchRelateRecords';
 import ViewHoverRelateRecordCard from 'src/pages/worksheet/views/components/ViewHoverRelateRecordCard.jsx';
-import { browserIsMobile } from 'src/utils/common';
+import { browserIsMobile, htmlEncodeReg } from 'src/utils/common';
 import { getTitleTextFromRelateControl } from 'src/utils/control';
 import { addBehaviorLog } from 'src/utils/project';
 
@@ -34,7 +34,7 @@ function getCellHeight(texts = [], width) {
       text =>
         `<div style="display:inline-block;font-size: 13px;margin: 6px 0 0 6px;padding: 0 10px;max-width: ${
           width - 46
-        }px"><span class="name InlineBlock ellipsis" style="max-width: 100%;">${text}</span></div>`,
+        }px"><span class="name InlineBlock ellipsis" style="max-width: 100%;">${htmlEncodeReg(text)}</span></div>`,
     )
     .join('');
   result = div.clientHeight;

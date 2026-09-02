@@ -31,6 +31,13 @@ const BASIC_FUNCTION_TYPE = {
   PDF_GEN: 5,
 };
 
+const NOCOLY_HIDDEN_CONFIG_KEYS = [
+  'autoPurchaseWorkflowExtPack',
+  'autoPurchaseDataPipelineExtPack',
+  'autoPurchaseApkStorageExtPack',
+  'autoPurchaseExternalUserExtPack',
+];
+
 // 从 basePricingPolicy 中获取价格
 const getPrice = (basePricingPolicy, key) => {
   const typeMap = {
@@ -122,7 +129,7 @@ const getConfigs = basePricingPolicy => [
 ];
 
 export default function BalanceManage(props) {
-  const { visible, projectId, value = {}, onClose = () => {}, onChange = () => {} } = props;
+  const { visible, projectId, isNocolySaas, value = {}, onClose = () => {}, onChange = () => {} } = props;
 
   const [basePricingPolicy, setBasePricingPolicy] = useState({});
 
@@ -152,7 +159,9 @@ export default function BalanceManage(props) {
     });
   };
 
-  const configs = getConfigs(basePricingPolicy);
+  const configs = getConfigs(basePricingPolicy).filter(
+    item => !isNocolySaas || !NOCOLY_HIDDEN_CONFIG_KEYS.includes(item.key),
+  );
 
   return (
     <Dialog width={640} visible={visible} footer={null} title={_l('信用点余额使用管理')} handleClose={onClose}>

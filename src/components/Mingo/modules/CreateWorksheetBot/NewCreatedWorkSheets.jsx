@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import cx from 'classnames';
 import styled from 'styled-components';
+import { htmlEncodeReg } from 'src/utils/common';
 
 const Con = styled.div`
   .createWorksheetTitle {
@@ -47,7 +48,7 @@ export default function NewCreatedWorkSheets({ relateControls = [], onEditWorkSh
         dangerouslySetInnerHTML={{
           __html: _l(
             '已新建关联表 <b>%0</b>。点击开始为您继续生成关联表字段。',
-            relateControls.map(item => item.worksheetName).join('、'),
+            relateControls.map(item => htmlEncodeReg(item.worksheetName)).join('、'),
           ),
         }}
       />
@@ -68,7 +69,7 @@ export default function NewCreatedWorkSheets({ relateControls = [], onEditWorkSh
           <div
             className="name"
             dangerouslySetInnerHTML={{
-              __html: _l('生成 <b>%0</b> 表字段', item.worksheetName),
+              __html: _l('生成 <b>%0</b> 表字段', htmlEncodeReg(item.worksheetName)),
             }}
           />
           <div className="description">{item.worksheetDescription}</div>

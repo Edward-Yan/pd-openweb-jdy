@@ -278,7 +278,7 @@ export default function WidgetIntro(props) {
       onChange({
         ..._.omit(sourceControl, ['controlId', 'controlName', 'default']),
         attribute: 0,
-        ..._.pick(data, ['sectionId', 'row', 'col']),
+        ..._.pick(data, ['sectionId', 'row', 'col', 'size']),
       });
       return;
     }

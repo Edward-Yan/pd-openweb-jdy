@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: "
-"POT-Creation-Date: 2026-07-14 17:50:50"
+"POT-Creation-Date: 2026-08-26 14:36:28"
 "Language-Team: Japanese"
 "Language: ja"
 "MIME-Version: 1.0"
@@ -279,7 +279,7 @@ msgstr "ワークシートトリガー"
 
 #: Disabled references:1
 msgid "定时触发"
-msgstr "時限式トリガー"
+msgstr "スケジュールでトリガー"
 
 #: Disabled references:1
 msgid "日期触发"
@@ -1082,15 +1082,11 @@ msgstr "添付ファイルを管理する"
 
 #: Disabled references:1
 msgid "全部下载"
-msgstr "全てダウンロード"
+msgstr "すべてダウンロード"
 
 #: Disabled references:1
 msgid "未命名"
 msgstr "未命名"
-
-#: Disabled references:1
-msgid "不在可选范围内"
-msgstr "選択肢の範囲外です"
 
 #: Disabled references:1
 msgid "最多可选择20项"
@@ -1106,7 +1102,7 @@ msgstr "さらにキーワードを入力してください"
 
 #: Disabled references:1
 msgid "数据源异常"
-msgstr "データソース異常"
+msgstr "データソース利用不可"
 
 #: Disabled references:1
 msgid "数据加载中..."
@@ -1583,6 +1579,10 @@ msgstr "写真を撮る"
 #: Disabled references:1
 msgid "拍摄"
 msgstr "撮影する"
+
+#: Disabled references:1
+msgid "不在可选范围内"
+msgstr "選択肢の範囲外です"
 
 #: Disabled references:1
 msgid "%0级"
@@ -2694,11 +2694,11 @@ msgstr "入力または貼り付けて、コンテンツの作成を開始でき
 
 #: Disabled references:1
 msgid "下次试试在工作表页面直接粘贴剪贴板内容，可以自动激活智能创建，更方便喔～"
-msgstr "クリップボードの内容をテーブルページに直接貼り付けるだけで、自動的にスマート作成が開始されます。これまで以上に簡単にご利用いただけます。"
+msgstr "次回からは、ワークシートに直接貼り付けることで、Smart作成がより速く行えます～"
 
 #: Disabled references:1
 msgid "✨AI根据输入内容智能推测或联网搜索相关信息，为您补全尽可能多的字段"
-msgstr "✨AIによる高度な推論とインターネット検索に基づき、入力内容から可能な限り多くの項目を自動補完します"
+msgstr "AIは、お客様の入力情報とオンライン情報を活用して、できる限り多くの項目を自動入力します。"
 
 #: Disabled references:1
 msgid "AI只填写输入内容中明确包含的字段"
@@ -3039,7 +3039,7 @@ msgstr "アプリケーションは閉じられました"
 
 #: Disabled references:1
 msgid "应用已删除"
-msgstr "アプリケーションが削除されました"
+msgstr "アプリ削除済み"
 
 #: Disabled references:1
 msgid "你还不是应用成员，无权访问此应用"
@@ -5235,11 +5235,11 @@ msgstr "300G/月年"
 
 #: Disabled references:1
 msgid "AI 福利点"
-msgstr "AI特典クレジット"
+msgstr "AI無料クレジット"
 
 #: Disabled references:1
 msgid "「AI 福利点」（1福利点=1个信用点）可用于抵扣 mingo 中AI搭建和查询功能费用，组织所有用户共享；使用 AI 搭建应用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费"
-msgstr "AI特典クレジット（1ギフトクレジット＝1クレジット）は、MingoのAI構築機能およびクエリ機能の利用料に充当できます。全ユーザーで共有され、一般クレジットよりも先に優先して消費されます。"
+msgstr "AI無料クレジット（1ギフトクレジット＝1クレジット）は、MingoのAI構築およびクエリ機能の利用料金に適用できます。全ユーザーで共有されており、一般クレジットより先に消費されます。"
 
 #: Disabled references:1
 msgid "一次性赠送50"
@@ -7114,7 +7114,7 @@ msgstr "社内アシスタント"
 
 #: Disabled references:1
 msgid "账号已注销"
-msgstr "アカウントはキャンセルされました"
+msgstr "アカウントは解約されました"
 
 #: Disabled references:1
 msgid "复制ID"
@@ -7343,6 +7343,10 @@ msgstr "大文字と小文字を区別しない"
 #: Disabled references:1
 msgid "看不清，换一张"
 msgstr "見えない場合は、別の画像に変更してください。"
+
+#: Disabled references:1
+msgid "加载失败，请刷新重试"
+msgstr ""
 
 #: Disabled references:1
 msgid "管理应用“%0”"
@@ -7762,7 +7766,7 @@ msgstr "今すぐ購入"
 
 #: Disabled references:1
 msgid "未发布"
-msgstr "未公開"
+msgstr "下書き"
 
 #: Disabled references:1
 msgid "外部链接"
@@ -7850,7 +7854,7 @@ msgstr "表示可能な端末"
 
 #: Disabled references:1
 msgid "操作人"
-msgstr "オペレーター"
+msgstr "アクター"
 
 #: Disabled references:1
 msgid "导出时间"
@@ -8575,7 +8579,7 @@ msgstr "移動に失敗しました"
 
 #: Disabled references:1
 msgid "添加时间"
-msgstr "時間を追加"
+msgstr "参加日時"
 
 #: Disabled references:1
 msgid "添加人"
@@ -9331,7 +9335,7 @@ msgstr "アプリ一覧を取得"
 
 #: Disabled references:1
 msgid "获取应用信息"
-msgstr "アプリケーション情報を取得"
+msgstr "アプリ情報を取得"
 
 #: Disabled references:1
 msgid "创建应用项分组"
@@ -9339,11 +9343,11 @@ msgstr "アプリ項目グループを作成"
 
 #: Disabled references:1
 msgid "批量创建应用项"
-msgstr "アプリケーション項目の一括作成"
+msgstr "一括アプリアイテム作成"
 
 #: Disabled references:1
 msgid "编辑应用"
-msgstr "アプリケーションを編集"
+msgstr "アプリを編集"
 
 #: Disabled references:1
 msgid "删除应用"
@@ -9355,7 +9359,7 @@ msgstr "ワークシート一覧を取得"
 
 #: Disabled references:1
 msgid "获取工作表详情"
-msgstr "ワークシート詳細ビューを取得"
+msgstr "ワークシート詳細を取得"
 
 #: Disabled references:1
 msgid "编辑工作表"
@@ -9375,15 +9379,15 @@ msgstr "行の詳細を表示"
 
 #: Disabled references:1
 msgid "创建行记录"
-msgstr "行を作成"
+msgstr "レコード作成"
 
 #: Disabled references:1
 msgid "更新行记录"
-msgstr "行を更新"
+msgstr "レコードを更新"
 
 #: Disabled references:1
 msgid "删除行记录"
-msgstr "行を削除"
+msgstr "レコードを削除"
 
 #: Disabled references:1
 msgid "获取行记录列表"
@@ -9443,11 +9447,11 @@ msgstr "カスタムページを編集"
 
 #: Disabled references:1
 msgid "获取触发流程列表"
-msgstr "トリガー済みフロー一覧を取得"
+msgstr "トリガーされたワークフローの詳細を取得"
 
 #: Disabled references:1
 msgid "获取触发流程详情"
-msgstr "トリガーフローの詳細ビュー"
+msgstr "トリガーされたワークフローの詳細取得"
 
 #: Disabled references:1
 msgid "获取工作流结构"
@@ -9455,11 +9459,11 @@ msgstr "ワークフロー構造を取得"
 
 #: Disabled references:1
 msgid "获取审批流程执行列表"
-msgstr "承認フロー実行リストを取得"
+msgstr "承認フロー一覧を取得"
 
 #: Disabled references:1
 msgid "获取审批流程执行详情"
-msgstr "承認ワークフローの実行詳細を表示"
+msgstr "承認フローの詳細を取得"
 
 #: Disabled references:1
 msgid "批量创建工作流节点"
@@ -9487,11 +9491,11 @@ msgstr "タスク"
 
 #: Disabled references:1
 msgid "获取用户流程待办列表"
-msgstr "ユーザーワークフロータスクリスト取得"
+msgstr "ユーザータスクリストを取得"
 
 #: Disabled references:1
 msgid "获取审批待办详情"
-msgstr "承認タスク詳細ビュー"
+msgstr "承認タスクの詳細"
 
 #: Disabled references:1
 msgid "批量审批"
@@ -9639,7 +9643,7 @@ msgstr "Mingo AI 機能"
 
 #: Disabled references:1
 msgid "关闭后，当AI福利点用完后，将不会继续扣除信用点，且无法使用MingoAI付费功能"
-msgstr "無効化すると、AI特典クレジットはクレジットを消費しなくなり、MingoAIの有償機能は利用できなくなります。"
+msgstr "無効にすると、AI無料クレジットが消費された後は組織クレジットが使用されません。クレジットベースのMingo AI機能はご利用いただけなくなります。"
 
 #: Disabled references:1
 msgid "发送短信"
@@ -9991,7 +9995,7 @@ msgstr "コミッションの未払い"
 
 #: Disabled references:1
 msgid "每月1日00:00自动刷新为 %0 福利点，不累加"
-msgstr "毎月1日の00:00に%0の無料クレジットが自動的にリフレッシュされます。未使用分の繰り越しはできません"
+msgstr "毎月1日00:00に%0の無料クレジットが自動的にリフレッシュされます。繰り越しはできません。"
 
 #: Disabled references:1
 msgid "请先完成组织身份认证"
@@ -10011,7 +10015,8 @@ msgstr "クレジットは、ミンゴAI機能、メール、SMSなどの課金�
 
 #: Disabled references:1
 msgid "其中「AI 福利点」为平台赠送额度（1福利点=1个信用点），仅抵扣 Mingo AI功能费用；使用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费。"
-msgstr "「AI特典クレジット」は、プラットフォームから付与されるクレジットで、Mingo AI機能専用です（1 AI特典クレジット＝1クレジット）。AI特典クレジットが優先的に消費され、残高がゼロになった後に一般クレジットが差し引かれます。"
+msgstr "AI無料クレジットは、プラットフォームから付与されるクレジットであり、Mingo AI機能専用です（1 AI無料クレジット＝1クレジット）。  
+AI無料クレジットは優先的に消費され、残高がなくなった後に一般クレジットが差し引かれます。"
 
 #: Disabled references:1
 msgid "「信用点」用于发送邮件、短信等计费服务自动扣费。为避免系统功能不可用，请确保账户信用点余额充足。"
@@ -10031,7 +10036,7 @@ msgstr "クレジットアラート"
 
 #: Disabled references:1
 msgid "AI 福利点:"
-msgstr "AI特典クレジット:"
+msgstr "AI無料クレジット"
 
 #: Disabled references:1
 msgid "认证组织+10信用点"
@@ -10387,7 +10392,7 @@ msgstr "キー名"
 
 #: Disabled references:1
 msgid "授权服务"
-msgstr "認可サービス"
+msgstr "サービス"
 
 #: Disabled references:1
 msgid "已禁用"
@@ -12953,7 +12958,7 @@ msgstr "UI操作"
 
 #: Disabled references:1
 msgid "个人访问令牌"
-msgstr "パーソナルアクセス トークン"
+msgstr "アクセストークン"
 
 #: Disabled references:1
 msgid "应用密钥"
@@ -13165,7 +13170,7 @@ msgstr "人員を削除"
 
 #: Disabled references:1
 msgid "注销"
-msgstr "ログアウト"
+msgstr "削除"
 
 #: Disabled references:1
 msgid "交接"
@@ -13461,7 +13466,7 @@ msgstr "未登録メンバー"
 
 #: Disabled references:1
 msgid "获取AI福利点记录失败"
-msgstr "AI特典クレジットの取得に失敗しました"
+msgstr "AI無料クレジットの記録を取得できませんでした"
 
 #: Disabled references:1
 msgid "支付记录"
@@ -13469,7 +13474,7 @@ msgstr "支払い履歴"
 
 #: Disabled references:1
 msgid "信用点消费"
-msgstr "クレジット消費"
+msgstr "クレジット"
 
 #: Disabled references:1
 msgid "确定取消该订单？"
@@ -13517,7 +13522,7 @@ msgstr "請求書IDをコピー"
 
 #: Disabled references:1
 msgid "暂无AI福利点扣费记录"
-msgstr "AI特典クレジットの記録はまだありません。"
+msgstr "AI無料クレジットの記録はまだありません"
 
 #: Disabled references:1
 msgid "组织 - 账务"
@@ -13533,11 +13538,11 @@ msgstr "インボイスの設定"
 
 #: Disabled references:1
 msgid "「AI 福利点」为平台赠送额度（1福利点=1个信用点），仅抵扣 Mingo AI 功能费用；使用时会优先消耗 AI 福利点，额度用尽后再从通用信用点扣费。"
-msgstr "「AI特典クレジット」は、プラットフォームによって付与されるクレジットで、Mingo AI機能専用となります（1 AI特典クレジット＝1クレジット）。まずAI特典クレジットから優先的に消費され、残高がなくなった後に一般クレジットが使用されます。"
+msgstr "「AI無料クレジット」は、プラットフォームから付与されるクレジットで、Mingo AI機能専用です（1 AI無料クレジット＝1クレジット）。先にAI無料クレジットが消費され、残高がなくなった場合は一般クレジットが差し引かれます。"
 
 #: Disabled references:1
 msgid "每月赠送%0福利点，当月1日00:00自动刷新，不累加。"
-msgstr "毎月%0のギフトクレジットが無料で付与されます。クレジットは毎月1日の0:00に自動的にリフレッシュされ、未使用分は繰り越されません。"
+msgstr "毎月、%0の無料ギフトクレジットを獲得できます。クレジットは毎月1日00:00に自動でリフレッシュされ、繰り越しはできません。"
 
 #: Disabled references:1
 msgid "异步执行的工作流扣费存在约 5 分钟延迟，同时系统会将 5 分钟内相同操作自动合并成一条扣费记录，如5分钟内相同流程的扣费信息"
@@ -13545,7 +13550,7 @@ msgstr "非同期ワークフローは約5分の遅延があり、この間に�
 
 #: Disabled references:1
 msgid "AI 福利点消费"
-msgstr "AIクレジット消費"
+msgstr "AI無料クレジット"
 
 #: Disabled references:1
 msgid "按照时间筛选"
@@ -14090,8 +14095,8 @@ msgstr "クレジット残高を追加しました
 
 #: Disabled references:1
 msgid "AI 福利点；多充多送可叠加。"
-msgstr "AI特典クレジット  
-追加チャージでさらに報酬が獲得できます。重複利用可能です。"
+msgstr "AI無料クレジット  
+チャージするほど特典が増えます。重複利用可能です。"
 
 #: Disabled references:1
 msgid "活动截止时间：2026 年 7 月 31 日。"
@@ -14107,7 +14112,7 @@ msgstr "購入後クレジット残高：%0"
 
 #: Disabled references:1
 msgid "AI 福利点余额：%0"
-msgstr "AI特典クレジット残高：%0"
+msgstr "AI無料クレジット残高：%0"
 
 #: Disabled references:1
 msgid "信用点付款"
@@ -14519,7 +14524,7 @@ msgstr "告知を発行する"
 
 #: Disabled references:1
 msgid "可以在组织内群发通告，支持附件、私信、Email"
-msgstr "添付ファイル、プライベートメッセージ、電子メールに対応し、組織内でグループアナウンスを送信することが可能"
+msgstr "添付ファイル付きの全社向けお知らせを、ダイレクトメッセージまたはメールで送信できます。"
 
 #: Disabled references:1
 msgid "用户排行、动态更新、文档、图片等统计信息"
@@ -15760,7 +15765,7 @@ msgstr "赤フラッシュを確認"
 
 #: Disabled references:1
 msgid "冲红原因"
-msgstr "リバーサル理由"
+msgstr "取消理由"
 
 #: Disabled references:1
 msgid "付费开通"
@@ -17532,7 +17537,7 @@ msgstr "セキュリティ - データとアクセス"
 
 #: Disabled references:1
 msgid "对组织成员的数据访问、下载与关键操作进行统一管控，降低数据泄露与误操作风险"
-msgstr "組織メンバーによるデータアクセス、ダウンロード、重要な操作を一元管理し、情報漏洩や誤操作のリスクを低減します。"
+msgstr "組織メンバーのデータアクセス、ダウンロード、重要な操作を一元管理し、情報漏洩やミスのリスクを低減します。"
 
 #: Disabled references:1
 msgid "应用访问策略"
@@ -17548,7 +17553,7 @@ msgstr "添付ファイルのダウンロードを制限"
 
 #: Disabled references:1
 msgid "限制成员在特定网络或设备环境下下载附件，防止文件外泄"
-msgstr "指定したネットワークまたはデバイス環境でのみメンバーによる添付ファイルのダウンロードを許可し、データ漏洩を防止します。"
+msgstr "データ漏洩を防ぐため、承認されたネットワークまたはデバイスのみで添付ファイルのダウンロードを制限します。"
 
 #: Disabled references:1
 msgid "为组织内所有应用内容显示屏幕水印，防止截图、拍照等场景下的数据外泄"
@@ -17720,7 +17725,7 @@ msgstr "有効化すると、この制限により、認可された管理者の
 
 #: Disabled references:1
 msgid "允许一小时内免验证 (默认)"
-msgstr "1時間の認証不要期間を許可（デフォルト）"
+msgstr "1時間検証をスキップ（デフォルト）"
 
 #: Disabled references:1
 msgid "每次操作均需验证"
@@ -17764,7 +17769,7 @@ msgstr "現在の設定"
 
 #: Disabled references:1
 msgid "允许一小时内免验证"
-msgstr "1時間の認証なしで許可します"
+msgstr "1時間検証をスキップ"
 
 #: Disabled references:1
 msgid "AI 模型授权规则"
@@ -18665,7 +18670,15 @@ msgstr "「%0」のトップメンバーのランキング"
 
 #: Disabled references:1
 msgid "在人员选择层、通讯录中按部门查看时，按设置的排序显示"
-msgstr "人員選択レイヤーおよびアドレス帳で部門別に表示する際、設定された並び順で表示します。"
+msgstr "人員選択レイヤーおよびアドレス帳で部門別に表示する際、設定された並び順で表示します"
+
+#: Disabled references:1
+msgid "刷新中，请稍后查看"
+msgstr "更新中です。しばらくしてから再度ご確認ください。"
+
+#: Disabled references:1
+msgid "刷新失败"
+msgstr "リフレッシュの失敗"
 
 #: Disabled references:1
 msgid "在进行工作表和工作流的所有下级部门检索时，若所有下级部门总数超过2000（含），系统将默认仅获取当前部门的“一级子部门”所有部门。"
@@ -18682,6 +18695,10 @@ msgstr "部門をインポートする"
 #: Disabled references:1
 msgid "导出部门"
 msgstr "部門をエクスポート"
+
+#: Disabled references:1
+msgid "刷新部门列表"
+msgstr "部門リストをリフレッシュ"
 
 #: Disabled references:1
 msgid "删除“%0”"
@@ -18710,6 +18727,10 @@ msgstr "一部の親部門が見つかりません。先に復元してくださ
 #: Disabled references:1
 msgid "复制 ID"
 msgstr "IDをコピー"
+
+#: Disabled references:1
+msgid "刷新部门成员信息"
+msgstr "部署メンバー情報をリフレッシュします"
 
 #: Disabled references:1
 msgid "添加子部门"
@@ -18958,10 +18979,6 @@ msgstr "部門を持っていないメンバーだけを検索"
 #: Disabled references:1
 msgid "更多邀请"
 msgstr "もっと招待"
-
-#: Disabled references:1
-msgid "刷新失败"
-msgstr "リフレッシュの失敗"
 
 #: Disabled references:1
 msgid "刷新所有成员信息"
@@ -19368,6 +19385,10 @@ msgid "角色存在成员，无法删除"
 msgstr "メンバーが存在するため、ロールを削除できません。"
 
 #: Disabled references:1
+msgid "刷新角色成员信息"
+msgstr "ロールメンバー情報をリフレッシュ"
+
+#: Disabled references:1
 msgid "停用后，当前停用的角色将对用户隐藏，角色下的成员不会移除。"
 msgstr "無効化すると、ロールは非表示になりますが、割り当てられているメンバーには影響しません。"
 
@@ -19398,6 +19419,10 @@ msgstr "ロールのインポート"
 #: Disabled references:1
 msgid "导出角色"
 msgstr "役割をエクスポート"
+
+#: Disabled references:1
+msgid "刷新角色列表"
+msgstr "ロール一覧をリフレッシュ"
 
 #: Disabled references:1
 msgid "暂无结果"
@@ -20165,7 +20190,7 @@ msgstr "データ形式"
 
 #: Disabled references:1
 msgid "字段已删除"
-msgstr "フィールドが削除されました"
+msgstr "フィールド削除済み"
 
 #: Disabled references:1
 msgid "记录数量"
@@ -21615,8 +21640,8 @@ msgid "知识库用量超限，请联系组织管理员增购额度"
 msgstr "ナレッジベースの上限に達しました。アップグレードについては管理者にお問い合わせください。"
 
 #: Disabled references:1
-msgid "开启后，对 %0 格式的附件使用视觉模型解析，提升复杂文档的结构还原准确率。"
-msgstr "有効化すると、%0形式の添付ファイルをビジュアルモデルで解析し、複雑なドキュメント構造の再現精度が向上します。"
+msgid "开启后，对 %0 格式的附件进行增强解析，提升复杂文档的内容提取效果；暂不识别文档内图片内容。"
+msgstr "有効にすると、%0 の添付ファイル解析による複雑なコンテンツの抽出が向上します。ドキュメント画像には現在対応していません。"
 
 #: Disabled references:1
 msgid "向量数据库服务未部署，知识库暂不可用"
@@ -22036,7 +22061,7 @@ msgstr "承認手順の説明"
 
 #: Disabled references:1
 msgid "填写说明"
-msgstr "記入説明"
+msgstr "インストラクション"
 
 #: Disabled references:1
 msgid "通知说明"
@@ -22716,11 +22741,11 @@ msgstr "パスワードの検証に失敗しました！"
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销！"
-msgstr "まだ退出していない組織があります。登録を解除する前に、個人センター - 私の組織に移動してすべての組織を退出してください！"
+msgstr "アカウント削除前に、「個人センター > マイ組織」からすべての組織を退出してください。"
 
 #: Disabled references:1
 msgid "账号已申请注销！"
-msgstr "アカウントは解約の申請がされました！"
+msgstr "アカウント削除を申請しました！"
 
 #: Disabled references:1
 msgid "state过期或错误！"
@@ -22736,7 +22761,7 @@ msgstr "同意します（キャンセル後15日以内に取り消すことが�
 
 #: Disabled references:1
 msgid "确认注销"
-msgstr "キャンセルの確認"
+msgstr "削除を確認"
 
 #: Disabled references:1
 msgid "%0 分 %1 秒"
@@ -22855,12 +22880,12 @@ msgid "账号已注册"
 msgstr "アカウントは登録されています"
 
 #: Disabled references:1
-msgid "验证码发送过于频繁"
-msgstr "認証コードが頻繁に送信されています"
-
-#: Disabled references:1
 msgid "验证码发送过于频繁，%0收不到验证码？%1"
 msgstr "検証コードが頻繁に送信されすぎています。%0は検証コードを受信できませんか？%1"
+
+#: Disabled references:1
+msgid "验证码发送过于频繁"
+msgstr "認証コードが頻繁に送信されています"
 
 #: Disabled references:1
 msgid "账号未注册"
@@ -22983,10 +23008,6 @@ msgid "图形验证码校验失败"
 msgstr "CAPTCHA（キャプチャ）の認証に失敗しました"
 
 #: Disabled references:1
-msgid "返回登录页面"
-msgstr "ログインページに戻る"
-
-#: Disabled references:1
 msgid "找回密码"
 msgstr "パスワードを再取得"
 
@@ -23005,10 +23026,6 @@ msgstr "アカウントとパスワードでログイン"
 #: Disabled references:1
 msgid "使用验证码登录"
 msgstr "認証コードを使用してログイン"
-
-#: Disabled references:1
-msgid "或通过以下方式"
-msgstr "または以下の方法で"
 
 #: Disabled references:1
 msgid "小程序登录"
@@ -23039,6 +23056,14 @@ msgid "登录%14002"
 msgstr "ログイン"
 
 #: Disabled references:1
+msgid "还没有账号?"
+msgstr "アカウントをお持ちでない方へ"
+
+#: Disabled references:1
+msgid "免费注册"
+msgstr "無料で登録"
+
+#: Disabled references:1
 msgid "下次自动登录"
 msgstr "次回自動ログイン"
 
@@ -23057,10 +23082,6 @@ msgstr "続ける"
 #: Disabled references:1
 msgid "此小程序仅支持组织内部员工登录使用"
 msgstr "このミニプログラムは、組織内の従業員のみがログインして使用できます。"
-
-#: Disabled references:1
-msgid "注册新账号"
-msgstr "新しいアカウントを登録"
 
 #: Disabled references:1
 msgid "使用 Microsoft 登录"
@@ -23775,6 +23796,14 @@ msgid "%0邀请您加入"
 msgstr "%0があなたを招待しています"
 
 #: Disabled references:1
+msgid "注册并加入"
+msgstr "登録して参加"
+
+#: Disabled references:1
+msgid "已有账号"
+msgstr "アカウントをお持ちですか"
+
+#: Disabled references:1
 msgid "我同意接收短信"
 msgstr "テキストメッセージの受信に同意します"
 
@@ -23791,20 +23820,8 @@ msgid "《隐私条款》"
 msgstr "プライバシーポリシー"
 
 #: Disabled references:1
-msgid "注册并加入"
-msgstr "登録して参加"
-
-#: Disabled references:1
 msgid "登录并加入"
 msgstr "ログインして参加する"
-
-#: Disabled references:1
-msgid "已有账号"
-msgstr "アカウントをお持ちですか"
-
-#: Disabled references:1
-msgid "登录已有账号"
-msgstr "既存のアカウントでログイン"
 
 #: Disabled references:1
 msgid "邀请您加入"
@@ -24772,7 +24789,7 @@ msgstr "ボタン名を入力してください"
 
 #: Disabled references:1
 msgid "设置填写说明"
-msgstr "記入説明を設定する"
+msgstr "手順を設定"
 
 #: Disabled references:1
 msgid "详细内容"
@@ -25425,10 +25442,6 @@ msgstr "印刷用の主要なデータソースとしてメインテーブルを
 #: Disabled references:1
 msgid "复制自定义动作“%0”"
 msgstr "カスタム・アクション 「%0」をコピーします。"
-
-#: Disabled references:1
-msgid "将复制目标自定义动作的所有节点和配置"
-msgstr "ターゲットカスタムアクションのすべてのノードと設定をコピーする"
 
 #: Disabled references:1
 msgid "动作将被删除，请确认执行此操作"
@@ -26475,12 +26488,12 @@ msgid "不允许查看"
 msgstr "表示できません"
 
 #: Disabled references:1
-msgid "允许将视图对外公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
-msgstr "共有リンクを使用してビューとレコードへのパブリックアクセスを許可する"
+msgid "允许将视图公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
+msgstr "公開ビューの共有を許可し、リンクを知っているユーザーはビューおよびすべてのレコードにアクセスできます"
 
 #: Disabled references:1
-msgid "允许将记录对外公开分享，获得链接的所有人都可以查看记录"
-msgstr "公開共有を許可すると、リンクを知っている人なら誰でも記録を閲覧できます"
+msgid "允许将记录公开分享，获得链接的所有人都可以查看记录"
+msgstr "リンクによる公開共有を許可"
 
 #: Disabled references:1
 msgid "有分享权限的用户"
@@ -26884,7 +26897,7 @@ msgstr "返信%0 :"
 
 #: Disabled references:1
 msgid "发表讨论"
-msgstr "ディスカッションを投稿する"
+msgstr "コメント"
 
 #: Disabled references:1
 msgid "@全体"
@@ -27619,7 +27632,7 @@ msgstr "%0人が選択されました"
 
 #: Disabled references:1
 msgid "或签（一名审批人通过或否决即可）"
-msgstr "または署名（1人の承認者が承認または否認できます）"
+msgstr "または（いずれか1名の承認または却下で十分です）"
 
 #: Disabled references:1
 msgid "会签（需所有审批人通过）"
@@ -27995,7 +28008,7 @@ msgstr "新規%0"
 
 #: Disabled references:1
 msgid "不存在符合条件的%0"
-msgstr "条件に合う%0は存在しません"
+msgstr "一致する %0 が見つかりません"
 
 #: Disabled references:1
 msgid "无匹配的结果"
@@ -28260,314 +28273,6 @@ msgstr "追加に失敗しました。後ほど再試行してください。"
 #: Disabled references:1
 msgid "AI 填写"
 msgstr "AI入力"
-
-#: Disabled references:1
-msgid "平铺"
-msgstr "ラジオボタン"
-
-#: Disabled references:1
-msgid "流程节点"
-msgstr "プロセスノード"
-
-#: Disabled references:1
-msgid "备注/签名"
-msgstr "備考/署名"
-
-#: Disabled references:1
-msgid "(%0委托)"
-msgstr "(%0委託)"
-
-#: Disabled references:1
-msgid "(%0操作)"
-msgstr "(%0操作)"
-
-#: Disabled references:1
-msgid "退回到%0"
-msgstr "%0に戻る"
-
-#: Disabled references:1
-msgid "无需填写"
-msgstr "記入の必要はありません"
-
-#: Disabled references:1
-msgid "打印人："
-msgstr "印刷者："
-
-#: Disabled references:1
-msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
-msgstr "クロスドメインの添付ファイルが検出されました。エクスポートはスキップされました。レコードから直接ダウンロードしてください。"
-
-#: Disabled references:1
-msgid "预览: %0"
-msgstr "プレビュー: %0"
-
-#: Disabled references:1
-msgid "编辑模板"
-msgstr "テンプレートを編集"
-
-#: Disabled references:1
-msgid "生成失败时，请点击此处刷新试试"
-msgstr "生成に失敗した場合は、ここをクリックして再試行してください"
-
-#: Disabled references:1
-msgid "正在导出"
-msgstr "エクスポート中"
-
-#: Disabled references:1
-msgid "导出Word"
-msgstr "Wordをエクスポート"
-
-#: Disabled references:1
-msgid "保存为打印模板"
-msgstr "印刷テンプレートとして保存"
-
-#: Disabled references:1
-msgid "导出为excel"
-msgstr "Excelにエクスポート"
-
-#: Disabled references:1
-msgid "导出为word"
-msgstr "Wordにエクスポート"
-
-#: Disabled references:1
-msgid "保存模板"
-msgstr "テンプレートを保存する"
-
-#: Disabled references:1
-msgid "模板名称"
-msgstr "名前"
-
-#: Disabled references:1
-msgid "企业Logo"
-msgstr "企業ロゴ"
-
-#: Disabled references:1
-msgid "在企业管理后台中设置"
-msgstr "企業管理バックエンドで設定する"
-
-#: Disabled references:1
-msgid "记录标题"
-msgstr "レコードタイトル"
-
-#: Disabled references:1
-msgid "打印时间"
-msgstr "印刷時間"
-
-#: Disabled references:1
-msgid "打印人"
-msgstr "印刷者"
-
-#: Disabled references:1
-msgid "对外公开分享链接"
-msgstr "外部公開共有リンク"
-
-#: Disabled references:1
-msgid "内部成员访问链接"
-msgstr "内部メンバーアクセスリンク"
-
-#: Disabled references:1
-msgid "选项字段平铺打印"
-msgstr "オプションフィールドのフラット印刷"
-
-#: Disabled references:1
-msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
-msgstr "有効にすると、タイル形式のオプションフィールドに未選択のオプションが印刷されます"
-
-#: Disabled references:1
-msgid "打印值为空的字段"
-msgstr "空の値のフィールドを印刷"
-
-#: Disabled references:1
-msgid "开启后，没有内容的字段会显示并可以打印"
-msgstr "有効にすると、空のフィールドが表示され、印刷できます"
-
-#: Disabled references:1
-msgid "文字大小"
-msgstr "文字サイズ"
-
-#: Disabled references:1
-msgid "名称宽度"
-msgstr "名前の幅"
-
-#: Disabled references:1
-msgid "表单字段"
-msgstr "フォームフィールド"
-
-#: Disabled references:1
-msgid "手写签名"
-msgstr "手書きの署名"
-
-#: Disabled references:1
-msgid "选择打印字段"
-msgstr "印刷フィールドを選択"
-
-#: Disabled references:1
-msgid "附加信息"
-msgstr "追加情報"
-
-#: Disabled references:1
-msgid "审批签名位置"
-msgstr "承認署名場所"
-
-#: Disabled references:1
-msgid "填写人"
-msgstr "記入者"
-
-#: Disabled references:1
-msgid "审批人"
-msgstr "承認者"
-
-#: Disabled references:1
-msgid "转交"
-msgstr "転送"
-
-#: Disabled references:1
-msgid "通过申请"
-msgstr "承認"
-
-#: Disabled references:1
-msgid "否决申请"
-msgstr "却下する"
-
-#: Disabled references:1
-msgid "转审"
-msgstr "委任"
-
-#: Disabled references:1
-msgid "添加审批人"
-msgstr "承認者を追加"
-
-#: Disabled references:1
-msgid "被移除"
-msgstr "削除されました"
-
-#: Disabled references:1
-msgid "撤回后重新发起"
-msgstr "取下げ後再起票"
-
-#: Disabled references:1
-msgid "审批前加签"
-msgstr "承認前に署名する"
-
-#: Disabled references:1
-msgid "通过申请并加签"
-msgstr "適用して署名"
-
-#: Disabled references:1
-msgid "修改申请内容"
-msgstr "申請内容を変更する"
-
-#: Disabled references:1
-msgid "无需审批"
-msgstr "承認不要"
-
-#: Disabled references:1
-msgid "拥有者："
-msgstr "所有者："
-
-#: Disabled references:1
-msgid "创建人："
-msgstr "作成者："
-
-#: Disabled references:1
-msgid "创建时间："
-msgstr "作成時間："
-
-#: Disabled references:1
-msgid "最近修改时间："
-msgstr "最終更新日時："
-
-#: Disabled references:1
-msgid "最近修改人："
-msgstr "最終修正者"
-
-#: Disabled references:1
-msgid "审批意见"
-msgstr "承認コメント"
-
-#: Disabled references:1
-msgid "Word 模板"
-msgstr "Word テンプレート"
-
-#: Disabled references:1
-msgid "Excel 模板"
-msgstr "Excel テンプレート"
-
-#: Disabled references:1
-msgid "在明细内显示"
-msgstr "詳細に表示"
-
-#: Disabled references:1
-msgid "在明细表下方显示"
-msgstr "明細表の下に表示"
-
-#: Disabled references:1
-msgid "缩略图"
-msgstr "サムネイル"
-
-#: Disabled references:1
-msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
-msgstr "画像タイプのみサムネイル印刷をサポートし、非画像タイプは最後にファイル名で表示されます。"
-
-#: Disabled references:1
-msgid "%0 级"
-msgstr "レベル %0"
-
-#: Disabled references:1
-msgid "批量打印"
-msgstr "バッチ印刷"
-
-#: Disabled references:1
-msgid "工作流打印"
-msgstr "ワークフロープリント"
-
-#: Disabled references:1
-msgid "保存成功，请到打印模板中查看"
-msgstr "保存に成功しました。印刷テンプレートで確認してください。"
-
-#: Disabled references:1
-msgid "正在生成文件..."
-msgstr "ファイルを生成中..."
-
-#: Disabled references:1
-msgid "您是否保存本次修改？"
-msgstr "この修正は保存するのですか？"
-
-#: Disabled references:1
-msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
-msgstr "現在、保存されていない変更があります。このページを離れる前に、これらの変更を保存しますか？"
-
-#: Disabled references:1
-msgid "否，放弃保存"
-msgstr "いいえ、保存しません"
-
-#: Disabled references:1
-msgid "是，保存修改"
-msgstr "はい、変更を保存"
-
-#: Disabled references:1
-msgid "导出成功！"
-msgstr "エクスポートが成功しました！"
-
-#: Disabled references:1
-msgid "下载%0文件"
-msgstr "%0ファイルをダウンロード"
-
-#: Disabled references:1
-msgid "正在导出Excel文件..."
-msgstr "Excelファイルをエクスポート中..."
-
-#: Disabled references:1
-msgid "正在导出Word文件..."
-msgstr "ワードファイルのエクスポート中..."
-
-#: Disabled references:1
-msgid "包含图片时生成速度较慢，请耐心等待..."
-msgstr "画像を含む場合、生成速度が遅くなりますので、しばらくお待ちください..."
-
-#: Disabled references:1
-msgid "记录或模板已删除"
-msgstr "記録またはテンプレートが削除されました"
 
 #: Disabled references:1
 msgid "加入/创建组织"
@@ -29048,7 +28753,7 @@ msgstr "CLIアクセスのポリシーが有効になっていません"
 
 #: Disabled references:1
 msgid "需组织管理员在「组织后台 - 数据与访问」中开启后才能使用"
-msgstr "オーグ管理 > データ＆アクセス で組織管理者の有効化が必要です"
+msgstr "オーガナイゼーション管理者が「オーグ管理」＞「データとアクセス」で有効にする必要があります。"
 
 #: Disabled references:1
 msgid "同时安装配套Skills"
@@ -29400,15 +29105,15 @@ msgstr "アカウントを解約しますか？"
 
 #: Disabled references:1
 msgid "账号一旦注销将无法登录平台，且会解除与第三方账号的绑定关系、身份、账号信息等将被清空且无法找回"
-msgstr "アカウントをキャンセルすると、プラットフォームにログインできなくなり、サードパーティアカウントとのバインディング関係、身分、アカウント情報などがクリアされ、復元できなくなります。"
+msgstr "アカウントを削除すると、プラットフォームにログインできなくなります。第三者アカウントとの連携は解除され、本人情報やアカウント情報は完全に削除され、復元できません。"
 
 #: Disabled references:1
 msgid "注销失败，请稍后再试"
-msgstr "ログアウトに失敗しました。後でもう一度お試しください。"
+msgstr "アカウント削除に失敗しました。後でもう一度お試しください。"
 
 #: Disabled references:1
 msgid "注销账户"
-msgstr "アカウントを無効にする"
+msgstr "アカウント削除へ"
 
 #: Disabled references:1
 msgid "请输入8-20位，需包含字母和数字"
@@ -29456,7 +29161,7 @@ msgstr "ログアウト"
 
 #: Disabled references:1
 msgid "注销此账户"
-msgstr "このアカウントをキャンセルする"
+msgstr "このアカウントを削除します"
 
 #: Disabled references:1
 msgid "外部协作应用"
@@ -29588,7 +29293,7 @@ msgstr "ログイン時のセキュリティ強化のため、2要素認証を�
 
 #: Disabled references:1
 msgid "验证方式"
-msgstr "認証方法"
+msgstr "検証方法"
 
 #: Disabled references:1
 msgid "当启用多种验证方式时，首选的验证方式为："
@@ -29804,7 +29509,7 @@ msgstr "あなたはプラットフォームの唯一の管理者であり、ロ
 
 #: Disabled references:1
 msgid "您尚有未退出的组织，请先至 个人中心-我的组织 退出所有组织，方可注销"
-msgstr "まだ退出していない組織がありますので、個人センター - 私の組織に移動してすべての組織を退出してください。その後、アカウントをキャンセルできます。"
+msgstr "アカウント削除前に、「個人センター > マイ組織」からすべての組織を退出してください。"
 
 #: Disabled references:1
 msgid "账户与隐私"
@@ -30104,11 +29809,11 @@ msgstr "あなたは組織【%0】のスーパ管理者です"
 
 #: Disabled references:1
 msgid "请先注销组织或交接后方可注销。"
-msgstr "組織からログアウトするか、引き継ぎを行ってからログアウトしてください。"
+msgstr "アカウント削除前に、組織を削除するか引き継いでください。"
 
 #: Disabled references:1
 msgid "前往注销"
-msgstr "ログアウトに移動"
+msgstr "アカウント削除へ"
 
 #: Disabled references:1
 msgid "请指定成员"
@@ -30208,7 +29913,7 @@ msgstr "承認されたアプリケーションを選択"
 
 #: Disabled references:1
 msgid "请选择接口范围"
-msgstr "インターフェースの範囲を選択"
+msgstr "API権限を選択"
 
 #: Disabled references:1
 msgid "%0 不允许使用个人访问令牌"
@@ -30240,7 +29945,7 @@ msgstr "+ 追加"
 
 #: Disabled references:1
 msgid "接口范围"
-msgstr "インターフェース範囲"
+msgstr "API権限"
 
 #: Disabled references:1
 msgid "创建个人访问令牌"
@@ -30288,8 +29993,8 @@ msgstr "オーグの管理者はパーソナルアクセストークンを使用
 
 #: Disabled references:1
 msgid "个人访问令牌代表您的身份，用于 HAP 数据的操作访问。您可自定义权限范围和数据访问权限。️安全提示：令牌具有账户权限，请勿分享给他人。"
-msgstr "パーソナルアクセス トークンは、ユーザーを識別し、HAPデータの操作を可能にします。必要に応じてスコープをカスタマイズしてください。  
-ヒント：トークンはアカウント全体の権限を持ちますので、安全に管理してください。"
+msgstr "パーソナルアクセストークンは、お客様に代わってHAPデータへアクセスします。必要に応じてスコープやデータアクセスをカスタマイズできます。  
+ヒント：トークンにはお客様のアカウント権限が付与されますので、安全に管理してください。"
 
 #: Disabled references:1
 msgid "API 文档"
@@ -30565,7 +30270,7 @@ msgstr "マップ"
 
 #: Disabled references:1
 msgid "包含全球地图，暂不支持搜索名称定位。"
-msgstr "グローバルマップを含みますが、名前検索による位置特定はサポートされていません。"
+msgstr "グローバルマップが含まれていますが、現在、名称によるロケーション検索には対応していません。"
 
 #: Disabled references:1
 msgid "支持搜索地点名称定位，地图信息只包含：中国大陆、香港、澳门、台湾地区"
@@ -30573,7 +30278,7 @@ msgstr "中国、香港、マカオ、台湾内の場所のみを検索します
 
 #: Disabled references:1
 msgid "浏览器新消息通知"
-msgstr "新着メッセージ閲覧"
+msgstr "ブラウザメッセージアラート"
 
 #: Disabled references:1
 msgid "当有新消息时以何种方式提醒"
@@ -30608,6 +30313,38 @@ msgid "行列转置"
 msgstr "転置"
 
 #: Disabled references:1
+msgid "平铺"
+msgstr "タイル表示"
+
+#: Disabled references:1
+msgid "流程节点"
+msgstr "プロセスノード"
+
+#: Disabled references:1
+msgid "备注/签名"
+msgstr "備考/署名"
+
+#: Disabled references:1
+msgid "(%0委托)"
+msgstr "(%0委託)"
+
+#: Disabled references:1
+msgid "(%0操作)"
+msgstr "(%0操作)"
+
+#: Disabled references:1
+msgid "退回到%0"
+msgstr "%0に戻る"
+
+#: Disabled references:1
+msgid "无需填写"
+msgstr "記入の必要はありません"
+
+#: Disabled references:1
+msgid "打印人："
+msgstr "印刷者："
+
+#: Disabled references:1
 msgid "复制打印链接"
 msgstr "コピー  
 印刷  
@@ -30618,12 +30355,112 @@ msgid "当前打印服务在第三方应用内无法直接打开。请复制下�
 msgstr "印刷サービスにはサードパーティ連携経由で直接アクセスできません。下記のリンクをコピーし、ブラウザで開いて操作を続行してください。"
 
 #: Disabled references:1
+msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
+msgstr "クロスドメインの添付ファイルが検出されました。エクスポートはスキップされました。レコードから直接ダウンロードしてください。"
+
+#: Disabled references:1
 msgid "导出数量超出系统上限，请减少数量后重试"
 msgstr "エクスポート上限を超えています。数量を減らして再度お試しください。"
 
 #: Disabled references:1
+msgid "编辑模板"
+msgstr "テンプレートを編集"
+
+#: Disabled references:1
+msgid "预览: %0"
+msgstr "プレビュー: %0"
+
+#: Disabled references:1
 msgid "pdf生成失败时，请点击此处刷新试试"
 msgstr "PDF生成に失敗した場合は、ここをクリックして再試行してください"
+
+#: Disabled references:1
+msgid "正在导出"
+msgstr "エクスポート中"
+
+#: Disabled references:1
+msgid "导出Word"
+msgstr "Wordをエクスポート"
+
+#: Disabled references:1
+msgid "保存为打印模板"
+msgstr "印刷テンプレートとして保存"
+
+#: Disabled references:1
+msgid "导出为excel"
+msgstr "Excelにエクスポート"
+
+#: Disabled references:1
+msgid "导出为word"
+msgstr "Wordにエクスポート"
+
+#: Disabled references:1
+msgid "保存模板"
+msgstr "テンプレートを保存する"
+
+#: Disabled references:1
+msgid "模板名称"
+msgstr "名前"
+
+#: Disabled references:1
+msgid "企业Logo"
+msgstr "企業ロゴ"
+
+#: Disabled references:1
+msgid "在企业管理后台中设置"
+msgstr "企業管理バックエンドで設定する"
+
+#: Disabled references:1
+msgid "记录标题"
+msgstr "レコードタイトル"
+
+#: Disabled references:1
+msgid "打印时间"
+msgstr "印刷時間"
+
+#: Disabled references:1
+msgid "打印人"
+msgstr "印刷者"
+
+#: Disabled references:1
+msgid "公开分享链接"
+msgstr "パブリック共有リンク"
+
+#: Disabled references:1
+msgid "内部成员访问链接"
+msgstr "内部メンバーアクセスリンク"
+
+#: Disabled references:1
+msgid "选项字段平铺打印"
+msgstr "オプションフィールドのフラット印刷"
+
+#: Disabled references:1
+msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
+msgstr "有効にすると、タイル形式のオプションフィールドに未選択のオプションが印刷されます"
+
+#: Disabled references:1
+msgid "打印值为空的字段"
+msgstr "空の値のフィールドを印刷"
+
+#: Disabled references:1
+msgid "开启后，没有内容的字段会显示并可以打印"
+msgstr "有効にすると、空のフィールドが表示され、印刷できます"
+
+#: Disabled references:1
+msgid "文字大小"
+msgstr "文字サイズ"
+
+#: Disabled references:1
+msgid "名称宽度"
+msgstr "名前の幅"
+
+#: Disabled references:1
+msgid "表单字段"
+msgstr "フォームフィールド"
+
+#: Disabled references:1
+msgid "手写签名"
+msgstr "手書きの署名"
 
 #: Disabled references:1
 msgid "纸张"
@@ -30638,12 +30475,184 @@ msgid "布局"
 msgstr "レイアウト"
 
 #: Disabled references:1
+msgid "选择打印字段"
+msgstr "印刷フィールドを選択"
+
+#: Disabled references:1
+msgid "附加信息"
+msgstr "追加情報"
+
+#: Disabled references:1
+msgid "审批签名位置"
+msgstr "承認署名場所"
+
+#: Disabled references:1
+msgid "填写人"
+msgstr "記入者"
+
+#: Disabled references:1
+msgid "审批人"
+msgstr "承認者"
+
+#: Disabled references:1
+msgid "转交"
+msgstr "転送"
+
+#: Disabled references:1
+msgid "通过申请"
+msgstr "承認"
+
+#: Disabled references:1
+msgid "否决申请"
+msgstr "却下する"
+
+#: Disabled references:1
+msgid "转审"
+msgstr "委任"
+
+#: Disabled references:1
+msgid "添加审批人"
+msgstr "承認者を追加"
+
+#: Disabled references:1
+msgid "被移除"
+msgstr "削除されました"
+
+#: Disabled references:1
+msgid "撤回后重新发起"
+msgstr "取下げ後再起票"
+
+#: Disabled references:1
+msgid "审批前加签"
+msgstr "承認前に署名する"
+
+#: Disabled references:1
+msgid "通过申请并加签"
+msgstr "適用して署名"
+
+#: Disabled references:1
+msgid "修改申请内容"
+msgstr "申請内容を変更する"
+
+#: Disabled references:1
+msgid "无需审批"
+msgstr "承認不要"
+
+#: Disabled references:1
+msgid "拥有者："
+msgstr "所有者："
+
+#: Disabled references:1
+msgid "创建人："
+msgstr "作成者："
+
+#: Disabled references:1
+msgid "创建时间："
+msgstr "作成時間："
+
+#: Disabled references:1
+msgid "最近修改时间："
+msgstr "最終更新日時："
+
+#: Disabled references:1
+msgid "最近修改人："
+msgstr "最終修正者"
+
+#: Disabled references:1
+msgid "审批意见"
+msgstr "承認コメント"
+
+#: Disabled references:1
+msgid "Word 模板"
+msgstr "Word テンプレート"
+
+#: Disabled references:1
+msgid "Excel 模板"
+msgstr "Excel テンプレート"
+
+#: Disabled references:1
+msgid "在明细内显示"
+msgstr "詳細に表示"
+
+#: Disabled references:1
+msgid "在明细表下方显示"
+msgstr "明細表の下に表示"
+
+#: Disabled references:1
 msgid "纵向"
 msgstr "縦向"
 
 #: Disabled references:1
 msgid "横向"
 msgstr "横方向"
+
+#: Disabled references:1
+msgid "缩略图"
+msgstr "サムネイル"
+
+#: Disabled references:1
+msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
+msgstr "画像タイプのみサムネイル印刷をサポートし、非画像タイプは最後にファイル名で表示されます。"
+
+#: Disabled references:1
+msgid "%0 级"
+msgstr "レベル %0"
+
+#: Disabled references:1
+msgid "批量打印"
+msgstr "バッチ印刷"
+
+#: Disabled references:1
+msgid "工作流打印"
+msgstr "ワークフロープリント"
+
+#: Disabled references:1
+msgid "保存成功，请到打印模板中查看"
+msgstr "保存に成功しました。印刷テンプレートで確認してください。"
+
+#: Disabled references:1
+msgid "正在生成文件..."
+msgstr "ファイルを生成中..."
+
+#: Disabled references:1
+msgid "您是否保存本次修改？"
+msgstr "この修正は保存するのですか？"
+
+#: Disabled references:1
+msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
+msgstr "現在、保存されていない変更があります。このページを離れる前に、これらの変更を保存しますか？"
+
+#: Disabled references:1
+msgid "否，放弃保存"
+msgstr "いいえ、保存しません"
+
+#: Disabled references:1
+msgid "是，保存修改"
+msgstr "はい、変更を保存"
+
+#: Disabled references:1
+msgid "导出成功！"
+msgstr "エクスポートが成功しました！"
+
+#: Disabled references:1
+msgid "下载%0文件"
+msgstr "%0ファイルをダウンロード"
+
+#: Disabled references:1
+msgid "正在导出Excel文件..."
+msgstr "Excelファイルをエクスポート中..."
+
+#: Disabled references:1
+msgid "正在导出Word文件..."
+msgstr "ワードファイルのエクスポート中..."
+
+#: Disabled references:1
+msgid "包含图片时生成速度较慢，请耐心等待..."
+msgstr "画像を含む場合、生成速度が遅くなりますので、しばらくお待ちください..."
+
+#: Disabled references:1
+msgid "记录或模板已删除"
+msgstr "記録またはテンプレートが削除されました"
 
 #: Disabled references:1
 msgid "暂未设置用户协议"
@@ -30955,23 +30964,23 @@ msgstr "チーム"
 
 #: Disabled references:1
 msgid "通过工作表管理应用成员额外的扩展信息字段"
-msgstr "ワークシートを通じてアプリケーションメンバーの追加拡張情報フィールドを管理する"
+msgstr "ワークシートで追加メンバー項目を管理します"
 
 #: Disabled references:1
 msgid "在角色权限、筛选器中可以使用用户的扩展信息字段来作为动态筛选条件"
-msgstr "役割の権限やフィルターでは、ユーザーの拡張情報フィールドを動的フィルタリング条件として使用できます。"
+msgstr "メンバー拡張フィールドを、ロール権限やフィルターの動的フィルターとして利用できます"
 
 #: Disabled references:1
 msgid "如在销售管理应用中"
-msgstr "営業管理アプリケーションのように"
+msgstr "例えば、営業管理アプリの場合"
 
 #: Disabled references:1
 msgid "可以通过建立成员表来管理销售人员的团队、地区、关联订单等扩展信息"
-msgstr "メンバーのワークシートを作成することで、販売チーム、地域、関連する注文などの拡張情報を管理できます。"
+msgstr "営業チームや地域、関連注文などの拡張情報を管理するためのメンバーシートを作成します。"
 
 #: Disabled references:1
 msgid "可以根据订单所关联的团队，来筛选出当前销售人员所在团队的订单"
-msgstr "現在の販売員が所属するチームに関連する注文をフィルタリングできます。"
+msgstr "フィルターで、関連するチームごとに並べ替え、現在の営業担当者のチームに属するもののみを表示します。"
 
 #: Disabled references:1
 msgid "建立用户扩展信息表"
@@ -31183,7 +31192,7 @@ msgstr "対象ロールを選択"
 
 #: Disabled references:1
 msgid "扩展"
-msgstr "拡張"
+msgstr "拡張機能"
 
 #: Disabled references:1
 msgid "勾选时，普通角色可以查看应用下所有角色和人员。未勾选时，对普通角色直接隐藏用户入口"
@@ -31227,7 +31236,7 @@ msgstr "有効にすると、アプリケーション管理者とオペレータ
 
 #: Disabled references:1
 msgid "角色调试"
-msgstr "キャラクター・デバッグ"
+msgstr "ロールデバッグ"
 
 #: Disabled references:1
 msgid "手机邀请"
@@ -31296,10 +31305,6 @@ msgstr "テンプレートをダウンロード"
 #: Disabled references:1
 msgid "邀请用户并发送短信/邮箱"
 msgstr "ユーザーを招待し、SMS/Eメールを送る"
-
-#: Disabled references:1
-msgid "（短信%0/条、邮箱%1/封，自动从企业账户扣除。）"
-msgstr "(SMS %0/テキストおよび電子メール %1/電子メールは、企業アカウントから自動的に引き落とされます。)"
 
 #: Disabled references:1
 msgid "从Excel导入数据"
@@ -31415,7 +31420,7 @@ msgstr "他のアプリケーションのワークシート"
 
 #: Disabled references:1
 msgid "工作表已删除"
-msgstr "ワークシートが削除されました"
+msgstr "ワークシート削除済み"
 
 #: Disabled references:1
 msgid "查询满足以下条件的记录"
@@ -32239,8 +32244,8 @@ msgid "对所有记录只有查看权限"
 msgstr "すべてのレコードの表示権限のみ"
 
 #: Disabled references:1
-msgid "可查看加入的，只能编辑、删除自己拥有的记录"
-msgstr "参加したものを表示でき、自分が所有するレコードのみを編集および削除できます"
+msgid "可查看自己加入的，只能编辑、删除自己拥有的记录"
+msgstr "参加済みレコードを表示できます。自分が作成したレコードのみ編集・削除可能です。"
 
 #: Disabled references:1
 msgid "可查看所有记录，但只能编辑、删除自己拥有的记录"
@@ -32268,11 +32273,11 @@ msgstr "バッチ操作とは、ワークシートでの記録を一括選択す
 
 #: Disabled references:1
 msgid "管理员可以配置应用，管理应用下所有数据和人员"
-msgstr "管理者はアプリケーションを構成し、アプリケーション内のすべてのデータと人員を管理できます。"
+msgstr "管理者はアプリケーションを構成し、アプリケーション内のすべてのデータと人員を管理できます"
 
 #: Disabled references:1
 msgid "拥有所有权限"
-msgstr "すべての権限を持つ"
+msgstr "すべての権限"
 
 #: Disabled references:1
 msgid "运营者"
@@ -33555,10 +33560,6 @@ msgid "前往组织后台编辑颜色"
 msgstr "オーグ管理者で色を編集"
 
 #: Disabled references:1
-msgid "保存为个人颜色"
-msgstr "個人のカラーとして保存"
-
-#: Disabled references:1
 msgid "图形颜色"
 msgstr "グラフィカルカラー"
 
@@ -34315,6 +34316,10 @@ msgid "还没有个人图表"
 msgstr "まだ個人チャートはありません"
 
 #: Disabled references:1
+msgid "方向1和方向2仅支持添加一个数值"
+msgstr "方向1と方向2には、それぞれ1つの値のみ入力できます。"
+
+#: Disabled references:1
 msgid "不允许添加重复粒度"
 msgstr "重複した粒度の追加は許可されていません"
 
@@ -34446,32 +34451,63 @@ msgid "（4）在打印 Excel 模板时，多张图片排列可能导致撑高�
 msgstr "（4）Excelテンプレートを印刷する際、複数の画像を配置すると、セルが引き伸ばされ、結合セルがずれる場合があります。その場合は Fキー を押して「フィルモード」を有効にすると、画像によるセルの高さ変更を防げます。例：#{attachment$[auto*20_F]$} または #{attachment$[auto*90_HF]$}"
 
 #: Disabled references:1
-msgid "5. 可通过代码 #{[qrcode]字段名$[20*20]$} 或 #{[barcode]字段名$[40*10]$} 获取任意字段的二维码或条形码。其中：[20*20]、[40*10] 表示二维码/条形码的宽高尺寸，单位为 mm；二维码编码方式为 QR-code，最大包含 150 个字，支持汉字；条形码编码方式为 code128，最大包含 30 个字符，仅支持数字、字母、符号。"
-msgstr "5. 「#{[qrcode]FieldName$[20*20]$}」または「#{[barcode]FieldName$[40*10]$}」を使用すると、QRコードまたはバーコードを生成できます。寸法は、[20*20]および[40*10]がmm単位です。QRコードは最大150文字（中国語を含む）まで対応し、QRコードエンコーディングを使用します。バーコードは最大30文字（数字、英字、記号）まで対応し、Code128エンコーディングを使用します。"
+msgid "5. 可通过代码 #{[qrcode]字段名$[20*20_H]$} 或 #{[barcode]字段名$[40*10]$}，获取任意字段的二维码或条形码。其中，[20*20]、[40*10] 表示二维码或条形码的宽高尺寸，单位为 mm。二维码采用 QR Code 编码，最多支持 150 个字符，支持汉字；条形码采用 Code 128 编码，最多支持 30 个字符，支持数字、字母及常用符号。"
+msgstr "5. コードでQRコードまたはバーコードを生成する方法：  
+- QRコード： `#{[qrcode]FieldName$[20*20_H]$}`  
+　サイズ：20×20 mm。QRコード（最大150文字、中国語含む）に対応しています。  
+- バーコード： `#{[barcode]FieldName$[40*10]$}`  
+　サイズ：40×10 mm。Code 128（最大30文字、数字・英字・記号を含む）に対応しています。"
 
 #: Disabled references:1
-msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽高固定为 20*20。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
-msgstr "(1) QRコードのサイズは20×20に固定されており、自動リサイズには対応していません。表示は正方形のみサポートします。"
+msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽度和高度均为 20 mm。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
+msgstr "QRコードのサイズを幅20mm、高さ20mmに固定し、正方形で表示されるようにします。自動リサイズは行いません。"
 
 #: Disabled references:1
-msgid "（2）条形码尺寸支持 4 种设置方式。[40*auto] 表示宽度固定为 40，高度按比例自适应；[auto*10] 表示高度固定为 10，宽度按比例自适应；[40*10_auto] 表示宽高在 40*10 的范围内同时自适应；[40*10] 表示宽高为固定尺寸。"
-msgstr "(2) バーコードのサイズ設定は、以下の4つのモードから選択できます。
-- [40*auto]：幅40固定、高さは自動調整
-- [auto*10]：高さ10固定、幅は自動調整
-- [40*10_auto]：40×10の範囲内で自動調整
-- [40*10]：幅・高さともに固定"
+msgid "（2）二维码支持配置容错率，在尺寸后添加容错率代码，例如：#{[qrcode]字段名$[20*20_H]$}。支持以下两种写法："
+msgstr "（2）QRコードの誤り訂正レベルの設定に対応しています。サイズの後に誤り訂正レベルのコードを直接追加してください（例：#{[qrcode]FieldName$[20*20_H]$}）。以下の2つの形式に対応しています。"
 
 #: Disabled references:1
-msgid "（3）条形码默认显示下方文字。如需隐藏条形码下方的显示值，可增加 _NT 控制隐藏。例如：#{[barcode]字段名$[40*10_NT]$} 表示隐藏条形码下方文字；不加 _NT 仍按原逻辑显示。"
-msgstr "(3) 標準では、バーコードの下部にテキストが表示されます。テキストを非表示にするには、_NT を追加してください。例：#{[barcode]FieldName$[40*10_NT]$} ではテキストが非表示になります。_NT を省略するとテキストは表示されます。"
+msgid "字母代码：L、M、Q、H"
+msgstr "L：L  
+M：M  
+Q：Q  
+H：H  
+
+（B2B SaaS UIで正式な日本語訳が不要な場合、英字略称をそのまま使用します。日本語ラベル化が必要な場合はご指示ください。）"
 
 #: Disabled references:1
-msgid "（4）示例代码：#{[qrcode]字段名$[20*20]$} 表示获取固定尺寸为 20*20 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40，高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10，宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示获取固定尺寸为 40*10 的条形码，并隐藏下方文字。"
-msgstr "（4）サンプルコード：  
-- `#{[qrcode]FieldName$[20*20]$}` は、20×20固定サイズのQRコードを生成します。  
-- `#{[barcode]FieldName$[40*auto]$}` は、幅40で高さが自動調整されるバーコードを生成します。  
-- `#{[barcode]FieldName$[auto*10]$}` は、高さ10で幅が自動調整されるバーコードを生成します。  
-- `#{[barcode]FieldName$[40*10_NT]$}` は、40×10の固定サイズで下部テキストを表示しないバーコードを生成します。"
+msgid "数值代码：7、15、25、30，也兼容 7%、15%、25%、30%"
+msgstr "バリューコード：7、15、25、30  
+また、7%、15%、25%、30%もサポートしています"
+
+#: Disabled references:1
+msgid "对应关系为：L = 7%、M = 15%、Q = 25%、H = 30%。容错率越高，二维码被遮挡或污损后仍可识别的能力越强，但可容纳的有效内容会相应减少。"
+msgstr "エラー補正レベル：L＝7%、M＝15%、Q＝25%、H＝30%。  
+エラー補正を高く設定すると、QRコードが損傷した場合でも読み取り精度が向上しますが、格納できるデータ量は減少します。"
+
+#: Disabled references:1
+msgid "例如：#{[qrcode]字段名$[20*20_Q]$}、#{[qrcode]字段名$[20*20_25]$} 与 #{[qrcode]字段名$[20*20_25%]$}，均表示生成尺寸为 20 × 20 mm、容错率为 25% 的二维码。"
+msgstr "たとえば、#{[qrcode]FieldName$[20*20_Q]$}、#{[qrcode]FieldName$[20*20_25]$}、#{[qrcode]FieldName$[20*20_25%]$}はいずれも、20×20 mm・誤り訂正レベル25％のQRコードを生成するために使用します。"
+
+#: Disabled references:1
+msgid "（3）条形码支持 4 种尺寸设置方式：[40*auto] 表示宽度固定为 40 mm，高度按比例自适应；[auto*10] 表示高度固定为 10 mm，宽度按比例自适应；[40*10_auto] 表示宽高均为 40 × 10 mm，并根据内容自适应；[40*10] 表示宽高固定为 40 × 10 mm。"
+msgstr "(3) バーコードは4つのサイズオプションに対応しています。  
+・[40*auto]：幅40mm固定、高さは自動調整  
+・[auto*10]：高さ10mm固定、幅は自動調整  
+・[40*10_auto]：40×10mmで内容に合わせて調整  
+・[40*10]：40×10mm固定"
+
+#: Disabled references:1
+msgid "（4）条形码默认显示下方文字。如需隐藏条形码下方的文字，可增加 _NT 控制参数，例如：#{[barcode]字段名$[40*10_NT]$}。未添加 _NT 时，仍按原有方式显示文字。"
+msgstr "(4) バーコードはデフォルトで下部にテキストが表示されます。テキストを非表示にする場合は、_NTパラメーターを追加してください（例：#{[barcode]FieldName$[40*10_NT]$}）。_NTを指定しない場合、テキストは標準で表示されます。"
+
+#: Disabled references:1
+msgid "（5）示例：#{[qrcode]字段名$[20*20_H]$} 表示生成尺寸为 20 × 20 mm、容错率为 30% 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40 mm、高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10 mm、宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示生成固定尺寸为 40 × 10 mm 的条形码，并隐藏下方文字。"
+msgstr "(5) 例：  
+#{[qrcode]FieldName$[20*20_H]$}：20 × 20 mm のQRコード（誤り訂正率30%）を生成します  
+#{[barcode]FieldName$[40*auto]$}：幅40 mm、自動高さのバーコードです  
+#{[barcode]FieldName$[auto*10]$}：高さ10 mm、自動幅のバーコードです  
+#{[barcode]FieldName$[40*10_NT]$}：テキスト非表示の40 × 10 mmバーコードを生成します"
 
 #: Disabled references:1
 msgid "6. 如需不打印没有数据的关联表/子表，请将代码：#NoDataNotPrint[start]# 和 #NoDataNotPrint[end]# 插入到模板中，代码之间的关联记录/子表没有数据则不会打印。"
@@ -35971,7 +36007,7 @@ msgstr "返信にあなたが言及されました"
 
 #: Disabled references:1
 msgid "在回复中提到了你所在的群组"
-msgstr "返信の中であなたのグループが言及されました"
+msgstr "返信でグループがメンションされました"
 
 #: Disabled references:1
 msgid "回复了你"
@@ -35979,7 +36015,7 @@ msgstr "あなたに返信しました"
 
 #: Disabled references:1
 msgid "发表了任务讨论"
-msgstr "タスクディスカッションを発表しました"
+msgstr "このタスクにコメントしました"
 
 #: Disabled references:1
 msgid "在任务讨论中提到了你"
@@ -35999,7 +36035,7 @@ msgstr "プロジェクトに対するディスカッションにて、あなた
 
 #: Disabled references:1
 msgid "发表了日程讨论"
-msgstr "スケジュールのディスカッションを発表しました"
+msgstr "この予定にコメントしました"
 
 #: Disabled references:1
 msgid "在日程讨论中提到了你"
@@ -36019,7 +36055,7 @@ msgstr "承認のディスカッションについて、あなたに返信しま
 
 #: Disabled references:1
 msgid "发表了审批讨论"
-msgstr "承認に向けたディスカッションをテーマアップしました"
+msgstr "この承認にコメント"
 
 #: Disabled references:1
 msgid "在考勤讨论中提到了你"
@@ -36031,7 +36067,7 @@ msgstr "勤怠のディスカッションにおいて、あなたに返信しま
 
 #: Disabled references:1
 msgid "发表了考勤讨论"
-msgstr "出席に関するディスカッションを投稿しました"
+msgstr "この勤怠記録にコメント"
 
 #: Disabled references:1
 msgid "在%0讨论中回复了你"
@@ -36043,7 +36079,7 @@ msgstr "%0のディスカッションにて、あなたのことが言及され�
 
 #: Disabled references:1
 msgid "发表了%0讨论"
-msgstr "%0 のディスカッションを公開しました"
+msgstr "%0にコメントしました"
 
 #: Disabled references:1
 msgid "在%0中发布了讨论"
@@ -36343,7 +36379,7 @@ msgstr "ロードに失敗しました。再読み込みをクリックしてく
 
 #: Disabled references:1
 msgid "已关闭消息免打扰"
-msgstr "通知の受信を無効にしました"
+msgstr "おやすみモードをオフにしました"
 
 #: Disabled references:1
 msgid "已开启消息免打扰"
@@ -37732,7 +37768,7 @@ msgstr "メールのバインドに失敗しました"
 
 #: Disabled references:1
 msgid "告诉我您想搭建的应用，或者从下面推荐中选择一个尝试"
-msgstr "作成したいアプリについて説明するか、下の提案から選択してお試しください。"
+msgstr "作成したいアプリを入力するか、下の候補から選択してください"
 
 #: Disabled references:1
 msgid "物业，报修工单、巡检打卡、费用催缴的应用"
@@ -37912,7 +37948,7 @@ msgstr "投票項目を入力してください"
 
 #: Disabled references:1
 msgid "知会工作是一种美德"
-msgstr "積極的な情報共有は組織を活性化します"
+msgstr "チームと最新情報を共有してください…"
 
 #: Disabled references:1
 msgid "分享文件"
@@ -37957,22 +37993,6 @@ msgstr "知識センターの月間トラフィック制限を超えました。
 #: Disabled references:1
 msgid "发布动态失败"
 msgstr "更新の公開に失敗しました"
-
-#: Disabled references:1
-msgid "提出问题"
-msgstr "質問をする"
-
-#: Disabled references:1
-msgid "是的"
-msgstr "はい"
-
-#: Disabled references:1
-msgid "不用了"
-msgstr "結構しない"
-
-#: Disabled references:1
-msgid "是否将此动态作为问答？"
-msgstr "このアクティビティはQ＆Aですか？"
 
 #: Disabled references:1
 msgid "请预览链接"
@@ -38816,7 +38836,7 @@ msgstr "API呼び出しが失敗した場合は所有者にエラーメッセー
 
 #: Disabled references:1
 msgid "内不发送同类错误通知"
-msgstr "同様のエラーメッセージを社内で送信しない"
+msgstr "の間、同様のエラー通知を再送信しない"
 
 #: Disabled references:1
 msgid "将 API 授权给"
@@ -39292,7 +39312,7 @@ msgstr "Python言語を使用する"
 
 #: Disabled references:1
 msgid "更新未发布"
-msgstr "更新が公開されていません"
+msgstr "下書きの更新"
 
 #: Disabled references:1
 msgid "监控"
@@ -41640,7 +41660,7 @@ msgstr "閉じる"
 
 #: Disabled references:1
 msgid "有更新未发布"
-msgstr "未公開の更新"
+msgstr "下書き"
 
 #: Disabled references:1
 msgid "已读取(行)"
@@ -42720,7 +42740,7 @@ msgstr "(期限切れ)"
 
 #: Disabled references:1
 msgid "授权给指定组织"
-msgstr "指定された組織に権限を付与"
+msgstr "以下の組織を認証します"
 
 #: Disabled references:1
 msgid "暂无提交的代码"
@@ -42824,7 +42844,7 @@ msgstr "エクスポートプラグイン"
 
 #: Disabled references:1
 msgid "将插件导出为 .mdye 格式，可以导入到其他组织使用"
-msgstr "プラグインを .mdye 形式でエクスポートし、他の組織で使用可能です"
+msgstr "プラグインを`.mdye`ファイルとしてエクスポートし、他の組織で利用できます"
 
 #: Disabled references:1
 msgid "导出中..."
@@ -42864,7 +42884,7 @@ msgstr "1行につき1つ、最大10個まで"
 
 #: Disabled references:1
 msgid "检测到已有插件"
-msgstr "既存のプラグインが検出されました"
+msgstr "既存のプラグインが見つかりました"
 
 #: Disabled references:1
 msgid "检测到当前组织中存在相同的插件，您可以选择导入已有插件或者创建一个新插件"
@@ -42980,7 +43000,7 @@ msgstr "発行日"
 
 #: Disabled references:1
 msgid "未发布版本"
-msgstr "未発表版"
+msgstr "ドラフトバージョン"
 
 #: Disabled references:1
 msgid "发布新版本"
@@ -43484,7 +43504,7 @@ msgstr "3、メンバーのプロジェクト内のタスクに対する可視�
 
 #: Disabled references:1
 msgid "仅影响项目成员和在公开范围内人员，管理员固定为对项目下所有任务可见且可查看详情"
-msgstr "プロジェクトメンバーと公開範囲内の人員にのみ影響し、管理者はプロジェクト内のすべてのタスクを表示し、詳細を見ることが固定されています。"
+msgstr "プロジェクトメンバーおよび公開範囲内のユーザーにのみ適用されます。管理者は常にすべてのプロジェクトタスクとその詳細を閲覧できます。"
 
 #: Disabled references:1
 msgid "获取链接与二维码"
@@ -44232,7 +44252,7 @@ msgstr "リマインダー有効"
 
 #: Disabled references:1
 msgid "已关闭提醒"
-msgstr "通知がオフになりました"
+msgstr "リマインダーオフ"
 
 #: Disabled references:1
 msgid "锁定后任务成员将无法完成和修改任务内容（但仍可参与任务讨论）"
@@ -45736,7 +45756,7 @@ msgstr "レイアウトフィールド"
 
 #: Disabled references:1
 msgid "双向关联"
-msgstr "双方向関連"
+msgstr "双方向リンク"
 
 #: Disabled references:1
 msgid "字段属性"
@@ -46392,11 +46412,11 @@ msgstr "関連の%0"
 
 #: Disabled references:1
 msgid "新版本如果要建立双向关联，需要前往关联表（%0）中添加关联本表（%1）的关联记录"
-msgstr "新しいバージョンで双方向の関連付けを作成するには、関連表（%0）に移動して、この表（%1）の関連レコードを追加する必要があります"
+msgstr "新バージョンで双方向リンクを作成するには、リンク先のテーブル（%0）に移動し、このテーブル（%1）のリンク済みレコードを追加してください。"
 
 #: Disabled references:1
 msgid "什么是双向关联?"
-msgstr "双方向の関連とは何ですか?"
+msgstr "双方向リンクとは何ですか？"
 
 #: Disabled references:1
 msgid "在"
@@ -49637,7 +49657,7 @@ msgstr "関連するビュー"
 
 #: Disabled references:1
 msgid "设置关联视图，统一控制关联记录的排序方式、选择范围、和打开记录时的视图。字段本身设置的排序和打开记录视图优先级高于此配置；过滤选择范围的效果为叠加。"
-msgstr "関連付けられたレコードのソート方法、選択範囲、レコードを開いたときのビューを統一的に制御するために、関連付けビューを設定します。フィールド自体が設定するソートとレコードを開くビューは、この設定より優先されます。選択範囲をフィルタリングする効果は重複します。"
+msgstr "リンクビューを設定し、並び替え、選択範囲、リンクされたレコードの開き方を制御できます。フィールドレベルの設定が優先され、選択フィルターは統合されます。"
 
 #: Disabled references:1
 msgid "请先选择关联表"
@@ -50377,7 +50397,7 @@ msgstr "列の代替色表示"
 
 #: Disabled references:1
 msgid "标题行文字换行"
-msgstr "タイトル行の文字を折り返す"
+msgstr "ヘッダーの折り返し"
 
 #: Disabled references:1
 msgid "分页"
@@ -50673,7 +50693,7 @@ msgstr "現在のワークシートは、以下のワークフローノードに
 
 #: Disabled references:1
 msgid "展示工作流对当前字段的关键引用，主要包括筛选条件、动态值设置、人员配置等可能影响流程执行或数据准确性的引用"
-msgstr "現在のフィールドに関連する主要なワークフロー参照を表示します。フィルター、動的値、担当者設定、その他のプロセス実行やデータ精度に影響する要素を含みます。"
+msgstr "現在のフィールドに関連する主要なワークフロー参照を表示します。これには、フィルター、動的値、ワークフロー実行やデータ精度に影響を与える可能性のある担当者設定などが含まれます。"
 
 #: Disabled references:1
 msgid "当前字段正被以下业务规则的筛选条件使用"
@@ -50969,7 +50989,7 @@ msgstr "すでに関連"
 
 #: Disabled references:1
 msgid "检测到所选表已关联 %0，是否建立"
-msgstr "選択したテーブルが%0に関連することが検出されましたが、作成されましたか？"
+msgstr "%0は選択されたテーブルにリンクされています。"
 
 #: Disabled references:1
 msgid "同步数据？"
@@ -51400,8 +51420,8 @@ msgid "编码方式：code128，仅支持数字、字母、符号，最大包含
 msgstr "エンコーディング方式：code128、数字、アルファベット、記号のみをサポートし、最大128文字まで"
 
 #: Disabled references:1
-msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
-msgstr "エンコーディング方式：QRコード、中国語の文字をサポートし、最大150文字を含むことができます。"
+msgid "编码方式：QR-code，可支持汉字，最大包含250个字"
+msgstr "エンコーディング：QRコード（漢字に対応、最大250文字まで）"
 
 #: Disabled references:1
 msgid "容错率"
@@ -52365,7 +52385,7 @@ msgstr "ワークシートに新しいレコードが追加されるか、既存
 
 #: Disabled references:1
 msgid "定时触发%03012"
-msgstr "時限式トリガー"
+msgstr "スケジュールでトリガー"
 
 #: Disabled references:1
 msgid "按照设定的时间周期循环触发流程"
@@ -53033,7 +53053,7 @@ msgstr "プロジェクトを選択"
 
 #: Disabled references:1
 msgid "工作表无效或已删除"
-msgstr "ワークシートが無効または削除されました"
+msgstr "無効または削除済み"
 
 #: Disabled references:1
 msgid "项目无效或已删除"
@@ -53209,7 +53229,7 @@ msgstr "フィルター条件の判断値は空であってはいけません"
 
 #: Disabled references:1
 msgid "有必填字段未填写"
-msgstr "必須フィールドが未入力です"
+msgstr "必須項目が未入力です"
 
 #: Disabled references:1
 msgid "部分退款金额不能为空"
@@ -55509,8 +55529,8 @@ msgid "必须选择一个目标工作表"
 msgstr "ターゲットワークシートを選択する必要があります"
 
 #: Disabled references:1
-msgid "通过解析内部成员访问或对外公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
-msgstr "内部メンバーがアクセスするか、外部に公開されている記録リンクを解析することによって、対応する記録オブジェクトを取得し、プロセス内の他のノードで使用します。シーンの例：倉庫管理者がPCでスキャナーを使用して商品のQRコードをスキャンし、指す記録リンクをテキストボックスに書き込み、ワークフローが関連された製品を解析し、自動化された入出庫を実現します。"
+msgid "通过解析内部成员访问或公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
+msgstr "リンクを解析して該当するレコードオブジェクトを抽出し、他のワークフローノードで利用できます。これにより、倉庫管理者が商品QRコードをシステムに読み取った際に、在庫管理を自動化できます。"
 
 #: Disabled references:1
 msgid "根据筛选条件和排序规则从工作表中查找符合条件的第一条数据，并在获取的同时对记录进行更新（原子性防止并发操作，适用于出入库等场景）"
@@ -56510,7 +56530,7 @@ msgstr "プロセスオーナーによる代理"
 
 #: Disabled references:1
 msgid "由指定人员代理"
-msgstr "指定された者が代理"
+msgstr "特定のメンバーに代理を依頼"
 
 #: Disabled references:1
 msgid "流程结束"
@@ -56646,7 +56666,7 @@ msgstr "印刷テンプレートがありません"
 
 #: Disabled references:1
 msgid "允许审批人撤回上次审批结果"
-msgstr "承認者が前回の承認結果を撤回できるようにします"
+msgstr "承認の撤回を許可"
 
 #: Disabled references:1
 msgid "当没有上级负责人时，由当前人员进行处理"
@@ -56674,7 +56694,7 @@ msgstr "注意: バッチ操作は影響を受けません。"
 
 #: Disabled references:1
 msgid "审批流程中允许查看他人填写字段"
-msgstr "承認プロセスで他のユーザーが入力した項目を閲覧できます"
+msgstr "他のユーザーが入力したフィールドの閲覧を許可"
 
 #: Disabled references:1
 msgid "审批和填写节点中查看他人填写内容"
@@ -56958,7 +56978,7 @@ msgstr "全組織範囲のロールには対応していません"
 
 #: Disabled references:1
 msgid "指定人员代理"
-msgstr "指定された者が代理"
+msgstr "特定のメンバーに代理を依頼"
 
 #: Disabled references:1
 msgid "使用发起节点中的默认设置"
@@ -57422,7 +57442,7 @@ msgstr "NULL値を無視"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示是其中任何一个值时，即符合条件"
-msgstr "複数の値が選択されている場合は、これらの値のいずれかである場合に条件が満たされることを意味します。"
+msgstr "複数の値を選択した場合、いずれかの値が一致すると条件を満たします。"
 
 #: Disabled references:1
 msgid "当选择多个值，则表示不是其中所有值时，才符合条件"
@@ -59150,6 +59170,10 @@ msgid "恢复到此版本"
 msgstr "このバージョンに復元"
 
 #: Disabled references:1
+msgid "版本%26016"
+msgstr "バージョン"
+
+#: Disabled references:1
 msgid "编辑中…"
 msgstr "編集中…"
 
@@ -60055,7 +60079,7 @@ msgstr "数値フィールドの小数点以下の桁数"
 
 #: Disabled references:1
 msgid "仅支持分支节点条件判断"
-msgstr "分岐ノードの条件判定のみ対応"
+msgstr "ブランチ条件にのみ適用されます"
 
 #: Disabled references:1
 msgid "文本格式化"
@@ -61911,8 +61935,8 @@ msgid "选择索引字段"
 msgstr "インデックスフィールドを選択"
 
 #: Disabled references:1
-msgid "每张工作表只能创建一个「文本索引」或者「文本字段全文索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
-msgstr "各ワークシートには「テキストインデックス」または「テキストフィールドの全文インデックス」を1つだけ作成できます。「テキストインデックス」を作成する際には「オプションフィールド」を含めることはできません; 各インデックスには1つの「オプションフィールド」だけを含めることができます。"
+msgid "每张工作表只能创建一个「文本索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
+msgstr "各テーブルにはテキストインデックスを1つのみ設定できます。テキストインデックスにはセレクトフィールドを含めることはできません。また、各インデックスにはセレクトフィールドを1つのみ含めることができます。"
 
 #: Disabled references:1
 msgid "建立唯一索引后，字段的值不允许重复。如果字段为非必填，则整个工作表只能有一条为空的数据，以保证数据的唯一性"
@@ -62213,6 +62237,10 @@ msgstr "交換"
 #: Disabled references:1
 msgid "编码方式：code128，仅支持数字、字母、符号，最大包含30个字符"
 msgstr "エンコーディング方式：code128、数字、アルファベット、記号のみをサポート、最大30文字を含む"
+
+#: Disabled references:1
+msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
+msgstr "エンコーディング方式：QRコード、中国語の文字をサポートし、最大150文字を含むことができます。"
 
 #: Disabled references:1
 msgid "条形码数据源"
@@ -62832,7 +62860,7 @@ msgstr "必要なプラグインパラメーターをJSON形式で設定して�
 
 #: Disabled references:1
 msgid "常规（多条）"
-msgstr "一般（複数）"
+msgstr "標準（複数）"
 
 #: Disabled references:1
 msgid "在左侧显示卡片列表，可切换查看记录详情"
@@ -62840,11 +62868,11 @@ msgstr "左側にカードリストを表示し、レコードの詳細を切り
 
 #: Disabled references:1
 msgid "仅显示详情（一条）"
-msgstr "詳細を表示（1件）"
+msgstr "詳細のみ（シングル）"
 
 #: Disabled references:1
 msgid "显示第一条记录的详情"
-msgstr "最初のレコードの詳細を表示"
+msgstr "最初のレコードの詳細を表示します。"
 
 #: Disabled references:1
 msgid "详情设置"
@@ -64812,7 +64840,10 @@ msgstr "データインポート - エクセルのアップロード (1/3)"
 
 #: Disabled references:1
 msgid "支持10MB以内的xls、xlsx、csv文件, 最大行数不超过%0行，列数不超过200列；导入多选类型的控件，请确保Excel字段内各个选项/人员用“，”隔开；导入地区控件，省市县之间以“/”隔开，如：江西省/上饶市/铅山县，如填写的地区格式没有“/”，则会按照名称精准匹配"
-msgstr "10MB以内のxls、xlsx、csvファイルをサポートし、最大行数は%0行、列数は200列を超えない；複数選択タイプのコントロールをインポートする際は、Excelフィールド内の各オプション/人物が「、」で区切られていることを確認してください；地域コントロールをインポートする場合、県、市、郡は「/」で区切ります。例：江西省/上饒市/鉛山区；入力された地域の形式に「/」が含まれていない場合は、名前で正確に一致します。"
+msgstr "XLS、XLSX、CSVファイル（最大10MB、%0行・200列まで）に対応しています。  
+マルチセレクトフィールドでは、オプションやメンバーをカンマで区切ってください。  
+所在地フィールドでは、都道府県・市区町村・区郡を「/」で区切って入力してください（例：江西省/上饒市/鉛山県）。  
+「/」が含まれない場合は、名称の完全一致で位置情報が照合されます。"
 
 #: Disabled references:1
 msgid "已选择%0条草稿"
@@ -66730,7 +66761,7 @@ msgstr "ダブルクリックでレコードを作成"
 
 #: Disabled references:1
 msgid "插件未发布"
-msgstr "プラグインが公開されていません"
+msgstr "ドラフトプラグイン"
 
 #: Disabled references:1
 msgid "插件开发中"
@@ -67610,7 +67641,7 @@ msgstr "行の記録ログを取得 POST"
 
 #: Disabled references:1
 msgid "按操作者ID筛选"
-msgstr "操作者IDでフィルタリング"
+msgstr "アクターIDでフィルター"
 
 #: Disabled references:1
 msgid "按控件ID筛选"

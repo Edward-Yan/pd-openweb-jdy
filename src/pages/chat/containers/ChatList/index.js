@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import cx from 'classnames';
 import _ from 'lodash';
-import zendeskApi from 'src/api/Zendesk';
+import { initZendeskWidget } from 'src/utils/services/zendeskWidget';
 import * as actions from '../../redux/actions';
 import * as socket from '../../utils/socketEvent';
 import Apps from '../Apps';
@@ -12,54 +12,14 @@ import Toolbar from './Toolbar';
 import ToolbarDrawer from './Toolbar/Drawer';
 import './index.less';
 
-const KEY_STORAGE_KEY = 'zendeskToken';
-const KEY_TIMESTAMP_KEY = 'zendeskTokenTimestamp';
-const EXPIRATION_TIME = 50 * 60 * 1000;
-
-async function fetchKey() {
-  try {
-    const key = await zendeskApi.getWidgetJwt();
-    const currentTime = new Date().getTime();
-    localStorage.setItem(KEY_STORAGE_KEY, key);
-    localStorage.setItem(KEY_TIMESTAMP_KEY, currentTime.toString());
-    return key;
-  } catch (error) {
-    console.error('Error fetching key:', error);
-  }
-}
-
-function getZendeskKey() {
-  const storedKey = localStorage.getItem(KEY_STORAGE_KEY);
-  const storedTimestamp = localStorage.getItem(KEY_TIMESTAMP_KEY);
-
-  if (storedKey && storedTimestamp) {
-    const currentTime = new Date().getTime();
-    const timeElapsed = currentTime - parseInt(storedTimestamp, 10);
-
-    if (timeElapsed < EXPIRATION_TIME) {
-      return Promise.resolve(storedKey);
-    } else {
-      return fetchKey();
-    }
-  }
-
-  return fetchKey();
-}
-
 class Chat extends Component {
   constructor(props) {
     super(props);
   }
   componentDidMount() {
     if (location.href.includes('chat_window')) return;
-
-    // 获取 Zendesk Key
     if (!window.platformENV.isLocal && window.platformENV.isOverseas) {
-      getZendeskKey().then(key => {
-        window.zE('messenger', 'loginUser', callback => {
-          callback(key);
-        });
-      });
+      initZendeskWidget();
     }
 
     // 注册事件

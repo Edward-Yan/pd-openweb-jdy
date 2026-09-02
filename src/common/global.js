@@ -210,11 +210,7 @@ window.md = {
       DataPipelinePrice: _l('0.15信用点'),
     },
     getCaptchaType: () => {
-      return window.localStorage.getItem('captchaType')
-        ? parseInt(window.localStorage.getItem('captchaType'))
-        : ua.match(/miniprogram|wechatdevtools|wxwork/) || !window.TencentCaptcha
-          ? 1
-          : md.global.Config.CaptchaType || 0;
+      return ua.match(/miniprogram|wechatdevtools|wxwork/) ? 1 : md.global.Config.CaptchaType || 0;
     },
     SysSettings: {
       passwordRegex: /^(?=.*\d)(?=.*[a-zA-Z]).{8,20}$/,

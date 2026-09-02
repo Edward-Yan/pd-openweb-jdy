@@ -4,6 +4,7 @@ import { Tooltip } from 'ming-ui/antd-components';
 import { handleAdvancedSettingChange } from 'src/pages/widgetConfig/util/setting';
 import { DATE_TYPE } from 'src/pages/worksheet/common/ViewConfig/components/fastFilter/config.js';
 import { getDaterange } from 'src/pages/worksheet/common/ViewConfig/components/fastFilter/util.js';
+import { htmlEncodeReg } from 'src/utils/common';
 import { getAdvanceSetting } from 'src/utils/control';
 import { DynamicInputStyle } from '../styled';
 
@@ -24,7 +25,7 @@ export default function DynamicInput({
   linkParams,
 }) {
   const current = _.find(ICON_TYPES, item => item.key === defaultType) || {};
-  const name = `<span>：${_.get(queryConfig, 'sourceName')}</span>`;
+  const name = `<span>：${htmlEncodeReg(_.get(queryConfig, 'sourceName'))}</span>`;
   const [sourceName, setSourceName] = useState(name);
 
   useEffect(() => {

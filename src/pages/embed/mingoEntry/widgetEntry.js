@@ -383,23 +383,7 @@ function bindAgentAPIToMdyAPI() {
   window.agentAPI = agentAPI;
 }
 
-function getStoredCaptchaType() {
-  try {
-    const value = window.localStorage.getItem('captchaType');
-    const type = parseInt(value, 10);
-
-    return Number.isNaN(type) ? undefined : type;
-  } catch {
-    return undefined;
-  }
-}
-
 function getCaptchaType() {
-  const storedType = getStoredCaptchaType();
-
-  if (storedType !== undefined) return storedType;
-  if (!window.TencentCaptcha) return 1;
-
   const config = (window.md && window.md.global && window.md.global.Config) || {};
   const configType = parseInt(config.CaptchaType, 10);
 

@@ -183,7 +183,7 @@ function NewRecordForm(props) {
 
   function newRecord(options = {}) {
     function handleSubmit() {
-      if (!customwidget.current) {
+      if (!customwidget.current?.dataFormat) {
         // loading 已经提前打开，这里必须收尾，否则遮罩关不掉
         onSubmitEnd();
         return;

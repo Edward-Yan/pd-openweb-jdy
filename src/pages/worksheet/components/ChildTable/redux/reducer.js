@@ -91,6 +91,20 @@ function cellErrors(state = {}, action) {
   }
 }
 
+// 仅记录「row 端重算发现不了」的错误（失焦时持久化的非法格式值、后端唯一校验），
+// 由写入方通过 action.persisted 标记。保存时只有这类错误才与 row 端结果合并：
+// 否则上一次保存写回 cellErrors 的必填/规则错误会被当成待处理错误反复保留，
+// 出现「改了业务规则条件字段、该字段已不必填，保存仍报必填」。
+// 未标记的 key 随 cellErrors 收敛（清空、删行、改值清错误时同步失效）。
+function persistedCellErrors(state = {}, action) {
+  switch (action.type) {
+    case 'UPDATE_CELL_ERRORS':
+      return _.pickBy({ ...state, ...(action.persisted || {}) }, (error, key) => key in (action.value || {}));
+    default:
+      return state;
+  }
+}
+
 function lastAction(state, action) {
   return action;
 }
@@ -253,6 +267,7 @@ function filterControls(state = [], action) {
 
 export default combineReducers({
   cellErrors,
+  persistedCellErrors,
   baseLoading,
   dataLoading,
   base,

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: "
-"POT-Creation-Date: 2026-07-14 17:50:50"
+"POT-Creation-Date: 2026-08-26 14:36:28"
 "Language-Team: Chinese Simplified"
 "Language: zh_CN"
 "MIME-Version: 1.0"
@@ -1086,10 +1086,6 @@ msgid "未命名"
 msgstr "未命名"
 
 #: Disabled references:1
-msgid "不在可选范围内"
-msgstr "不在可选范围内"
-
-#: Disabled references:1
 msgid "最多可选择20项"
 msgstr "最多可选择20项"
 
@@ -1580,6 +1576,10 @@ msgstr "拍照"
 #: Disabled references:1
 msgid "拍摄"
 msgstr "拍摄"
+
+#: Disabled references:1
+msgid "不在可选范围内"
+msgstr "不在可选范围内"
 
 #: Disabled references:1
 msgid "%0级"
@@ -7336,6 +7336,10 @@ msgstr "不区分大小写"
 #: Disabled references:1
 msgid "看不清，换一张"
 msgstr "看不清，换一张"
+
+#: Disabled references:1
+msgid "加载失败，请刷新重试"
+msgstr "加载失败，请刷新重试"
 
 #: Disabled references:1
 msgid "管理应用“%0”"
@@ -18646,6 +18650,14 @@ msgid "在人员选择层、通讯录中按部门查看时，按设置的排序�
 msgstr "在人员选择层、通讯录中按部门查看时，按设置的排序显示"
 
 #: Disabled references:1
+msgid "刷新中，请稍后查看"
+msgstr "刷新中，请稍后查看"
+
+#: Disabled references:1
+msgid "刷新失败"
+msgstr "刷新失败"
+
+#: Disabled references:1
 msgid "在进行工作表和工作流的所有下级部门检索时，若所有下级部门总数超过2000（含），系统将默认仅获取当前部门的“一级子部门”所有部门。"
 msgstr "在进行工作表和工作流的所有下级部门检索时，若所有下级部门总数超过2000（含），系统将默认仅获取当前部门的“一级子部门”所有部门。"
 
@@ -18660,6 +18672,10 @@ msgstr "导入部门"
 #: Disabled references:1
 msgid "导出部门"
 msgstr "导出部门"
+
+#: Disabled references:1
+msgid "刷新部门列表"
+msgstr "刷新部门列表"
 
 #: Disabled references:1
 msgid "删除“%0”"
@@ -18688,6 +18704,10 @@ msgstr "存在未恢复的上级部门，请先恢复"
 #: Disabled references:1
 msgid "复制 ID"
 msgstr "复制 ID"
+
+#: Disabled references:1
+msgid "刷新部门成员信息"
+msgstr "刷新部门成员信息"
 
 #: Disabled references:1
 msgid "添加子部门"
@@ -18936,10 +18956,6 @@ msgstr "仅看无部门人员"
 #: Disabled references:1
 msgid "更多邀请"
 msgstr "更多邀请"
-
-#: Disabled references:1
-msgid "刷新失败"
-msgstr "刷新失败"
 
 #: Disabled references:1
 msgid "刷新所有成员信息"
@@ -19346,6 +19362,10 @@ msgid "角色存在成员，无法删除"
 msgstr "角色存在成员，无法删除"
 
 #: Disabled references:1
+msgid "刷新角色成员信息"
+msgstr "刷新角色成员信息"
+
+#: Disabled references:1
 msgid "停用后，当前停用的角色将对用户隐藏，角色下的成员不会移除。"
 msgstr "停用后，当前停用的角色将对用户隐藏，角色下的成员不会移除。"
 
@@ -19376,6 +19396,10 @@ msgstr "导入角色"
 #: Disabled references:1
 msgid "导出角色"
 msgstr "导出角色"
+
+#: Disabled references:1
+msgid "刷新角色列表"
+msgstr "刷新角色列表"
 
 #: Disabled references:1
 msgid "暂无结果"
@@ -21586,8 +21610,8 @@ msgid "知识库用量超限，请联系组织管理员增购额度"
 msgstr "知识库用量超限，请联系组织管理员增购额度"
 
 #: Disabled references:1
-msgid "开启后，对 %0 格式的附件使用视觉模型解析，提升复杂文档的结构还原准确率。"
-msgstr "开启后，对 %0 格式的附件使用视觉模型解析，提升复杂文档的结构还原准确率。"
+msgid "开启后，对 %0 格式的附件进行增强解析，提升复杂文档的内容提取效果；暂不识别文档内图片内容。"
+msgstr "开启后，对 %0 格式的附件进行增强解析，提升复杂文档的内容提取效果；暂不识别文档内图片内容。"
 
 #: Disabled references:1
 msgid "向量数据库服务未部署，知识库暂不可用"
@@ -22826,12 +22850,12 @@ msgid "账号已注册"
 msgstr "账号已注册"
 
 #: Disabled references:1
-msgid "验证码发送过于频繁"
-msgstr "验证码发送过于频繁"
-
-#: Disabled references:1
 msgid "验证码发送过于频繁，%0收不到验证码？%1"
 msgstr "验证码发送过于频繁，%0收不到验证码？%1"
+
+#: Disabled references:1
+msgid "验证码发送过于频繁"
+msgstr "验证码发送过于频繁"
 
 #: Disabled references:1
 msgid "账号未注册"
@@ -22954,10 +22978,6 @@ msgid "图形验证码校验失败"
 msgstr "图形验证码校验失败"
 
 #: Disabled references:1
-msgid "返回登录页面"
-msgstr "返回登录页面"
-
-#: Disabled references:1
 msgid "找回密码"
 msgstr "找回密码"
 
@@ -22976,10 +22996,6 @@ msgstr "使用账号密码登录"
 #: Disabled references:1
 msgid "使用验证码登录"
 msgstr "使用验证码登录"
-
-#: Disabled references:1
-msgid "或通过以下方式"
-msgstr "或通过以下方式"
 
 #: Disabled references:1
 msgid "小程序登录"
@@ -23010,6 +23026,14 @@ msgid "登录%14002"
 msgstr "登录"
 
 #: Disabled references:1
+msgid "还没有账号?"
+msgstr "还没有账号?"
+
+#: Disabled references:1
+msgid "免费注册"
+msgstr "免费注册"
+
+#: Disabled references:1
 msgid "下次自动登录"
 msgstr "下次自动登录"
 
@@ -23028,10 +23052,6 @@ msgstr "继 续"
 #: Disabled references:1
 msgid "此小程序仅支持组织内部员工登录使用"
 msgstr "此小程序仅支持组织内部员工登录使用"
-
-#: Disabled references:1
-msgid "注册新账号"
-msgstr "注册新账号"
 
 #: Disabled references:1
 msgid "使用 Microsoft 登录"
@@ -23746,6 +23766,14 @@ msgid "%0邀请您加入"
 msgstr "%0邀请您加入"
 
 #: Disabled references:1
+msgid "注册并加入"
+msgstr "注册并加入"
+
+#: Disabled references:1
+msgid "已有账号"
+msgstr "已有账号"
+
+#: Disabled references:1
 msgid "我同意接收短信"
 msgstr "我同意接收短信"
 
@@ -23762,20 +23790,8 @@ msgid "《隐私条款》"
 msgstr "《隐私条款》"
 
 #: Disabled references:1
-msgid "注册并加入"
-msgstr "注册并加入"
-
-#: Disabled references:1
 msgid "登录并加入"
 msgstr "登录并加入"
-
-#: Disabled references:1
-msgid "已有账号"
-msgstr "已有账号"
-
-#: Disabled references:1
-msgid "登录已有账号"
-msgstr "登录已有账号"
 
 #: Disabled references:1
 msgid "邀请您加入"
@@ -25394,10 +25410,6 @@ msgid "复制自定义动作“%0”"
 msgstr "复制自定义动作“%0”"
 
 #: Disabled references:1
-msgid "将复制目标自定义动作的所有节点和配置"
-msgstr "将复制目标自定义动作的所有节点和配置"
-
-#: Disabled references:1
 msgid "动作将被删除，请确认执行此操作"
 msgstr "动作将被删除，请确认执行此操作"
 
@@ -26442,12 +26454,12 @@ msgid "不允许查看"
 msgstr "不允许查看"
 
 #: Disabled references:1
-msgid "允许将视图对外公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
-msgstr "允许将视图对外公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
+msgid "允许将视图公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
+msgstr "允许将视图公开分享，获得链接的所有人都可以查看视图和视图下的全部记录"
 
 #: Disabled references:1
-msgid "允许将记录对外公开分享，获得链接的所有人都可以查看记录"
-msgstr "允许将记录对外公开分享，获得链接的所有人都可以查看记录"
+msgid "允许将记录公开分享，获得链接的所有人都可以查看记录"
+msgstr "允许将记录公开分享，获得链接的所有人都可以查看记录"
 
 #: Disabled references:1
 msgid "有分享权限的用户"
@@ -28224,314 +28236,6 @@ msgstr "添加失败,请稍后重试"
 #: Disabled references:1
 msgid "AI 填写"
 msgstr "AI 填写"
-
-#: Disabled references:1
-msgid "平铺"
-msgstr "平铺"
-
-#: Disabled references:1
-msgid "流程节点"
-msgstr "流程节点"
-
-#: Disabled references:1
-msgid "备注/签名"
-msgstr "备注/签名"
-
-#: Disabled references:1
-msgid "(%0委托)"
-msgstr "(%0委托)"
-
-#: Disabled references:1
-msgid "(%0操作)"
-msgstr "(%0操作)"
-
-#: Disabled references:1
-msgid "退回到%0"
-msgstr "退回到%0"
-
-#: Disabled references:1
-msgid "无需填写"
-msgstr "无需填写"
-
-#: Disabled references:1
-msgid "打印人："
-msgstr "打印人："
-
-#: Disabled references:1
-msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
-msgstr "检测到跨域附件，已跳过导出，可在记录中直接下载"
-
-#: Disabled references:1
-msgid "预览: %0"
-msgstr "预览: %0"
-
-#: Disabled references:1
-msgid "编辑模板"
-msgstr "编辑模板"
-
-#: Disabled references:1
-msgid "生成失败时，请点击此处刷新试试"
-msgstr "生成失败时，请点击此处刷新试试"
-
-#: Disabled references:1
-msgid "正在导出"
-msgstr "正在导出"
-
-#: Disabled references:1
-msgid "导出Word"
-msgstr "导出Word"
-
-#: Disabled references:1
-msgid "保存为打印模板"
-msgstr "保存为打印模板"
-
-#: Disabled references:1
-msgid "导出为excel"
-msgstr "导出为excel"
-
-#: Disabled references:1
-msgid "导出为word"
-msgstr "导出为word"
-
-#: Disabled references:1
-msgid "保存模板"
-msgstr "保存模板"
-
-#: Disabled references:1
-msgid "模板名称"
-msgstr "模板名称"
-
-#: Disabled references:1
-msgid "企业Logo"
-msgstr "企业Logo"
-
-#: Disabled references:1
-msgid "在企业管理后台中设置"
-msgstr "在企业管理后台中设置"
-
-#: Disabled references:1
-msgid "记录标题"
-msgstr "记录标题"
-
-#: Disabled references:1
-msgid "打印时间"
-msgstr "打印时间"
-
-#: Disabled references:1
-msgid "打印人"
-msgstr "打印人"
-
-#: Disabled references:1
-msgid "对外公开分享链接"
-msgstr "对外公开分享链接"
-
-#: Disabled references:1
-msgid "内部成员访问链接"
-msgstr "内部成员访问链接"
-
-#: Disabled references:1
-msgid "选项字段平铺打印"
-msgstr "选项字段平铺打印"
-
-#: Disabled references:1
-msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
-msgstr "开启后，平铺类型的选项字段会打印没有选中的选项"
-
-#: Disabled references:1
-msgid "打印值为空的字段"
-msgstr "打印值为空的字段"
-
-#: Disabled references:1
-msgid "开启后，没有内容的字段会显示并可以打印"
-msgstr "开启后，没有内容的字段会显示并可以打印"
-
-#: Disabled references:1
-msgid "文字大小"
-msgstr "文字大小"
-
-#: Disabled references:1
-msgid "名称宽度"
-msgstr "名称宽度"
-
-#: Disabled references:1
-msgid "表单字段"
-msgstr "表单字段"
-
-#: Disabled references:1
-msgid "手写签名"
-msgstr "手写签名"
-
-#: Disabled references:1
-msgid "选择打印字段"
-msgstr "选择打印字段"
-
-#: Disabled references:1
-msgid "附加信息"
-msgstr "附加信息"
-
-#: Disabled references:1
-msgid "审批签名位置"
-msgstr "审批签名位置"
-
-#: Disabled references:1
-msgid "填写人"
-msgstr "填写人"
-
-#: Disabled references:1
-msgid "审批人"
-msgstr "审批人"
-
-#: Disabled references:1
-msgid "转交"
-msgstr "转交"
-
-#: Disabled references:1
-msgid "通过申请"
-msgstr "通过申请"
-
-#: Disabled references:1
-msgid "否决申请"
-msgstr "否决申请"
-
-#: Disabled references:1
-msgid "转审"
-msgstr "转审"
-
-#: Disabled references:1
-msgid "添加审批人"
-msgstr "添加审批人"
-
-#: Disabled references:1
-msgid "被移除"
-msgstr "被移除"
-
-#: Disabled references:1
-msgid "撤回后重新发起"
-msgstr "撤回后重新发起"
-
-#: Disabled references:1
-msgid "审批前加签"
-msgstr "审批前加签"
-
-#: Disabled references:1
-msgid "通过申请并加签"
-msgstr "通过申请并加签"
-
-#: Disabled references:1
-msgid "修改申请内容"
-msgstr "修改申请内容"
-
-#: Disabled references:1
-msgid "无需审批"
-msgstr "无需审批"
-
-#: Disabled references:1
-msgid "拥有者："
-msgstr "拥有者："
-
-#: Disabled references:1
-msgid "创建人："
-msgstr "创建人："
-
-#: Disabled references:1
-msgid "创建时间："
-msgstr "创建时间："
-
-#: Disabled references:1
-msgid "最近修改时间："
-msgstr "最近修改时间："
-
-#: Disabled references:1
-msgid "最近修改人："
-msgstr "最近修改人："
-
-#: Disabled references:1
-msgid "审批意见"
-msgstr "审批意见"
-
-#: Disabled references:1
-msgid "Word 模板"
-msgstr "Word 模板"
-
-#: Disabled references:1
-msgid "Excel 模板"
-msgstr "Excel 模板"
-
-#: Disabled references:1
-msgid "在明细内显示"
-msgstr "在明细内显示"
-
-#: Disabled references:1
-msgid "在明细表下方显示"
-msgstr "在明细表下方显示"
-
-#: Disabled references:1
-msgid "缩略图"
-msgstr "缩略图"
-
-#: Disabled references:1
-msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
-msgstr "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
-
-#: Disabled references:1
-msgid "%0 级"
-msgstr "%0 级"
-
-#: Disabled references:1
-msgid "批量打印"
-msgstr "批量打印"
-
-#: Disabled references:1
-msgid "工作流打印"
-msgstr "工作流打印"
-
-#: Disabled references:1
-msgid "保存成功，请到打印模板中查看"
-msgstr "保存成功，请到打印模板中查看"
-
-#: Disabled references:1
-msgid "正在生成文件..."
-msgstr "正在生成文件..."
-
-#: Disabled references:1
-msgid "您是否保存本次修改？"
-msgstr "您是否保存本次修改？"
-
-#: Disabled references:1
-msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
-msgstr "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
-
-#: Disabled references:1
-msgid "否，放弃保存"
-msgstr "否，放弃保存"
-
-#: Disabled references:1
-msgid "是，保存修改"
-msgstr "是，保存修改"
-
-#: Disabled references:1
-msgid "导出成功！"
-msgstr "导出成功！"
-
-#: Disabled references:1
-msgid "下载%0文件"
-msgstr "下载%0文件"
-
-#: Disabled references:1
-msgid "正在导出Excel文件..."
-msgstr "正在导出Excel文件..."
-
-#: Disabled references:1
-msgid "正在导出Word文件..."
-msgstr "正在导出Word文件..."
-
-#: Disabled references:1
-msgid "包含图片时生成速度较慢，请耐心等待..."
-msgstr "包含图片时生成速度较慢，请耐心等待..."
-
-#: Disabled references:1
-msgid "记录或模板已删除"
-msgstr "记录或模板已删除"
 
 #: Disabled references:1
 msgid "加入/创建组织"
@@ -30570,6 +30274,38 @@ msgid "行列转置"
 msgstr "行列转置"
 
 #: Disabled references:1
+msgid "平铺"
+msgstr "平铺"
+
+#: Disabled references:1
+msgid "流程节点"
+msgstr "流程节点"
+
+#: Disabled references:1
+msgid "备注/签名"
+msgstr "备注/签名"
+
+#: Disabled references:1
+msgid "(%0委托)"
+msgstr "(%0委托)"
+
+#: Disabled references:1
+msgid "(%0操作)"
+msgstr "(%0操作)"
+
+#: Disabled references:1
+msgid "退回到%0"
+msgstr "退回到%0"
+
+#: Disabled references:1
+msgid "无需填写"
+msgstr "无需填写"
+
+#: Disabled references:1
+msgid "打印人："
+msgstr "打印人："
+
+#: Disabled references:1
 msgid "复制打印链接"
 msgstr "复制打印链接"
 
@@ -30578,12 +30314,112 @@ msgid "当前打印服务在第三方应用内无法直接打开。请复制下�
 msgstr "当前打印服务在第三方应用内无法直接打开。请复制下方链接，并在浏览器中打开后继续使用打印功能。"
 
 #: Disabled references:1
+msgid "检测到跨域附件，已跳过导出，可在记录中直接下载"
+msgstr "检测到跨域附件，已跳过导出，可在记录中直接下载"
+
+#: Disabled references:1
 msgid "导出数量超出系统上限，请减少数量后重试"
 msgstr "导出数量超出系统上限，请减少数量后重试"
 
 #: Disabled references:1
+msgid "编辑模板"
+msgstr "编辑模板"
+
+#: Disabled references:1
+msgid "预览: %0"
+msgstr "预览: %0"
+
+#: Disabled references:1
 msgid "pdf生成失败时，请点击此处刷新试试"
 msgstr "pdf生成失败时，请点击此处刷新试试"
+
+#: Disabled references:1
+msgid "正在导出"
+msgstr "正在导出"
+
+#: Disabled references:1
+msgid "导出Word"
+msgstr "导出Word"
+
+#: Disabled references:1
+msgid "保存为打印模板"
+msgstr "保存为打印模板"
+
+#: Disabled references:1
+msgid "导出为excel"
+msgstr "导出为excel"
+
+#: Disabled references:1
+msgid "导出为word"
+msgstr "导出为word"
+
+#: Disabled references:1
+msgid "保存模板"
+msgstr "保存模板"
+
+#: Disabled references:1
+msgid "模板名称"
+msgstr "模板名称"
+
+#: Disabled references:1
+msgid "企业Logo"
+msgstr "企业Logo"
+
+#: Disabled references:1
+msgid "在企业管理后台中设置"
+msgstr "在企业管理后台中设置"
+
+#: Disabled references:1
+msgid "记录标题"
+msgstr "记录标题"
+
+#: Disabled references:1
+msgid "打印时间"
+msgstr "打印时间"
+
+#: Disabled references:1
+msgid "打印人"
+msgstr "打印人"
+
+#: Disabled references:1
+msgid "公开分享链接"
+msgstr "公开分享链接"
+
+#: Disabled references:1
+msgid "内部成员访问链接"
+msgstr "内部成员访问链接"
+
+#: Disabled references:1
+msgid "选项字段平铺打印"
+msgstr "选项字段平铺打印"
+
+#: Disabled references:1
+msgid "开启后，平铺类型的选项字段会打印没有选中的选项"
+msgstr "开启后，平铺类型的选项字段会打印没有选中的选项"
+
+#: Disabled references:1
+msgid "打印值为空的字段"
+msgstr "打印值为空的字段"
+
+#: Disabled references:1
+msgid "开启后，没有内容的字段会显示并可以打印"
+msgstr "开启后，没有内容的字段会显示并可以打印"
+
+#: Disabled references:1
+msgid "文字大小"
+msgstr "文字大小"
+
+#: Disabled references:1
+msgid "名称宽度"
+msgstr "名称宽度"
+
+#: Disabled references:1
+msgid "表单字段"
+msgstr "表单字段"
+
+#: Disabled references:1
+msgid "手写签名"
+msgstr "手写签名"
 
 #: Disabled references:1
 msgid "纸张"
@@ -30598,12 +30434,184 @@ msgid "布局"
 msgstr "布局"
 
 #: Disabled references:1
+msgid "选择打印字段"
+msgstr "选择打印字段"
+
+#: Disabled references:1
+msgid "附加信息"
+msgstr "附加信息"
+
+#: Disabled references:1
+msgid "审批签名位置"
+msgstr "审批签名位置"
+
+#: Disabled references:1
+msgid "填写人"
+msgstr "填写人"
+
+#: Disabled references:1
+msgid "审批人"
+msgstr "审批人"
+
+#: Disabled references:1
+msgid "转交"
+msgstr "转交"
+
+#: Disabled references:1
+msgid "通过申请"
+msgstr "通过申请"
+
+#: Disabled references:1
+msgid "否决申请"
+msgstr "否决申请"
+
+#: Disabled references:1
+msgid "转审"
+msgstr "转审"
+
+#: Disabled references:1
+msgid "添加审批人"
+msgstr "添加审批人"
+
+#: Disabled references:1
+msgid "被移除"
+msgstr "被移除"
+
+#: Disabled references:1
+msgid "撤回后重新发起"
+msgstr "撤回后重新发起"
+
+#: Disabled references:1
+msgid "审批前加签"
+msgstr "审批前加签"
+
+#: Disabled references:1
+msgid "通过申请并加签"
+msgstr "通过申请并加签"
+
+#: Disabled references:1
+msgid "修改申请内容"
+msgstr "修改申请内容"
+
+#: Disabled references:1
+msgid "无需审批"
+msgstr "无需审批"
+
+#: Disabled references:1
+msgid "拥有者："
+msgstr "拥有者："
+
+#: Disabled references:1
+msgid "创建人："
+msgstr "创建人："
+
+#: Disabled references:1
+msgid "创建时间："
+msgstr "创建时间："
+
+#: Disabled references:1
+msgid "最近修改时间："
+msgstr "最近修改时间："
+
+#: Disabled references:1
+msgid "最近修改人："
+msgstr "最近修改人："
+
+#: Disabled references:1
+msgid "审批意见"
+msgstr "审批意见"
+
+#: Disabled references:1
+msgid "Word 模板"
+msgstr "Word 模板"
+
+#: Disabled references:1
+msgid "Excel 模板"
+msgstr "Excel 模板"
+
+#: Disabled references:1
+msgid "在明细内显示"
+msgstr "在明细内显示"
+
+#: Disabled references:1
+msgid "在明细表下方显示"
+msgstr "在明细表下方显示"
+
+#: Disabled references:1
 msgid "纵向"
 msgstr "纵向"
 
 #: Disabled references:1
 msgid "横向"
 msgstr "横向"
+
+#: Disabled references:1
+msgid "缩略图"
+msgstr "缩略图"
+
+#: Disabled references:1
+msgid "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
+msgstr "仅图片类型支持按缩略图打印，非图片类型会在最后以文件名显示"
+
+#: Disabled references:1
+msgid "%0 级"
+msgstr "%0 级"
+
+#: Disabled references:1
+msgid "批量打印"
+msgstr "批量打印"
+
+#: Disabled references:1
+msgid "工作流打印"
+msgstr "工作流打印"
+
+#: Disabled references:1
+msgid "保存成功，请到打印模板中查看"
+msgstr "保存成功，请到打印模板中查看"
+
+#: Disabled references:1
+msgid "正在生成文件..."
+msgstr "正在生成文件..."
+
+#: Disabled references:1
+msgid "您是否保存本次修改？"
+msgstr "您是否保存本次修改？"
+
+#: Disabled references:1
+msgid "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
+msgstr "当前有尚未保存的修改，你在离开页面前是否需要保存这些修改？"
+
+#: Disabled references:1
+msgid "否，放弃保存"
+msgstr "否，放弃保存"
+
+#: Disabled references:1
+msgid "是，保存修改"
+msgstr "是，保存修改"
+
+#: Disabled references:1
+msgid "导出成功！"
+msgstr "导出成功！"
+
+#: Disabled references:1
+msgid "下载%0文件"
+msgstr "下载%0文件"
+
+#: Disabled references:1
+msgid "正在导出Excel文件..."
+msgstr "正在导出Excel文件..."
+
+#: Disabled references:1
+msgid "正在导出Word文件..."
+msgstr "正在导出Word文件..."
+
+#: Disabled references:1
+msgid "包含图片时生成速度较慢，请耐心等待..."
+msgstr "包含图片时生成速度较慢，请耐心等待..."
+
+#: Disabled references:1
+msgid "记录或模板已删除"
+msgstr "记录或模板已删除"
 
 #: Disabled references:1
 msgid "暂未设置用户协议"
@@ -31256,10 +31264,6 @@ msgstr "下载模版"
 #: Disabled references:1
 msgid "邀请用户并发送短信/邮箱"
 msgstr "邀请用户并发送短信/邮箱"
-
-#: Disabled references:1
-msgid "（短信%0/条、邮箱%1/封，自动从企业账户扣除。）"
-msgstr "（短信%0/条、邮箱%1/封，自动从企业账户扣除。）"
 
 #: Disabled references:1
 msgid "从Excel导入数据"
@@ -32198,8 +32202,8 @@ msgid "对所有记录只有查看权限"
 msgstr "对所有记录只有查看权限"
 
 #: Disabled references:1
-msgid "可查看加入的，只能编辑、删除自己拥有的记录"
-msgstr "可查看加入的，只能编辑、删除自己拥有的记录"
+msgid "可查看自己加入的，只能编辑、删除自己拥有的记录"
+msgstr "可查看自己加入的，只能编辑、删除自己拥有的记录"
 
 #: Disabled references:1
 msgid "可查看所有记录，但只能编辑、删除自己拥有的记录"
@@ -33514,10 +33518,6 @@ msgid "前往组织后台编辑颜色"
 msgstr "前往组织后台编辑颜色"
 
 #: Disabled references:1
-msgid "保存为个人颜色"
-msgstr "保存为个人颜色"
-
-#: Disabled references:1
 msgid "图形颜色"
 msgstr "图形颜色"
 
@@ -34274,6 +34274,10 @@ msgid "还没有个人图表"
 msgstr "还没有个人图表"
 
 #: Disabled references:1
+msgid "方向1和方向2仅支持添加一个数值"
+msgstr "方向1和方向2仅支持添加一个数值"
+
+#: Disabled references:1
 msgid "不允许添加重复粒度"
 msgstr "不允许添加重复粒度"
 
@@ -34402,24 +34406,44 @@ msgid "（4）在打印 Excel 模板时，多张图片排列可能导致撑高�
 msgstr "（4）在打印 Excel 模板时，多张图片排列可能导致撑高合并单元格引起错位，此时可以加 F 启用图片填充模式，此模式下图片不会撑高单元格，例如：#{附件$[auto*20_F]$} 或 #{附件$[auto*90_HF]$}"
 
 #: Disabled references:1
-msgid "5. 可通过代码 #{[qrcode]字段名$[20*20]$} 或 #{[barcode]字段名$[40*10]$} 获取任意字段的二维码或条形码。其中：[20*20]、[40*10] 表示二维码/条形码的宽高尺寸，单位为 mm；二维码编码方式为 QR-code，最大包含 150 个字，支持汉字；条形码编码方式为 code128，最大包含 30 个字符，仅支持数字、字母、符号。"
-msgstr "5. 可通过代码 #{[qrcode]字段名$[20*20]$} 或 #{[barcode]字段名$[40*10]$} 获取任意字段的二维码或条形码。其中：[20*20]、[40*10] 表示二维码/条形码的宽高尺寸，单位为 mm；二维码编码方式为 QR-code，最大包含 150 个字，支持汉字；条形码编码方式为 code128，最大包含 30 个字符，仅支持数字、字母、符号。"
+msgid "5. 可通过代码 #{[qrcode]字段名$[20*20_H]$} 或 #{[barcode]字段名$[40*10]$}，获取任意字段的二维码或条形码。其中，[20*20]、[40*10] 表示二维码或条形码的宽高尺寸，单位为 mm。二维码采用 QR Code 编码，最多支持 150 个字符，支持汉字；条形码采用 Code 128 编码，最多支持 30 个字符，支持数字、字母及常用符号。"
+msgstr "5. 可通过代码 #{[qrcode]字段名$[20*20_H]$} 或 #{[barcode]字段名$[40*10]$}，获取任意字段的二维码或条形码。其中，[20*20]、[40*10] 表示二维码或条形码的宽高尺寸，单位为 mm。二维码采用 QR Code 编码，最多支持 150 个字符，支持汉字；条形码采用 Code 128 编码，最多支持 30 个字符，支持数字、字母及常用符号。"
 
 #: Disabled references:1
-msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽高固定为 20*20。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
-msgstr "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽高固定为 20*20。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
+msgid "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽度和高度均为 20 mm。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
+msgstr "（1）二维码尺寸为固定尺寸。[20*20] 表示二维码宽度和高度均为 20 mm。二维码需保持正方形显示，不支持 auto 自适应尺寸。"
 
 #: Disabled references:1
-msgid "（2）条形码尺寸支持 4 种设置方式。[40*auto] 表示宽度固定为 40，高度按比例自适应；[auto*10] 表示高度固定为 10，宽度按比例自适应；[40*10_auto] 表示宽高在 40*10 的范围内同时自适应；[40*10] 表示宽高为固定尺寸。"
-msgstr "（2）条形码尺寸支持 4 种设置方式。[40*auto] 表示宽度固定为 40，高度按比例自适应；[auto*10] 表示高度固定为 10，宽度按比例自适应；[40*10_auto] 表示宽高在 40*10 的范围内同时自适应；[40*10] 表示宽高为固定尺寸。"
+msgid "（2）二维码支持配置容错率，在尺寸后添加容错率代码，例如：#{[qrcode]字段名$[20*20_H]$}。支持以下两种写法："
+msgstr "（2）二维码支持配置容错率，在尺寸后添加容错率代码，例如：#{[qrcode]字段名$[20*20_H]$}。支持以下两种写法："
 
 #: Disabled references:1
-msgid "（3）条形码默认显示下方文字。如需隐藏条形码下方的显示值，可增加 _NT 控制隐藏。例如：#{[barcode]字段名$[40*10_NT]$} 表示隐藏条形码下方文字；不加 _NT 仍按原逻辑显示。"
-msgstr "（3）条形码默认显示下方文字。如需隐藏条形码下方的显示值，可增加 _NT 控制隐藏。例如：#{[barcode]字段名$[40*10_NT]$} 表示隐藏条形码下方文字；不加 _NT 仍按原逻辑显示。"
+msgid "字母代码：L、M、Q、H"
+msgstr "字母代码：L、M、Q、H"
 
 #: Disabled references:1
-msgid "（4）示例代码：#{[qrcode]字段名$[20*20]$} 表示获取固定尺寸为 20*20 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40，高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10，宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示获取固定尺寸为 40*10 的条形码，并隐藏下方文字。"
-msgstr "（4）示例代码：#{[qrcode]字段名$[20*20]$} 表示获取固定尺寸为 20*20 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40，高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10，宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示获取固定尺寸为 40*10 的条形码，并隐藏下方文字。"
+msgid "数值代码：7、15、25、30，也兼容 7%、15%、25%、30%"
+msgstr "数值代码：7、15、25、30，也兼容 7%、15%、25%、30%"
+
+#: Disabled references:1
+msgid "对应关系为：L = 7%、M = 15%、Q = 25%、H = 30%。容错率越高，二维码被遮挡或污损后仍可识别的能力越强，但可容纳的有效内容会相应减少。"
+msgstr "对应关系为：L = 7%、M = 15%、Q = 25%、H = 30%。容错率越高，二维码被遮挡或污损后仍可识别的能力越强，但可容纳的有效内容会相应减少。"
+
+#: Disabled references:1
+msgid "例如：#{[qrcode]字段名$[20*20_Q]$}、#{[qrcode]字段名$[20*20_25]$} 与 #{[qrcode]字段名$[20*20_25%]$}，均表示生成尺寸为 20 × 20 mm、容错率为 25% 的二维码。"
+msgstr "例如：#{[qrcode]字段名$[20*20_Q]$}、#{[qrcode]字段名$[20*20_25]$} 与 #{[qrcode]字段名$[20*20_25%]$}，均表示生成尺寸为 20 × 20 mm、容错率为 25% 的二维码。"
+
+#: Disabled references:1
+msgid "（3）条形码支持 4 种尺寸设置方式：[40*auto] 表示宽度固定为 40 mm，高度按比例自适应；[auto*10] 表示高度固定为 10 mm，宽度按比例自适应；[40*10_auto] 表示宽高均为 40 × 10 mm，并根据内容自适应；[40*10] 表示宽高固定为 40 × 10 mm。"
+msgstr "（3）条形码支持 4 种尺寸设置方式：[40*auto] 表示宽度固定为 40 mm，高度按比例自适应；[auto*10] 表示高度固定为 10 mm，宽度按比例自适应；[40*10_auto] 表示宽高均为 40 × 10 mm，并根据内容自适应；[40*10] 表示宽高固定为 40 × 10 mm。"
+
+#: Disabled references:1
+msgid "（4）条形码默认显示下方文字。如需隐藏条形码下方的文字，可增加 _NT 控制参数，例如：#{[barcode]字段名$[40*10_NT]$}。未添加 _NT 时，仍按原有方式显示文字。"
+msgstr "（4）条形码默认显示下方文字。如需隐藏条形码下方的文字，可增加 _NT 控制参数，例如：#{[barcode]字段名$[40*10_NT]$}。未添加 _NT 时，仍按原有方式显示文字。"
+
+#: Disabled references:1
+msgid "（5）示例：#{[qrcode]字段名$[20*20_H]$} 表示生成尺寸为 20 × 20 mm、容错率为 30% 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40 mm、高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10 mm、宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示生成固定尺寸为 40 × 10 mm 的条形码，并隐藏下方文字。"
+msgstr "（5）示例：#{[qrcode]字段名$[20*20_H]$} 表示生成尺寸为 20 × 20 mm、容错率为 30% 的二维码；#{[barcode]字段名$[40*auto]$} 表示条形码宽度固定为 40 mm、高度按比例自适应；#{[barcode]字段名$[auto*10]$} 表示条形码高度固定为 10 mm、宽度按比例自适应；#{[barcode]字段名$[40*10_NT]$} 表示生成固定尺寸为 40 × 10 mm 的条形码，并隐藏下方文字。"
 
 #: Disabled references:1
 msgid "6. 如需不打印没有数据的关联表/子表，请将代码：#NoDataNotPrint[start]# 和 #NoDataNotPrint[end]# 插入到模板中，代码之间的关联记录/子表没有数据则不会打印。"
@@ -37902,22 +37926,6 @@ msgstr "已超出知识中心每月流量限制，无法加入知识中心"
 #: Disabled references:1
 msgid "发布动态失败"
 msgstr "发布动态失败"
-
-#: Disabled references:1
-msgid "提出问题"
-msgstr "提出问题"
-
-#: Disabled references:1
-msgid "是的"
-msgstr "是的"
-
-#: Disabled references:1
-msgid "不用了"
-msgstr "不用了"
-
-#: Disabled references:1
-msgid "是否将此动态作为问答？"
-msgstr "是否将此动态作为问答？"
 
 #: Disabled references:1
 msgid "请预览链接"
@@ -51344,8 +51352,8 @@ msgid "编码方式：code128，仅支持数字、字母、符号，最大包含
 msgstr "编码方式：code128，仅支持数字、字母、符号，最大包含128个字符"
 
 #: Disabled references:1
-msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
-msgstr "编码方式：QR-code，可支持汉字，最大包含150个字"
+msgid "编码方式：QR-code，可支持汉字，最大包含250个字"
+msgstr "编码方式：QR-code，可支持汉字，最大包含250个字"
 
 #: Disabled references:1
 msgid "容错率"
@@ -55452,8 +55460,8 @@ msgid "必须选择一个目标工作表"
 msgstr "必须选择一个目标工作表"
 
 #: Disabled references:1
-msgid "通过解析内部成员访问或对外公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
-msgstr "通过解析内部成员访问或对外公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
+msgid "通过解析内部成员访问或公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
+msgstr "通过解析内部成员访问或公开分享的记录链接来获取对应的记录对象，供流程中的其他节点使用。场景例如：仓库管理员在PC端使用扫描枪来扫描商品的二维码，将指向的记录链接写入文本框，由工作流解析出关联的产品，实现自动化出入库。"
 
 #: Disabled references:1
 msgid "根据筛选条件和排序规则从工作表中查找符合条件的第一条数据，并在获取的同时对记录进行更新（原子性防止并发操作，适用于出入库等场景）"
@@ -59092,6 +59100,10 @@ msgid "恢复到此版本"
 msgstr "恢复到此版本"
 
 #: Disabled references:1
+msgid "版本%26016"
+msgstr "版本"
+
+#: Disabled references:1
 msgid "编辑中…"
 msgstr "编辑中…"
 
@@ -61852,8 +61864,8 @@ msgid "选择索引字段"
 msgstr "选择索引字段"
 
 #: Disabled references:1
-msgid "每张工作表只能创建一个「文本索引」或者「文本字段全文索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
-msgstr "每张工作表只能创建一个「文本索引」或者「文本字段全文索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
+msgid "每张工作表只能创建一个「文本索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
+msgstr "每张工作表只能创建一个「文本索引」；创建「文本索引」时，不能包含「选项字段」；每个索引只能包含一个「选项字段」"
 
 #: Disabled references:1
 msgid "建立唯一索引后，字段的值不允许重复。如果字段为非必填，则整个工作表只能有一条为空的数据，以保证数据的唯一性"
@@ -62154,6 +62166,10 @@ msgstr "交换"
 #: Disabled references:1
 msgid "编码方式：code128，仅支持数字、字母、符号，最大包含30个字符"
 msgstr "编码方式：code128，仅支持数字、字母、符号，最大包含30个字符"
+
+#: Disabled references:1
+msgid "编码方式：QR-code，可支持汉字，最大包含150个字"
+msgstr "编码方式：QR-code，可支持汉字，最大包含150个字"
 
 #: Disabled references:1
 msgid "条形码数据源"

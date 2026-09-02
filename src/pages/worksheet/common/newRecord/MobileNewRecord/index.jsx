@@ -91,7 +91,7 @@ function NewRecord(props) {
     projectId,
     ...rest
   } = props;
-  const { appId, worksheetInfo = {} } = rest;
+  const { appId, worksheetId, worksheetInfo = {} } = rest;
   const newRecordContent = useRef(null);
   const cache = useRef({});
   const photoRecognitionRef = useRef(null);
@@ -103,6 +103,10 @@ function NewRecord(props) {
 
   const [loading, setLoading] = useState();
   const [autoFill, setAutoFill] = useState(null);
+  // worksheetInfo 异步加载后 worksheetId 可能从空值变为真实值；固定 layerId，避免 Hook 将其误判为旧层卸载并触发 history.go。
+  const [historyLayerId] = useState(
+    () => `newRecord-${worksheetId || worksheetInfo.worksheetId || _.uniqueId('unknown-')}`,
+  );
 
   // 上传中、识别中 toast 显示
   const [aiToastVisible, setAiToastVisible] = useState(false);
@@ -504,7 +508,7 @@ function NewRecord(props) {
       <ModalWrap
         className={cx('MobileNewRecordModal mobileModal full', className)}
         onClose={hideNewRecord}
-        layerId={`newRecord-${worksheetInfo.worksheetId}`}
+        layerId={historyLayerId}
         historyUrlParams={{ page: 'newRecord' }}
         visible={visible}
       >

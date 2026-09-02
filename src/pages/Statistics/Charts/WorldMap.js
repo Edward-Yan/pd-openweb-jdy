@@ -447,7 +447,7 @@ export default class extends Component {
               className="pointer Font20 textSecondary"
               icon="add"
               onClick={() => {
-                this.scene && this.scene.zoomIn();
+                this.scene && this.scene.loaded && this.scene.zoomIn();
               }}
             />
           </Tooltip>
@@ -456,7 +456,7 @@ export default class extends Component {
               className="pointer Font17 textSecondary mTop10 mBottom10"
               icon="gps_fixed"
               onClick={() => {
-                this.scene && this.scene.setZoom(1);
+                this.scene && this.scene.loaded && this.scene.setZoom(1);
               }}
             />
           </Tooltip>
@@ -465,7 +465,7 @@ export default class extends Component {
               className="pointer Font20 textSecondary"
               icon="minus"
               onClick={() => {
-                this.scene && this.scene.zoomOut();
+                this.scene && this.scene.loaded && this.scene.zoomOut();
               }}
             />
           </Tooltip>

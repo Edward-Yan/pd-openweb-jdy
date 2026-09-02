@@ -6,9 +6,11 @@ import Dialog from './Dialog';
 import '../less/Dialog.less';
 
 export default function confirm(props) {
-  const div = document.createElement('div');
+  const body = document.body;
+  if (!body) return _.noop;
 
-  document.body.appendChild(div);
+  const div = document.createElement('div');
+  body.appendChild(div);
 
   const root = createRoot(div);
 

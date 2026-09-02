@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Checkbox, Icon, RadioGroup, Switch } from 'ming-ui';
 import { Tooltip } from 'ming-ui/antd-components';
 import { getTranslateInfo } from 'src/utils/app';
+import { htmlEncodeReg } from 'src/utils/common';
 import delPng from './img/del.png';
 import editPng from './img/edit.png';
 import lookPng from './img/look.png';
@@ -82,8 +83,8 @@ function TipsRender(props) {
             dangerouslySetInnerHTML={{
               __html: _l(
                 '%0表中%1字段包含当前用户的记录',
-                sheetName,
-                `<span class="Bold mLeft3 mRight3 Inline">${str}</span>`,
+                htmlEncodeReg(sheetName),
+                `<span class="Bold mLeft3 mRight3 Inline">${htmlEncodeReg(str)}</span>`,
               ),
             }}
           />

@@ -125,10 +125,13 @@ export const clearRows = () => {
   };
 };
 
-export const updateCellErrors = errors => {
+// persisted：本次写入中属于「row 端重算发现不了」的错误（失焦持久化的非法格式值、后端唯一校验），
+// 保存时只有这部分会与 row 端校验结果合并，见 reducer 的 persistedCellErrors
+export const updateCellErrors = (errors, { persisted } = {}) => {
   return {
     type: 'UPDATE_CELL_ERRORS',
     value: errors || {},
+    persisted,
   };
 };
 

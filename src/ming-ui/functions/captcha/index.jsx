@@ -3,6 +3,37 @@ import { Dialog } from 'ming-ui';
 import { generateRandomPassword } from 'src/utils/common';
 import './index.less';
 
+const TENCENT_CAPTCHA_SCRIPT_URL = 'https://turing.captcha.qcloud.com/TJCaptcha.js';
+const LANG_MAPS = {
+  'zh-Hans': 'zh-cn',
+  'zh-Hant': 'zh-hk',
+  ja: 'en',
+  en: 'en',
+};
+
+let tencentCaptchaLoaderPromise;
+
+function loadTencentCaptcha() {
+  if (window.TencentCaptcha) return Promise.resolve(window.TencentCaptcha);
+
+  if (!tencentCaptchaLoaderPromise) {
+    tencentCaptchaLoaderPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+
+      script.src = TENCENT_CAPTCHA_SCRIPT_URL;
+      script.onload = () => resolve(window.TencentCaptcha);
+      script.onerror = () => {
+        tencentCaptchaLoaderPromise = undefined;
+        reject(new Error('Failed to load TencentCaptcha'));
+      };
+
+      document.head.appendChild(script);
+    });
+  }
+
+  return tencentCaptchaLoaderPromise;
+}
+
 export default function captcha(callback = () => {}, onCancel = () => {}) {
   const randstr = generateRandomPassword(16);
 
@@ -10,13 +41,6 @@ export default function captcha(callback = () => {}, onCancel = () => {}) {
     return `${
       __api_server__.main
     }code/CreateVerifyCodeImage?width=320&height=130&fontSize=30&randstr=${randstr}&${Math.random()}`;
-  };
-
-  const LANG_MAPS = {
-    'zh-Hans': 'zh-cn',
-    'zh-Hant': 'zh-hk',
-    ja: 'en',
-    en: 'en',
   };
 
   if (md.global.getCaptchaType() === 1) {
@@ -58,10 +82,18 @@ export default function captcha(callback = () => {}, onCancel = () => {}) {
       },
       onCancel,
     });
-  } else {
-    new TencentCaptcha(md.global.Config.CaptchaAppId.toString(), callback, {
-      needFeedBack: false,
-      userLanguage: LANG_MAPS[window.getCurrentLang()],
-    }).show();
+    return;
   }
+
+  loadTencentCaptcha()
+    .then(TencentCaptcha => {
+      new TencentCaptcha(md.global.Config.CaptchaAppId.toString(), callback, {
+        needFeedBack: false,
+        userLanguage: LANG_MAPS[window.getCurrentLang()],
+      }).show();
+    })
+    .catch(() => {
+      alert(_l('加载失败，请刷新重试'), 2);
+      onCancel();
+    });
 }

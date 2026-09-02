@@ -193,7 +193,7 @@ function mergeRequiredState(controls = [], control = {}) {
 
 export function getSubListErrorOfStore(store, currentControl) {
   const state = store.getState();
-  const { rows, base = {}, cellErrors: pendingCellErrors = {} } = state;
+  const { rows, base = {}, persistedCellErrors: pendingCellErrors = {} } = state;
   const { recordId, control = {} } = base;
   const isWorkflow =
     ((base.instanceId && base.workId) || _.get(window, 'shareState.isPublicWorkflowRecord')) &&
@@ -213,6 +213,8 @@ export function getSubListErrorOfStore(store, currentControl) {
     { workflowRequiredCheck: isWorkflow },
   );
   // 合并失焦时本地保留的校验错误（这些非法值未落入 row 数据，row 端校验无法发现）。
+  // 只取 persistedCellErrors：cellErrors 里还有上一次保存写回的必填/规则错误，
+  // 它们能由 row 端重新算出，若一并合并会在条件字段改动后仍按旧结果拦截保存。
   // row 端结果优先：同一格若两边都报错以 row 计算结果为准。
   const merged = { ...filterPendingCellErrors(pendingCellErrors, rows, mergedControl.showControls), ...error };
 
@@ -221,7 +223,9 @@ export function getSubListErrorOfStore(store, currentControl) {
       type: 'UPDATE_CELL_ERRORS',
       value: merged,
     });
-  } else if (browserIsMobile()) {
+  } else if (browserIsMobile() || !isEmpty(state.cellErrors)) {
+    // 本次校验已无错误：清掉上一次保存写回的过期错误（如业务规则条件字段改动后已不再必填的单元格），
+    // 否则单元格红框和错误提示会一直留在表格上
     store.clearSubListErrors();
   }
 

@@ -1588,8 +1588,7 @@ export default class DataFormat {
       };
 
       // 公开表单
-      if (window.isPublicWorksheet && window.publicWorksheetShareId) {
-        params.shareId = window.publicWorksheetShareId;
+      if (window.isPublicWorksheet) {
         params.getType = 3;
       }
 
@@ -1786,10 +1785,6 @@ export default class DataFormat {
       getType: 7,
       ...para,
     };
-
-    if (window.isPublicWorksheet) {
-      params.formId = window.publicWorksheetShareId;
-    }
 
     return this.requestPool.getFilterRowsByQueryDefault(params, this.abortController);
   };

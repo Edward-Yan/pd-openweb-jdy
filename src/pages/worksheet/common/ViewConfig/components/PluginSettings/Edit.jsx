@@ -64,19 +64,16 @@ function Edit(params) {
     setState({
       info: params.info || {},
     });
-  }, [params]);
+  }, [params, setState]);
   const onUpdate = data => {
     onChange({ ...info, ...data });
   };
 
-  const keys =
-    controlKeys[
-      (
-        PARAM_TYPES.find(
-          o => o.type === info.type && (!info.sourceControlType || o.sourceControlType === info.sourceControlType),
-        ) || {}
-      ).fieldId
-    ] || [];
+  const paramType =
+    PARAM_TYPES.find(
+      o => o.type === info.type && (!info.sourceControlType || o.sourceControlType === info.sourceControlType),
+    ) || PARAM_TYPES.find(o => o.type === info.type);
+  const keys = controlKeys[(paramType || {}).fieldId] || [];
 
   const renderContent = o => {
     const renderTitle = o => {
@@ -468,14 +465,7 @@ function Edit(params) {
     <Wrap className="">
       <div className="con flexColumn">
         <div className="headerCon Bold flexRow alignItemsCenter">
-          <span className="flex Font16 Bold">
-            {
-              PARAM_TYPES.find(
-                o =>
-                  o.type === info.type && (!info.sourceControlType || info.sourceControlType === o.sourceControlType),
-              ).paramName
-            }
-          </span>
+          <span className="flex Font16 Bold">{(paramType || {}).paramName}</span>
           <Icon icon={'close'} className="Font20 Hand textTertiary hoverColorPrimary" onClick={() => onClose()} />
         </div>
         <div className="flex editCon">

@@ -1320,6 +1320,8 @@ export const changeYaxisList = (data, isRequest = true) => {
     const { currentReport } = getState().statistics;
     const { reportType, displaySetup, split = {} } = currentReport;
     const { yaxisList = [], sorts = [] } = data;
+
+    if (!displaySetup) return;
     const title = yaxisList.length ? _.get(yaxisList[0], 'controlName') : null;
 
     if (reportType === reportTypes.TopChart) {

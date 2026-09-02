@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import mingdaoLogo from 'staticfiles/images/mingdao.png';
 import styled from 'styled-components';
 import { Button, Qr } from 'ming-ui';
 import { Tooltip } from 'ming-ui/antd-components';
@@ -154,6 +153,7 @@ export default function Header({
 }) {
   const searchParams = new URL(location.href).searchParams;
   const isEmbed = !!searchParams.get('embed') || window.top !== window.self;
+  const brandLogoUrl = md?.global?.SysSettings?.brandLogoUrl;
 
   if (isEmbed) {
     return (
@@ -176,7 +176,7 @@ export default function Header({
         // PlanPage 使用明道云 logo；agent 落地页用 mingo 文字 logo；其余页面保持品牌 logo + 名称
         (useMingdaoLogo ? (
           <a href={pathCompletion('/')} className="logo t-flex t-items-center">
-            <img className="mingdao-logo" src={mingdaoLogo} alt={_l('明道云')} />
+            {!!brandLogoUrl && <img className="mingdao-logo" src={brandLogoUrl} />}
           </a>
         ) : brandWordmark ? (
           <a href={pathCompletion('/')} className="logo t-flex t-items-center">

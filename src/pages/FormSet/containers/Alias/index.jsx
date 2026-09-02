@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { Icon, ScrollView } from 'ming-ui';
 import sheetAjax from 'src/api/worksheet';
 import { ALL_SYS } from 'src/pages/widgetConfig/config/widget.js';
+import { htmlEncodeReg } from 'src/utils/common';
 import AliasDialog from '../../components/AliasDialog';
 import './index.less';
 
@@ -146,7 +147,7 @@ export default function Alias(props) {
                           '应用消息:您已被%0@刘兰%1添加为%2：%3销售线索管理%4的负责人',
                           '<span>',
                           '</span>',
-                          `<b class="Normal ${nameFocus ? 'nameFocus' : ''}">${name}</b>`,
+                          `<b class="Normal ${nameFocus ? 'nameFocus' : ''}">${htmlEncodeReg(name)}</b>`,
                           '<span>',
                           '</span>',
                         ),

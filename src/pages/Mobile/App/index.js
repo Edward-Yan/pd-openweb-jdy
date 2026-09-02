@@ -17,6 +17,7 @@ import { APP_ROLE_TYPE } from 'src/pages/worksheet/constants/enum.js';
 import { canEditApp } from 'src/pages/worksheet/redux/actions/util';
 import { getTranslateInfo } from 'src/utils/app';
 import { getAppFeaturesVisible } from 'src/utils/common';
+import { isHistoryLayerPopstate } from 'src/utils/mobileNavigation';
 import { addBehaviorLog } from 'src/utils/project';
 import { AppPermissionsInfo } from '../components/AppPermissions';
 import Back from '../components/Back';
@@ -165,7 +166,10 @@ class App extends Component {
     window.removeEventListener('popstate', this.backDashboard);
   }
 
-  backDashboard = () => {
+  backDashboard = event => {
+    // 弹层关闭也会触发 popstate，此时只应关闭弹层，不能按页面返回跳转到工作台。
+    if (isHistoryLayerPopstate(event)) return;
+
     const previewRecordId = localStorage.getItem('mobilePreviewRecordId');
     const { appNaviStyle } = _.get(this.props, 'appDetail.detail') || {};
 

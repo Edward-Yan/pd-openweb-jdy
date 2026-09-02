@@ -345,6 +345,7 @@ const OCR = props => {
     <QiniuUpload
       className="customFormControlBox customFormButton"
       ref={fileRef}
+      getTokenParam={{ worksheetId }}
       options={{
         ...(advancedSetting.ocrmaptype === '2'
           ? {

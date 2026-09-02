@@ -3,6 +3,7 @@ import cx from 'classnames';
 import _ from 'lodash';
 import styled from 'styled-components';
 import { Icon } from 'ming-ui';
+import { openZendeskWidget } from 'src/utils/services/zendeskWidget';
 import HapAiDialog from './HapAiDialog';
 import hapAI from './images/hapAI.png';
 
@@ -108,35 +109,6 @@ export default function HelpCollection(props) {
   const { hapAIPosition, updatePopupVisible = () => {} } = props;
   const isTop = hapAIPosition === 'top';
   const [showHapAi, setShowHapAi] = useState(false);
-  let monitorZendesk = false;
-
-  const handleCloseZendesk = event => {
-    const { target } = event;
-
-    if (target.classList.contains('zendeskWrap') || target.parentNode.classList.contains('zendeskWrap')) {
-      return;
-    }
-
-    window.zE('messenger', 'close');
-  };
-
-  const handleOpenZendesk = () => {
-    if (!window.zE) return;
-    if (!monitorZendesk) {
-      window.zE('messenger:on', 'open', () => {
-        document.body.addEventListener('click', handleCloseZendesk, false);
-      });
-      window.zE('messenger:on', 'close', () => {
-        document.body.removeEventListener('click', handleCloseZendesk, false);
-      });
-      window.addEventListener('beforeunload', () => {
-        window.zE('messenger', 'close');
-      });
-    }
-
-    monitorZendesk = true;
-    window.zE('messenger', 'open');
-  };
 
   const renderHap = () => {
     return (
@@ -183,12 +155,12 @@ export default function HelpCollection(props) {
               if (_.includes(['partnerSupport'], v.id)) {
                 return (
                   <div
-                    className={cx('item Hand', { zendeskWrap: window.platformENV.isOverseas })}
+                    className="item Hand"
                     key={v.id}
                     onClick={() => {
+                      updatePopupVisible(false);
                       if (window.platformENV.isOverseas) {
-                        updatePopupVisible(false);
-                        handleOpenZendesk();
+                        openZendeskWidget();
                       } else {
                         window.mdCustomerServiceOpen && window.mdCustomerServiceOpen();
                       }

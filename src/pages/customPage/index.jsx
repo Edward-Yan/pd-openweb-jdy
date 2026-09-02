@@ -447,13 +447,15 @@ let CustomPage = class CustomPage extends Component {
             };
           });
           const newComponents = components.map(component => {
-            if (component.type === enumWidgetType.filter && !component.value) {
+            const target = _.find(filterIds, {
+              id: component.id || component.uuid,
+            });
+
+            if (component.type === enumWidgetType.filter && target) {
               return {
                 ...component,
                 filter: undefined,
-                value: _.find(filterIds, {
-                  id: component.id || component.uuid,
-                }).filtersGroupId,
+                value: target.filtersGroupId,
               };
             } else {
               return component;

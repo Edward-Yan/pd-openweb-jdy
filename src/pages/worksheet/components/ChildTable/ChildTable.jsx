@@ -1285,12 +1285,20 @@ class ChildTable extends React.Component {
   };
 
   handleClearCellError = (key, error) => {
-    const { cellErrors, updateCellErrors } = this.props;
+    const { cellErrors, persistedCellErrors = {}, updateCellErrors } = this.props;
 
     if (error) {
-      // 二参形式用于"失焦兜底"：把校验错误写入 cellErrors，让主记录保存时也能拦截
-      if (cellErrors[key] === error) return;
-      updateCellErrors({ ...cellErrors, [key]: error });
+      // 二参形式用于"失焦兜底"：把校验错误写入 cellErrors，让主记录保存时也能拦截。
+      // 同时标记 persisted：这类非法值没有落进 row 数据，保存时的 row 端校验发现不了，
+      // 需要在保存合并时保留（区别于上一次保存写回的必填/规则错误）
+      if (cellErrors[key] === error && persistedCellErrors[key] === error) return;
+      updateCellErrors(
+        {
+          ...cellErrors,
+          [key]: error,
+        },
+        { persisted: { [key]: error } },
+      );
       return;
     }
 
@@ -1337,11 +1345,16 @@ class ChildTable extends React.Component {
           })
           .then(res => {
             if (!res.isSuccess && res.data && res.data.rowId !== rowId) {
-              // 不唯一
-              updateCellErrors({
-                ...this.props.cellErrors,
-                [`${rowId}-${controlId}`]: FORM_ERROR_TYPE_TEXT.UNIQUE(checkControl, true),
-              });
+              // 不唯一。跨记录唯一性由接口判定，row 端校验发现不了，标记 persisted 让保存时保留
+              const uniqueError = FORM_ERROR_TYPE_TEXT.UNIQUE(checkControl, true);
+              const uniqueErrorKey = `${rowId}-${controlId}`;
+              updateCellErrors(
+                {
+                  ...this.props.cellErrors,
+                  [uniqueErrorKey]: uniqueError,
+                },
+                { persisted: { [uniqueErrorKey]: uniqueError } },
+              );
             } else if (res.isSuccess) {
               // 唯一
             }
@@ -2756,6 +2769,7 @@ const mapStateToProps = state => ({
   rows: state.rows,
   lastAction: state.lastAction,
   cellErrors: state.cellErrors,
+  persistedCellErrors: state.persistedCellErrors,
   sortConfig: state.sortConfig,
   filterControls: state.filterControls,
   changes: state.changes,

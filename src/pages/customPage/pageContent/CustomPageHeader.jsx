@@ -25,6 +25,7 @@ import { APP_ROLE_TYPE } from 'src/pages/worksheet/constants/enum';
 import store from 'src/redux/configureStore';
 import { navigateTo } from 'src/router/navigateTo';
 import { getTranslateInfo } from 'src/utils/app';
+import { htmlEncodeReg } from 'src/utils/common';
 import { getCurrentProject } from 'src/utils/project';
 import OperateMenu from './OperateMenu';
 import 'rc-trigger/assets/index.css';
@@ -292,8 +293,8 @@ export default function CustomPageHeader(props) {
                         dangerouslySetInnerHTML={{
                           __html: _l(
                             '%0是%1',
-                            `<span class="bold mRight2">${n.controlName}</span>`,
-                            `<span class="bold mLeft2">${n.controlValue || '--'}</span>`,
+                            `<span class="bold mRight2">${htmlEncodeReg(n.controlName)}</span>`,
+                            `<span class="bold mLeft2">${htmlEncodeReg(n.controlValue || '--')}</span>`,
                           ),
                         }}
                       ></div>

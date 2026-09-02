@@ -76,6 +76,7 @@ async function replacePublicWorksheetTranslateInfo(data) {
     await shareGetAppLangDetail({
       projectId: data.projectId,
       appId: data.appId,
+      worksheetId: data.worksheetId,
     });
   }
 

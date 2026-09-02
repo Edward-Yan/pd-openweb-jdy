@@ -53,15 +53,26 @@ const IframeWrap = styled.div`
  * 弹框 + iframe 组件
  *
  * 关闭方式：右上角 × / 遮罩点击 / ESC 键
+ *
+ * @param {object} props
+ * @param {boolean} props.visible - 是否显示
+ * @param {string} props.src - iframe 地址
+ * @param {string} [props.title] - 标题
+ * @param {() => void} props.onClose - 关闭回调（遮罩/ESC/关闭按钮都会触发）
+ * @param {() => void} [props.afterClose] - 关闭后额外回调（用于刷新列表等）
  */
-export default function IframeModal({ visible, src, title = '详情', onClose }) {
+export default function IframeModal({ visible, src, title = '详情', onClose, afterClose }) {
+  const handleClose = () => {
+    onClose && onClose();
+    afterClose && afterClose();
+  };
   return (
     <Modal
       visible={visible}
       closable={false}
       width="90%"
       footer={null}
-      onCancel={onClose}
+      onCancel={handleClose}
       maskClosable={true}
       keyboard={true}
       destroyOnClose={true}
@@ -70,7 +81,7 @@ export default function IframeModal({ visible, src, title = '详情', onClose })
       bodyStyle={{ padding: 24 }}
     >
       <BodyWrap>
-        <CloseBtn type="button" onClick={onClose} title="关闭">
+        <CloseBtn type="button" onClick={handleClose} title="关闭">
           <CloseOutlined />
         </CloseBtn>
         {visible && src && (

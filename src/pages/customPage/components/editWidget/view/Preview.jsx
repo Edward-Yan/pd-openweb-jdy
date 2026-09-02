@@ -171,6 +171,8 @@ export function View(props) {
   const menuConfigRef = useRef(null);
   const worksheetInfoRef = useRef(null);
   const [iframeState, setIframeState] = useState({ visible: false, src: '', title: '' });
+  // 用于关闭 iframe 后强制刷新 SingleView（变更 key 触发重挂载）
+  const [refreshKey, setRefreshKey] = useState(0);
 
   // 首次挂载时判断是否命中 iframe 菜单，预加载 worksheet controls
   useEffect(() => {
@@ -236,6 +238,7 @@ export function View(props) {
     >
       <Suspense fallback={<LoadDiv className="mTop10" />}>
         <Component
+          key={refreshKey}
           showHeader={showTitle}
           ref={singleViewRef}
           appId={apkId || appId}
@@ -276,6 +279,7 @@ export function View(props) {
         visible={iframeState.visible}
         src={iframeState.src}
         onClose={() => setIframeState({ visible: false, src: '', title: '' })}
+        afterClose={() => setRefreshKey(k => k + 1)}
       />
     </ViewWrap>
   );

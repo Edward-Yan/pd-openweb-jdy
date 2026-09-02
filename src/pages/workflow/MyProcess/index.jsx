@@ -252,6 +252,30 @@ export default class MyProcess extends Component {
       this.updateCountData(countData);
     });
   };
+
+  /** 重置列表状态并重新请求待办数据（供 iframe 弹框关闭后刷新用） */
+  resetAndReloadTodoList = () => {
+    this.setState(
+      {
+        list: [],
+        pageIndex: 1,
+        isMore: true,
+        loading: false,
+      },
+      () => {
+        this.getTodoList();
+        // 刷新 tab 计数
+        const { archivedItem, filter } = this.state;
+        getTodoCount({
+          archivedId: archivedItem.id,
+          filter: filter && filter.resultType ? { ...filter, resultType: undefined } : filter,
+          resultType: filter && filter.resultType,
+        }).then(countData => {
+          this.updateCountData(countData);
+        });
+      },
+    );
+  };
   handleScroll = () => {
     this.getTodoList();
   };
@@ -1282,6 +1306,7 @@ export default class MyProcess extends Component {
                 onClose={() => {
                   this.setState({ selectCard: null, iframeSrc: '' });
                 }}
+                afterClose={this.resetAndReloadTodoList}
               />
             ) : null
           ) : (

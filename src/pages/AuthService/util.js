@@ -145,18 +145,45 @@ export const registerSuc = (registerData, action) => {
   }
 };
 
+// 获取登录后跳转的基础地址。
+// 后端 GetGlobalMeta 返回的 Config.WebUrl 通常不带端口（如 https://jdy.crecg-jt.com/），
+// 当容器/反代以非标准端口（如 :3443）对外提供前端服务时，直接用 WebUrl 拼接跳转会丢失端口，
+// 导致登录后被重定向到不带端口的默认域名。此处当 WebUrl 与当前页同 host 时，
+// 用 location.origin（保留端口）替换 WebUrl 的 origin，避免端口丢失。
+const getWebBaseUrl = () => {
+  const webUrl = _.get(md, 'global.Config.WebUrl', '') || '';
+
+  try {
+    if (webUrl) {
+      const webUrlOrigin = new URL(webUrl, location.origin).origin;
+
+      // 使用 origin 比较（协议 + 主机 + 端口 三者都匹配）
+      if (webUrlOrigin === location.origin) {
+        return location.origin + '/';
+      }
+    }
+  } catch (err) {
+    console.error(err);
+  }
+
+  return location.origin + '/';
+};
+
+
 export const toMDPage = () => {
+  const baseUrl = getWebBaseUrl();
+
   if (_.get(md, 'global.SysSettings.loginGotoUrl')) {
-    location.href = md.global.Config.WebUrl + md.global.SysSettings.loginGotoUrl;
+    location.href = baseUrl + md.global.SysSettings.loginGotoUrl;
     return;
   }
 
   if (_.get(md, 'global.SysSettings.loginGotoAppId')) {
-    window.location.replace(md.global.Config.WebUrl + `app/${md.global.SysSettings.loginGotoAppId}`);
+    window.location.replace(baseUrl + `app/${md.global.SysSettings.loginGotoAppId}`);
     return;
   }
 
-  window.location.replace(md.global.Config.WebUrl + 'dashboard');
+  window.location.replace(baseUrl + 'dashboard');
 };
 
 export const toMDApp = ({ emailOrTel = '', dialCode = '' }) => {

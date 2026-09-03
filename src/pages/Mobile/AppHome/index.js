@@ -41,6 +41,7 @@ class AppHome extends React.Component {
     this.contentRef = createRef();
     this.handleScroll = _.debounce(this.handleScroll.bind(this), 300);
     this.isSetScrollTop = false;
+    this.isHideForWebview = true;
   }
   componentDidMount() {
     $('html').addClass('appHomeMobile');
@@ -543,12 +544,12 @@ class AppHome extends React.Component {
 
     return (
       <WaterMark projectId={projectObj.projectId}>
-        <div className="listConBox h100">
-          {this.renderHeader()}
+        <div className="listConBox h100 pTop15">
+          {!this.isHideForWebview && <SelectProject changeProject={this.getProject} />}
           {this.renderSearchApp()}
           {!searchValue && this.renderContent()}
           {searchValue && this.renderSearchResult()}
-          <TabBar action="appHome" />
+          {!this.isHideForWebview && <TabBar action="appHome" />}
         </div>
       </WaterMark>
     );

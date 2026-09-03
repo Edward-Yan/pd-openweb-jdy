@@ -59,4 +59,11 @@ export default {
     name: _l('文件传输助手'),
     description: _l('支持在设备之间轻松传输多种类型文件'),
   },
+  CARD_SHARE_ENUM: {
+    APP: 'app',
+    SHEET: 'sheet',
+    VIEW: 'view',
+    RECORD: 'record',
+    MINI_APP: 'minapp',
+  },
 };

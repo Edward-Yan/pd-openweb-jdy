@@ -14,7 +14,6 @@ export const getTodoCount = (params = {}) => {
     if (request) {
       request.abort();
     }
-
     request = instance.getTodoCount(params);
     request.then(list => {
       const mySponsor = list[0]; // 我的发起
@@ -41,7 +40,7 @@ export default class Entry extends Component {
   constructor(props) {
     super(props);
   }
-  componentDidMount() {
+  componentDidMount () {
     getTodoCount().then(countData => {
       this.props.updateCountData(countData);
     });

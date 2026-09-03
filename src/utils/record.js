@@ -527,6 +527,14 @@ export const openLinkFromRecord = (linkControlId, record = {}) => {
 };
 
 export const handleRecordClick = (view, row, openRecord = () => {}) => {
+  // 自定义菜单 iframe 弹框钩子：由 Preview.jsx 挂载
+  // hook 签名：{ enabled: boolean, onRowClick: (row) => void }
+  const iframeHook = window.__CUSTOM_PAGE_IFRAME_HOOK__;
+  if (iframeHook?.enabled && _.isFunction(iframeHook.onRowClick)) {
+    iframeHook.onRowClick(row);
+    return;
+  }
+
   const clickType = _.get(view, 'advancedSetting.clicktype') || VIEW_CONFIG_RECORD_CLICK_ACTION.OPEN_RECORD;
 
   if (clickType === VIEW_CONFIG_RECORD_CLICK_ACTION.OPEN_RECORD) {

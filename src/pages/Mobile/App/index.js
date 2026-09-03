@@ -11,6 +11,8 @@ import RecordList from 'mobile/RecordList';
 import WorksheetUnNormal from 'mobile/RecordList/State';
 import { getEmbedValue } from 'src/components/Form/core/formUtils/helper';
 import UpgradeContent from 'src/components/UpgradeContent';
+import Constant from 'src/pages/chat/utils/constant';
+import SendToChatForMobile from 'src/pages/Mobile/components/RecordInfo/SendToChatForMobile/SendToChatForMobile';
 import PortalUserSet from 'src/pages/PageHeader/components/PortalUserSet/index.jsx';
 import { transferValue } from 'src/pages/widgetConfig/widgetSetting/components/DynamicDefaultValue/util';
 import { APP_ROLE_TYPE } from 'src/pages/worksheet/constants/enum.js';
@@ -84,6 +86,7 @@ class App extends Component {
       expandGroupKeys: [],
       viewHideNavi: false,
       level2ExpandKeys: [],
+      sendChatMobileVisible: false,
     };
     this.contentRef = createRef();
     if (isHideTabBar) {
@@ -667,6 +670,39 @@ class App extends Component {
     );
   };
 
+  renderSendToChat() {
+    const { sendChatMobileVisible } = this.state;
+    const { appName } = this.props.appDetail;
+    const { params } = this.props.match;
+    // console.log('-----------params:', this.props);
+    const shareHostUrl = `${process.env.NODE_ENV === 'development' ? 'https://jdy.crecg-jt.com:3443' : location.origin}`;
+    const shareUrl = `${shareHostUrl}/app/${params.appId}`;
+    const chatCard = {
+      msg: `[应用]${appName}`,
+      title: appName,
+      extra: {
+        appId: params.appId,
+        shareUser: md.global.Account.fullname,
+      },
+      url: shareUrl,
+      text: Constant.CARD_SHARE_ENUM.APP,
+    };
+
+    console.log('chatCard::', chatCard);
+    return (
+      <Fragment>
+        {sendChatMobileVisible && (
+          <SendToChatForMobile
+            sendChatMobileVisible={sendChatMobileVisible}
+            card={chatCard}
+            url={chatCard.url}
+            onClose={() => this.setState({ sendChatMobileVisible: false })}
+          />
+        )}
+      </Fragment>
+    );
+  }
+
   renderContent() {
     const { appDetail, match, debugRoles = [] } = this.props;
 
@@ -837,8 +873,12 @@ class App extends Component {
                 }),
               );
             }}
+            dealShareApp={() => {
+              this.setState({ appMoreActionVisible: false, sendChatMobileVisible: true });
+            }}
           />
           {<DebugInfo appId={detail.id} debugRoles={debugRoles} />}
+          {this.renderSendToChat()}
         </Fragment>
       );
     }

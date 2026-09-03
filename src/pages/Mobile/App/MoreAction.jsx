@@ -58,6 +58,7 @@ export default function MoreAction(props) {
     onClose = () => {},
     dealMarked = () => {},
     dealViewHideNavi = () => {},
+    dealShareApp = () => {},
   } = props;
   const hasManagePermission = canEditData(detail.permissionType) || canEditApp(detail.permissionType, detail.isLock);
   const [roleEntryVisible, setRoleEntryVisible] = useState(hasManagePermission);
@@ -243,6 +244,10 @@ export default function MoreAction(props) {
               <span className="Font15">{viewHideNavi ? _l('不显示隐藏的应用项') : _l('显示隐藏的应用项')}</span>
             </div>
           )}
+          <div className="flexCenter" onClick={() => dealShareApp()}>
+            <Icon icon="shareLink" className="Gray_9e mRight24 Font20 TxtMiddle" />
+            <span className="Font15">{_l('分享')}</span>
+          </div>
         </div>
       </ModalWrap>
       <ModalWrap

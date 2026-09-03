@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useRef } from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import _ from 'lodash';
 import styled from 'styled-components';
@@ -8,6 +8,11 @@ import homeAppApi from 'src/api/homeApp';
 import { navigateTo } from 'src/router/navigateTo';
 import { getTranslateInfo } from 'src/utils/app';
 import { browserIsMobile, pathCompletion } from 'src/utils/common';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  getMenuConfig,
+  buildDetailUrl,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 
 const Wrap = styled.div`
   display: flex;
@@ -161,6 +166,50 @@ export function View(props) {
   const Component = isMobileLayout ? LoadableMobileSingleView : LoadableSingleView;
   const showTitle = config.showTitle ?? true;
 
+  // === iframe 弹框相关 ===
+  const menuConfigRef = useRef(null);
+  const [iframeState, setIframeState] = useState({ visible: false, src: '', title: '' });
+  // 用于关闭 iframe 后强制刷新 SingleView（变更 key 触发重挂载）
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  // 首次挂载时判断是否命中 iframe 菜单
+  useEffect(() => {
+    const currentMenuAppId = id;
+    const cfg = getMenuConfig(currentMenuAppId);
+    menuConfigRef.current = cfg;
+
+    if (cfg) {
+      // 挂全局 hook 拦截行点击
+      window.__CUSTOM_PAGE_IFRAME_HOOK__ = {
+        enabled: true,
+        onRowClick: row => {
+          const cfg = menuConfigRef.current;
+          if (!cfg) return;
+
+          buildDetailUrl(cfg, row).then(url => {
+            if (!url) {
+              console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
+              return;
+            }
+            setIframeState({
+              visible: true,
+              src: url,
+            });
+          });
+        },
+      };
+
+      return () => {
+        // 卸载时清理 hook（避免误触发其他页面）
+        if (window.__CUSTOM_PAGE_IFRAME_HOOK__?.enabled) {
+          window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
+        }
+      };
+    }
+
+    return undefined;
+  }, [apkId, appId]);
+
   if (_.isEmpty(viewId)) {
     return (
       <EmptyView className="SingleViewWrap valignWrapper emptyView">
@@ -182,6 +231,7 @@ export function View(props) {
     >
       <Suspense fallback={<LoadDiv className="mTop10" />}>
         <Component
+          key={refreshKey}
           showHeader={showTitle}
           ref={singleViewRef}
           appId={apkId || appId}
@@ -216,6 +266,14 @@ export function View(props) {
           }
         />
       </Suspense>
+
+      {/* iframe 详情弹框 */}
+      <IframeModal
+        visible={iframeState.visible}
+        src={iframeState.src}
+        onClose={() => setIframeState({ visible: false, src: '', title: '' })}
+        afterClose={() => setRefreshKey(k => k + 1)}
+      />
     </ViewWrap>
   );
 }

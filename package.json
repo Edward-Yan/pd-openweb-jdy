@@ -2,10 +2,10 @@
   "name": "mingdao-web",
   "version": "12.3.0",
   "scripts": {
-    "start": "cross-env API_SERVER=http://127.0.0.1:8880 NODE_OPTIONS=--max_old_space_size=8192 node ./scripts/build.js dev:main",
+    "start": "cross-env API_SERVER=https://jdy.crecg-jt.com/wwwapi/ NODE_OPTIONS=--max_old_space_size=8192 node ./scripts/build.js dev:main",
     "start-nocoly": "cross-env API_SERVER=https://dev.nocoly.com NODE_OPTIONS=--max_old_space_size=8192 node ./scripts/build.js dev:main",
-    "release": "cross-env NODE_ENV=production NODE_OPTIONS=--max_old_space_size=8192 node ./scripts/build.js release",
-    "publish": "cross-env NODE_ENV=production node ./scripts/build.js publish",
+    "release": "cross-env NODE_ENV=production API_SERVER=https://jdy.crecg-jt.com/wwwapi/ NODE_OPTIONS=--max_old_space_size=8192 node ./scripts/build.js release",
+    "publish": "cross-env NODE_ENV=production API_SERVER=https://jdy.crecg-jt.com/wwwapi/ node ./scripts/build.js publish",
     "lang:sync-po": "node ./scripts/lang.js sync-po",
     "lang:build-js": "node ./scripts/lang.js build-js",
     "lang:clean-po": "node ./scripts/lang.js clean-po",

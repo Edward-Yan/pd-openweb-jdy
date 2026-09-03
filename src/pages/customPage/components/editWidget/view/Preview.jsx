@@ -12,7 +12,6 @@ import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeMod
 import {
   getMenuConfig,
   buildDetailUrl,
-  preloadWorksheetBaseInfo,
 } from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 
 const Wrap = styled.div`
@@ -169,23 +168,17 @@ export function View(props) {
 
   // === iframe 弹框相关 ===
   const menuConfigRef = useRef(null);
-  const worksheetInfoRef = useRef(null);
   const [iframeState, setIframeState] = useState({ visible: false, src: '', title: '' });
   // 用于关闭 iframe 后强制刷新 SingleView（变更 key 触发重挂载）
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // 首次挂载时判断是否命中 iframe 菜单，预加载 worksheet controls
+  // 首次挂载时判断是否命中 iframe 菜单
   useEffect(() => {
     const currentMenuAppId = id;
     const cfg = getMenuConfig(currentMenuAppId);
     menuConfigRef.current = cfg;
 
     if (cfg) {
-      // 预加载 worksheet 定义（用于查 controlId）
-      preloadWorksheetBaseInfo(cfg.worksheetId).then(info => {
-        worksheetInfoRef.current = info;
-      });
-
       // 挂全局 hook 拦截行点击
       window.__CUSTOM_PAGE_IFRAME_HOOK__ = {
         enabled: true,
@@ -193,7 +186,7 @@ export function View(props) {
           const cfg = menuConfigRef.current;
           if (!cfg) return;
 
-          buildDetailUrl(cfg, row, worksheetInfoRef.current).then(url => {
+          buildDetailUrl(cfg, row).then(url => {
             if (!url) {
               console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
               return;

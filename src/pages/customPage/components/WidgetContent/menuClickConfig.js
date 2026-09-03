@@ -1,4 +1,3 @@
-import localForage from 'localforage';
 import _ from 'lodash';
 import worksheetApi from 'src/api/worksheet';
 
@@ -6,11 +5,6 @@ import worksheetApi from 'src/api/worksheet';
  * 固定常量
  */
 const DEFAULT_APP_ID = '2537d1b8-170a-4c02-abdf-124e610b194c';
-
-/** 懒加载语言（模块初始化时 md.global 可能还未就绪） */
-function getLang() {
-  return _.get(md, 'global.Account.lang') || 'zh-Hans';
-}
 
 /**
  * 菜单 → 表格行点击弹框映射表
@@ -155,109 +149,73 @@ export function getMenuConfig(menuAppId) {
 }
 
 /**
- * 从 IndexedDB localForage 缓存中读取 worksheet controls 定义
- * key 格式：Worksheet_GetWorksheetBaseInfo_${worksheetId}_${lang}
- */
-function loadWorksheetBaseInfo(worksheetId) {
-  const cacheKey = `Worksheet_GetWorksheetBaseInfo_${worksheetId}_${getLang()}`;
-  return localForage.getItem(cacheKey).then(cache => _.get(cache, 'data') || null);
-}
-
-/**
- * 在 worksheet controls 里，通过 controlName（中文名）找 controlId
- * @returns {string|null}
- */
-function findControlIdByName(controls, controlName) {
-  if (!_.isArray(controls)) return null;
-  const matched = controls.find(c => c.controlName === controlName);
-  return matched ? matched.controlId : null;
-}
-
-/**
- * 从 row 数据里取某个 controlId 的值
- * 明道云 row 对象里，自定义字段的 key 是 controlId，系统字段（rowid、caid 等）直接用字段名
- */
-function getRowValue(row, controlId) {
-  if (!row) return '';
-  // row 数据可能有两套 key：controlId（后端原样返回） 或 alias（前端处理后）
-  // 先直接取
-  if (row[controlId] !== undefined && row[controlId] !== null) {
-    const val = row[controlId];
-    // 关联记录类型（type=29）可能是数组 {rowid, name}
-    if (_.isArray(val)) {
-      return val.length > 0 ? val[0].rowid || val[0].name || val[0] : '';
-    }
-    if (_.isObject(val)) {
-      return val.rowid || val.name || val.value || JSON.stringify(val);
-    }
-    return val;
-  }
-  return '';
-}
-
-/**
- * 构建 iframe URL
+ * 构建 iframe URL（通过 getRowByID 的 receiveControls 按 controlName 取值）
  *
  * @param {object} config  - menuConfig 条目
- * @param {object} row     - 表格行数据
- * @param {object} worksheetInfo - worksheet 基础信息（用于查 controls）
- * @returns {string} 完整 URL
+ * @param {object} row     - 表格行数据（含 rowid）
+ * @returns {Promise<string>} 完整 URL
  */
-export async function buildDetailUrl(config, row, worksheetInfo) {
+export async function buildDetailUrl(config, row) {
   if (!config || !row) return '';
 
   const rowId = row.rowid || '';
   const userId = _.get(md, 'global.Account.accountId') || '';
-  const controls = _.get(worksheetInfo, 'template.controls') || [];
 
-  // 先准备好各参数的值（按 doc 的 paramsDesc 规则）
+  let instanceId = '';
+  let customFieldValues = {}; // paramKey → value
+
+  try {
+    if (rowId) {
+      const rowRes = await worksheetApi.getRowByID({
+        worksheetId: config.worksheetId,
+        rowId,
+        getTemplate: true,
+      });
+
+      const receiveControls =
+        _.get(rowRes, 'receiveControls') ||
+        _.get(rowRes, 'row.receiveControls') ||
+        [];
+
+      // instanceId
+      if (config.instanceIdFromRowId) {
+        instanceId = rowId;
+      } else {
+        const relation = _.find(receiveControls, { controlName: '关联实例' });
+        instanceId = relation?.value || '';
+      }
+
+      // customFields：paramKey → controlName
+      _.forEach(config.customFields || {}, (controlName, paramKey) => {
+        const control = _.find(receiveControls, { controlName });
+        customFieldValues[paramKey] = control?.value || '';
+      });
+    }
+  } catch (e) {
+    console.warn('[buildDetailUrl] getRowByID 失败，退化为最小 URL', e);
+    if (config.instanceIdFromRowId) {
+      instanceId = rowId;
+    }
+  }
+
   const params = {
-    // 固定值
     appid: DEFAULT_APP_ID,
     appId: DEFAULT_APP_ID,
     userId,
-    // 直接从 rowId 取的
     recordId: rowId,
     ccRecordId: rowId,
     runNodeRowId: rowId,
-    // 自定义字段（需要先查 controlId）
-    nodeId: '',
-    isRead: '',
-    instanceId: '',
+    instanceId,
+    ...customFieldValues,
   };
 
-  // instanceId 特殊处理
-  if (config.instanceIdFromRowId) {
-    params.instanceId = rowId;
-  } else {
-    const relationControlId = findControlIdByName(controls, '关联实例');
-    params.instanceId = relationControlId ? getRowValue(row, relationControlId) : '';
-  }
-
-  // 其他自定义字段
-  _.forEach(config.customFields || {}, (controlName, paramKey) => {
-    const controlId = findControlIdByName(controls, controlName);
-    params[paramKey] = controlId ? getRowValue(row, controlId) : '';
-  });
-
-  // 替换 detailUrl 模板里的空占位参数
   let url = config.detailUrl;
   _.forEach(params, (value, key) => {
-    // 匹配 &key= 或 &key=& 后的空值（包括 &key=value 已有值也覆盖，但 doc 模板里都是空）
     const re = new RegExp(`(${key}=)([^&]*)`, 'g');
     url = url.replace(re, `$1${encodeURIComponent(value)}`);
   });
 
   return url;
-}
-
-/**
- * 加载 worksheetInfo（优先从缓存，没有则返回 null）
- * 调用方可以在页面加载时预加载，避免用户点击时阻塞
- */
-export function preloadWorksheetBaseInfo(worksheetId) {
-  if (!worksheetId) return Promise.resolve(null);
-  return loadWorksheetBaseInfo(worksheetId);
 }
 
 /**

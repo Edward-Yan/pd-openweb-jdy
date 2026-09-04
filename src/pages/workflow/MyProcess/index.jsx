@@ -12,6 +12,7 @@ import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeMod
 import {
   shouldUseWorkflowIframe,
   buildWorkflowDetailUrl,
+  ensureIframeConfigLoaded,
 } from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import Card from './Card';
 import { getStateParam, TABS } from './config';
@@ -125,6 +126,11 @@ export default class MyProcess extends Component {
       this.updateCountData(countData);
     });
     this.removeEscEvent = this.bindEscEvent();
+
+    // 等待 iframe 配置加载完成后，重渲染以正确命中 iframe 分支
+    ensureIframeConfigLoaded().then(() => {
+      this.forceUpdate();
+    });
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -1164,8 +1170,8 @@ export default class MyProcess extends Component {
               }
               onAlreadyRead={this.handleAlreadyRead}
               onClick={async () => {
-                if (shouldUseWorkflowIframe(item)) {
-                  // appid 命中 → 先置 selectCard，异步拿 URL，拿到后再渲染 Modal
+                if (stateTab === TABS.WAITING_APPROVE && shouldUseWorkflowIframe(item)) {
+                  // 仅审批 tab + appid 命中 → 用 iframe 替换
                   this.setState({ selectCard: item, iframeSrc: '' });
                   try {
                     const src = await buildWorkflowDetailUrl(item);
@@ -1296,8 +1302,8 @@ export default class MyProcess extends Component {
           )}
         </div>
         {selectCard ? (
-          shouldUseWorkflowIframe(selectCard) ? (
-            // appid 命中 → 用 iframe 替换原生审批详情弹框
+          stateTab === TABS.WAITING_APPROVE && shouldUseWorkflowIframe(selectCard) ? (
+            // 仅审批 tab + appid 命中 → 用 iframe 替换原生审批详情弹框
             iframeSrc ? (
               <IframeModal
                 visible

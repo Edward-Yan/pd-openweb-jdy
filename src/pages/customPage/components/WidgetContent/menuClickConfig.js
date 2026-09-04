@@ -1,298 +1,214 @@
 import _ from 'lodash';
+import axios from 'axios';
 import worksheetApi from 'src/api/worksheet';
 
 /**
- * 固定常量
+ * iframe 基础地址（后端配置表中的 detailUrl 只存储 query 参数部分）
  */
-const DEFAULT_APP_ID = 'c378a60b-d734-4608-a351-d01e66b07f05';
-const TEST_APP_ID = '2537d1b8-170a-4c02-abdf-124e610b194c';
+const IFRAME_BASE_URL = 'https://zttt.crecg-jt.com:18001/?';
 
 /**
- * 菜单 → 表格行点击弹框映射表
- * 多套配置（默认 + 测试）共存，按 menuAppId 天然区分（不冲突）
- * 每个 entry：
- *   - appId          : 所属应用 ID（用于拼 iframe URL 的 appid 参数）
- *   - menuAppId      : 自定义页面所属的应用 ID，用于命中匹配
- *   - worksheetId    : 表格 widget 绑定的工作表 ID
- *   - detailUrl      : iframe 页面 URL 模板
- *   - instanceIdFromRowId : true → instanceId = rowId；false → 取 "关联实例" 字段
- *   - customFields   : 其他需要从 receiveControls 按 controlName 取值的字段
+ * 后端接口地址
  */
-const MENU_IFRAME_CONFIGS = [
-  // ========== 默认（线上）配置 ==========
-  {
-    menuName: '业务台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c37d',
-    worksheetId: '6a94e222e171f989ce3c0cc0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '发文业务台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c378',
-    worksheetId: '6a94e222e171f989ce3c0cc0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '收文业务台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c37b',
-    worksheetId: '6a94e222e171f989ce3c0cc0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '我管理的流程',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c387',
-    worksheetId: '6a94e222e171f989ce3c0cc0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '业务流程管理',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c388',
-    worksheetId: '6a94e222e171f989ce3c0cc0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c386',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c37a',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办任务台账（发文管理）',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c37f',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办任务台账（发文管理）',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c38b',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办任务台账（收文管理）',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c389',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办任务台账（收文管理）',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c382',
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待阅台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c385',
-    worksheetId: '6a94e222e171f989ce3c0cb4',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&userId=&ccRecordId=&appid=&isRead=&type=cc',
-    customFields: { isRead: '阅读状态' },
-  },
-  {
-    menuName: '已阅台账',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c38c',
-    worksheetId: '6a94e222e171f989ce3c0cb4',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&userId=&ccRecordId=&appid=&isRead=&type=cc',
-    customFields: { isRead: '阅读状态' },
-  },
-  {
-    menuName: '待签收',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c379',
-    worksheetId: '6a94e222e171f989ce3c0cc6',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=distribute-sign&appId=&recordId=&userId=',
-  },
-  {
-    menuName: '已签收',
-    appId: DEFAULT_APP_ID,
-    menuAppId: '6a94e2285fa340b327d2c381',
-    worksheetId: '6a94e222e171f989ce3c0cc6',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=distribute-sign&appId=&recordId=&userId=',
-  },
-  // ========== 测试环境配置 ==========
-  {
-    menuName: '业务台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c8',
-    worksheetId: '6a632c256f0d1cf1793b75d1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '发文业务台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a72dc56aca80ffffd723afe',
-    worksheetId: '6a632c256f0d1cf1793b75d1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '收文业务台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a72dc97aca80ffffd723b0c',
-    worksheetId: '6a632c256f0d1cf1793b75d1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '我管理的流程',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c5',
-    worksheetId: '6a632c256f0d1cf1793b75d1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '业务流程管理',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1b5',
-    worksheetId: '6a632c256f0d1cf1793b75d1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&appid=&userId=&type=instance',
-    instanceIdFromRowId: true,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1bb',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c0',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办任务台账（发文管理）',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c1',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办任务台账（发文管理）',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1ba',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待办任务台账（收文管理）',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1b4',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '已办任务台账（收文管理）',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1bf',
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-    instanceIdFromRowId: false,
-    customFields: { nodeId: '节点ID' },
-  },
-  {
-    menuName: '待阅台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c2',
-    worksheetId: '6a632c256f0d1cf1793b75dd',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&userId=&ccRecordId=&appid=&isRead=&type=cc',
-    customFields: { isRead: '阅读状态' },
-  },
-  {
-    menuName: '已阅台账',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c4',
-    worksheetId: '6a632c256f0d1cf1793b75dd',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&userId=&ccRecordId=&appid=&isRead=&type=cc',
-    customFields: { isRead: '阅读状态' },
-  },
-  {
-    menuName: '待签收',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1b6',
-    worksheetId: '6a632c256f0d1cf1793b75bd',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=distribute-sign&appId=&recordId=&userId=',
-  },
-  {
-    menuName: '已签收',
-    appId: TEST_APP_ID,
-    menuAppId: '6a632c28aca80ffffd67e1c7',
-    worksheetId: '6a632c256f0d1cf1793b75bd',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=distribute-sign&appId=&recordId=&userId=',
-  },
-];
-
-/** 快速查找：menuAppId → config */
-const menuIndex = _.keyBy(MENU_IFRAME_CONFIGS, 'menuAppId');
+const CONFIG_API_URL = 'https://zttt.crecg-jt.com:18001/api/sync/exec-app-data-config';
 
 /**
- * 根据 menuAppId 查找配置
+ * localStorage 缓存 key，用于持久化配置（减少启动时的接口请求）
  */
-export function getMenuConfig(menuAppId) {
-  return menuIndex[menuAppId];
+const CACHE_KEY = 'exec_app_data_config_cache';
+const CACHE_TTL = 30 * 60 * 1000; // 30 分钟
+
+/**
+ * IFrameConfigLoader —— 配置加载器
+ *
+ * 职责：
+ * 1. 模块首次被 import 时就尝试加载配置（先读 localStorage 缓存，再异步请求接口）
+ * 2. 内存中维护两份索引：
+ *    - menuIndex      : menuAppId → MENU_IFRAME_CONFIG 条目
+ *    - workflowIndex  : appId     → WORKFLOW_IFRAME_CONFIG 条目
+ * 3. 对外暴露同步 getter 和一个 ensureLoaded() Promise
+ *    - ensureLoaded() 供组件在首次渲染前 await，避免未命中
+ *    - getter 在 cache 就绪前返回 null / false
+ */
+class IFrameConfigLoader {
+  constructor() {
+    this.menuIndex = {};      // menuAppId → menuConfig
+    this.workflowIndex = {};  // appId → workflowConfig
+    this._loadingPromise = null;
+    this._cacheLoaded = false;
+
+    // 启动时立即尝试加载
+    this._loadingPromise = this._init();
+  }
+
+  async _init() {
+    // 1. 先尝试读 localStorage 缓存（同步），尽快填充 menuIndex
+    const cached = this._readCache();
+    if (cached) {
+      this._applyConfigList(cached);
+      this._cacheLoaded = true;
+    }
+
+    // 2. 无论是否命中缓存，都异步请求最新数据（保证刷新后生效）
+    try {
+      await this._fetchFromApi();
+    } catch (e) {
+      console.warn('[IFrameConfigLoader] 配置接口请求失败，使用缓存数据', e);
+    }
+    return this;
+  }
+
+  _readCache() {
+    try {
+      const raw = localStorage.getItem(CACHE_KEY);
+      if (!raw) return null;
+      const { list, ts } = JSON.parse(raw);
+      if (!list || !Array.isArray(list)) return null;
+      if (Date.now() - (ts || 0) > CACHE_TTL) return null;
+      return list;
+    } catch (_) {
+      return null;
+    }
+  }
+
+  _writeCache(list) {
+    try {
+      localStorage.setItem(
+        CACHE_KEY,
+        JSON.stringify({ list, ts: Date.now() }),
+      );
+    } catch (_) {
+      // 忽略 localStorage 写入失败
+    }
+  }
+
+  async _fetchFromApi() {
+    const { data } = await axios.get(CONFIG_API_URL, {
+      timeout: 8000,
+    });
+    console.log('配置信息', data)
+    // 兼容两种返回格式：{ success, data: { list } } / 直接数组
+    const list = _.get(data, 'data.list') || _.get(data, 'list') || (Array.isArray(data) ? data : []);
+    if (_.get(data, 'success') === false || !list.length) {
+      return;
+    }
+
+    this._applyConfigList(list);
+    this._writeCache(list);
+    this._cacheLoaded = true;
+  }
+
+  _applyConfigList(list) {
+    const newMenuIndex = {};
+    const newWorkflowIndex = {};
+
+    list.forEach(entry => {
+      const appId = entry.appId;
+      const cfg = entry.config || {};
+
+      // menu 配置 —— 用 appId + menuAppId 做复合 key，避免不同应用的 menuAppId 冲突
+      const menuList = cfg.MENU_IFRAME_CONFIGS || [];
+      menuList.forEach(item => {
+        const fullUrl = this._resolveDetailUrl(item.detailUrl);
+        const effectiveAppId = item.appId || appId;
+        const key = `${effectiveAppId}__${item.menuAppId}`;
+        newMenuIndex[key] = {
+          ...item,
+          appId: effectiveAppId,
+          detailUrl: fullUrl,
+        };
+      });
+
+      // workflow 配置 —— appId 本身唯一，保持原逻辑
+      const wfList = cfg.WORKFLOW_IFRAME_CONFIGS || [];
+      wfList.forEach(item => {
+        const fullUrl = this._resolveDetailUrl(item.detailUrl);
+        newWorkflowIndex[item.appId || appId] = {
+          ...item,
+          detailUrl: fullUrl,
+        };
+      });
+    });
+
+    this.menuIndex = newMenuIndex;
+    this.workflowIndex = newWorkflowIndex;
+  }
+
+  /**
+   * 后端 detailUrl 可能只存 query 参数（"tab=todo-detail&..."），
+   * 也可能是完整 URL（兼容旧格式），这里统一补全。
+   */
+  _resolveDetailUrl(detailUrl) {
+    if (!detailUrl) return '';
+    if (/^https?:\/\//.test(detailUrl)) return detailUrl;
+    return `${IFRAME_BASE_URL}${detailUrl}`;
+  }
+
+  /** 等待首次加载完成（组件可 await） */
+  ensureLoaded() {
+    return this._loadingPromise || Promise.resolve(this);
+  }
+
+  /** 强制重新拉取接口数据 */
+  async reload() {
+    this._loadingPromise = this._fetchFromApi();
+    await this._loadingPromise;
+  }
+
+  /** 根据 appId + menuAppId 查找菜单配置（同步，未就绪时返回 undefined） */
+  getMenuConfig(appId, menuAppId) {
+    if (!appId || !menuAppId) return undefined;
+    return this.menuIndex[`${appId}__${menuAppId}`];
+  }
+
+  /** 根据 appId 查找 workflow 配置（同步，未就绪时返回 undefined） */
+  getWorkflowConfig(appId) {
+    if (!appId) return undefined;
+    return this.workflowIndex[appId];
+  }
+}
+
+/** 单例实例，模块加载即启动 */
+const loader = new IFrameConfigLoader();
+
+/* ==================== 对外导出的工具函数 ==================== */
+
+/**
+ * 根据 appId + menuAppId 查找菜单配置
+ *
+ * 同步版本：首次渲染时可能返回 undefined，建议在组件中配合 ensureLoaded 使用。
+ *
+ * @param {string} appId      当前应用的 appId（如 2537d1b8-...）
+ * @param {string} menuAppId  当前自定义页面所属的 menuAppId（如 6a632c28...）
+ */
+export function getMenuConfig(appId, menuAppId) {
+  return loader.getMenuConfig(appId, menuAppId);
 }
 
 /**
- * 构建 iframe URL（通过 getRowByID 的 receiveControls 按 controlName 取值）
+ * 根据 appId + menuAppId 查找菜单配置（异步，确保配置已加载）
+ */
+export async function getMenuConfigAsync(appId, menuAppId) {
+  await loader.ensureLoaded();
+  return loader.getMenuConfig(appId, menuAppId);
+}
+
+/**
+ * 等待配置加载完成（组件在 useEffect 中可 await）
+ */
+export async function ensureIframeConfigLoaded() {
+  return loader.ensureLoaded();
+}
+
+/**
+ * 强制重新加载配置
+ */
+export function reloadIframeConfig() {
+  return loader.reload();
+}
+
+/**
+ * 构建菜单 iframe 详情 URL
  *
  * @param {object} config  - menuConfig 条目
  * @param {object} row     - 表格行数据（含 rowid）
@@ -342,8 +258,8 @@ export async function buildDetailUrl(config, row) {
   }
 
   const params = {
-    appid: config.appId || DEFAULT_APP_ID,
-    appId: config.appId || DEFAULT_APP_ID,
+    appid: config.appId,
+    appId: config.appId,
     userId,
     recordId: rowId,
     ccRecordId: rowId,
@@ -357,37 +273,30 @@ export async function buildDetailUrl(config, row) {
     const re = new RegExp(`(${key}=)([^&]*)`, 'g');
     url = url.replace(re, `$1${encodeURIComponent(value)}`);
   });
-
+  console.log('构建的 URL', url);
   return url;
 }
-
-/**
- * 流程待办 iframe 配置（多套 appId/worksheetId 共存，遍历时自然区分）
- * 每条含：appId（匹配 item.app.id）、worksheetId（getRowByID 用）、detailUrl
- */
-const WORKFLOW_IFRAME_CONFIGS = [
-  {
-    appId: DEFAULT_APP_ID,
-    worksheetId: '6a94e222e171f989ce3c0cc1',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-  },
-  {
-    appId: TEST_APP_ID,
-    worksheetId: '6a632c256f0d1cf1793b75d0',
-    detailUrl: 'https://zttt.crecg-jt.com:18001/?tab=todo-detail&instanceId=&nodeId=&runNodeRowId=&userId=&appid=&type=todo',
-  },
-];
 
 /** @param {object} item - 待办卡片数据，关键字段 app.id */
 function findWorkflowConfig(item) {
   const appId = _.get(item, 'app.id');
-  return _.find(WORKFLOW_IFRAME_CONFIGS, { appId });
+  return loader.getWorkflowConfig(appId);
 }
 
 /**
  * 流程待办卡片的 app.id 命中任何一套配置时，用 iframe 替换默认 ExecDialog
+ *
+ * 同步版本（未加载完成时返回 false）
  */
 export function shouldUseWorkflowIframe(item) {
+  return !!findWorkflowConfig(item);
+}
+
+/**
+ * 是否命中 workflow iframe 配置（异步，确保配置已加载）
+ */
+export async function shouldUseWorkflowIframeAsync(item) {
+  await loader.ensureLoaded();
   return !!findWorkflowConfig(item);
 }
 
@@ -407,14 +316,14 @@ export async function buildWorkflowDetailUrl(item) {
 
   let instanceId = '';
   let nodeId = '';
-
+  let rowId = '';
   try {
     // 1. 通过 workId 反查 worksheet 行 ID
     const workItemRes = await worksheetApi.getWorkItem({
       instanceId: item.id,
       workId: item.workId,
     });
-    const rowId = _.get(workItemRes, 'rowId') || '';
+    rowId = _.get(workItemRes, 'rowId') || '';
 
     if (rowId) {
       const rowRes = await worksheetApi.getRowByID({
@@ -437,7 +346,7 @@ export async function buildWorkflowDetailUrl(item) {
       const params = {
         instanceId,
         nodeId,
-        runNodeRowId: item.workId || '',
+        runNodeRowId: rowId || '',
         userId: _.get(md, 'global.Account.accountId') || '',
         appid: workflowConfig.appId,
       };
@@ -447,14 +356,14 @@ export async function buildWorkflowDetailUrl(item) {
         const re = new RegExp(`(${key}=)([^&]*)`, 'g');
         url = url.replace(re, `$1${encodeURIComponent(value)}`);
       });
-
+      console.log('构建的审批详情 URL', url);
       return url;
     }
   } catch (e) {
     console.warn('[buildWorkflowDetailUrl] 获取 worksheet 行数据失败，退化为最小 URL', e);
   }
 
-  const runNodeRowId = item.workId || '';
+  const runNodeRowId = rowId || '';
   const userId = _.get(md, 'global.Account.accountId') || '';
   let url = workflowConfig.detailUrl;
   url = url.replace(/(runNodeRowId=)([^&]*)/, `$1${encodeURIComponent(runNodeRowId)}`);
@@ -462,3 +371,7 @@ export async function buildWorkflowDetailUrl(item) {
   url = url.replace(/(appid=)([^&]*)/, `$1${encodeURIComponent(workflowConfig.appId)}`);
   return url;
 }
+
+/* ==================== 兼容旧名（如果外部有引用） ==================== */
+export const MENU_IFRAME_CONFIGS = []; // 保留导出名，避免直接引用时报错
+export const WORKFLOW_IFRAME_CONFIGS = [];

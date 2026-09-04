@@ -12,6 +12,7 @@ import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeMod
 import {
   getMenuConfig,
   buildDetailUrl,
+  ensureIframeConfigLoaded,
 } from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 
 const Wrap = styled.div`
@@ -172,43 +173,52 @@ export function View(props) {
   // 用于关闭 iframe 后强制刷新 SingleView（变更 key 触发重挂载）
   const [refreshKey, setRefreshKey] = useState(0);
 
-  // 首次挂载时判断是否命中 iframe 菜单
+  // 首次挂载时等待配置加载，再判断是否命中 iframe 菜单
   useEffect(() => {
-    const currentMenuAppId = id;
-    const cfg = getMenuConfig(currentMenuAppId);
-    menuConfigRef.current = cfg;
+    let cancelled = false;
 
-    if (cfg) {
-      // 挂全局 hook 拦截行点击
-      window.__CUSTOM_PAGE_IFRAME_HOOK__ = {
-        enabled: true,
-        onRowClick: row => {
-          const cfg = menuConfigRef.current;
-          if (!cfg) return;
+    const setupHook = async () => {
+      // 等待配置加载完成（模块启动时就会发请求，这里只是 ensure）
+      await ensureIframeConfigLoaded();
+      if (cancelled) return;
 
-          buildDetailUrl(cfg, row).then(url => {
-            if (!url) {
-              console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
-              return;
-            }
-            setIframeState({
-              visible: true,
-              src: url,
+      const currentMenuAppId = id;
+      const cfg = getMenuConfig(appId, currentMenuAppId);
+      menuConfigRef.current = cfg;
+
+      if (cfg) {
+        // 挂全局 hook 拦截行点击
+        window.__CUSTOM_PAGE_IFRAME_HOOK__ = {
+          enabled: true,
+          onRowClick: row => {
+            const cfg = menuConfigRef.current;
+            if (!cfg) return;
+
+            buildDetailUrl(cfg, row).then(url => {
+              if (!url) {
+                console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
+                return;
+              }
+              setIframeState({
+                visible: true,
+                src: url,
+              });
             });
-          });
-        },
-      };
+          },
+        };
+      }
+    };
 
-      return () => {
-        // 卸载时清理 hook（避免误触发其他页面）
-        if (window.__CUSTOM_PAGE_IFRAME_HOOK__?.enabled) {
-          window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
-        }
-      };
-    }
+    setupHook();
 
-    return undefined;
-  }, [apkId, appId]);
+    return () => {
+      cancelled = true;
+      // 卸载时清理 hook（避免误触发其他页面）
+      if (window.__CUSTOM_PAGE_IFRAME_HOOK__?.enabled) {
+        window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
+      }
+    };
+  }, [apkId, appId, id]);
 
   if (_.isEmpty(viewId)) {
     return (

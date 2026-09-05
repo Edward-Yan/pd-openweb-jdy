@@ -11,4 +11,5 @@ module.exports = {
   webpackPublicPath: process.env.WEBPACK_PUBLIC_PATH || WEBPACK_PUBLIC_PATH[process.env.PUBLIC] || '/dist/pack/',
   API_SERVER,
   ztttApiServer: 'https://zttt.crecg-jt.com/api/',
+  oaApiServer: 'https://zttt.crecg-jt.com:18001/api/',
 };

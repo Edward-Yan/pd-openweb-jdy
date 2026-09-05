@@ -78,6 +78,8 @@ const proxyConfigs = [
   },
   // SSO 互信 token：专用代理至中铁交投互信系统（https://zttt.crecg-jt.com/api），避免跨域。
   { name: 'zttt_api', path: '/zttt_api/', replace: '', server: publishConfig.ztttApiServer },
+  // OA 配置接口：专用代理至中铁交投 OA 后端（https://zttt.crecg-jt.com:18001/api），避免跨域。
+  { name: 'oa_api', path: '/oa_api/', replace: '', server: publishConfig.oaApiServer },
   { name: 'api', path: '/api/', replace: '/', server: publishConfig.apiServer },
   { name: 'workflow_api', path: '/workflow_api/', replace: '', server: publishConfig.apiServer },
   { name: 'report_api', path: '/report_api/', replace: '', server: publishConfig.apiServer },

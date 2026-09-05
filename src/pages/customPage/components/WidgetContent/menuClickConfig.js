@@ -9,8 +9,10 @@ const IFRAME_BASE_URL = 'https://zttt.crecg-jt.com:18001/?';
 
 /**
  * 后端接口地址
+ * 开发/生产环境统一走代理路径 /oa_api/，避免跨域
+ * serve.js 已配置 /oa_api/ → https://zttt.crecg-jt.com:18001/api/
  */
-const CONFIG_API_URL = 'https://zttt.crecg-jt.com:18001/api/sync/exec-app-data-config';
+const CONFIG_API_URL = '/oa_api/sync/exec-app-data-config';
 
 /**
  * localStorage 缓存 key，用于持久化配置（减少启动时的接口请求）

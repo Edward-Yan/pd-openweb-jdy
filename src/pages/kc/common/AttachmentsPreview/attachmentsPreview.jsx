@@ -5,6 +5,7 @@ import DocumentTitle from 'react-document-title';
 import cx from 'classnames';
 import _ from 'lodash';
 import PropTypes from 'prop-types';
+import { Base64 } from 'js-base64';
 import Button from 'ming-ui/components/Button';
 import LoadDiv from 'ming-ui/components/LoadDiv';
 import { addToken, browserIsMobile, formatFileSize, getClassNameByExt } from 'src/utils/common';
@@ -405,6 +406,13 @@ class AttachmentsPreview extends React.Component {
 
                     if (md.global.Config.HttpOnly || window.self !== window.top) {
                       viewUrl = addToken(viewUrl, false);
+                    }
+                    // 明道云 onlineOffice 预览（viewUrl 为 /wwwapi/file/owa）替换为 zttt 预览服务，
+                    // 文件地址按预览服务要求做 Base64 + encodeURIComponent 编码
+                    if (/\/file\/owa(\?|$)/.test(viewUrl)) {
+                      viewUrl = `https://zttt.crecg-jt.com/preview/onlinePreview?url=${encodeURIComponent(
+                        Base64.encode(currentAttachment.sourceNode.privateDownloadUrl),
+                      )}`;
                     }
 
                     const iframeMode = htmlPreviewUrl ? 'html' : previewService === 'wps' ? 'wps' : 'file';

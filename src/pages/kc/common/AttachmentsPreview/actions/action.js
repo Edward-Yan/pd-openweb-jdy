@@ -1,4 +1,4 @@
-﻿import _, { isEmpty } from 'lodash';
+import _, { isEmpty } from 'lodash';
 import kcService from '../../../api/service';
 import attachmentAjax from 'src/api/attachment';
 import fileAjax from 'src/api/file';
@@ -175,7 +175,33 @@ function loadAttachment(attachment, options = {}) {
         if (previewAttachmentType === 'COMMON') {
           if (attachment.sourceNode.viewUrl) {
             newAttachment.viewUrl = attachment.sourceNode.viewUrl;
-            resolve(newAttachment);
+          }
+
+          // onlineOffice 预览但来源数据未签发带认证参数的 privateDownloadUrl 时（如记录详情页），
+          // 调 GetAttachmentDetail 换取签名地址，否则预览服务在服务端拉取文件会鉴权失败
+          const isOwaPreview = /\/file\/owa(\?|$)/.test(attachment.sourceNode.viewUrl || '');
+          const needSignedUrl = isOwaPreview && !attachment.sourceNode.privateDownloadUrl;
+
+          if (needSignedUrl) {
+            attachmentAjax
+              .getAttachmentDetail(
+                {
+                  fileId: attachment.sourceNode.fileID || attachment.sourceNode.fileId,
+                  rowId: options.recordId,
+                  controlId: options.controlId,
+                  worksheetId: options.worksheetId,
+                },
+                { silent: true },
+              )
+              .then(data => {
+                if (data && data.privateDownloadUrl) {
+                  newAttachment.sourceNode = Object.assign({}, newAttachment.sourceNode, {
+                    privateDownloadUrl: data.privateDownloadUrl,
+                  });
+                }
+                resolve(newAttachment);
+              })
+              .catch(() => resolve(newAttachment));
           } else {
             resolve(newAttachment);
           }

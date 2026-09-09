@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import axios from 'axios';
 import worksheetApi from 'src/api/worksheet';
+import { buildMutualTrustAuthUrl } from 'src/pages/customPage/mutualTrust';
 
 /**
  * iframe 基础地址（后端配置表中的 detailUrl 只存储 query 参数部分）
@@ -21,6 +22,14 @@ const CACHE_KEY = 'exec_app_data_config_cache';
 const CACHE_TTL = 30 * 60 * 1000; // 30 分钟
 
 /**
+ * 互信认证默认配置（配置接口未返回 MUTUAL_TRUST_CONFIG 时使用）
+ */
+const DEFAULT_MUTUAL_TRUST_CONFIG = {
+  sourceSystemId: 'd03fb5f3-189e-4586-b1f7-45c75364cfeb',
+  targetSystemId: 'ba1aa320-e6d9-47cc-80e8-f1ac8f05eeb1',
+};
+
+/**
  * IFrameConfigLoader —— 配置加载器
  *
  * 职责：
@@ -36,6 +45,7 @@ class IFrameConfigLoader {
   constructor() {
     this.menuIndex = {};      // menuAppId → menuConfig
     this.workflowIndex = {};  // appId → workflowConfig
+    this.mutualTrustConfig = null;  // { sourceSystemId, targetSystemId }
     this._loadingPromise = null;
     this._cacheLoaded = false;
 
@@ -88,7 +98,6 @@ class IFrameConfigLoader {
     const { data } = await axios.get(CONFIG_API_URL, {
       timeout: 8000,
     });
-    console.log('配置信息', data)
     // 兼容两种返回格式：{ success, data: { list } } / 直接数组
     const list = _.get(data, 'data.list') || _.get(data, 'list') || (Array.isArray(data) ? data : []);
     if (_.get(data, 'success') === false || !list.length) {
@@ -103,6 +112,7 @@ class IFrameConfigLoader {
   _applyConfigList(list) {
     const newMenuIndex = {};
     const newWorkflowIndex = {};
+    let newMutualTrustConfig = null;
 
     list.forEach(entry => {
       const appId = entry.appId;
@@ -130,10 +140,23 @@ class IFrameConfigLoader {
           detailUrl: fullUrl,
         };
       });
+
+      // 互信认证配置 —— 取第一条有效记录
+      const trustList = cfg.MUTUAL_TRUST_CONFIG || [];
+      if (!newMutualTrustConfig && trustList.length > 0) {
+        const first = trustList[0];
+        if (first.sourceSystemId && first.targetSystemId) {
+          newMutualTrustConfig = {
+            sourceSystemId: first.sourceSystemId,
+            targetSystemId: first.targetSystemId,
+          };
+        }
+      }
     });
 
     this.menuIndex = newMenuIndex;
     this.workflowIndex = newWorkflowIndex;
+    this.mutualTrustConfig = newMutualTrustConfig;
   }
 
   /**
@@ -168,6 +191,11 @@ class IFrameConfigLoader {
     if (!appId) return undefined;
     return this.workflowIndex[appId];
   }
+
+  /** 获取互信认证配置（同步，未取到时取默认值） */
+  getMutualTrustConfig() {
+    return this.mutualTrustConfig || DEFAULT_MUTUAL_TRUST_CONFIG;
+  }
 }
 
 /** 单例实例，模块加载即启动 */
@@ -200,6 +228,15 @@ export async function getMenuConfigAsync(appId, menuAppId) {
  */
 export async function ensureIframeConfigLoaded() {
   return loader.ensureLoaded();
+}
+
+/**
+ * 获取互信认证配置（异步，确保配置已加载）
+ * @returns {Promise<{sourceSystemId: string, targetSystemId: string}|null>}
+ */
+export async function getMutualTrustConfigAsync() {
+  await loader.ensureLoaded();
+  return loader.getMutualTrustConfig();
 }
 
 /**
@@ -275,8 +312,18 @@ export async function buildDetailUrl(config, row) {
     const re = new RegExp(`(${key}=)([^&]*)`, 'g');
     url = url.replace(re, `$1${encodeURIComponent(value)}`);
   });
-  console.log('构建的 URL', url);
-  return url;
+
+  // 从配置接口获取互信认证参数（sourceSystemId / targetSystemId）
+  const trustConfig = loader.getMutualTrustConfig();
+  if (trustConfig) {
+    // 追加互信标记和 targetSystemId，使 parseMutualTrustParams 能识别该 url 为启用互信
+    const separator = url.includes('?') ? '&' : '?';
+    url = `${url}${separator}sysMutualTrust=true&targetSystemId=${encodeURIComponent(trustConfig.targetSystemId)}`;
+  }
+
+  // 详情页启用互信（sysMutualTrust=true）时：以详情页 url 作为 redirectUrl 换取 jumpToken，
+  // iframe 地址改为认证中心地址；未启用时原样返回
+  return buildMutualTrustAuthUrl(url, trustConfig || {});
 }
 
 /** @param {object} item - 待办卡片数据，关键字段 app.id */
@@ -358,8 +405,15 @@ export async function buildWorkflowDetailUrl(item) {
         const re = new RegExp(`(${key}=)([^&]*)`, 'g');
         url = url.replace(re, `$1${encodeURIComponent(value)}`);
       });
-      console.log('构建的审批详情 URL', url);
-      return url;
+      // 从配置接口获取互信认证参数，追加互信标记使 parseMutualTrustParams 能识别
+      const trustConfig = loader.getMutualTrustConfig();
+      if (trustConfig) {
+        const separator = url.includes('?') ? '&' : '?';
+        url = `${url}${separator}sysMutualTrust=true&targetSystemId=${encodeURIComponent(trustConfig.targetSystemId)}`;
+      }
+      // 详情页启用互信（sysMutualTrust=true）时：以详情页 url 作为 redirectUrl 换取 jumpToken，
+      // iframe 地址改为认证中心地址；未启用时原样返回
+      return buildMutualTrustAuthUrl(url, trustConfig || {});
     }
   } catch (e) {
     console.warn('[buildWorkflowDetailUrl] 获取 worksheet 行数据失败，退化为最小 URL', e);
@@ -371,7 +425,13 @@ export async function buildWorkflowDetailUrl(item) {
   url = url.replace(/(runNodeRowId=)([^&]*)/, `$1${encodeURIComponent(runNodeRowId)}`);
   url = url.replace(/(userId=)([^&]*)/, `$1${encodeURIComponent(userId)}`);
   url = url.replace(/(appid=)([^&]*)/, `$1${encodeURIComponent(workflowConfig.appId)}`);
-  return url;
+  // 降级路径同样接入互信认证
+  const trustConfig = loader.getMutualTrustConfig();
+  if (trustConfig) {
+    const separator = url.includes('?') ? '&' : '?';
+    url = `${url}${separator}sysMutualTrust=true&targetSystemId=${encodeURIComponent(trustConfig.targetSystemId)}`;
+  }
+  return buildMutualTrustAuthUrl(url, trustConfig || {});
 }
 
 /* ==================== 兼容旧名（如果外部有引用） ==================== */

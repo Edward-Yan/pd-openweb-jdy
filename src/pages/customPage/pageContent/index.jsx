@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import DocumentTitle from 'react-document-title';
 import { useFullscreen, useToggle } from 'react-use';
-import axios from 'axios';
 import cx from 'classnames';
 import { pick } from 'lodash';
 import _ from 'lodash';
@@ -19,6 +18,7 @@ import {
   updatePageInfo,
 } from 'src/pages/customPage/redux/action';
 import { CUSTOM_PAGE_IFRAME_ALLOW, enumWidgetType, updateLayout } from 'src/pages/customPage/util';
+import { buildAuthCenterUrl, fetchMutualTrustToken, parseMutualTrustParams } from '../mutualTrust';
 import WebLayout from 'src/pages/customPage/webLayout';
 import { getAppSectionData } from 'src/pages/PageHeader/AppPkgHeader/LeftAppGroup';
 import { transferValue } from 'src/pages/widgetConfig/widgetSetting/components/DynamicDefaultValue/util';
@@ -270,52 +270,7 @@ function CustomPageContent(props) {
     getPage();
   };
 
-  let cachedKey = null;
-  /**
-   * 导入 PKCS#8 私钥
-   * 只在首次调用时执行,之后用缓存
-   */
-  const loadPrivateKey = async () => {
-    if (cachedKey) return cachedKey;
-    const RSA_PRIVATE_KEY_B64 = `MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC6UtmeUf1XDmlPvyoUbFQ4kPX2meCmshdjcpi4e7HZixu0XILwVt0kR0hhFmkgUYGRl4K4Sg3dlAF2DkcjrSs2C25oR6ZLd3aYQfTFiDOjmeUHlzhiOFRXRapm+wTTLJ1ZXBeGv7FbcNdJVJDlWLt0Dnb0ifGIXLW3aWVwyO7iGRJEL+OE1h7TnVJZiQ4lGT1IsIYxFK8CFiTZ+dI8P/A3Qdl4RCuEjwIXRd+qvOld90fGtZTTDaromHi+WdIuq7dhR4p3kycd/cbIv1a0GoBuLJJw4mFM0z3h04VqmzOtIgtcO3xkW9GQtgN4pbkuOaX1iuN7NfFoHmLhiGnxQFaLAgMBAAECggEAGhfkNhHRYtG32d0xrW6GVO2oJILkPTQPpnO0A5H/FDIxDQ8vnyzrB1ucPUyAKHCBrrwDKH/mdTN3COty9wIXXRg4vA3cshDm4OfLuaYbZTv2IRwCX274EMjG1mktAc3rs0n8WXibA+1HmRNov1Wv2s7zxcdTtf8Vy7vM4wCgw7T159Dp7NkFBWm3be15213s28tpstdgLVZlYs+B+RhRTAgPy3+FHFXIDBLYAJFH52mLxOkj1KLjsAqmupe4qDFbk/vdumtdON3begoLhFi6H16F3vHdB5nDRfBX0ef1gy7tH33PUPqScuPgp9TPdGsfuc9882andUvtZcdU2y198QKBgQDkhzYZzSzIR0z4C8cktsdacSyKJQlH9Uur72CpFVQSE4R1R5nnDOkuDUBU2AJrdrRbeRfJ/sFG61Phk7o2SRI3TLqXRP/RxnFS9n4HKikpEBIehrZFfYFZGRPGKcePLurw/JBvfeKtWOtpgVSqg2hGT4eam9JRrS6vu7r/zx8R3wKBgQDQuNMiwgLgqT763VMEIPOL4UU9a6/Uezr4vkeUlAejVPXoMOhItgwETDbax8I7nFtS/d+ZPf3ycJE35+QwvDTQUXvjPCPiP/oeBqaveqaTVZsdktHK4ULAXVETQmUXfbNwxh7Ibex3Wnseod4290ijoAKJyD/JH96cLBX5UhiI1QKBgQDWAwHZO9naXVtpV65RZZJf0mjBnlmIt+D7zRsafUzT+M8s/bbVN7QPWn2KdxgdB3dzyn1Kv3bFMZDGSZAzUk7q1sJO82EXVN2/sfLoRsVxHQm66LE9doFxrRhlla67GlcPA5dHsf5cFE+x6FofrRwz7DqzwYU+1A5KqGZBNfiExQKBgA1+dYAAxQjbSEwVtQFGVBiOBtjytlppYSWlv6D2dQv1OTS6vLm+s0Yv2zgHxCHweOMDsMoKfPmIl4rivhj8gfmZ2wWU5MkC09vPGEWuC0jpNu8Rh+iy6YrgPZaeK0T6hnhbBrB0kt4ghmczldc9439Yn/FideU93zl/jCgjS5zFAoGBAK+0jmVtu5UbGBiYGC4JcIrND/AL8+RjDCvRRoU1AjZ4q1jiu5QCwTCIMq753CZPEjfHNw3UYpCHyzki1sTM5a8Y76uH3yktqG0UsQnyZSKpZ6N6lvvyzvRCjz/VAlB4CtGaovi202I/F06yIQAXvG+NSL6ZUNUozcqCWkT3H80y`;
-
-    // Base64 → 字节
-    const keyBytes = Uint8Array.from(atob(RSA_PRIVATE_KEY_B64), c => c.charCodeAt(0));
-
-    cachedKey = await crypto.subtle.importKey(
-      'pkcs8', // 格式:PKCS#8
-      keyBytes, // 私钥字节
-      { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' }, // 算法
-      false, // 不 extractable
-      ['sign'], // 用途:只允许签名
-    );
-    return cachedKey;
-  };
-
-  /**
-   * SHA256withRSA 签名,返回 Base64
-   * 对应后端 RsaUtil.sign
-   */
-  const signHandler = async data => {
-    const key = await loadPrivateKey();
-    const dataBytes = new TextEncoder().encode(data);
-    const sigBuffer = await crypto.subtle.sign({ name: 'RSASSA-PKCS1-v1_5' }, key, dataBytes);
-    // ArrayBuffer → Base64
-    const bytes = new Uint8Array(sigBuffer);
-    let binary = '';
-    bytes.forEach(b => (binary += String.fromCharCode(b)));
-    return btoa(binary);
-  };
-  const handleRedirectUrl = (urlStr, keysToRemove) => {
-    if (!keysToRemove || keysToRemove.length === 0 || !Array.isArray(keysToRemove)) {
-      return urlStr;
-    }
-    const urlObj = new URL(urlStr);
-    // 收集要删除的 key（避免在遍历中直接 delete 导致迭代异常）
-    const toDelete = keysToRemove.filter(k => urlObj.searchParams.has(k));
-    toDelete.forEach(k => urlObj.searchParams.delete(k));
-    return urlObj.toString();
-  };
+  // 互信认证：签名与 token 请求已抽至 ../mutualTrust 公用模块
 
   // 互信认证：当 urlTemplate 含 sysMutualTrust=true 时请求 token
   // 放在 useEffect 中执行，避免在 render 函数中发起副作用（render 可能被 React 多次调用）导致重复调用接口
@@ -345,31 +300,12 @@ function CustomPageContent(props) {
       return;
     }
 
-    let urlParams;
-    try {
-      urlParams = new URLSearchParams(new URL(url).search);
-    } catch (e) {
-      return;
-    }
-
-    if (urlParams.get('sysMutualTrust') !== 'true') return;
-
-    const targetSystemId = urlParams.get('targetSystemId');
-    const userId = urlParams.get('userId');
-    const cookie = window.getCookie('md_pss_id') || '';
-    const redirectUrl = handleRedirectUrl(url, ['sysMutualTrust', 'targetSystemId']);
-
-    if (!userId) {
-      alert('请配置用户ID(userId)', 2);
-      return;
-    }
-    if (!redirectUrl || !cookie) {
-      alert('未获取到相关参数', 2);
-      return;
-    }
+    // 解析互信参数；未启用互信（sysMutualTrust !== 'true' 或 url 非法）时返回 null
+    const parsed = parseMutualTrustParams(url);
+    if (!parsed) return;
 
     // 参数键：用于判断是否已为该组参数发起过请求
-    const paramsKey = `${targetSystemId}|${userId}|${redirectUrl}|${cookie}`;
+    const paramsKey = parsed.paramsKey;
 
     // 已有请求进行中，或已为相同参数完成过请求，则跳过，确保接口仅按预期单次调用
     if (ssoFetchingRef.current || ssoParamsKeyRef.current === paramsKey) return;
@@ -385,61 +321,15 @@ function CustomPageContent(props) {
     setSsoToken('');
     setSsoTokenError(false);
 
-    const timestamp = String(Date.now());
-    const params = {
-      sourceSystemId: 'd03fb5f3-189e-4586-b1f7-45c75364cfeb',
-      targetSystemId,
-      userId,
-      redirectUrl,
-      sign: '',
-      timestamp,
-      extParams: {
-        cookie,
-      },
-    };
-    const signStr = `${params.sourceSystemId}${params.targetSystemId}${params.userId}${timestamp}`;
-    // 签名 → axios POST 请求 → 解析 token；所有回调都先校验 isCurrent，避免依赖变化后旧请求污染状态
-    signHandler(signStr)
-      .then(sign => {
-        if (!isCurrent() || !sign) throw new Error('sign 为空');
-        // 使用 /zttt_api/，dev 由 CI/serve.js 代理、prod 由 nginx 代理，统一转发至 https://zttt.crecg-jt.com/api/sso/system/token，避免跨域
-        return axios.post(
-          '/zttt_api/sso/system/token',
-          { ...params, sign },
-          {
-            headers: { 'Content-Type': 'application/json' },
-            signal: controller.signal,
-          },
-        );
-      })
-      .then(res => {
+    fetchMutualTrustToken(url, { signal: controller.signal })
+      .then(jumpToken => {
         if (!isCurrent()) return;
-        // axios 响应体在 res.data，兼容 {data:{token}} / {data:token} / {token} 三种结构
-        if (res.status === 200) {
-          if (res.data.success) {
-            const jumpToken = _.get(res, 'data.data.jumpToken') || '';
-            if (jumpToken) {
-              setSsoToken(jumpToken);
-            } else {
-              setSsoTokenError('未获取到返回中的token');
-              alert(_l('未获取到返回中的token'), 2);
-            }
-          } else {
-            setSsoTokenError(res.data?.msg || '获取互信认证token失败');
-            alert(res.data?.msg || '获取互信认证token失败', 2);
-          }
-        } else {
-          setSsoTokenError('互信认证请求失败');
-          alert(_l('互信认证请求失败'), 2);
-        }
+        setSsoToken(jumpToken);
       })
       .catch(error => {
-        if (!isCurrent()) return;
-        // 被主动取消（切换菜单/卸载时 abort）：不提示，不置错
-        if (axios.isCancel(error)) return;
-        // 网络异常 / 接口报错 / 签名失败统一兜底；不重置 ssoParamsKeyRef，避免失败后无限重试
-        setSsoTokenError('互信认证请求失败');
-        alert(_l('互信认证请求失败'), 2);
+        // 请求失败：记录错误信息，在 iframe 位置展示加载失败提示
+        if (!isCurrent() || controller.signal.aborted) return;
+        setSsoTokenError(error.message || _l('互信认证请求失败'));
       })
       .finally(() => {
         if (!isCurrent()) return;
@@ -485,7 +375,7 @@ function CustomPageContent(props) {
         // token 请求与防重锁逻辑已迁移至上方 useEffect，renderContent 保持纯渲染
         if (ssoToken) {
           // token 已就绪,则跳转认证中心
-          urlFormat = `https://zttt.crecg-jt.com/mutual-trust/auth-center/authenticate?jumpToken=${ssoToken}`;
+          urlFormat = buildAuthCenterUrl(ssoToken);
         } else if (ssoTokenError) {
           // 请求失败：在 iframe 位置展示加载失败提示
           return (

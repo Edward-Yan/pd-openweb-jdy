@@ -15,6 +15,11 @@ import { navigateTo } from 'src/router/navigateTo';
 import { getRequest, pathCompletion } from 'src/utils/common';
 import { addBehaviorLog, dateConvertToUserZone } from 'src/utils/project';
 import { MSG_DONE_TEXT, MSGTYPES } from '../../constants';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  shouldUseWorkflowIframeAsync,
+  buildWorkflowDetailUrl,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import { formatInboxItem, linkifySanitizedHtml } from '../../util';
 import Avatar from '../baseComponent/avatar';
 import Star from '../baseComponent/star';
@@ -114,23 +119,7 @@ export default class SystemMessage extends PureComponent {
           evt.preventDefault();
           evt.stopPropagation();
           const ids = hrefWithoutQuery.slice(hrefWithoutQuery.indexOf('workflowinstance') + 17).split('/');
-          const div = document.createElement('div');
-          const root = createRoot(div);
-          root.render(
-            <Suspense fallback={null}>
-              <LoadableExecDialog
-                id={ids[0]}
-                workId={ids[1]}
-                onLoad={() => {
-                  const refreshBtn = document.querySelector('.ChatPanel-active .inboxHeader .refreshBtn');
-                  refreshBtn && refreshBtn.click();
-                }}
-                onClose={() => {
-                  root.unmount();
-                }}
-              />
-            </Suspense>,
-          );
+          that.openWorkflowDetail(ids[0], ids[1]);
           return;
         }
 
@@ -220,6 +209,68 @@ export default class SystemMessage extends PureComponent {
       });
     }
   }
+
+  /**
+   * 打开工作流详情（仅审批消息 + appid 命中配置 → 用 iframe 弹框替换原生 ExecDialog）
+   */
+  openWorkflowDetail = async (id, workId) => {
+    const { inboxType, app } = this.props;
+    const item = { id, workId, app };
+
+    if (parseInt(inboxType, 10) === MSGTYPES.WorkFlowUserTaskMessage && (await shouldUseWorkflowIframeAsync(item))) {
+      try {
+        const src = await buildWorkflowDetailUrl(item);
+        if (src) {
+          this.renderWorkflowIframeModal(src);
+          return;
+        }
+      } catch (_) {}
+    }
+
+    this.renderExecDialog(id, workId);
+  };
+
+  renderExecDialog = (id, workId) => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    root.render(
+      <Suspense fallback={null}>
+        <LoadableExecDialog
+          id={id}
+          workId={workId}
+          onLoad={() => {
+            const refreshBtn = document.querySelector('.ChatPanel-active .inboxHeader .refreshBtn');
+            refreshBtn && refreshBtn.click();
+          }}
+          onClose={() => {
+            root.unmount();
+          }}
+        />
+      </Suspense>,
+    );
+  };
+
+  renderWorkflowIframeModal = src => {
+    const div = document.createElement('div');
+    const root = createRoot(div);
+    root.render(
+      <Suspense fallback={null}>
+        <IframeModal
+          visible
+          src={src}
+          title={_l('审批详情')}
+          onClose={() => {
+            root.unmount();
+          }}
+          afterClose={() => {
+            // 关闭后刷新收件箱，同步审批状态
+            const refreshBtn = document.querySelector('.ChatPanel-active .inboxHeader .refreshBtn');
+            refreshBtn && refreshBtn.click();
+          }}
+        />
+      </Suspense>,
+    );
+  };
 
   getWorkflowDetail = () => {
     const { processId = null } = this.props;

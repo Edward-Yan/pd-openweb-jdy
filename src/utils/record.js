@@ -526,12 +526,28 @@ export const openLinkFromRecord = (linkControlId, record = {}) => {
   }
 };
 
-export const handleRecordClick = (view, row, openRecord = () => {}) => {
-  // 自定义菜单 iframe 弹框钩子：由 Preview.jsx 挂载
-  // hook 签名：{ enabled: boolean, onRowClick: (row) => void }
+/**
+ * 自定义菜单 iframe 弹框钩子（由 Preview.jsx 挂载）
+ * hook 签名：{ enabled: boolean, onRowClick: (row) => void }
+ *
+ * 尝试通过 iframe 弹框拦截记录点击（网页端 / 移动端共用）。
+ * @param {object} row - 行数据（含 rowid）
+ * @returns {boolean} 是否已拦截（true 时调用方应跳过默认打开逻辑）
+ */
+export const tryIframeHookIntercept = row => {
   const iframeHook = window.__CUSTOM_PAGE_IFRAME_HOOK__;
+
   if (iframeHook?.enabled && _.isFunction(iframeHook.onRowClick)) {
     iframeHook.onRowClick(row);
+    return true;
+  }
+
+  return false;
+};
+
+export const handleRecordClick = (view, row, openRecord = () => {}) => {
+  // 自定义菜单 iframe 弹框钩子：由 Preview.jsx 挂载
+  if (tryIframeHookIntercept(row)) {
     return;
   }
 

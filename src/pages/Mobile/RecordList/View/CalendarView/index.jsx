@@ -15,6 +15,7 @@ import { RECORD_COLOR_SHOW_TYPE } from 'worksheet/constants/enum';
 import { pathCompletion } from 'src/utils/common';
 import { getAdvanceSetting } from 'src/utils/control';
 import RegExpValidator from 'src/utils/expression';
+import { tryIframeHookIntercept } from 'src/utils/record';
 import DailySchedule from './components/DailySchedule';
 import EventContent from './components/EventContent';
 import IconDimension from './components/IconDimension';
@@ -226,6 +227,8 @@ const Calendar = memo(
     };
 
     const openRecord = item => {
+      // 自定义页面 iframe 弹框拦截（与网页端 handleRecordClick 钩子逻辑一致）
+      if (tryIframeHookIntercept(item)) return;
       const { clicktype, clickcid } = view.advancedSetting || {};
       // clicktype：点击操作 空或者0：打开记录 1：打开链接 2：无
       if (clicktype === '2') return;

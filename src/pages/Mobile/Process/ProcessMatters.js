@@ -8,6 +8,11 @@ import instanceVersion from 'src/pages/workflow/api/instanceVersion';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
 import 'mobile/ProcessRecord/OtherAction/index.less';
 import verifyPassword from 'src/components/verifyPassword';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  buildWorkflowDetailUrl,
+  shouldUseWorkflowIframe,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import { getTodoCount } from 'src/pages/workflow/MyProcess/Entry';
 import 'src/pages/worksheet/common/newRecord/NewRecord.less';
 import { navigateTo } from 'src/router/navigateTo';
@@ -130,6 +135,7 @@ export default class ProcessMatters extends Component {
       countData: {},
       appCount: {},
       previewRecord: {},
+      workflowIframe: null,
       batchApproval: false,
       approveCards: [],
       approveType: null,
@@ -279,6 +285,49 @@ export default class ProcessMatters extends Component {
   };
   handleScrollEnd = () => {
     this.getTodoList();
+  };
+  /**
+   * 待办卡片点击：仅待审批 tab + app.id 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
+   * （与网页端 MyProcess 的处理逻辑一致）
+   */
+  openTodoItem = item => {
+    const { topTab } = this.state;
+
+    if (topTab && topTab.id === 'waitingApproval' && shouldUseWorkflowIframe(item)) {
+      this.setState({ previewRecord: {}, workflowIframe: { item, src: '' } });
+      buildWorkflowDetailUrl(item)
+        .then(src => {
+          if (src) {
+            this.setState({ workflowIframe: { item, src } });
+          } else {
+            // 构建 URL 失败时退化为原生审批详情
+            this.setState({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+          }
+        })
+        .catch(() => {
+          this.setState({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+        });
+      return;
+    }
+
+    this.setState({
+      previewRecord: { instanceId: item.id, workId: item.workId },
+    });
+  };
+  /** iframe 审批弹框关闭后刷新待办列表与数量（审批可能已在 iframe 内完成） */
+  handleWorkflowIframeRefresh = () => {
+    this.setState(
+      {
+        workflowIframe: null,
+        list: [],
+        pageIndex: 1,
+        isMore: true,
+      },
+      () => {
+        this.getTodoCount();
+        this.getTodoList();
+      },
+    );
   };
   handleApproveDone = ({ workId }) => {
     const { list, countData, appCount, topTab = {} } = this.state;
@@ -786,9 +835,7 @@ export default class ProcessMatters extends Component {
                 return item.entityName ? `${item.entityName}: ${item.title}` : item.title;
               }}
               onClick={() => {
-                this.setState({
-                  previewRecord: { instanceId: item.id, workId: item.workId },
-                });
+                this.openTodoItem(item);
               }}
               onApproveDone={this.handleApproveDone}
               onChangeApproveCards={checked => {
@@ -822,6 +869,7 @@ export default class ProcessMatters extends Component {
       bottomTab,
       topTab,
       previewRecord,
+      workflowIframe,
       approveCards,
       approveType,
       encryptType,
@@ -1008,6 +1056,21 @@ export default class ProcessMatters extends Component {
             alert(_l('操作成功'));
           }}
         />
+        {!!workflowIframe && !!workflowIframe.src && (
+          <IframeModal
+            visible
+            src={workflowIframe.src}
+            title={
+              workflowIframe.item.entityName
+                ? `${workflowIframe.item.entityName}: ${workflowIframe.item.title || _l('未命名')}`
+                : workflowIframe.item.title || _l('审批详情')
+            }
+            onClose={() => {
+              this.setState({ workflowIframe: null });
+            }}
+            afterClose={this.handleWorkflowIframeRefresh}
+          />
+        )}
         {(approveType || encryptType) && this.renderSignatureDialog()}
         {rejectVisible && this.renderRejectDialog()}
       </div>

@@ -45,7 +45,7 @@ const MOBILE_MODAL_STYLE_CSS = `
   .mobileIframeModalWrap .ant-modal {
     height: 100%;
     max-width: 100%;
-    margin: 0; /* 覆盖 antd 小屏默认 margin: 8px auto，保证全屏无留白、不撑出滚动条 */
+    margin: 0;
     padding-bottom: 0;
   }
   .mobileIframeModalWrap .ant-modal-content {

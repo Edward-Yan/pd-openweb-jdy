@@ -190,7 +190,7 @@ const WidgetDisplay = forwardRef((props, $cardRef) => {
       if (browserIsMobile()) {
         return (
           <Suspense fallback={<LazyDisplayFallback />}>
-            <MobileView appId={ids.appId} setting={widget} />
+            <MobileView appId={ids.appId} ids={ids} setting={widget} />
           </Suspense>
         );
       }
@@ -203,6 +203,7 @@ const WidgetDisplay = forwardRef((props, $cardRef) => {
               layoutType={layoutType}
               className={cx({ disableSingleView: editable })}
               appId={ids.appId}
+              ids={ids}
               setting={{
                 ...widget,
                 config: {

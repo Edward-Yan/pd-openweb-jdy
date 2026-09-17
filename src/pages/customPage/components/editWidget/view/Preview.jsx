@@ -159,15 +159,15 @@ const navigateToView = (workSheetId, viewId) => {
 };
 
 export function View(props) {
-  const { appId, setting = {}, className, layoutType, filtersGroup = [], themeColor } = props;
+  const { appId, ids = {}, setting = {}, className, layoutType, filtersGroup = [], themeColor } = props;
   const { id, apkId, value, viewId, config = {} } = setting;
   const singleViewRef = useRef();
   const isMobileLayout = isMobile || layoutType === 'mobile';
   const translateInfo = getTranslateInfo(appId, null, id);
   const Component = isMobileLayout ? LoadableMobileSingleView : LoadableSingleView;
   const showTitle = config.showTitle ?? true;
-
   // === iframe 弹框相关 ===
+  const currentMenuAppId = ids.worksheetId;
   const menuConfigRef = useRef(null);
   const [iframeState, setIframeState] = useState({ visible: false, src: '', title: '' });
   // 用于关闭 iframe 后强制刷新 SingleView（变更 key 触发重挂载）
@@ -182,7 +182,6 @@ export function View(props) {
       await ensureIframeConfigLoaded();
       if (cancelled) return;
 
-      const currentMenuAppId = id;
       const cfg = getMenuConfig(appId, currentMenuAppId);
       menuConfigRef.current = cfg;
 
@@ -218,7 +217,7 @@ export function View(props) {
         window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
       }
     };
-  }, [apkId, appId, id]);
+  }, [apkId, appId, currentMenuAppId]);
 
   if (_.isEmpty(viewId)) {
     return (

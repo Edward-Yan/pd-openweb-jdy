@@ -43,9 +43,9 @@ const DEFAULT_MUTUAL_TRUST_CONFIG = {
  */
 class IFrameConfigLoader {
   constructor() {
-    this.menuIndex = {};      // menuAppId → menuConfig
-    this.workflowIndex = {};  // appId → workflowConfig
-    this.mutualTrustConfig = null;  // { sourceSystemId, targetSystemId }
+    this.menuIndex = {}; // menuAppId → menuConfig
+    this.workflowIndex = {}; // appId → workflowConfig
+    this.mutualTrustConfig = null; // { sourceSystemId, targetSystemId }
     this._loadingPromise = null;
     this._cacheLoaded = false;
 
@@ -78,18 +78,15 @@ class IFrameConfigLoader {
       if (!list || !Array.isArray(list)) return null;
       if (Date.now() - (ts || 0) > CACHE_TTL) return null;
       return list;
-    } catch (_) {
+    } catch {
       return null;
     }
   }
 
   _writeCache(list) {
     try {
-      localStorage.setItem(
-        CACHE_KEY,
-        JSON.stringify({ list, ts: Date.now() }),
-      );
-    } catch (_) {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({ list, ts: Date.now() }));
+    } catch {
       // 忽略 localStorage 写入失败
     }
   }
@@ -119,26 +116,33 @@ class IFrameConfigLoader {
       const cfg = entry.config || {};
 
       // menu 配置 —— 用 appId + menuAppId 做复合 key，避免不同应用的 menuAppId 冲突
+      // 兼容配置数据中 item.appId 与配置行 appId（entry.appId）不一致的情况：
+      // 两个 appId 都建索引，保证按「当前应用 appId」（entry.appId）查询时也能命中
       const menuList = cfg.MENU_IFRAME_CONFIGS || [];
       menuList.forEach(item => {
         const fullUrl = this._resolveDetailUrl(item.detailUrl);
-        const effectiveAppId = item.appId || appId;
-        const key = `${effectiveAppId}__${item.menuAppId}`;
-        newMenuIndex[key] = {
-          ...item,
-          appId: effectiveAppId,
-          detailUrl: fullUrl,
-        };
+        const menuKeys = _.uniq([appId, item.appId].filter(Boolean));
+        menuKeys.forEach(effectiveAppId => {
+          newMenuIndex[`${effectiveAppId}__${item.menuAppId}`] = {
+            ...item,
+            appId: effectiveAppId,
+            detailUrl: fullUrl,
+          };
+        });
       });
 
-      // workflow 配置 —— appId 本身唯一，保持原逻辑
+      // workflow 配置 —— item.appId 与 entry.appId 可能不一致（同 menu），双 appId 注册
       const wfList = cfg.WORKFLOW_IFRAME_CONFIGS || [];
       wfList.forEach(item => {
         const fullUrl = this._resolveDetailUrl(item.detailUrl);
-        newWorkflowIndex[item.appId || appId] = {
-          ...item,
-          detailUrl: fullUrl,
-        };
+        const wfKeys = _.uniq([appId, item.appId].filter(Boolean));
+        wfKeys.forEach(effectiveAppId => {
+          newWorkflowIndex[effectiveAppId] = {
+            ...item,
+            appId: effectiveAppId,
+            detailUrl: fullUrl,
+          };
+        });
       });
 
       // 互信认证配置 —— 取第一条有效记录
@@ -270,10 +274,7 @@ export async function buildDetailUrl(config, row) {
         getTemplate: true,
       });
 
-      const receiveControls =
-        _.get(rowRes, 'receiveControls') ||
-        _.get(rowRes, 'row.receiveControls') ||
-        [];
+      const receiveControls = _.get(rowRes, 'receiveControls') || _.get(rowRes, 'row.receiveControls') || [];
 
       // instanceId
       if (config.instanceIdFromRowId) {
@@ -381,10 +382,7 @@ export async function buildWorkflowDetailUrl(item) {
         getTemplate: true,
       });
 
-      const receiveControls =
-        _.get(rowRes, 'receiveControls') ||
-        _.get(rowRes, 'row.receiveControls') ||
-        [];
+      const receiveControls = _.get(rowRes, 'receiveControls') || _.get(rowRes, 'row.receiveControls') || [];
 
       const relation = _.find(receiveControls, { controlName: '关联实例' });
       instanceId = relation?.value || '';

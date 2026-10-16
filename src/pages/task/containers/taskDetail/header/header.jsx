@@ -113,13 +113,15 @@ class Header extends Component {
   handleZtttIPC = () => {
     const { taskId } = this.props;
     const { data } = this.props.taskDetails[taskId];
-    const members = data.member || [];
-    const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
+    // const members = data.member || [];
+    // const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
+    const isCharge = data.auth === config.auth.Charger;
+    const isMember = data.auth === config.auth.Member;
 
     // console.log('-------------------props', this.props);
     // console.log('-------------------data', data);
 
-    if (isCurrentUserInTask) {
+    if (isCharge || isMember) {
       // console.log('----------当前用户在任务中', taskId);
       window.electron?.send('navigateToTaskChat', { taskId: taskId });
     }
@@ -354,8 +356,8 @@ class Header extends Component {
     const { data } = this.props.taskDetails[taskId];
     const isCharge = data.auth === config.auth.Charger;
     const isMember = data.auth === config.auth.Member;
-    const members = data.member || [];
-    const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
+    // const members = data.member || [];
+    // const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
 
     return (
       <div className={cx('taskDetailHeader boxSizing flexRow')}>
@@ -372,7 +374,7 @@ class Header extends Component {
         </div>
         <div
           className={cx('taskDetailStatusBtn colorPrimary borderColorPrimary mLeft15', {
-            taskDetailStatusBtnNo: !isCurrentUserInTask,
+            taskDetailStatusBtnNo: !isCharge && !isMember,
           })}
           onClick={this.handleZtttIPC}
         >

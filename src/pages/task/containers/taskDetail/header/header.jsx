@@ -113,17 +113,19 @@ class Header extends Component {
   handleZtttIPC = () => {
     const { taskId } = this.props;
     const { data } = this.props.taskDetails[taskId];
-    // const members = data.member || [];
-    // const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
-    const isCharge = data.auth === config.auth.Charger;
-    const isMember = data.auth === config.auth.Member;
+    const members = data.member || [];
+    const currentUserIsCharge = data.charge?.accountID===md.global.Account.accountId;
+    const currentUserIsMember = members.some(item => item.account.accountID === md.global.Account.accountId);
 
     // console.log('-------------------props', this.props);
     // console.log('-------------------data', data);
+    console.log('-------------------ischarge,ismember:', currentUserIsCharge,currentUserIsMember);
 
-    if (isCharge || isMember) {
-      // console.log('----------当前用户在任务中', taskId);
+    if (currentUserIsCharge || currentUserIsMember) {
+      console.log('----------当前用户在任务中', taskId);
       window.electron?.send('navigateToTaskChat', { taskId: taskId });
+    }else{
+      alert('没有该任务的任务通权限',2);
     }
   };
 
@@ -356,8 +358,9 @@ class Header extends Component {
     const { data } = this.props.taskDetails[taskId];
     const isCharge = data.auth === config.auth.Charger;
     const isMember = data.auth === config.auth.Member;
-    // const members = data.member || [];
-    // const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
+    const members = data.member || [];
+    const currentUserIsCharge = data.charge?.accountID===md.global.Account.accountId;
+    const currentUserIsMember = members.some(item => item.account.accountID === md.global.Account.accountId);
 
     return (
       <div className={cx('taskDetailHeader boxSizing flexRow')}>
@@ -374,7 +377,7 @@ class Header extends Component {
         </div>
         <div
           className={cx('taskDetailStatusBtn colorPrimary borderColorPrimary mLeft15', {
-            taskDetailStatusBtnNo: !isCharge && !isMember,
+            taskDetailStatusBtnNo: !currentUserIsCharge && !currentUserIsMember,
           })}
           onClick={this.handleZtttIPC}
         >

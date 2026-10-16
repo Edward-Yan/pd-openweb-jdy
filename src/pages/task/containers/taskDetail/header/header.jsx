@@ -110,6 +110,21 @@ class Header extends Component {
     });
   };
 
+  handleZtttIPC = () => {
+    const { taskId } = this.props;
+    const { data } = this.props.taskDetails[taskId];
+    const members = data.member || [];
+    const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
+
+    // console.log('-------------------props', this.props);
+    // console.log('-------------------data', data);
+
+    if (isCurrentUserInTask) {
+      // console.log('----------当前用户在任务中', taskId);
+      window.electron?.send('navigateToTaskChat', { taskId: taskId });
+    }
+  };
+
   /**
    * 刷新
    */
@@ -339,6 +354,8 @@ class Header extends Component {
     const { data } = this.props.taskDetails[taskId];
     const isCharge = data.auth === config.auth.Charger;
     const isMember = data.auth === config.auth.Member;
+    const members = data.member || [];
+    const isCurrentUserInTask = members.some(item => item.account.accountID === md.global.Account.accountId);
 
     return (
       <div className={cx('taskDetailHeader boxSizing flexRow')}>
@@ -352,6 +369,14 @@ class Header extends Component {
         >
           <i className="Font16 icon-ok mRight5" />
           {_l('标记完成')}
+        </div>
+        <div
+          className={cx('taskDetailStatusBtn colorPrimary borderColorPrimary mLeft15', {
+            taskDetailStatusBtnNo: !isCurrentUserInTask,
+          })}
+          onClick={this.handleZtttIPC}
+        >
+          {'任务通'}
         </div>
 
         <div className="flex" />

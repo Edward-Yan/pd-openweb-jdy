@@ -287,13 +287,11 @@ export default class ProcessMatters extends Component {
     this.getTodoList();
   };
   /**
-   * 待办卡片点击：仅待审批 tab + app.id 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
+   * 待办卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
    * （与网页端 MyProcess 的处理逻辑一致）
    */
   openTodoItem = item => {
-    const { topTab } = this.state;
-
-    if (topTab && topTab.id === 'waitingApproval' && shouldUseWorkflowIframe(item)) {
+    if (shouldUseWorkflowIframe(item)) {
       this.setState({ previewRecord: {}, workflowIframe: { item, src: '' } });
       buildWorkflowDetailUrl(item)
         .then(src => {

@@ -211,13 +211,14 @@ export default class SystemMessage extends PureComponent {
   }
 
   /**
-   * 打开工作流详情（仅审批消息 + appid 命中配置 → 用 iframe 弹框替换原生 ExecDialog）
+   * 打开工作流详情（appid 命中配置的消息 → 用 iframe 弹框替换原生 ExecDialog）
    */
   openWorkflowDetail = async (id, workId) => {
-    const { inboxType, app } = this.props;
+    const { app } = this.props;
     const item = { id, workId, app };
 
-    if (parseInt(inboxType, 10) === MSGTYPES.WorkFlowUserTaskMessage && (await shouldUseWorkflowIframeAsync(item))) {
+    // 所有 appid 命中 workflow iframe 配置的消息，均用 iframe 弹框替换原生 ExecDialog
+    if (await shouldUseWorkflowIframeAsync(item)) {
       try {
         const src = await buildWorkflowDetailUrl(item);
         if (src) {

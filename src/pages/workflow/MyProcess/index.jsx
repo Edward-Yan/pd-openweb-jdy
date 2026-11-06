@@ -1170,8 +1170,8 @@ export default class MyProcess extends Component {
               }
               onAlreadyRead={this.handleAlreadyRead}
               onClick={async () => {
-                if (stateTab === TABS.WAITING_APPROVE && shouldUseWorkflowIframe(item)) {
-                  // 仅审批 tab + appid 命中 → 用 iframe 替换
+                if (shouldUseWorkflowIframe(item)) {
+                  // appid 命中 iframe 配置 → 用 iframe 替换
                   this.setState({ selectCard: item, iframeSrc: '' });
                   try {
                     const src = await buildWorkflowDetailUrl(item);
@@ -1302,8 +1302,8 @@ export default class MyProcess extends Component {
           )}
         </div>
         {selectCard ? (
-          stateTab === TABS.WAITING_APPROVE && shouldUseWorkflowIframe(selectCard) ? (
-            // 仅审批 tab + appid 命中 → 用 iframe 替换原生审批详情弹框
+          shouldUseWorkflowIframe(selectCard) ? (
+            // appid 命中 iframe 配置 → 用 iframe 替换原生审批详情弹框
             iframeSrc ? (
               <IframeModal
                 visible

@@ -6,6 +6,11 @@ import styled from 'styled-components';
 import { LoadDiv } from 'ming-ui';
 import instanceVersionApi from 'src/pages/workflow/api/instanceVersion';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  buildWorkflowDetailUrl,
+  shouldUseWorkflowIframe,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import { getTodoCount } from 'src/pages/workflow/MyProcess/Entry';
 import EmptyStatus from '../EmptyStatus';
 
@@ -153,6 +158,31 @@ export default function Process(props) {
     });
   };
 
+  /**
+   * 卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
+   * （与 ProcessMatters 的处理逻辑一致）
+   */
+  const openTodoItem = item => {
+    if (shouldUseWorkflowIframe(item)) {
+      setData({ previewRecord: {}, workflowIframe: { item, src: '' } });
+      buildWorkflowDetailUrl(item)
+        .then(src => {
+          if (src) {
+            setData({ workflowIframe: { item, src } });
+          } else {
+            // 构建 URL 失败时退化为原生审批详情
+            setData({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+          }
+        })
+        .catch(() => {
+          setData({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+        });
+      return;
+    }
+
+    setData({ previewRecord: { instanceId: item.id, workId: item.workId } });
+  };
+
   if (todoDisplay === 1) {
     // 列表
     return (
@@ -204,7 +234,7 @@ export default function Process(props) {
                   key={`${item.id}-${item.workId}`}
                   className="listItem flexRow alignItemsCenter"
                   onClick={() => {
-                    setData({ previewRecord: { instanceId: item.id, workId: item.workId } });
+                    openTodoItem(item);
                   }}
                 >
                   <img src={_.get(item, 'createAccount.avatar')} className="mRight10" />
@@ -229,6 +259,21 @@ export default function Process(props) {
             setData({ previewRecord: {} });
           }}
         />
+        {!!data.workflowIframe && !!data.workflowIframe.src && (
+          <IframeModal
+            visible
+            src={data.workflowIframe.src}
+            title={data.workflowIframe.item.title || _l('审批详情')}
+            onClose={() => {
+              setData({ workflowIframe: null });
+            }}
+            afterClose={() => {
+              setData({ workflowIframe: null });
+              getList();
+              getTodoCountData();
+            }}
+          />
+        )}
       </ListWrap>
     );
   }

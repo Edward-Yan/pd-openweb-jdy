@@ -6,6 +6,11 @@ import { Icon, LoadDiv, ScrollView } from 'ming-ui';
 import instanceVersion from 'src/pages/workflow/api/instanceVersion';
 import workflowPushSoket from 'mobile/components/socket/workflowPushSoket';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  buildWorkflowDetailUrl,
+  shouldUseWorkflowIframe,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import { getTodoCount } from 'src/pages/workflow/MyProcess/Entry';
 import Back from '../components/Back';
 import Card from './Card';
@@ -29,6 +34,7 @@ export default class ProcessInform extends Component {
       searchValue: '',
       countData: {},
       previewRecord: {},
+      workflowIframe: null,
       sortVisible: false,
       sortParam: {},
       filterVisible: false,
@@ -121,6 +127,49 @@ export default class ProcessInform extends Component {
       visible: newList.length ? visible : false,
       countData: { ...countData, waitingExamine: waitingExamine - 1 },
     });
+  };
+
+  /**
+   * 卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
+   * （与 ProcessMatters 的处理逻辑一致）
+   */
+  openTodoItem = item => {
+    if (shouldUseWorkflowIframe(item)) {
+      this.setState({ previewRecord: {}, workflowIframe: { item, src: '' } });
+      buildWorkflowDetailUrl(item)
+        .then(src => {
+          if (src) {
+            this.setState({ workflowIframe: { item, src } });
+          } else {
+            // 构建 URL 失败时退化为原生审批详情
+            this.setState({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+          }
+        })
+        .catch(() => {
+          this.setState({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+        });
+      return;
+    }
+
+    this.setState({
+      previewRecord: { instanceId: item.id, workId: item.workId },
+    });
+  };
+
+  /** iframe 审批弹框关闭后刷新列表与数量（可能在 iframe 内完成处理） */
+  handleWorkflowIframeRefresh = () => {
+    this.setState(
+      {
+        workflowIframe: null,
+        list: [],
+        pageIndex: 1,
+        isMore: true,
+      },
+      () => {
+        this.getTodoCount();
+        this.getTodoList();
+      },
+    );
   };
 
   renderInput() {
@@ -256,9 +305,7 @@ export default class ProcessInform extends Component {
                 return item.title;
               }}
               onClick={() => {
-                this.setState({
-                  previewRecord: { instanceId: item.id, workId: item.workId },
-                });
+                this.openTodoItem(item);
                 if (currentTab === 'unread') {
                   this.handleRead(item);
                 }
@@ -299,7 +346,7 @@ export default class ProcessInform extends Component {
   };
 
   render() {
-    const { currentTab, countData, previewRecord } = this.state;
+    const { currentTab, countData, previewRecord, workflowIframe } = this.state;
     return (
       <div className="processContent flexColumn h100">
         <div className="flex flexColumn overflowHidden">
@@ -349,6 +396,17 @@ export default class ProcessInform extends Component {
               alert(_l('操作成功'));
             }}
           />
+          {!!workflowIframe && !!workflowIframe.src && (
+            <IframeModal
+              visible
+              src={workflowIframe.src}
+              title={workflowIframe.item.title || _l('抄送详情')}
+              onClose={() => {
+                this.setState({ workflowIframe: null });
+              }}
+              afterClose={this.handleWorkflowIframeRefresh}
+            />
+          )}
         </div>
       </div>
     );

@@ -2,6 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon, LoadDiv, ScrollView } from 'ming-ui';
 import delegationtodoApi from 'src/pages/workflow/api/delegationtodo';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
+import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
+import {
+  buildWorkflowDetailUrl,
+  shouldUseWorkflowIframe,
+} from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 import Card from 'src/pages/Mobile/Process/Card';
 
 const PAGE_SIZE = 10;
@@ -26,6 +31,7 @@ function TodoList(props) {
     pageInfo: getDefaultTodoPageInfo(Boolean(delegationId)),
   }));
   const [selectCard, setSelectCard] = useState(null);
+  const [workflowIframe, setWorkflowIframe] = useState(null);
   const requestIndexRef = useRef(0);
 
   const getTodoList = useCallback((nextDelegationId, pageIndex = 1) => {
@@ -119,6 +125,34 @@ function TodoList(props) {
     getTodoList(delegationId, pageIndex);
   };
 
+  /**
+   * 卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
+   * （与 ProcessMatters 的处理逻辑一致）
+   */
+  const openTodoItem = item => {
+    if (shouldUseWorkflowIframe(item)) {
+      setSelectCard(null);
+      setWorkflowIframe({ item, src: '' });
+      buildWorkflowDetailUrl(item)
+        .then(src => {
+          if (src) {
+            setWorkflowIframe({ item, src });
+          } else {
+            // 构建 URL 失败时退化为原生审批详情
+            setWorkflowIframe(null);
+            setSelectCard(item);
+          }
+        })
+        .catch(() => {
+          setWorkflowIframe(null);
+          setSelectCard(item);
+        });
+      return;
+    }
+
+    setSelectCard(item);
+  };
+
   return (
     <div className="flexColumn h100 bgSecondary">
       <div className="pTop10 pBottom10 pLeft15 pRight15 TxtRight">
@@ -141,7 +175,7 @@ function TodoList(props) {
                 renderBodyTitle={() => {
                   return item.entityName ? `${item.entityName}: ${item.title}` : item.title;
                 }}
-                onClick={() => setSelectCard(item)}
+                onClick={() => openTodoItem(item)}
               />
             ))}
             {todoPageInfo.moreLoading && (
@@ -165,6 +199,21 @@ function TodoList(props) {
           workId={selectCard.workId}
           onClose={() => setSelectCard(null)}
           onSave={refreshTodoList}
+        />
+      )}
+      {!!workflowIframe && !!workflowIframe.src && (
+        <IframeModal
+          visible
+          src={workflowIframe.src}
+          title={
+            workflowIframe.item.entityName
+              ? `${workflowIframe.item.entityName}: ${workflowIframe.item.title || _l('未命名')}`
+              : workflowIframe.item.title || _l('审批详情')
+          }
+          onClose={() => {
+            setWorkflowIframe(null);
+          }}
+          afterClose={refreshTodoList}
         />
       )}
     </div>

@@ -44,7 +44,7 @@ const DEFAULT_MUTUAL_TRUST_CONFIG = {
 class IFrameConfigLoader {
   constructor() {
     this.menuIndex = {}; // menuAppId → menuConfig
-    this.workflowIndex = {}; // appId → workflowConfig
+    this.workflowIndex = {}; // appId → workflowConfig[]（同一 appId 可有多套配置，按 worksheetId 区分）
     this.mutualTrustConfig = null; // { sourceSystemId, targetSystemId }
     this._loadingPromise = null;
     this._cacheLoaded = false;
@@ -132,16 +132,20 @@ class IFrameConfigLoader {
       });
 
       // workflow 配置 —— item.appId 与 entry.appId 可能不一致（同 menu），双 appId 注册
+      // 同一 appId 可有多套配置（如待办 type=todo / 抄送 type=cc），按 worksheetId 区分，存为数组
       const wfList = cfg.WORKFLOW_IFRAME_CONFIGS || [];
       wfList.forEach(item => {
         const fullUrl = this._resolveDetailUrl(item.detailUrl);
         const wfKeys = _.uniq([appId, item.appId].filter(Boolean));
         wfKeys.forEach(effectiveAppId => {
-          newWorkflowIndex[effectiveAppId] = {
+          if (!newWorkflowIndex[effectiveAppId]) {
+            newWorkflowIndex[effectiveAppId] = [];
+          }
+          newWorkflowIndex[effectiveAppId].push({
             ...item,
             appId: effectiveAppId,
             detailUrl: fullUrl,
-          };
+          });
         });
       });
 
@@ -190,10 +194,10 @@ class IFrameConfigLoader {
     return this.menuIndex[`${appId}__${menuAppId}`];
   }
 
-  /** 根据 appId 查找 workflow 配置（同步，未就绪时返回 undefined） */
-  getWorkflowConfig(appId) {
-    if (!appId) return undefined;
-    return this.workflowIndex[appId];
+  /** 根据 appId 查找 workflow 配置列表（同步，未就绪时返回空数组） */
+  getWorkflowConfigs(appId) {
+    if (!appId) return [];
+    return this.workflowIndex[appId] || [];
   }
 
   /** 获取互信认证配置（同步，未取到时取默认值） */
@@ -328,9 +332,9 @@ export async function buildDetailUrl(config, row) {
 }
 
 /** @param {object} item - 待办卡片数据，关键字段 app.id */
-function findWorkflowConfig(item) {
+function findWorkflowConfigs(item) {
   const appId = _.get(item, 'app.id');
-  return loader.getWorkflowConfig(appId);
+  return loader.getWorkflowConfigs(appId);
 }
 
 /**
@@ -339,7 +343,7 @@ function findWorkflowConfig(item) {
  * 同步版本（未加载完成时返回 false）
  */
 export function shouldUseWorkflowIframe(item) {
-  return !!findWorkflowConfig(item);
+  return findWorkflowConfigs(item).length > 0;
 }
 
 /**
@@ -347,13 +351,15 @@ export function shouldUseWorkflowIframe(item) {
  */
 export async function shouldUseWorkflowIframeAsync(item) {
   await loader.ensureLoaded();
-  return !!findWorkflowConfig(item);
+  return findWorkflowConfigs(item).length > 0;
 }
 
 /**
- * 为流程待办卡片（MyProcess）构建审批详情 iframe URL
+ * 为流程待办卡片构建 OA 详情 iframe URL
  *
- * 先按 item.app.id 找到对应 workflowConfig，再从 config.worksheetId 查行数据
+ * 先按 item.app.id 找到该应用的全部 workflowConfig（同一 appId 可有多套，如待办 type=todo / 抄送 type=cc），
+ * 再通过 GetWorkItem 返回的 worksheetId 匹配对应配置，按配置的 worksheetId 查行数据拼参数。
+ * 参数为超集 + 只替换 detailUrl 中存在的 key，天然兼容 todo / cc 两种地址格式。
  *
  * @param {object} item - 待办卡片数据（from instanceVersion.getTodoList）
  * @returns {Promise<string>}
@@ -361,19 +367,19 @@ export async function shouldUseWorkflowIframeAsync(item) {
 export async function buildWorkflowDetailUrl(item) {
   if (!item) return '';
 
-  const workflowConfig = findWorkflowConfig(item);
-  if (!workflowConfig) return '';
-
-  let instanceId = '';
-  let nodeId = '';
+  const configs = findWorkflowConfigs(item);
+  if (!configs.length) return '';
   let rowId = '';
+  let workflowConfig = configs[0];
   try {
-    // 1. 通过 workId 反查 worksheet 行 ID
+    // 1. 通过 workId 反查 OA 同步表行：返回 { worksheetId, rowId }，worksheetId 表明行归属哪张表
     const workItemRes = await worksheetApi.getWorkItem({
       instanceId: item.id,
       workId: item.workId,
     });
     rowId = _.get(workItemRes, 'rowId') || '';
+    // 2. 按返回的 worksheetId 精确匹配配置（待办表 → todo 配置，抄送表 → cc 配置），匹配不到退回第一条
+    workflowConfig = configs.find(cfg => cfg.worksheetId === workItemRes.worksheetId) || configs[0];
 
     if (rowId) {
       const rowRes = await worksheetApi.getRowByID({
@@ -384,18 +390,35 @@ export async function buildWorkflowDetailUrl(item) {
 
       const receiveControls = _.get(rowRes, 'receiveControls') || _.get(rowRes, 'row.receiveControls') || [];
 
-      const relation = _.find(receiveControls, { controlName: '关联实例' });
-      instanceId = relation?.value || '';
+      // instanceId：配置要求从行 ID 取时直接用 rowId，否则取「关联实例」控件值
+      let instanceId = '';
+      if (workflowConfig.instanceIdFromRowId) {
+        instanceId = rowId;
+      } else {
+        const relation = _.find(receiveControls, { controlName: '关联实例' });
+        instanceId = relation?.value || '';
+      }
 
       const node = _.find(receiveControls, { controlName: '节点ID' });
-      nodeId = node?.value || '';
+      const nodeId = node?.value || '';
 
+      // customFields：paramKey → controlName（如 cc 配置的 isRead ← 阅读状态）
+      const customFieldValues = {};
+      _.forEach(workflowConfig.customFields || {}, (controlName, paramKey) => {
+        const control = _.find(receiveControls, { controlName });
+        customFieldValues[paramKey] = control?.value || '';
+      });
+
+      // 参数超集：替换循环只处理 detailUrl 中实际存在的 key（如 cc 地址无 instanceId=，自动跳过）
       const params = {
+        appid: workflowConfig.appId,
+        userId: _.get(md, 'global.Account.accountId') || '',
+        recordId: rowId,
+        ccRecordId: rowId,
+        runNodeRowId: rowId,
         instanceId,
         nodeId,
-        runNodeRowId: rowId || '',
-        userId: _.get(md, 'global.Account.accountId') || '',
-        appid: workflowConfig.appId,
+        ...customFieldValues,
       };
 
       let url = workflowConfig.detailUrl;
@@ -417,6 +440,7 @@ export async function buildWorkflowDetailUrl(item) {
     console.warn('[buildWorkflowDetailUrl] 获取 worksheet 行数据失败，退化为最小 URL', e);
   }
 
+  // 降级路径：无 rowId / 接口失败时，用第一条配置拼最小 URL
   const runNodeRowId = rowId || '';
   const userId = _.get(md, 'global.Account.accountId') || '';
   let url = workflowConfig.detailUrl;

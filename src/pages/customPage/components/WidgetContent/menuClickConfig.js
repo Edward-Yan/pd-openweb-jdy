@@ -418,13 +418,15 @@ export async function buildWorkflowDetailUrl(item) {
         runNodeRowId: rowId,
         instanceId,
         nodeId,
+        jdyInstanceId: item.id || '',
+        jdyWorkId: item.workId || '',
         ...customFieldValues,
       };
 
       let url = workflowConfig.detailUrl;
       _.forEach(params, (value, key) => {
-        const re = new RegExp(`(${key}=)([^&]*)`, 'g');
-        url = url.replace(re, `$1${encodeURIComponent(value)}`);
+        const re = new RegExp(`(^|&)(${key}=)([^&]*)`, 'g');
+        url = url.replace(re, `$1$2${encodeURIComponent(value)}`);
       });
       // 从配置接口获取互信认证参数，追加互信标记使 parseMutualTrustParams 能识别
       const trustConfig = loader.getMutualTrustConfig();
@@ -447,6 +449,8 @@ export async function buildWorkflowDetailUrl(item) {
   url = url.replace(/(runNodeRowId=)([^&]*)/, `$1${encodeURIComponent(runNodeRowId)}`);
   url = url.replace(/(userId=)([^&]*)/, `$1${encodeURIComponent(userId)}`);
   url = url.replace(/(appid=)([^&]*)/, `$1${encodeURIComponent(workflowConfig.appId)}`);
+  url = url.replace(/(jdyInstanceId=)([^&]*)/, `$1${encodeURIComponent(item.id)}`);
+  url = url.replace(/(jdyWorkId=)([^&]*)/, `$1${encodeURIComponent(item.workId)}`);
   // 降级路径同样接入互信认证
   const trustConfig = loader.getMutualTrustConfig();
   if (trustConfig) {

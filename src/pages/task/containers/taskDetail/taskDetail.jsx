@@ -350,7 +350,7 @@ class TaskDetail extends Component {
   /**
    * 移除任务成员
    */
-  removeTaskMember = accountId => {
+  removeTaskMember = (accountId, callback) => {
     const { taskId } = this.state;
     const { openType } = this.props;
     const isMe = accountId === md.global.Account.accountId;
@@ -376,6 +376,7 @@ class TaskDetail extends Component {
             }
           } else {
             this.props.dispatch(removeTaskMember(taskId, accountId));
+            if (callback) callback();
           }
         });
       },

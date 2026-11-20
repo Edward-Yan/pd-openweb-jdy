@@ -549,6 +549,54 @@ export default {
     return mdyAPI('TaskCenter', 'GetTaskDetail', args, options);
   },
   /**
+   * 桌面端-获取任务详情（member 负责人 / viewers 参与者）
+   * @param {string} taskId 任务id
+   * @param {Object} options 配置参数
+   * @returns {Promise<Boolean, ErrorModel>}
+   **/
+  getDesktopTaskDetail: function (taskId, options = {}) {
+    return mdyAPI('', '', {}, {
+      ...options,
+      silent: true,
+      customParseResponse: true,
+      ajaxOptions: {
+        type: 'GET',
+        // 走 /zttt_api/ 代理（dev: CI/serve.js -> https://zttt.crecg-jt.com/api/），避免跨域 404
+        url: `/zttt_api/teamwork/task/getTaskMember/${taskId}`,
+      },
+    });
+  },
+  /**
+   * 桌面端-添加任务成员
+   * @param {Object} args 请求参数
+   * @param {string} args.task_id 任务id
+   * @param {string} args.account_ids 账号id，多人逗号隔开
+   * @param {string} args.project_id 项目id
+   * @param {number} args.type 1为负责人，2为参与者
+   * @param {string} args.chargeUserId 当前用户id
+   * @param {Object} options 配置参数
+   * @returns {Promise<Boolean, ErrorModel>}
+   **/
+  webAddMembersToTask: function (args, options = {}) {
+    return mdyAPI(
+      '',
+      '',
+      {
+        ...args,
+        chargeUserId: (window.md && md.global.Account && md.global.Account.accountId) || '',
+      },
+      {
+        ...options,
+        silent: true,
+        customParseResponse: true,
+        ajaxOptions: {
+          type: 'POST',
+          url: '/zttt_api/teamwork/task/web_add_members_to_a_task',
+        },
+      },
+    );
+  },
+  /**
    * 获取任务控件
    * @param {Object} args 请求参数
    * @param {string} args.taskID 任务id

@@ -58,7 +58,7 @@ class SingleItem extends Component {
         className="textTertiary hoverColorPrimary pointer w100 oaButton updateSubTaskCharge"
         onClick={() => this.props.clickOp(projectID, taskID, charge.accountID)}
       >
-        {_l('更改负责人')}
+        {_l('更改指派人')}
       </span>
     );
   }

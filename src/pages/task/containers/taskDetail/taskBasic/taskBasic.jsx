@@ -10,11 +10,11 @@ import { dialogSelectUser, quickSelectUser } from 'ming-ui/functions';
 import UploadFiles from 'src/components/UploadFiles';
 import UploadFilesTrigger from 'src/components/UploadFilesTrigger';
 import { navigateTo } from 'src/router/navigateTo';
+import taskCenterApi from 'src/api/taskCenter';
 import { htmlDecodeReg } from 'src/utils/common';
 import config, { OPEN_TYPE, RELATION_TYPES } from '../../../config/config';
 import {
   addTaskAttachments,
-  addTaskMember,
   addTaskTag,
   agreeApplyJoinTask,
   deleteAttachmentData,
@@ -64,7 +64,31 @@ class TaskBasic extends Component {
       isEditing: false,
       attachmentData: [],
       kcAttachmentData: [],
+      desktopMembers: [],
+      desktopViewers: [],
     };
+  }
+
+  /**
+   * 获取桌面端任务详情（members 负责人 / viewers 参与者）
+   */
+  fetchDesktopDetail = taskId => {
+    taskCenterApi
+      .getDesktopTaskDetail(taskId)
+      .then(res => {
+        if (res && res.success && this.props.taskId === taskId) {
+          const detail = res.data || {};
+          this.setState({
+            desktopMembers: Array.isArray(detail.members) ? detail.members : [],
+            desktopViewers: Array.isArray(detail.viewers) ? detail.viewers : [],
+          });
+        }
+      })
+      .catch(() => {});
+  };
+
+  componentDidMount() {
+    this.fetchDesktopDetail(this.props.taskId);
   }
 
   /**
@@ -74,6 +98,10 @@ class TaskBasic extends Component {
   componentDidUpdate(prevProps) {
     if (prevProps !== this.props) {
       const { data } = this.props.taskDetails[this.props.taskId];
+
+      if (this.props.taskId !== prevProps.taskId) {
+        this.fetchDesktopDetail(this.props.taskId);
+      }
 
       if (data.taskName !== this.state.taskName) {
         this.setState({
@@ -290,7 +318,10 @@ class TaskBasic extends Component {
     const callback = users => {
       const user = users[0];
       this.props.dispatch(
-        updateTaskCharge(taskId, user, '', () => this.afterUpdateTaskCharge(user.avatar, user.accountId)),
+        updateTaskCharge(taskId, user, '', () => {
+          this.afterUpdateTaskCharge(user.avatar, user.accountId);
+          this.fetchDesktopDetail(taskId);
+        }),
       );
     };
 
@@ -323,7 +354,7 @@ class TaskBasic extends Component {
         onClick={() => {
           dialogSelectUser({
             sourceId: taskId,
-            title: _l('选择负责人'),
+            title: _l('选择指派人'),
             showMoreInvite: false,
             fromType: 2,
             SelectUserSettings: {
@@ -334,13 +365,15 @@ class TaskBasic extends Component {
               callback: users => {
                 const user = users[0];
                 this.afterUpdateTaskCharge(user.avatar, user.accountId);
-                this.props.dispatch(updateTaskCharge(taskId, user, ''));
+                this.props.dispatch(
+                  updateTaskCharge(taskId, user, '', () => this.fetchDesktopDetail(taskId)),
+                );
               },
             },
           });
         }}
       >
-        {_l('更改负责人')}
+        {_l('更改指派人')}
       </span>
     );
   }
@@ -396,6 +429,41 @@ class TaskBasic extends Component {
 
     this.props.dispatch(updateTaskMemberStar(taskId, star, callback));
   };
+
+  /**
+   * 桌面端成员item（负责人/参与者）: { accountId, avatar, fullName, status, member_type, apply_type }
+   */
+  renderDesktopMemberItem(item, i, hasAuth) {
+    if (!item.accountId || item.status === 2) {
+      return null;
+    }
+
+    const account = {
+      accountID: item.accountId,
+      accountId: item.accountId,
+      avatar: item.avatar,
+      fullname: item.fullName,
+    };
+
+    return (
+      <span key={i} className="membersListItem">
+        <UserHead
+          className={cx({ gray: item.status && item.status !== 1 })}
+          user={{
+            userHead: item.avatar,
+            accountId: item.accountId,
+          }}
+          size={26}
+          secretType={1}
+          operation={
+            hasAuth || item.accountId === md.global.Account.accountId
+              ? this.renderMemberOpHtml(account, hasAuth)
+              : null
+          }
+        />
+      </span>
+    );
+  }
 
   /**
    * 任务成员item
@@ -468,7 +536,7 @@ class TaskBasic extends Component {
           className="textTertiary hoverColorPrimary pointer oaButton updateTaskCharge"
           onClick={() => this.clickMemberFn('updateTaskCharge', account)}
         >
-          {_l('设为负责人')}
+          {_l('设为指派人')}
         </span>
         <span
           className="textTertiary hoverColorPrimary pointer oaButton removeTaskMember"
@@ -492,15 +560,24 @@ class TaskBasic extends Component {
     };
 
     switch (clickOp) {
-      // 设为负责人
+      // 设为指派人
       case 'updateTaskCharge':
         this.props.dispatch(
-          updateTaskCharge(taskId, user, '', () => this.afterUpdateTaskCharge(user.avatar, user.accountId)),
+          updateTaskCharge(taskId, user, '', () => {
+            this.afterUpdateTaskCharge(user.avatar, user.accountId);
+            this.fetchDesktopDetail(taskId);
+          }),
         );
         return;
       // 移出成员
       case 'removeTaskMember':
-        removeTaskMember(user.accountId);
+        // 移除接口成功后再本地同步移除
+        removeTaskMember(user.accountId, () => {
+          this.setState(state => ({
+            desktopMembers: state.desktopMembers.filter(item => item.accountId !== user.accountId),
+            desktopViewers: state.desktopViewers.filter(item => item.accountId !== user.accountId),
+          }));
+        });
         return;
       // 同意
       case 'addMemberAgree':
@@ -516,29 +593,39 @@ class TaskBasic extends Component {
   };
 
   /**
-   * 添加成员
+   * 添加桌面端成员（type: 1负责人 2参与者）
    */
-  addMembers = evt => {
+  addDesktopMembers = type => evt => {
     const { taskId } = this.props;
     const { data } = this.props.taskDetails[taskId];
-    let existsIds = data.member.filter(item => item.type !== 3).map(item => item.account.accountID);
+    const list = type === 1 ? this.state.desktopMembers : this.state.desktopViewers;
+    const existsIds = list.filter(item => item.accountId).map(item => item.accountId);
 
     // 回调
     const callback = (users, callbackInviteResult) => {
-      const userIdArr = [];
-      const specialAccounts = {}; // 外部用户
+      const accountIds = _.uniq(
+        users.map(item => (_.isFunction(callbackInviteResult) ? item.account : item.accountId)).filter(Boolean),
+      ).join(',');
 
-      if (_.isFunction(callbackInviteResult)) {
-        users.forEach(item => {
-          specialAccounts[item.account] = item.fullname;
-        });
-      } else {
-        users.forEach(item => {
-          userIdArr.push(item.accountId);
-        });
+      if (!accountIds) {
+        return;
       }
 
-      this.props.dispatch(addTaskMember(taskId, userIdArr, specialAccounts, callbackInviteResult));
+      taskCenterApi
+        .webAddMembersToTask({
+          task_id: taskId,
+          account_ids: accountIds,
+          project_id: data.projectID || '',
+          type,
+        })
+        .then(res => {
+          if (res && res.success) {
+            this.fetchDesktopDetail(taskId);
+          } else {
+            alert(_l('添加失败'), 2);
+          }
+        })
+        .catch(() => {});
     };
 
     quickSelectUser(evt.target, {
@@ -611,7 +698,7 @@ class TaskBasic extends Component {
   };
 
   render() {
-    const { taskName, showTags, attachmentData, kcAttachmentData, isEditing } = this.state;
+    const { taskName, showTags, attachmentData, kcAttachmentData, isEditing, desktopMembers, desktopViewers } = this.state;
     const { taskId, addTags, closeAddTags } = this.props;
     const { data } = this.props.taskDetails[taskId];
     const hasAuth = data.auth === config.auth.Charger || data.auth === config.auth.Member;
@@ -634,17 +721,19 @@ class TaskBasic extends Component {
             )}
           </ul>
           <div className="flexRow mTop15">
-            <span className="chargeAvatar" onClick={evt => hasAuth && this.clickChargeAvatar(evt)}>
-              <UserHead
-                className={cx({ gray: data.charge.status !== 1 }, { opacity6: data.status })}
-                user={{
-                  userHead: data.charge.avatar,
-                  accountId: data.charge.accountID,
-                }}
-                size={32}
-                operation={hasAuth ? this.renderChargeOpHtml() : null}
-              />
-            </span>
+            <Tooltip title={_l('指派人')}>
+              <span className="chargeAvatar" onClick={evt => hasAuth && this.clickChargeAvatar(evt)}>
+                <UserHead
+                  className={cx({ gray: data.charge.status !== 1 }, { opacity6: data.status })}
+                  user={{
+                    userHead: data.charge.avatar,
+                    accountId: data.charge.accountID,
+                  }}
+                  size={32}
+                  operation={hasAuth ? this.renderChargeOpHtml() : null}
+                />
+              </span>
+            </Tooltip>
             <Textarea
               disabled={!hasAuth}
               className="flex detailTaskName"
@@ -762,16 +851,33 @@ class TaskBasic extends Component {
               />
             </div>
             <div className="taskMembers">
-              <Tooltip title={_l('任务参与者')}>
+              <Tooltip title={_l('任务负责人')}>
                 <span className="taskContentIcon">
                   <i className="icon-group" />
                 </span>
               </Tooltip>
               <div className="membersList">
-                {(data.member || []).map((item, i) => this.renderMemberItem(item, i, hasAuth))}
+                {desktopMembers.map((item, i) => this.renderDesktopMemberItem(item, i, hasAuth))}
+                {hasAuth && (
+                  <Tooltip title={_l('添加任务负责人')}>
+                    <span className="colorPrimary detailAddMember" onClick={this.addDesktopMembers(1)}>
+                      <i className="icon-task-add-member-circle" />
+                    </span>
+                  </Tooltip>
+                )}
+              </div>
+            </div>
+            <div className="taskMembers">
+              <Tooltip title={_l('任务参与者')}>
+                <span className="taskContentIcon">
+                  <i className="icon-group-members" />
+                </span>
+              </Tooltip>
+              <div className="membersList">
+                {desktopViewers.map((item, i) => this.renderDesktopMemberItem(item, i, hasAuth))}
                 {hasAuth && (
                   <Tooltip title={_l('添加任务参与者')}>
-                    <span className="colorPrimary detailAddMember" onClick={this.addMembers}>
+                    <span className="colorPrimary detailAddMember" onClick={this.addDesktopMembers(2)}>
                       <i className="icon-task-add-member-circle" />
                     </span>
                   </Tooltip>

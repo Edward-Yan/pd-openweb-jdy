@@ -245,6 +245,7 @@ export default function CustomPageHeader(props) {
   const isPublicShare = location.href.includes('public/page');
   const isEmbedPage = location.href.includes('embed/page');
   const isEmbed = location.href.includes('#embed');
+  const isClientUa = /zttt|Electron/i.test(window.navigator.userAgent);
 
   const renderLinkageFiltersPopover = () => {
     const toArray = () => {
@@ -521,7 +522,7 @@ export default function CustomPageHeader(props) {
             <CreateByMingDaoYun />
           </div>
         )}
-        {!isPublicShare && pageConfig.fullScreenVisible && (
+        {!isPublicShare && !isClientUa && pageConfig.fullScreenVisible && (
           <Tooltip title={_l('全屏展示')} placement="bottom">
             <div data-event="fullScreen" className="iconWrap valignWrapper mLeft20" onClick={() => toggle(true)}>
               <Icon icon="full_screen" className="Font20 pointer" />

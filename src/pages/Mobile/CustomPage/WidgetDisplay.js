@@ -121,7 +121,7 @@ function WidgetDisplay(props) {
     }
 
     if (componentType === 'view') {
-      return <ViewContent appId={ids.appId} ids={ids} setting={widget} />;
+      return <ViewContent appId={ids.appId} ids={ids} setting={widget} layoutType="mobile" />;
     }
 
     if (componentType === 'filter') {

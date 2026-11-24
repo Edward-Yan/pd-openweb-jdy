@@ -1,11 +1,7 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { CloseOutlined } from '@ant-design/icons';
 import { Modal } from 'antd';
 import styled from 'styled-components';
-import { browserIsMobile } from 'src/utils/common';
-
-const isMobile = browserIsMobile();
-const MOBILE_HEADER_HEIGHT = 48;
 
 const BodyWrap = styled.div`
   position: relative;
@@ -38,86 +34,11 @@ const CloseBtn = styled.button`
   }
 `;
 
-const MOBILE_MODAL_STYLE_CSS = `
-  .mobileIframeModalWrap {
-    overflow: hidden;
-  }
-  .mobileIframeModalWrap .ant-modal {
-    height: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding-bottom: 0;
-  }
-  .mobileIframeModalWrap .ant-modal-content {
-    height: 100%;
-    padding: 0;
-    border-radius: 0;
-    overflow: hidden;
-  }
-  .mobileIframeModalWrap .ant-modal-body {
-    height: 100%;
-    overflow: hidden;
-  }
-`;
-
-const MobileBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-  background-color: var(--color-background-primary);
-`;
-
-const MobileHeader = styled.div`
-  flex-shrink: 0;
-  height: ${MOBILE_HEADER_HEIGHT}px;
-  padding: 0 15px;
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid var(--color-border-secondary);
-
-  .title {
-    flex: 1;
-    min-width: 0;
-    font-size: 17px;
-    font-weight: 600;
-    color: var(--color-text-primary);
-  }
-`;
-
-const MobileFooter = styled.div`
-  flex-shrink: 0;
-  padding: 10px 15px;
-  padding-bottom: calc(10px + constant(safe-area-inset-bottom));
-  padding-bottom: calc(10px + env(safe-area-inset-bottom));
-  border-top: 1px solid var(--color-border-secondary);
-
-  .closeBtn {
-    width: 100%;
-    height: 40px;
-    padding: 0;
-    border: none;
-    border-radius: 24px;
-    background-color: var(--color-primary);
-    color: var(--color-white, #fff);
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-
-    &:active {
-      opacity: 0.85;
-    }
-  }
-`;
-
 const IframeWrap = styled.div`
   width: 100%;
-  ${isMobile
-    ? `flex: 1;
-       min-height: 0;`
-    : `height: 90vh;`}
-  border: ${isMobile ? 'none' : '1px solid var(--color-border-secondary, #e8e8e8)'};
-  border-radius: ${isMobile ? 0 : '4px'};
+  height: 90vh;
+  border: 1px solid var(--color-border-secondary, #e8e8e8);
+  border-radius: 4px;
   overflow: hidden;
   background-color: var(--color-background-primary);
 
@@ -130,10 +51,10 @@ const IframeWrap = styled.div`
 `;
 
 /**
- * 弹框 + iframe 组件（网页端 / 移动端共用）
+ * 弹框 + iframe 组件（仅网页端使用）
  *
- * 网页端：居中 90% 宽弹框，右上角 × / 遮罩点击 / ESC 键关闭
- * 移动端：全屏弹框（标题栏 + 自适应 iframe + 底部关闭按钮），通过底部按钮关闭
+ * 居中 90% 宽弹框，右上角 × / 遮罩点击 / ESC 键关闭
+ * 移动端已改为直接打开认证中心页面，不再使用 iframe 弹框
  *
  * @param {object} props
  * @param {boolean} props.visible - 是否显示
@@ -148,51 +69,30 @@ export default function IframeModal({ visible, src, title = '详情', onClose, a
     afterClose && afterClose();
   };
 
-  const renderIframe = () =>
-    visible && src ? (
-      <IframeWrap>
-        <iframe src={src} allow="fullscreen" allowFullScreen title={title} />
-      </IframeWrap>
-    ) : null;
-
   return (
-    <Fragment>
-      {isMobile && <style>{MOBILE_MODAL_STYLE_CSS}</style>}
-      <Modal
-        visible={visible}
-        closable={false}
-        width={isMobile ? '100%' : '90%'}
-        footer={null}
-        onCancel={handleClose}
-        maskClosable={!isMobile}
-        keyboard={true}
-        destroyOnClose={true}
-        centered={!isMobile}
-        wrapClassName={isMobile ? 'mobileIframeModalWrap' : undefined}
-        style={isMobile ? { top: 0, maxWidth: '100%', paddingBottom: 0 } : { maxWidth: 1680 }}
-        bodyStyle={isMobile ? { padding: 0 } : { padding: 24 }}
-      >
-        {isMobile ? (
-          <MobileBody>
-            <MobileHeader>
-              <div className="title overflow_ellipsis">{title}</div>
-            </MobileHeader>
-            {renderIframe()}
-            <MobileFooter>
-              <button className="closeBtn" type="button" onClick={handleClose}>
-                {_l('关闭')}
-              </button>
-            </MobileFooter>
-          </MobileBody>
-        ) : (
-          <BodyWrap>
-            <CloseBtn type="button" onClick={handleClose} title={_l('关闭')}>
-              <CloseOutlined />
-            </CloseBtn>
-            {renderIframe()}
-          </BodyWrap>
+    <Modal
+      visible={visible}
+      closable={false}
+      width="90%"
+      footer={null}
+      onCancel={handleClose}
+      maskClosable={true}
+      keyboard={true}
+      destroyOnClose={true}
+      centered={true}
+      style={{ maxWidth: 1680 }}
+      bodyStyle={{ padding: 24 }}
+    >
+      <BodyWrap>
+        <CloseBtn type="button" onClick={handleClose} title={_l('关闭')}>
+          <CloseOutlined />
+        </CloseBtn>
+        {visible && src && (
+          <IframeWrap>
+            <iframe src={src} allow="fullscreen" allowFullScreen title={title} />
+          </IframeWrap>
         )}
-      </Modal>
-    </Fragment>
+      </BodyWrap>
+    </Modal>
   );
 }

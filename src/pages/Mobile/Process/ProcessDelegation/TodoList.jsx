@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Icon, LoadDiv, ScrollView } from 'ming-ui';
 import delegationtodoApi from 'src/pages/workflow/api/delegationtodo';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
-import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
 import {
   buildWorkflowDetailUrl,
   shouldUseWorkflowIframe,
@@ -31,7 +30,6 @@ function TodoList(props) {
     pageInfo: getDefaultTodoPageInfo(Boolean(delegationId)),
   }));
   const [selectCard, setSelectCard] = useState(null);
-  const [workflowIframe, setWorkflowIframe] = useState(null);
   const requestIndexRef = useRef(0);
 
   const getTodoList = useCallback((nextDelegationId, pageIndex = 1) => {
@@ -126,25 +124,22 @@ function TodoList(props) {
   };
 
   /**
-   * 卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
-   * （与 ProcessMatters 的处理逻辑一致）
+   * 卡片点击：appid 命中 OA 配置时，直接打开认证中心页面（含目标页面的重定向地址），
+   * 认证通过后由认证中心重定向到目标 OA 页面
    */
   const openTodoItem = item => {
     if (shouldUseWorkflowIframe(item)) {
       setSelectCard(null);
-      setWorkflowIframe({ item, src: '' });
       buildWorkflowDetailUrl(item)
         .then(src => {
           if (src) {
-            setWorkflowIframe({ item, src });
+            window.location.href = src;
           } else {
             // 构建 URL 失败时退化为原生审批详情
-            setWorkflowIframe(null);
             setSelectCard(item);
           }
         })
         .catch(() => {
-          setWorkflowIframe(null);
           setSelectCard(item);
         });
       return;
@@ -199,21 +194,6 @@ function TodoList(props) {
           workId={selectCard.workId}
           onClose={() => setSelectCard(null)}
           onSave={refreshTodoList}
-        />
-      )}
-      {!!workflowIframe && !!workflowIframe.src && (
-        <IframeModal
-          visible
-          src={workflowIframe.src}
-          title={
-            workflowIframe.item.entityName
-              ? `${workflowIframe.item.entityName}: ${workflowIframe.item.title || _l('未命名')}`
-              : workflowIframe.item.title || _l('审批详情')
-          }
-          onClose={() => {
-            setWorkflowIframe(null);
-          }}
-          afterClose={refreshTodoList}
         />
       )}
     </div>

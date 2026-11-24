@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { LoadDiv } from 'ming-ui';
 import instanceVersionApi from 'src/pages/workflow/api/instanceVersion';
 import ProcessRecordInfo from 'mobile/ProcessRecord';
-import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
 import {
   buildWorkflowDetailUrl,
   shouldUseWorkflowIframe,
@@ -159,23 +158,22 @@ export default function Process(props) {
   };
 
   /**
-   * 卡片点击：appid 命中 iframe 配置时，用 iframe 弹框替换原生审批详情
-   * （与 ProcessMatters 的处理逻辑一致）
+   * 卡片点击：appid 命中 OA 配置时，直接打开认证中心页面（含目标页面的重定向地址），
+   * 认证通过后由认证中心重定向到目标 OA 页面
    */
   const openTodoItem = item => {
     if (shouldUseWorkflowIframe(item)) {
-      setData({ previewRecord: {}, workflowIframe: { item, src: '' } });
       buildWorkflowDetailUrl(item)
         .then(src => {
           if (src) {
-            setData({ workflowIframe: { item, src } });
+            window.location.href = src;
           } else {
             // 构建 URL 失败时退化为原生审批详情
-            setData({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+            setData({ previewRecord: { instanceId: item.id, workId: item.workId } });
           }
         })
         .catch(() => {
-          setData({ workflowIframe: null, previewRecord: { instanceId: item.id, workId: item.workId } });
+          setData({ previewRecord: { instanceId: item.id, workId: item.workId } });
         });
       return;
     }
@@ -259,21 +257,6 @@ export default function Process(props) {
             setData({ previewRecord: {} });
           }}
         />
-        {!!data.workflowIframe && !!data.workflowIframe.src && (
-          <IframeModal
-            visible
-            src={data.workflowIframe.src}
-            title={data.workflowIframe.item.title || _l('审批详情')}
-            onClose={() => {
-              setData({ workflowIframe: null });
-            }}
-            afterClose={() => {
-              setData({ workflowIframe: null });
-              getList();
-              getTodoCountData();
-            }}
-          />
-        )}
       </ListWrap>
     );
   }

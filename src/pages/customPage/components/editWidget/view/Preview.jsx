@@ -10,9 +10,9 @@ import { getTranslateInfo } from 'src/utils/app';
 import { browserIsMobile, pathCompletion } from 'src/utils/common';
 import IframeModal from 'src/pages/customPage/components/WidgetContent/IframeModal';
 import {
-  getMenuConfig,
   buildDetailUrl,
   ensureIframeConfigLoaded,
+  getMenuConfig,
 } from 'src/pages/customPage/components/WidgetContent/menuClickConfig';
 
 const Wrap = styled.div`
@@ -198,6 +198,12 @@ export function View(props) {
                 console.warn('[iframe hook] 构建 URL 失败', { row, cfg });
                 return;
               }
+              // 移动端（含移动端自定义页在桌面浏览器中打开的场景）不再使用 iframe 弹框：
+              // 直接打开认证中心页面（含目标页面的重定向地址）
+              if (isMobileLayout) {
+                window.location.href = url;
+                return;
+              }
               setIframeState({
                 visible: true,
                 src: url,
@@ -217,7 +223,7 @@ export function View(props) {
         window.__CUSTOM_PAGE_IFRAME_HOOK__ = null;
       }
     };
-  }, [apkId, appId, currentMenuAppId]);
+  }, [apkId, appId, currentMenuAppId, isMobileLayout]);
 
   if (_.isEmpty(viewId)) {
     return (

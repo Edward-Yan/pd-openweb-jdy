@@ -320,7 +320,8 @@ class TaskBasic extends Component {
       this.props.dispatch(
         updateTaskCharge(taskId, user, '', () => {
           this.afterUpdateTaskCharge(user.avatar, user.accountId);
-          this.fetchDesktopDetail(taskId);
+          // 把原指派人加为参与者后刷新
+          this.addPrevChargeAsViewer(taskId, data.charge && data.charge.accountID);
         }),
       );
     };
@@ -364,9 +365,13 @@ class TaskBasic extends Component {
               unique: true,
               callback: users => {
                 const user = users[0];
+                const prevChargeId = data.charge && data.charge.accountID;
                 this.afterUpdateTaskCharge(user.avatar, user.accountId);
                 this.props.dispatch(
-                  updateTaskCharge(taskId, user, '', () => this.fetchDesktopDetail(taskId)),
+                  updateTaskCharge(taskId, user, '', () => {
+                    // 把原指派人加为参与者后刷新
+                    this.addPrevChargeAsViewer(taskId, prevChargeId);
+                  }),
                 );
               },
             },
@@ -433,7 +438,7 @@ class TaskBasic extends Component {
   /**
    * 桌面端成员item（负责人/参与者）: { accountId, avatar, fullName, status, member_type, apply_type }
    */
-  renderDesktopMemberItem(item, i, hasAuth) {
+  renderDesktopMemberItem(item, i, hasAuth, isChargeRow) {
     if (!item.accountId || item.status === 2) {
       return null;
     }
@@ -457,7 +462,7 @@ class TaskBasic extends Component {
           secretType={1}
           operation={
             hasAuth || item.accountId === md.global.Account.accountId
-              ? this.renderMemberOpHtml(account, hasAuth)
+              ? this.renderMemberOpHtml(account, hasAuth, undefined, isChargeRow)
               : null
           }
         />
@@ -497,7 +502,7 @@ class TaskBasic extends Component {
   /**
    * 成员 opHtml
    */
-  renderMemberOpHtml(account, hasAuth, isApply) {
+  renderMemberOpHtml(account, hasAuth, isApply, showChargeOp = true) {
     // 无权限经过我自己
     if (!hasAuth && md.global.Account.accountId === account.accountId) {
       return (
@@ -532,12 +537,14 @@ class TaskBasic extends Component {
 
     return (
       <Fragment>
-        <span
-          className="textTertiary hoverColorPrimary pointer oaButton updateTaskCharge"
-          onClick={() => this.clickMemberFn('updateTaskCharge', account)}
-        >
-          {_l('设为指派人')}
-        </span>
+        {showChargeOp && (
+          <span
+            className="textTertiary hoverColorPrimary pointer oaButton updateTaskCharge"
+            onClick={() => this.clickMemberFn('updateTaskCharge', account)}
+          >
+            {_l('设为指派人')}
+          </span>
+        )}
         <span
           className="textTertiary hoverColorPrimary pointer oaButton removeTaskMember"
           onClick={() => this.clickMemberFn('removeTaskMember', account)}
@@ -561,14 +568,18 @@ class TaskBasic extends Component {
 
     switch (clickOp) {
       // 设为指派人
-      case 'updateTaskCharge':
+      case 'updateTaskCharge': {
+        const { data } = this.props.taskDetails[taskId];
+        const prevChargeId = data.charge && data.charge.accountID;
         this.props.dispatch(
           updateTaskCharge(taskId, user, '', () => {
             this.afterUpdateTaskCharge(user.avatar, user.accountId);
-            this.fetchDesktopDetail(taskId);
+            // 把原指派人加为参与者后刷新
+            this.addPrevChargeAsViewer(taskId, prevChargeId);
           }),
         );
         return;
+      }
       // 移出成员
       case 'removeTaskMember':
         // 移除接口成功后再本地同步移除
@@ -591,6 +602,26 @@ class TaskBasic extends Component {
         return;
     }
   };
+
+  /**
+   * 更换指派人后，把原指派人以参与者（type: 2）加入，再刷新负责人/参与者列表
+   */
+  addPrevChargeAsViewer(taskId, prevChargeAccountId) {
+    if (!prevChargeAccountId) {
+      this.fetchDesktopDetail(taskId);
+      return;
+    }
+    const { data } = this.props.taskDetails[taskId];
+    taskCenterApi
+      .webAddMembersToTask({
+        task_id: taskId,
+        account_ids: prevChargeAccountId,
+        project_id: data.projectID || '',
+        type: 2,
+      })
+      .catch(() => {})
+      .then(() => this.fetchDesktopDetail(taskId));
+  }
 
   /**
    * 添加桌面端成员（type: 1负责人 2参与者）
@@ -622,10 +653,13 @@ class TaskBasic extends Component {
           if (res && res.success) {
             this.fetchDesktopDetail(taskId);
           } else {
-            alert(_l('添加失败'), 2);
+            alert((res && res.msg) || _l('添加失败'), 2);
           }
         })
-        .catch(() => {});
+        .catch(error => {
+          const reason = (error && error.data && error.data.msg) || (error && error.message) || '';
+          alert(reason ? `${_l('添加失败')}：${reason}` : _l('添加失败'), 2);
+        });
     };
 
     quickSelectUser(evt.target, {
@@ -851,7 +885,7 @@ class TaskBasic extends Component {
               />
             </div>
             <div className="taskMembers">
-              <Tooltip title={_l('任务负责人')}>
+              <Tooltip title={_l('主要负责人')}>
                 <span className="taskContentIcon">
                   <i className="icon-group" />
                 </span>
@@ -874,7 +908,7 @@ class TaskBasic extends Component {
                 </span>
               </Tooltip>
               <div className="membersList">
-                {desktopViewers.map((item, i) => this.renderDesktopMemberItem(item, i, hasAuth))}
+                {desktopViewers.map((item, i) => this.renderDesktopMemberItem(item, i, hasAuth, false))}
                 {hasAuth && (
                   <Tooltip title={_l('添加任务参与者')}>
                     <span className="colorPrimary detailAddMember" onClick={this.addDesktopMembers(2)}>

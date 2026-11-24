@@ -1,3 +1,35 @@
+/**
+ * 解析桌面端（zttt）接口成功返回：HTTP 200 但 success 为 false 时视为失败
+ * zttt 契约: { code, msg, data, success, time }
+ */
+function parseZtttResult(res) {
+  if (res && res.success === false) {
+    const error = new Error(res.msg ? `${_l('请求失败')}：${res.msg}` : _l('请求失败'));
+    error.code = res.code;
+    error.data = res;
+    throw error;
+  }
+  return res;
+}
+
+/**
+ * 归一化桌面端（zttt）接口报错：
+ * customParseResponse 下 HTTP 报错 reject 的是 axios error.response（{ status, data: { code, msg } }），
+ * 统一转成带 msg 的 Error，业务失败（success:false）原样透传
+ */
+function normalizeZtttError(err) {
+  if (err instanceof Error) {
+    return Promise.reject(err);
+  }
+  const data = (err && err.data) || err || {};
+  const reason = data.msg || data.message;
+  const error = new Error(reason ? `${_l('请求失败')}：${reason}` : _l('请求失败'));
+  error.code = data.code;
+  error.status = err && err.status;
+  error.data = data;
+  return Promise.reject(error);
+}
+
 export default {
   /**
    * 获取默认配置网络
@@ -564,7 +596,7 @@ export default {
         // 走 /zttt_api/ 代理（dev: CI/serve.js -> https://zttt.crecg-jt.com/api/），避免跨域 404
         url: `/zttt_api/teamwork/task/getTaskMember/${taskId}`,
       },
-    });
+    }).then(res => parseZtttResult(res)).catch(normalizeZtttError);
   },
   /**
    * 桌面端-添加任务成员
@@ -594,7 +626,7 @@ export default {
           url: '/zttt_api/teamwork/task/web_add_members_to_a_task',
         },
       },
-    );
+    ).then(res => parseZtttResult(res)).catch(normalizeZtttError);
   },
   /**
    * 获取任务控件

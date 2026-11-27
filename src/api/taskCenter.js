@@ -593,7 +593,6 @@ export default {
       customParseResponse: true,
       ajaxOptions: {
         type: 'GET',
-        // 走 /zttt_api/ 代理（dev: CI/serve.js -> https://zttt.crecg-jt.com/api/），避免跨域 404
         url: `/zttt_api/teamwork/task/getTaskMember/${taskId}`,
       },
     }).then(res => parseZtttResult(res)).catch(normalizeZtttError);

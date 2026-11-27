@@ -1,27 +1,39 @@
 import React, { Component, Fragment } from 'react';
-import { ActionSheet, Button, Form, Input, List, Popup, TextArea, Toast } from 'antd-mobile';
+import { Button, Popup, Toast } from 'antd-mobile';
 import { debounce } from 'lodash';
-import { ScrollView, UserHead } from 'ming-ui';
+import { Radio, ScrollView, UserHead } from 'ming-ui';
 import { mdNotification } from 'ming-ui/functions';
 import chatAjax from 'src/api/chat';
+import discussionAjax from 'src/api/discussion';
+import taskCenterAjax from 'src/api/taskCenter';
 import Constant from 'src/pages/chat/utils/constant';
 import * as utils from 'src/pages/chat/utils/index';
 import * as socket from 'src/pages/chat/utils/socket';
+import { SOURCE_TYPE } from 'src/components/comment/config';
 import './SendToChatForMobile.less';
+
+const SHARE_TARGET = {
+  CHAT: 'chat',
+  TASK: 'task',
+};
 
 export default class SendToChatForMobile extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      shareTarget: SHARE_TARGET.CHAT,
       type: 'user',
-      selectDepartmentType: 'current', // current: 仅当前部门， all: 选择当前部门下所有子部门
+      selectDepartmentType: 'current',
       description: '',
       selectedUser: null,
+      selectedTask: null,
       chatList: [],
+      taskList: [],
       loading: false,
       searchValue: '',
-      recentContactsList: [], // 最近所有人列表
-      selectUserVisible: false, //选择用户
+      recentContactsList: [],
+      selectUserVisible: false,
+      selectTaskVisible: false,
       listActive: false,
       activeIndex: null,
       keywords: '',
@@ -44,9 +56,65 @@ export default class SendToChatForMobile extends Component {
         this.setState({ loading: false, recentContactsList: data });
       });
   };
+
+  loadTask = () => {
+    this.setState({ loading: true, activeIndex: null });
+    const { keywords } = this.state;
+    taskCenterAjax
+      .getTaskList({
+        page: 1,
+        size: 50,
+        sort: 10,
+        other: '',
+        filterType: 6,
+        completeTime: '',
+        status: 0,
+        tagIDs: [],
+        withoutTag: false,
+        folderID: '',
+        structure: 0,
+        isFirst: true,
+        projectId: 'all',
+        keyWords: keywords,
+      })
+      .then(source => {
+        const list = source?.status ? source?.data?.data || [] : [];
+        this.setState({ loading: false, taskList: list });
+      })
+      .catch(() => {
+        this.setState({ loading: false, taskList: [] });
+      });
+  };
+
   handleScrollEnd = () => {};
 
+  getShareCardPayload = () => {
+    const { card, url } = this.props;
+    if (!card) return null;
+    const { extra, title = '', text } = card;
+    return {
+      extra: {
+        ...(extra || {}),
+      },
+      title,
+      md: null,
+      text: text || null,
+      url: card.url || url,
+      entityid: card.entityid || card.entityId || '',
+      pic: null,
+    };
+  };
+
   handleSend = () => {
+    const { shareTarget } = this.state;
+    if (shareTarget === SHARE_TARGET.TASK) {
+      this.handleSendToTask();
+      return;
+    }
+    this.handleSendToChat();
+  };
+
+  handleSendToChat = () => {
     const { card, url, onClose = () => {} } = this.props;
     const { selectedUser, description } = this.state;
 
@@ -87,6 +155,58 @@ export default class SendToChatForMobile extends Component {
     }
   };
 
+  handleSendToTask = () => {
+    const { onClose = () => {} } = this.props;
+    const { selectedTask } = this.state;
+    const cardPayload = this.getShareCardPayload();
+
+    if (!selectedTask) {
+      Toast.show({
+        content: _l('请选择'),
+      });
+      return;
+    }
+
+    if (!cardPayload) {
+      Toast.show({
+        icon: 'fail',
+        content: _l('发送失败'),
+      });
+      return;
+    }
+
+    const message = `[fx]${JSON.stringify(cardPayload)}[/fx]`;
+
+    discussionAjax
+      .addDiscussion({
+        sourceId: selectedTask.taskID,
+        sourceType: SOURCE_TYPE.TASK,
+        message,
+        appId: md.global.APPInfo.taskAppID,
+        attachments: JSON.stringify([]),
+      })
+      .then(res => {
+        if (res && res.code === 1) {
+          onClose();
+          Toast.show({
+            icon: 'success',
+            content: _l('发送成功'),
+          });
+        } else {
+          Toast.show({
+            icon: 'fail',
+            content: _l('发送失败'),
+          });
+        }
+      })
+      .catch(() => {
+        Toast.show({
+          icon: 'fail',
+          content: _l('发送失败'),
+        });
+      });
+  };
+
   handleShareBySocket = shareData => {
     if (window.config.SocketPolling && !IM.socket.connected) {
       return;
@@ -123,9 +243,6 @@ export default class SendToChatForMobile extends Component {
           onClose();
         },
         result => {
-          // const { error } = result;
-          // if (error === 'not my contract') {
-          // }
           Toast.show({
             icon: 'fail',
             content: _l('发送失败'),
@@ -151,12 +268,33 @@ export default class SendToChatForMobile extends Component {
     }
   };
 
-  // 处理聊天列表选择
+  handleShareTargetChange = value => {
+    if (value === this.state.shareTarget) return;
+    this.setState({
+      shareTarget: value,
+      selectedUser: null,
+      selectedTask: null,
+      selectUserVisible: false,
+      selectTaskVisible: false,
+      recentContactsList: [],
+      taskList: [],
+      keywords: '',
+      activeIndex: null,
+    });
+  };
+
   handleChatSelect = account => {
     this.setState({
       selectedUser: account,
     });
     this.handleRecentContactsClose();
+  };
+
+  handleTaskSelect = task => {
+    this.setState({
+      selectedTask: task,
+    });
+    this.handleTaskListClose();
   };
 
   handleRecentContactsClose = () => {
@@ -169,8 +307,18 @@ export default class SendToChatForMobile extends Component {
     });
   };
 
-  // 搜索聊天
+  handleTaskListClose = () => {
+    this.setState({
+      listActive: false,
+      activeIndex: null,
+      selectTaskVisible: false,
+      taskList: [],
+      keywords: '',
+    });
+  };
+
   debouncedLoadChat = debounce(this.loadChat, 300);
+  debouncedLoadTask = debounce(this.loadTask, 300);
 
   renderSelectUerPopup = () => {
     const { activeIndex, selectUserVisible, recentContactsList, loading, keywords } = this.state;
@@ -230,10 +378,112 @@ export default class SendToChatForMobile extends Component {
     );
   };
 
+  renderSelectTaskPopup = () => {
+    const { activeIndex, selectTaskVisible, taskList, loading, keywords } = this.state;
+    return (
+      <Popup
+        visible={selectTaskVisible}
+        className="mobileSelectUserModal mobileModal topRadius"
+        onMaskClick={() => this.handleTaskListClose()}
+      >
+        <div className="chat-list-mobile">
+          <Fragment>
+            <div className="header">
+              <span>{_l('我的任务')}</span>
+            </div>
+            <div className="chat-list-container">
+              <input
+                type="text"
+                placeholder={_l('请输入')}
+                value={keywords}
+                className="search-user-input"
+                onChange={val => {
+                  this.setState({ keywords: val.target.value.trim() });
+                  this.debouncedLoadTask();
+                }}
+              />
+              {loading && <div className="loading">加载中...</div>}
+              {!loading && !taskList.length && <div className="empty-chat">{_l('未找到相关任务')}</div>}
+              {!loading && !!taskList.length && (
+                <ScrollView className="chat-items" ref={this.scrollViewRef} onScrollEnd={this.handleScrollEnd}>
+                  {taskList.map((task, index) => (
+                    <div
+                      key={task.taskID}
+                      className={`chat-item ${index === activeIndex ? 'active' : ''}`}
+                      onClick={() => this.handleTaskSelect(task)}
+                    >
+                      <div className="user-name ellipsis" title={task.taskName}>
+                        {task.taskName}
+                      </div>
+                    </div>
+                  ))}
+                </ScrollView>
+              )}
+            </div>
+          </Fragment>
+        </div>
+      </Popup>
+    );
+  };
+
+  renderShareTargetRadio = () => {
+    const { shareTarget } = this.state;
+    return (
+      <div className="mobile-send-to-chat-target">
+        <Radio
+          text={_l('聊天')}
+          checked={shareTarget === SHARE_TARGET.CHAT}
+          onClick={() => this.handleShareTargetChange(SHARE_TARGET.CHAT)}
+        />
+        <Radio
+          text={_l('任务通')}
+          checked={shareTarget === SHARE_TARGET.TASK}
+          onClick={() => this.handleShareTargetChange(SHARE_TARGET.TASK)}
+        />
+      </div>
+    );
+  };
+
+  renderSelectArea = () => {
+    const { shareTarget, selectedUser, selectedTask, selectUserVisible, selectTaskVisible } = this.state;
+    const isChat = shareTarget === SHARE_TARGET.CHAT;
+    const selectedName = isChat ? selectedUser?.name : selectedTask?.taskName;
+    const placeholder = _l('请选择');
+    const focused = isChat ? selectUserVisible : selectTaskVisible;
+
+    return (
+      <div className="selected-user" style={{ position: 'relative' }}>
+        <input
+          type="text"
+          placeholder={selectedName || placeholder}
+          value={selectedName || ''}
+          readOnly
+          className="selected-user-input"
+          style={{ border: `1px solid ${focused ? '#1677ff' : '#ddd'}` }}
+        />
+        <div className="selected-user-btn">
+          <i
+            className="icon-add addIcon selected-user-btn-icon"
+            onClick={() => {
+              if (isChat) {
+                this.debouncedLoadChat();
+                this.setState({ selectUserVisible: true });
+              } else {
+                this.debouncedLoadTask();
+                this.setState({ selectTaskVisible: true });
+              }
+            }}
+          ></i>
+        </div>
+      </div>
+    );
+  };
+
   render() {
-    const { onClose = () => {}, sendChatMobileVisible, card } = this.props;
-    const { selectedUser, description, selectUserVisible } = this.state;
-    const isRecordCard = !card?.text || card?.text === Constant.CARD_SHARE_ENUM.RECORD ? true : false;
+    const { onClose = () => {}, sendChatMobileVisible } = this.props;
+    const { shareTarget, selectedUser, selectedTask, selectUserVisible, selectTaskVisible } = this.state;
+    const canSend = shareTarget === SHARE_TARGET.CHAT ? !!selectedUser : !!selectedTask;
+
     return (
       <Popup
         forceRender
@@ -245,39 +495,8 @@ export default class SendToChatForMobile extends Component {
         <Fragment>
           <div className="mobile-send-to-chat">
             <h3 className="mobile-send-to-chat-title">{_l('分享到')}</h3>
-            <div className="mobile-send-to-chat-info">
-              <div className="selected-user" style={{ position: 'relative' }}>
-                <input
-                  type="text"
-                  placeholder={selectedUser ? selectedUser.name : _l('请选择')}
-                  value={selectedUser ? selectedUser.name : ''}
-                  readOnly
-                  className="selected-user-input"
-                  style={{ border: `1px solid ${selectUserVisible ? '#1677ff' : '#ddd'}` }}
-                />
-                <div className="selected-user-btn">
-                  <i
-                    className="icon-add addIcon selected-user-btn-icon"
-                    onClick={() => {
-                      this.debouncedLoadChat();
-                      this.setState({ selectUserVisible: true });
-                    }}
-                  ></i>
-                </div>
-              </div>
-              {/* {isRecordCard && (
-                <TextArea
-                  className="desc-textarea"
-                  placeholder="请添加说明内容"
-                  showCount
-                  maxLength={500}
-                  value={description}
-                  rows={3}
-                  clearable
-                  onChange={val => this.setState({ description: val })}
-                />
-              )} */}
-            </div>
+            {this.renderShareTargetRadio()}
+            <div className="mobile-send-to-chat-info">{this.renderSelectArea()}</div>
 
             <Button
               style={{
@@ -289,13 +508,14 @@ export default class SendToChatForMobile extends Component {
                 fontSize: '16px',
                 marginTop: '10px',
               }}
-              className={`send-btn-${selectedUser ? 'enable' : 'disable'}`}
-              disabled={!selectedUser}
+              className={`send-btn-${canSend ? 'enable' : 'disable'}`}
+              disabled={!canSend}
               onClick={this.handleSend}
             >
               {_l('发送')}
             </Button>
             {selectUserVisible && this.renderSelectUerPopup()}
+            {selectTaskVisible && this.renderSelectTaskPopup()}
           </div>
         </Fragment>
       </Popup>
